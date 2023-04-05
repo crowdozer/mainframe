@@ -14,7 +14,7 @@
 <div class="relative flex flex-col h-screen overflow-auto content">
 	<Navbar />
 
-	<div class="flex-1 flex justify-center mt-4 mb-4">
+	<div class="flex-1 flex justify-center">
 		<slot />
 	</div>
 </div>

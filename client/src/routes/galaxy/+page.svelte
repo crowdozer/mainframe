@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { GalaxyGenerator } from './generator';
 	import Paper from '../../components/paper.svelte';
+	import Container from '../../components/container.svelte';
 
 	/**
 	 * Galaxy generation is adapted from this:
@@ -77,7 +78,7 @@
 	});
 </script>
 
-<div class="flex flex-col gap-4">
+<Container>
 	<Paper>
 		<div>
 			<canvas bind:this={canvas} />
@@ -128,7 +129,7 @@
 			</div>
 		</div>
 	</Paper>
-</div>
+</Container>
 
 <style>
 	canvas {
