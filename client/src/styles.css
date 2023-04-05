@@ -1,0 +1,65 @@
+body {
+	background: theme(colors.gray.950);
+	color: theme(colors.red.500);
+	font-family: consolas, monospace;
+	animation: crtTextShadow 2s linear infinite;
+}
+
+pre {
+	font-family: monospace;
+	white-space: pre-wrap;
+}
+
+strong {
+	font-weight: bold;
+}
+
+a {
+	color: #eee;
+	text-decoration: dotted underline;
+}
+
+h1,
+h2,
+h3 {
+	color: theme(colors.gray.300);
+}
+
+/** Animate the scanline */
+@keyframes scanline {
+	0% {
+		bottom: 100%;
+	}
+	40% {
+		bottom: 100%;
+	}
+	100% {
+		bottom: 0%;
+	}
+}
+
+/** Animate the bezel jitter */
+@keyframes bezel {
+	0% {
+		box-shadow: inset 1px 1px 100px black;
+	}
+	30% {
+		box-shadow: inset 1px 1px 130px black;
+	}
+	60% {
+		box-shadow: inset 1px 1px 100px black;
+	}
+}
+
+/** Animate text jitter */
+@keyframes crtTextShadow {
+	0% {
+		text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+	}
+	10% {
+		text-shadow: 1px 1px 5px rgba(255, 200, 0, 0.25);
+	}
+	20% {
+		text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+	}
+}
