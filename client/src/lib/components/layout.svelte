@@ -1,11 +1,10 @@
 <script lang="ts">
 	import Navbar from '$lib/components/navbar.svelte';
+	import { crt as showCRT } from '$lib/stores/crt';
 	import CRT from './crt.svelte';
-
-	export let showCRT: boolean = false;
 </script>
 
-{#if showCRT}
+{#if $showCRT}
 	<!-- crt screen (bezel + horizontal lines) + scanline -->
 	<CRT />
 {/if}

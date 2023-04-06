@@ -24,7 +24,7 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
-		background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+		background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
 		background-size: 100% 8px;
 		z-index: 998;
 		pointer-events: none;

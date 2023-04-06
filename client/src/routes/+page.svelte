@@ -2,9 +2,9 @@
 	import Container from '$lib/components/container.svelte';
 	import Paper from '$lib/components/paper.svelte';
 	import Intro from '$lib/components/intro/intro.svelte';
-	import type { Data } from './+page';
+	import type { PageData } from './$types';
 
-	export let data: Data;
+	export let data: PageData;
 
 	const { top10, time } = data;
 	const date = new Date(data.date);
