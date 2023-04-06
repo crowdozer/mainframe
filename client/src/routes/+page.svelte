@@ -54,7 +54,8 @@
 							<a
 								href={story.url}
 								class="overflow-hidden overflow-ellipsis max-w-full line-clamp-1 break-all px-4 py-1"
-								>read more > {story.url}</a
+								target="_blank"
+								rel="noopener noreferrer">read more > {story.url}</a
 							>
 						{/if}
 					</article>
