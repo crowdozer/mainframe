@@ -1,19 +1,19 @@
+/* Global setup */
 body {
 	background: theme(colors.gray.950);
 	color: theme(colors.gray.300);
-	font-family: Open Sans;
 	font-size: 16px;
 }
 
+/* Some decorative elements */
 pre {
-	font-family: monospace;
 	white-space: pre-wrap;
 }
-
 strong {
 	font-weight: bold;
 }
 
+/* Style links */
 a {
 	display: inline-block;
 	color: theme(colors.green.500);
@@ -26,11 +26,28 @@ a:hover {
 	background: theme(colors.green.500);
 	color: theme(colors.gray.950);
 }
+a::focus {
+	text-decoration: none;
+	background: theme(colors.green.600);
+	color: theme(colors.gray.950);
+}
 
+/* Apply coloring to headers */
 h1,
 h2,
 h3 {
 	color: theme(colors.gray.100);
+}
+
+/* Apply conditional fonts to various elements */
+body {
+	font-family: Consolas, monospace;
+}
+.mono {
+	font-family: Consolas, monospace;
+}
+.not-mono {
+	font-family: Open Sans, arial, sans-serif;
 }
 
 /* replace list styling */
@@ -44,6 +61,7 @@ li:before {
 	font-size: 0.65rem;
 }
 
+/* Selection styling */
 *::selection {
 	background: theme(colors.gray.300);
 	color: theme(colors.gray.950);
@@ -51,6 +69,8 @@ li:before {
 a::selection {
 	color: theme(colors.green.500);
 }
+
+/* Animations */
 
 /** Animate the scanline */
 @keyframes scanline {

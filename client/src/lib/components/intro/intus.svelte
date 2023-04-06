@@ -17,7 +17,7 @@ LICE THE INSTAR IT IS ONLY THROVGH GONG WITHIN THAT WE MAY EMERGE`;
 	const textStore = writable('');
 
 	// how many seconds should it take to reveal everything
-	const revealDurationSeconds = 20;
+	const revealDurationSeconds = 10;
 
 	// animates in the text
 	async function animateText() {
@@ -51,7 +51,7 @@ LICE THE INSTAR IT IS ONLY THROVGH GONG WITHIN THAT WE MAY EMERGE`;
 					temp[i] = character;
 					return temp.join('');
 				});
-			}, getRandomInt(1000, 3000));
+			}, getRandomInt(3000, 10000));
 		}
 	}
 

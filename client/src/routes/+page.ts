@@ -1,3 +1,5 @@
+const MAX_STORIES = 25;
+
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
 	const start = performance.now();
@@ -23,7 +25,7 @@ async function getTopStories(): Promise<Story[]> {
 
 	return Promise.all([
 		...ids
-			.slice(0, 25)
+			.slice(0, MAX_STORIES)
 			.map((id) =>
 				fetch('https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty').then((d) =>
 					d.json()
@@ -38,6 +40,8 @@ export type Story = {
 	type: 'story' | string;
 	text?: string;
 	url?: string;
+	by: string;
+	time: number;
 };
 
 export type Data = {

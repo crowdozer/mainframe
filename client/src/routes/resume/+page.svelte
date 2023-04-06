@@ -86,112 +86,122 @@
 </script>
 
 <Container>
-	<Paper>
-		<div class="p-8">
-			<!-- Header -->
-			<h1 class="text-3xl font-bold underline decoration-dotted underline-offset-8 mb-2">
-				Full Stack Developer
-			</h1>
+	<div class="mb-4">
+		<Paper kind="info">
+			<div class="p-4">
+				<p class="mono">to hire me, please contact me via the channel you received this</p>
+			</div>
+		</Paper>
+	</div>
+	<div class="mb-4">
+		<Paper>
+			<div class="p-8">
+				<!-- Header -->
+				<h1 class="text-3xl font-bold underline decoration-dotted underline-offset-8 mb-2">
+					Full Stack Developer
+				</h1>
 
-			<!-- Summary -->
-			<div>
+				<!-- Summary -->
+				<div>
+					<h2 class="text-2xl font-semibold mt-12 mb-2">
+						<Tag text="h2" open />Summary<Tag text="h2" />
+					</h2>
+					<p>
+						Over half a decade of experience in a wide array of web technologies, including
+						JS/NodeJS, PHP, React, NextJS, Svelte, and even JQuery. I have a comprehensive skill set
+						that enables rapid adaptation to challenges and the development of innovative solutions.
+						I bring strong problem-solving and exceptional debugging abilities for multiple JS and
+						PHP frameworks, cloud platforms, and databases. My familiarity with web hosting, CI/CD
+						processes, and error monitoring brings a well-rounded and valuable set of skills to any
+						project or team.
+					</p>
+				</div>
+
+				<!-- Skills -->
 				<h2 class="text-2xl font-semibold mt-12 mb-2">
-					<Tag text="h2" open />Summary<Tag text="h2" />
+					<Tag text="h2" open />Skills<Tag text="h2" />
 				</h2>
-				<p>
-					Over half a decade of experience in a wide array of web technologies, including JS/NodeJS,
-					PHP, React, NextJS, Svelte, and even JQuery. I have a comprehensive skill set that enables
-					rapid adaptation to challenges and the development of innovative solutions. I bring strong
-					problem-solving and exceptional debugging abilities for multiple JS and PHP frameworks,
-					cloud platforms, and databases. My familiarity with web hosting, CI/CD processes, and
-					error monitoring brings a well-rounded and valuable set of skills to any project or team.
-				</p>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+					<div>
+						<h3 class="font-semibold">Frameworks</h3>
+						<ul>
+							{#each frameworks as framework}
+								<li>{framework}</li>
+							{/each}
+						</ul>
+					</div>
+					<div>
+						<h3 class="font-semibold">Databases</h3>
+						<ul>
+							{#each databases as db}
+								<li>{db}</li>
+							{/each}
+						</ul>
+					</div>
+					<div>
+						<h3 class="font-semibold">Servers</h3>
+						<ul>
+							{#each servers as server}
+								<li>{server}</li>
+							{/each}
+						</ul>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+					<div>
+						<h3 class="font-semibold">Miscellaneous</h3>
+						<ul>
+							{#each otherTech as tech}
+								<li>{tech}</li>
+							{/each}
+						</ul>
+					</div>
+
+					<div>
+						<h3 class="font-semibold">Cool Stuff</h3>
+						<ul>
+							{#each coolStuff as stuff}
+								<li>{stuff}</li>
+							{/each}
+						</ul>
+					</div>
+				</div>
+
+				<!-- Experience -->
+				<h2 class="text-2xl font-semibold mt-12 mb-2">
+					<Tag text="h2" open />Experience<Tag text="h2" />
+				</h2>
+				{#each experience as job}
+					<div class="py-2">
+						<p>
+							<strong class="text-gray-300">{job.title}</strong>
+							{#if job.link}
+								<br />
+								<a href={job.link} target="_blank" rel="noopener noreferrer">{job.link}</a>
+							{/if}
+						</p>
+						<p>
+							{job.text}
+						</p>
+					</div>
+				{/each}
+
+				<!-- Education -->
+				<h2 class="text-2xl font-semibold mt-12 mb-2">
+					<Tag text="h2" open />Education<Tag text="h2" />
+				</h2>
+				{#each education as educate}
+					<div class="py-2">
+						<p>
+							<strong class="text-gray-300">{educate.title}</strong>
+						</p>
+						<p>
+							{educate.text}
+						</p>
+					</div>
+				{/each}
 			</div>
-
-			<!-- Skills -->
-			<h2 class="text-2xl font-semibold mt-12 mb-2">
-				<Tag text="h2" open />Skills<Tag text="h2" />
-			</h2>
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-				<div>
-					<h3 class="font-semibold">Frameworks</h3>
-					<ul>
-						{#each frameworks as framework}
-							<li>{framework}</li>
-						{/each}
-					</ul>
-				</div>
-				<div>
-					<h3 class="font-semibold">Databases</h3>
-					<ul>
-						{#each databases as db}
-							<li>{db}</li>
-						{/each}
-					</ul>
-				</div>
-				<div>
-					<h3 class="font-semibold">Servers</h3>
-					<ul>
-						{#each servers as server}
-							<li>{server}</li>
-						{/each}
-					</ul>
-				</div>
-			</div>
-
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-				<div>
-					<h3 class="font-semibold">Miscellaneous</h3>
-					<ul>
-						{#each otherTech as tech}
-							<li>{tech}</li>
-						{/each}
-					</ul>
-				</div>
-
-				<div>
-					<h3 class="font-semibold">Cool Stuff</h3>
-					<ul>
-						{#each coolStuff as stuff}
-							<li>{stuff}</li>
-						{/each}
-					</ul>
-				</div>
-			</div>
-
-			<!-- Experience -->
-			<h2 class="text-2xl font-semibold mt-12 mb-2">
-				<Tag text="h2" open />Experience<Tag text="h2" />
-			</h2>
-			{#each experience as job}
-				<div class="py-2">
-					<p>
-						<strong class="text-gray-300">{job.title}</strong>
-						{#if job.link}
-							<br />
-							<a href={job.link} target="_blank" rel="noopener noreferrer">{job.link}</a>
-						{/if}
-					</p>
-					<p>
-						{job.text}
-					</p>
-				</div>
-			{/each}
-
-			<!-- Education -->
-			<h2 class="text-2xl font-semibold mt-12 mb-2">
-				<Tag text="h2" open />Education<Tag text="h2" />
-			</h2>
-			{#each education as educate}
-				<div class="py-2">
-					<p>
-						<strong class="text-gray-300">{educate.title}</strong>
-					</p>
-					<p>
-						{educate.text}
-					</p>
-				</div>
-			{/each}
-		</div>
-	</Paper>
+		</Paper>
+	</div>
 </Container>

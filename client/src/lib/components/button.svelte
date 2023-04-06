@@ -26,11 +26,11 @@
 		text-transform: uppercase;
 		transition: transform 0.1s;
 	}
-	.button:active {
-		transform: translateY(1px);
-	}
 	.button:hover {
-		background: theme(colors.red.700);
-		color: theme(colors.gray.100);
+		@apply bg-green-950 text-green-500;
+	}
+	.button:active {
+		@apply bg-green-950 text-green-600;
+		transform: translateY(1px);
 	}
 </style>
