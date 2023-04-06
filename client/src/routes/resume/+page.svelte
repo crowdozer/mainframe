@@ -1,7 +1,7 @@
 <script>
-	import Container from '../../components/container.svelte';
-	import Paper from '../../components/paper.svelte';
-	import Tag from '../../components/tag.svelte';
+	import Container from '$lib/components/container.svelte';
+	import Paper from '$lib/components/paper.svelte';
+	import Tag from '$lib/components/tag.svelte';
 
 	const frameworks = [
 		'Express',
@@ -45,6 +45,44 @@
 		'Generative AI (Text and Images)',
 		'Event Sourcing'
 	];
+
+	const experience = [
+		{
+			title: 'Luxorts LLC - Full Stack Developer (2 years)',
+			link: 'https://www.luxorts.com/',
+			text:
+				'I designed and built a luxury condo rental website for Luxorts. ' +
+				'It features both regional and popularity based filtering, complex geolocation queries, ' +
+				'stripe API integration for checkouts, realtime chat, and a responsive mobile first design. ' +
+				'I also integrated the Luxorts API into existing CMS systems.'
+		},
+		{
+			title: 'We the Family Resorts - Full Stack Developer (2 years)',
+			text:
+				'In this position, I helped maintain and update legacy code while developing new in-house tools. ' +
+				'I designed a high volume leads intake and distribution system for a call center with external API support. ' +
+				'I also assisted in optimizing legacy cloud functions, reducing server reads ' +
+				'by nearly a factor of 100.'
+		},
+		{
+			title: 'Vacation Management Group - Full Stack Developer (2 years)',
+			text:
+				'I worked closely with management to design and build an in-house CMS ' +
+				'to replace excel databases. In addition to better performance and ' +
+				'adding complex data visualization, I implemented comprehensive business logic, ' +
+				' a robust user permissions system, and integrated with several external APIs (soap, xml, json). ' +
+				' I also automated and optimized many in-office processes, cutting the workload by a factor of 10 in some cases.'
+		}
+	];
+
+	const education = [
+		{
+			title: 'AAS Web Design - Jefferson College, MO',
+			text:
+				'I graduated from Jefferson College in 2015. ' +
+				'I primarily studied PHP, Javascript, SQL, and graphic design.'
+		}
+	];
 </script>
 
 <Container>
@@ -52,7 +90,7 @@
 		<div class="p-8">
 			<!-- Header -->
 			<h1 class="text-3xl font-bold underline decoration-dotted underline-offset-8 mb-2">
-				<span class="chevron">></span> Full Stack Developer
+				Full Stack Developer
 			</h1>
 
 			<!-- Summary -->
@@ -79,7 +117,7 @@
 					<h3 class="font-semibold">Frameworks</h3>
 					<ul>
 						{#each frameworks as framework}
-							<li><span class="chevron">></span> {framework}</li>
+							<li>{framework}</li>
 						{/each}
 					</ul>
 				</div>
@@ -87,7 +125,7 @@
 					<h3 class="font-semibold">Databases</h3>
 					<ul>
 						{#each databases as db}
-							<li><span class="chevron">></span> {db}</li>
+							<li>{db}</li>
 						{/each}
 					</ul>
 				</div>
@@ -95,7 +133,7 @@
 					<h3 class="font-semibold">Servers</h3>
 					<ul>
 						{#each servers as server}
-							<li><span class="chevron">></span> {server}</li>
+							<li>{server}</li>
 						{/each}
 					</ul>
 				</div>
@@ -106,7 +144,7 @@
 					<h3 class="font-semibold">Miscellaneous</h3>
 					<ul>
 						{#each otherTech as tech}
-							<li><span class="chevron">></span> {tech}</li>
+							<li>{tech}</li>
 						{/each}
 					</ul>
 				</div>
@@ -115,7 +153,7 @@
 					<h3 class="font-semibold">Cool Stuff</h3>
 					<ul>
 						{#each coolStuff as stuff}
-							<li><span class="chevron">></span> {stuff}</li>
+							<li>{stuff}</li>
 						{/each}
 					</ul>
 				</div>
@@ -125,36 +163,35 @@
 			<h2 class="text-2xl font-semibold mt-12 mb-2">
 				<Tag text="h2" open />Experience<Tag text="h2" />
 			</h2>
-			<p>
-				<strong class="text-gray-300">Full Stack Developer (6 years) - Luxorts LLC</strong>
-				<br />
-				<a href="https://www.luxorts.com/" target="_blank" rel="noopener noreferrer"
-					>https://www.luxorts.com/</a
-				>
-			</p>
-			<p>
-				I was a full stack developer at Luxorts (previously “We the Family Resorts” and “Vacation
-				Management Group”) for roughly 6 years. In this position, I worked closely with management
-				to design and build a complex in-house CMS (client & server), a luxury vacation condo rental
-				website, and various other supporting softwares.
-			</p>
+			{#each experience as job}
+				<div class="py-2">
+					<p>
+						<strong class="text-gray-300">{job.title}</strong>
+						{#if job.link}
+							<br />
+							<a href={job.link} target="_blank" rel="noopener noreferrer">{job.link}</a>
+						{/if}
+					</p>
+					<p>
+						{job.text}
+					</p>
+				</div>
+			{/each}
 
 			<!-- Education -->
 			<h2 class="text-2xl font-semibold mt-12 mb-2">
 				<Tag text="h2" open />Education<Tag text="h2" />
 			</h2>
-			<p>
-				<strong class="text-gray-300">AAS Web Design - Jefferson College, MO</strong>
-				<br />
-				I received my Associates of Applied Science in web design from Jeffco in 2015. I have since been
-				learning and working in the field.
-			</p>
+			{#each education as educate}
+				<div class="py-2">
+					<p>
+						<strong class="text-gray-300">{educate.title}</strong>
+					</p>
+					<p>
+						{educate.text}
+					</p>
+				</div>
+			{/each}
 		</div>
 	</Paper>
 </Container>
-
-<style>
-	.chevron {
-		color: #ababab;
-	}
-</style>

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { GalaxyGenerator } from './generator';
-	import Paper from '../../components/paper.svelte';
-	import Container from '../../components/container.svelte';
+	import Paper from '$lib/components/paper.svelte';
+	import Container from '$lib/components/container.svelte';
 
 	/**
 	 * Galaxy generation is adapted from this:
@@ -144,9 +144,5 @@
 		width: 800px;
 		height: 800px;
 		overflow: hidden;
-	}
-
-	input {
-		width: 800px;
 	}
 </style>
