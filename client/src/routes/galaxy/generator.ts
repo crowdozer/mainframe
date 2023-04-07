@@ -5,9 +5,11 @@
 export class GalaxyGenerator {
 	// Configuration variables for star creation and galaxy display
 
+	// Canvas used in drawing the stars
 	private canvas: HTMLCanvasElement;
 	private ctx: CanvasRenderingContext2D;
 
+	// Canvas used in transforming the star canvas to grayscale bitmap
 	private tmpCanvas: HTMLCanvasElement;
 	private tmpCanvasCtx: CanvasRenderingContext2D;
 
