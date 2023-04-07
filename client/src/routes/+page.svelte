@@ -24,11 +24,9 @@
 		<Paper>
 			<div class="m-8">
 				{#each top10 as story, index}
-					<article>
-						<h1
-							class="text-xl mt-4 mb-1 overflow-hidden overflow-ellipsis max-w-full break-all line-clamp-1"
-							title={story.title}
-						>
+					<article class="flex flex-col gap-1">
+						<!-- header line -->
+						<h1 class="text-xl text-ellipsis whitespace-nowrap overflow-hidden" title={story.title}>
 							<span class="text-gray-300">
 								{#if story.text}
 									<i class="fas fa-scroll self-center" />
@@ -42,23 +40,31 @@
 								</span>
 							</span>
 						</h1>
-						<h2 class="text-sm mt-1 mb-4 text-gray-500 not-mono">
+
+						<!-- author/meta line -->
+						<h2 class="text-sm text-gray-500 not-mono mb-6 lg:pl-10">
 							+{story.score.toString()} • {story.by} • {new Date(story.time).toLocaleDateString()}
 						</h2>
+
+						<!-- story content -->
 						{#if story.text}
-							<div class="story not-mono break-words" style="word-break:break-word;">
+							<div class="story not-mono break-words lg:pl-10" style="word-break:break-word;">
 								{@html story.text}
 							</div>
 						{/if}
+
+						<!-- story URL -->
 						{#if story.url}
 							<a
 								href={story.url}
-								class="overflow-hidden overflow-ellipsis max-w-full line-clamp-1 break-all px-4 py-1"
+								class="text-ellipsis whitespace-nowrap overflow-hidden pr-4 py-2 lg:pl-10"
 								target="_blank"
 								rel="noopener noreferrer">read more > {story.url}</a
 							>
 						{/if}
 					</article>
+
+					<!-- dividers -->
 					{#if index < top10.length - 1}
 						<hr class="mt-4 mb-4 opacity-25" />
 					{/if}

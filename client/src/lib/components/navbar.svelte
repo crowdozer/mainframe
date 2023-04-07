@@ -14,10 +14,12 @@
 		</div>
 
 		<!-- Buttons -->
-		<div class="inline-flex items-center ml-auto">
+		<div class="inline-flex items-center ml-auto gap-2">
 			<div class="hidden lg:flex">
-				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
-				<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
+				<div class="flex flex-row gap-2">
+					<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
+					<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
+				</div>
 			</div>
 			<Button icon="fas fa-handshake-angle" link="/resume">hire me</Button>
 			<div class="hidden lg:flex">
