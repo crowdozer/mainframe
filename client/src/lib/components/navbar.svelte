@@ -1,5 +1,5 @@
 <script>
-	import Button from './button.svelte';
+	import Button from './button/button.svelte';
 	import Switch from './switch.svelte';
 	import { crt } from '$lib/stores/crt';
 </script>
