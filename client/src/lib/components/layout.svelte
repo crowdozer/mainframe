@@ -16,7 +16,7 @@
 <div class="relative flex flex-col content">
 	<Navbar />
 
-	<main class="flex-1 flex justify-center">
+	<main class="flex-1 flex justify-center px-4">
 		<slot />
 	</main>
 </div>
