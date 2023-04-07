@@ -12,11 +12,11 @@
 
 <Container>
 	<!-- Hero section -->
-	<div class="my-32">
+	<div class="my-8 lg:my-32">
 		<Intro />
 	</div>
 
-	<div class="mx-auto mt-64 mb-16 text-center text-2xl">
+	<div class="mx-auto text-center text-2xl my-8 lg:my-16">
 		<i class="fas fa-chevron-down" />
 	</div>
 
@@ -46,7 +46,7 @@
 							+{story.score.toString()} • {story.by} • {new Date(story.time).toLocaleDateString()}
 						</h2>
 						{#if story.text}
-							<div class="story not-mono">
+							<div class="story not-mono break-words" style="word-break:break-word;">
 								{@html story.text}
 							</div>
 						{/if}
