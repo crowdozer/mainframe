@@ -44,10 +44,12 @@
 	// Also handles cleanup of intervals on unmount
 	$: if (fps || speed || alphabet) {
 		if (cleanup) {
+			console.log('stopping rendering cycles');
 			cleanup();
 		}
 
 		if (generator) {
+			console.log('restarting rendering cycles');
 			generator.rotationStep = getRotationStep();
 			generator.alphabet = alphabet;
 			cleanup = generator.beginIntervals(fps);
