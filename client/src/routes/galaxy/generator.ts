@@ -284,21 +284,6 @@ export class GalaxyGenerator {
 
 		this.tmpCanvasCtx.drawImage(this.canvas, 0, 0, this.asciiWidth, this.asciiHeight);
 
-		// let asciiArt = '';
-
-		// // Iterate through the downscaled canvas image and convert each pixel to an ASCII character
-		// for (let y = 0; y < this.asciiHeight; y++) {
-		// 	for (let x = 0; x < this.asciiWidth; x++) {
-		// 		const pixel = this.tmpCanvasCtx.getImageData(x, y, 1, 1).data;
-		// 		const grayscale = Math.round((pixel[0] + pixel[1] + pixel[2]) / 3);
-		// 		const asciiChar = this.mapGrayscaleToAscii(grayscale);
-		// 		asciiArt += asciiChar;
-		// 	}
-		// 	asciiArt += '\n';
-		// }
-
-		// this.onNewFrame(asciiArt);
-
 		let asciiArt = '';
 
 		// Get all pixel data at once
