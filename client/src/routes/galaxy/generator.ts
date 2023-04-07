@@ -8,6 +8,9 @@ export class GalaxyGenerator {
 	private canvas: HTMLCanvasElement;
 	private ctx: CanvasRenderingContext2D;
 
+	private tmpCanvas: HTMLCanvasElement;
+	private tmpCanvasCtx: CanvasRenderingContext2D;
+
 	// How many stars to keep track of
 	private numStars: number;
 	// How many arms the galaxy should have
@@ -94,6 +97,12 @@ export class GalaxyGenerator {
 		this.blackHoleOffset = config.blackHoleOffset || 0.05;
 		this.onNewFrame = config.onNewFrame;
 		this.ctx = config.canvas.getContext('2d', {
+			willReadFrequently: true
+		}) as CanvasRenderingContext2D;
+
+		// Downscale the canvas image to match the desired output resolution
+		this.tmpCanvas = document.createElement('canvas');
+		this.tmpCanvasCtx = this.tmpCanvas.getContext('2d', {
 			willReadFrequently: true
 		}) as CanvasRenderingContext2D;
 	}
@@ -270,28 +279,43 @@ export class GalaxyGenerator {
 	// Convert the canvas image to ASCII art
 	private canvasToAscii(): void {
 		// Downscale the canvas image to match the desired output resolution
-		const tempCanvas = document.createElement('canvas');
-		const tempCtx = tempCanvas.getContext('2d', { willReadFrequently: true });
-		tempCanvas.width = this.asciiWidth;
-		tempCanvas.height = this.asciiHeight;
-		if (!tempCtx) return;
+		this.tmpCanvas.width = this.asciiWidth;
+		this.tmpCanvas.height = this.asciiHeight;
 
-		tempCtx.drawImage(this.canvas, 0, 0, this.asciiWidth, this.asciiHeight);
+		this.tmpCanvasCtx.drawImage(this.canvas, 0, 0, this.asciiWidth, this.asciiHeight);
+
+		// let asciiArt = '';
+
+		// // Iterate through the downscaled canvas image and convert each pixel to an ASCII character
+		// for (let y = 0; y < this.asciiHeight; y++) {
+		// 	for (let x = 0; x < this.asciiWidth; x++) {
+		// 		const pixel = this.tmpCanvasCtx.getImageData(x, y, 1, 1).data;
+		// 		const grayscale = Math.round((pixel[0] + pixel[1] + pixel[2]) / 3);
+		// 		const asciiChar = this.mapGrayscaleToAscii(grayscale);
+		// 		asciiArt += asciiChar;
+		// 	}
+		// 	asciiArt += '\n';
+		// }
+
+		// this.onNewFrame(asciiArt);
 
 		let asciiArt = '';
+
+		// Get all pixel data at once
+		const imageData = this.tmpCanvasCtx.getImageData(0, 0, this.asciiWidth, this.asciiHeight).data;
 
 		// Iterate through the downscaled canvas image and convert each pixel to an ASCII character
 		for (let y = 0; y < this.asciiHeight; y++) {
 			for (let x = 0; x < this.asciiWidth; x++) {
-				const pixel = tempCtx.getImageData(x, y, 1, 1).data;
-				const grayscale = Math.round((pixel[0] + pixel[1] + pixel[2]) / 3);
+				const index = (y * this.asciiWidth + x) * 4;
+				const grayscale = Math.round(
+					(imageData[index] + imageData[index + 1] + imageData[index + 2]) / 3
+				);
 				const asciiChar = this.mapGrayscaleToAscii(grayscale);
 				asciiArt += asciiChar;
 			}
 			asciiArt += '\n';
 		}
-
-		tempCanvas.remove();
 
 		this.onNewFrame(asciiArt);
 	}
