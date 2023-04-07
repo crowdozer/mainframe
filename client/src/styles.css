@@ -1,3 +1,9 @@
+/* Consolas */
+@font-face {
+	font-family: 'Consolas';
+	src: url('/fonts/Consolas-Font/Consolab.ttf') format('truetype');
+}
+
 /* Global setup */
 body {
 	background: theme(colors.gray.950);
@@ -41,9 +47,6 @@ h3 {
 
 /* Apply conditional fonts to various elements */
 body {
-	font-family: Consolas, monospace;
-}
-.mono {
 	font-family: Consolas, monospace;
 }
 .not-mono {
