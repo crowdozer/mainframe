@@ -46,7 +46,6 @@ export async function getInfosecRSS(get: typeof fetch): Promise<InfoSecStory[]> 
 
 	return get('/api/feed', {})
 		.then(async (response) => {
-			console.log('[%s] %s', response.status, response.statusText);
 			return response.text();
 		})
 		.then(async (xml) => {
