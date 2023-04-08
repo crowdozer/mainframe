@@ -38,7 +38,7 @@
 <div class="my-4">
 	<p class="text-right" title={date.toISOString()}>
 		<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
-		<a href="https://threatpost.com/feed/">threatpost.com</a> •
+		<a href="https://krebsonsecurity.com/">krebsonsecurity.com</a> •
 		<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 	</p>
 	<p class="text-right" title={date.toISOString()}>
