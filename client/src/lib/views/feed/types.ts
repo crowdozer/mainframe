@@ -16,9 +16,18 @@ export type InfoSecStory = {
 	guid: string;
 };
 
+export type ThreatPostStory = {
+	title: string;
+	link: string;
+	description: string;
+	pubDate: number;
+	guid: string;
+};
+
 export type FeedItem =
 	| { kind: 'hacker-news'; data: HackerNewsStory }
-	| { kind: 'infosec-mag'; data: InfoSecStory };
+	| { kind: 'infosec-mag'; data: InfoSecStory }
+	| { kind: 'threat-post'; data: ThreatPostStory };
 
 export type Feed = {
 	feed: FeedItem[];

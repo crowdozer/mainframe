@@ -10,7 +10,7 @@
 		<span class="text-gray-300">
 			<i class="fas {icon} self-center" />
 			<span class="ml-2">
-				{title}
+				{@html title}
 			</span>
 		</span>
 	</h1>

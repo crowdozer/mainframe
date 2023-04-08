@@ -3,6 +3,7 @@
 	import HackerNews from './hacker-news.svelte';
 	import InfosecMag from './infosec-mag.svelte';
 	import type { Feed } from '../types';
+	import ThreatPost from './threat-post.svelte';
 
 	export let feed: Feed;
 
@@ -21,6 +22,10 @@
 					<InfosecMag story={story.data} />
 				{/if}
 
+				{#if story.kind === 'threat-post'}
+					<ThreatPost story={story.data} />
+				{/if}
+
 				<!-- dividers -->
 				{#if index < feedItems.length - 1}
 					<hr class="mt-4 mb-4 opacity-25" />
@@ -33,7 +38,10 @@
 <div class="my-4">
 	<p class="text-right" title={date.toISOString()}>
 		<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
+		<a href="https://threatpost.com/feed/">threatpost.com</a> •
 		<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
-		• generated in {time.toFixed(2)} seconds • {date.toLocaleDateString()}
+	</p>
+	<p class="text-right" title={date.toISOString()}>
+		generated in {time.toFixed(2)} seconds • {date.toLocaleDateString()}
 	</p>
 </div>

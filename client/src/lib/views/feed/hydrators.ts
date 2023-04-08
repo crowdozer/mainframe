@@ -1,14 +1,14 @@
-import type { HackerNewsStory, InfoSecStory } from './types';
+import type { HackerNewsStory, InfoSecStory, ThreatPostStory } from './types';
 import parser from 'fast-xml-parser';
 
 /**
- * Load all of the top stories from HackerNews
+ * Load top n stories from HackerNews
  */
-export async function getHackerNewsStories(get: typeof fetch): Promise<HackerNewsStory[]> {
+export async function getHackerNewsStories(get: typeof fetch, n = 20): Promise<HackerNewsStory[]> {
 	try {
 		// get the top 20 ids
 		const ids = await getHackerNewsStoryIDs(get);
-		const selection = ids.slice(0, 20);
+		const selection = ids.slice(0, n);
 
 		// load all of those stories
 		const storyPromises: Promise<HackerNewsStory>[] = selection.map((id) => {
@@ -43,6 +43,38 @@ export async function getHackerNewsStoryIDs(get: typeof fetch): Promise<number[]
 		return ids;
 	} catch (error) {
 		console.log('error loading hackernews ids');
+		console.error(error);
+
+		return [];
+	}
+}
+
+/**
+ * Returns latest n posts from threatpost
+ */
+export async function getThreatPostRSS(get: typeof fetch, n = 10): Promise<ThreatPostStory[]> {
+	try {
+		const xml = await get('https://threatpost.com/feed/', {}).then((response) => response.text());
+		const xmlParser = new parser.XMLParser({
+			attributeNamePrefix: '',
+			ignoreAttributes: false,
+			parseAttributeValue: true
+		});
+		const result = xmlParser.parse(xml);
+
+		return result.rss.channel.item
+			.slice(0, 10) // only get 10 stories
+			.map((item: any) => {
+				return {
+					description: item.description,
+					guid: item.guid['#text'],
+					link: item.link,
+					pubDate: new Date(item.pubDate).getTime(),
+					title: item.title
+				} satisfies ThreatPostStory;
+			});
+	} catch (error) {
+		console.log('error loading threatpost rss');
 		console.error(error);
 
 		return [];
