@@ -37,9 +37,6 @@
 </article>
 
 <style lang="postcss">
-	article {
-		/* background: theme(colors.stone.500); */
-	}
 	.story :global(p) {
 		@apply my-2;
 	}

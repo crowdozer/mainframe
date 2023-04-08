@@ -1,6 +1,6 @@
 <!-- crt screen (bezel + horizontal lines) + scanline -->
 <div class="crt-screen-container">
-	<div class="scanline" />
+	<!-- <div class="scanline" /> -->
 </div>
 
 <style lang="postcss">
@@ -10,7 +10,7 @@
 		height: 100vh;
 		width: 100%;
 		pointer-events: none;
-		box-shadow: inset 1px 1px 100px black;
+		box-shadow: inset 1px 1px 50px black;
 		animation: bezel 2s linear infinite;
 		z-index: 999;
 	}
