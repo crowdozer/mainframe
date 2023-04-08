@@ -1,18 +1,5 @@
 import type { PageLoad } from './$types';
-
-type Fetcher = typeof fetch;
-type Story = {
-	score: number;
-	title: string;
-	type: 'story' | string;
-	text?: string;
-	url?: string;
-	by: string;
-	time: number;
-};
-
-// How many stories to load
-const MAX_STORIES = 25;
+import { generateFeed } from '$lib/views/feed/feed';
 
 /**
  * Setup ISR for the page
@@ -30,40 +17,5 @@ export const config = {
  * Loads necessary page data
  */
 export const load = async function ({ fetch }) {
-	const start = performance.now();
-	const data = await getTopStories(fetch);
-	const end = performance.now();
-	const elapsedSeconds = (end - start) / 1000;
-
-	return {
-		top10: data,
-		time: elapsedSeconds,
-		date: Date.now()
-	};
+	return generateFeed(fetch);
 } satisfies PageLoad;
-
-/**
- * Load all of the top stories
- */
-async function getTopStories(get: Fetcher): Promise<Story[]> {
-	const ids = await getTopStoryIDs(get);
-
-	return Promise.all([
-		...ids
-			.slice(0, MAX_STORIES)
-			.map((id) =>
-				get('https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty').then((d) =>
-					d.json()
-				)
-			)
-	]);
-}
-
-/**
- * Load a list of top story IDs
- */
-async function getTopStoryIDs(get: Fetcher): Promise<number[]> {
-	const url = 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty';
-
-	return get(url).then((data) => data.json());
-}
