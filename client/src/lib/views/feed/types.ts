@@ -7,6 +7,7 @@ export type HackerNewsStory = {
 	by: string;
 	time: number;
 };
+
 export type InfoSecStory = {
 	title: string;
 	link: string;
@@ -14,9 +15,11 @@ export type InfoSecStory = {
 	pubDate: number;
 	guid: string;
 };
+
 export type FeedItem =
 	| { kind: 'hacker-news'; data: HackerNewsStory }
 	| { kind: 'infosec-mag'; data: InfoSecStory };
+
 export type Feed = {
 	feed: FeedItem[];
 	time: number;
