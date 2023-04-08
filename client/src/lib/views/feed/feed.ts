@@ -1,5 +1,5 @@
 import type { Feed, FeedItem } from './types';
-import { getHackerNewsStories, getInfosecRSS, getThreatPostRSS } from './hydrators';
+import { getHackerNewsStories, getInfosecRSS, getKrebsRSS } from './hydrators';
 import { sortFeedHelper } from './utils';
 
 export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
@@ -8,7 +8,7 @@ export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
 
 		const hnstories = await getHackerNewsStories(fetcher);
 		const infosec = await getInfosecRSS(fetcher);
-		const threatpost = await getThreatPostRSS(fetcher);
+		const krebs = await getKrebsRSS(fetcher);
 
 		const stories: FeedItem[] = [
 			...hnstories.map(
@@ -25,10 +25,10 @@ export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
 						data: story
 					} as FeedItem)
 			),
-			...threatpost.map(
+			...krebs.map(
 				(story) =>
 					({
-						kind: 'threat-post',
+						kind: 'krebs-sec',
 						data: story
 					} as FeedItem)
 			)

@@ -16,7 +16,7 @@ export type InfoSecStory = {
 	guid: string;
 };
 
-export type ThreatPostStory = {
+export type KrebsStory = {
 	title: string;
 	link: string;
 	description: string;
@@ -27,7 +27,7 @@ export type ThreatPostStory = {
 export type FeedItem =
 	| { kind: 'hacker-news'; data: HackerNewsStory }
 	| { kind: 'infosec-mag'; data: InfoSecStory }
-	| { kind: 'threat-post'; data: ThreatPostStory };
+	| { kind: 'krebs-sec'; data: KrebsStory };
 
 export type Feed = {
 	feed: FeedItem[];

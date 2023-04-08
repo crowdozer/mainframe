@@ -3,7 +3,7 @@
 	import HackerNews from './hacker-news.svelte';
 	import InfosecMag from './infosec-mag.svelte';
 	import type { Feed } from '../types';
-	import ThreatPost from './threat-post.svelte';
+	import KrebsSec from './krebs-sec.svelte';
 
 	export let feed: Feed;
 
@@ -22,8 +22,8 @@
 					<InfosecMag story={story.data} />
 				{/if}
 
-				{#if story.kind === 'threat-post'}
-					<ThreatPost story={story.data} />
+				{#if story.kind === 'krebs-sec'}
+					<KrebsSec story={story.data} />
 				{/if}
 
 				<!-- dividers -->

@@ -1,4 +1,4 @@
-import type { HackerNewsStory, InfoSecStory, ThreatPostStory } from './types';
+import type { HackerNewsStory, InfoSecStory, KrebsStory } from './types';
 import parser from 'fast-xml-parser';
 
 /**
@@ -50,11 +50,11 @@ export async function getHackerNewsStoryIDs(get: typeof fetch): Promise<number[]
 }
 
 /**
- * Returns latest n posts from threatpost
+ * Returns latest n posts from krebs
  */
-export async function getThreatPostRSS(get: typeof fetch, n = 10): Promise<ThreatPostStory[]> {
+export async function getKrebsRSS(get: typeof fetch, n = 10): Promise<KrebsStory[]> {
 	try {
-		const xml = await get('https://threatpost.com/feed/', {}).then((response) => response.text());
+		const xml = await get('/api/feed/proxy-krebs', {}).then((response) => response.text());
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
@@ -63,7 +63,7 @@ export async function getThreatPostRSS(get: typeof fetch, n = 10): Promise<Threa
 		const result = xmlParser.parse(xml);
 
 		return result.rss.channel.item
-			.slice(0, 10) // only get 10 stories
+			.slice(0, n) // only get 10 stories
 			.map((item: any) => {
 				return {
 					description: item.description,
@@ -71,7 +71,7 @@ export async function getThreatPostRSS(get: typeof fetch, n = 10): Promise<Threa
 					link: item.link,
 					pubDate: new Date(item.pubDate).getTime(),
 					title: item.title
-				} satisfies ThreatPostStory;
+				} satisfies KrebsStory;
 			});
 	} catch (error) {
 		console.log('error loading threatpost rss');
@@ -82,11 +82,11 @@ export async function getThreatPostRSS(get: typeof fetch, n = 10): Promise<Threa
 }
 
 /**
- * infosec RSS
+ * get the top n posts from the infosec RSS
  */
-export async function getInfosecRSS(get: typeof fetch): Promise<InfoSecStory[]> {
+export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecStory[]> {
 	try {
-		const xml = await get('/api/feed', {}).then((response) => response.text());
+		const xml = await get('/api/feed/proxy-infosec', {}).then((response) => response.text());
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
@@ -95,7 +95,7 @@ export async function getInfosecRSS(get: typeof fetch): Promise<InfoSecStory[]> 
 		const result = xmlParser.parse(xml);
 
 		return result.rss.channel.item
-			.slice(0, 10) // only get 10 stories
+			.slice(0, n) // only get 10 stories
 			.map((item: any) => {
 				return {
 					description: item.description,
