@@ -1,6 +1,6 @@
 import { mdsvex } from 'mdsvex';
 import { vitePreprocess } from '@sveltejs/kit/vite';
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-vercel';
 import tailwindcss from 'tailwindcss';
 
 /** @type {import('@sveltejs/kit').Config} */

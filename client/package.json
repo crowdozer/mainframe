@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^2.4.1",
 		"fast-xml-parser": "^4.1.4"
 	}
 }
