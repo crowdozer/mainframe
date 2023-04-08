@@ -54,14 +54,17 @@ export async function getHackerNewsStoryIDs(get: typeof fetch): Promise<number[]
  */
 export async function getInfosecRSS(get: typeof fetch): Promise<InfoSecStory[]> {
 	try {
+		console.log('getting xml');
 		const xml = await get('/api/feed', {}).then((response) => response.text());
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
 			parseAttributeValue: true
 		});
+		console.log('parsing xml');
 		const result = xmlParser.parse(xml);
 
+		console.log('mapping and returning');
 		return result.rss.channel.item
 			.slice(0, 10) // only get 10 stories
 			.map((item: any) => {
