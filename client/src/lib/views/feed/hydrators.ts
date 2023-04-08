@@ -5,17 +5,24 @@ import parser from 'fast-xml-parser';
  * Load all of the top stories from HackerNews
  */
 export async function getHackerNewsStories(get: typeof fetch): Promise<HackerNewsStory[]> {
+	// get the top 20 ids
 	const ids = await getHackerNewsStoryIDs(get);
+	const selection = ids.slice(0, 20);
 
-	return Promise.all([
-		...ids
-			.slice(0, 20) // only get 20 stories
-			.map((id) =>
-				get('https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty').then((d) =>
-					d.json()
-				)
-			)
-	]);
+	// load all of those stories
+	const storyPromises: Promise<HackerNewsStory>[] = selection.map((id) => {
+		return get('https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty').then(
+			(data) => data.json() as Promise<HackerNewsStory>
+		);
+	});
+	const stories = await Promise.all(storyPromises);
+
+	for (let i = 0; i < stories.length; i++) {
+		// the time needs to be corrected for date constructors
+		stories[i].time *= 10 * 10 * 10;
+	}
+
+	return stories;
 }
 
 /**
