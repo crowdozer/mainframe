@@ -51,6 +51,10 @@ export async function getInfosecRSS(get: typeof fetch): Promise<InfoSecStory[]> 
 		.then(async (xml) => {
 			const result = xmlParser.parse(xml);
 
+			if (!result || !result.rss) {
+				return [];
+			}
+
 			return result.rss.channel.item
 				.slice(0, 10) // only get 10 stories
 				.map((item: any) => {
