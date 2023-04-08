@@ -49,22 +49,24 @@ export async function getInfosecRSS(get: typeof fetch): Promise<InfoSecStory[]> 
 			return response.text();
 		})
 		.then(async (xml) => {
-			const result = xmlParser.parse(xml);
+			try {
+				const result = xmlParser.parse(xml);
 
-			if (!result || !result.rss) {
+				return result.rss.channel.item
+					.slice(0, 10) // only get 10 stories
+					.map((item: any) => {
+						return {
+							description: item.description,
+							guid: item.guid['#text'],
+							link: item.link,
+							pubDate: new Date(item.pubDate).getTime(),
+							title: item.title
+						} satisfies InfoSecStory;
+					});
+			} catch (error) {
+				console.error(error);
+
 				return [];
 			}
-
-			return result.rss.channel.item
-				.slice(0, 10) // only get 10 stories
-				.map((item: any) => {
-					return {
-						description: item.description,
-						guid: item.guid['#text'],
-						link: item.link,
-						pubDate: new Date(item.pubDate).getTime(),
-						title: item.title
-					} satisfies InfoSecStory;
-				});
 		});
 }
