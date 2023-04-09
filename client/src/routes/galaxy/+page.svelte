@@ -4,6 +4,7 @@
 	import Paper from '$lib/components/paper.svelte';
 	import Container from '$lib/components/container.svelte';
 	import { getRandomInt } from '$lib/utils/random-int';
+	import { sleep } from '$lib/utils/sleep';
 
 	/**
 	 * Galaxy generation is adapted from this:
@@ -20,8 +21,8 @@
 	let speed: number = 2;
 	const numStars = 1200;
 	const numArms = getRandomInt(1, 3);
-	const asciiWidth = 150;
-	const asciiHeight = 75;
+	let asciiWidth = 0;
+	let asciiHeight = 0;
 
 	// Stores the ascii output
 	let asciiArt: string = '';
@@ -45,6 +46,35 @@
 		return degreesPerFrame;
 	}
 
+	/**
+	 * Determines the char width/height
+	 */
+	function getCharSize(): [number, number] {
+		const canvas = document.createElement('canvas');
+		const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+		ctx.font = "10px 'Consolas'";
+
+		const charWidth = ctx.measureText('M').width;
+		const charHeight = 10 * 1.2; // Assuming line-height is 1.2 times the font size
+
+		return [charWidth, charHeight];
+	}
+
+	/**
+	 * Determines and saves the dimensions of the ascii renderer
+	 */
+	function setDimensions() {
+		const [charWidth, charHeight] = getCharSize();
+		const preWidth = galaxyElement.clientWidth;
+		const preHeight = galaxyElement.clientHeight;
+
+		const columns = Math.floor(preWidth / charWidth);
+		const rows = Math.floor(preHeight / charHeight);
+
+		asciiWidth = columns;
+		asciiHeight = rows;
+	}
+
 	// Starts and restarts the galaxy sequence automatically
 	// Also handles cleanup of intervals on unmount
 	$: if (fps || speed || alphabet) {
@@ -61,7 +91,15 @@
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
+		await sleep(150);
+
+		// Force a 1:1 aspect ratio
+		galaxyElement.style.height = getComputedStyle(galaxyElement).width;
+
+		// Set the dimensions
+		setDimensions();
+
 		generator = new GalaxyGenerator({
 			numStars,
 			numArms,
@@ -82,6 +120,7 @@
 				rotationIPS = Math.round(newRotationIPS);
 			}
 		});
+
 		generator.initializeStars();
 
 		// Clear the interval when the component is unmounted
@@ -101,8 +140,6 @@
 					Galaxy simulation: {numStars} stars, {numArms}
 					{numArms > 1 ? 'arms' : 'arm'}, {asciiWidth * asciiHeight} ascii chars
 				</p>
-				<br />
-				<p class="mono text-sm">> this isn't designed to be responsive</p>
 			</div>
 		</Paper>
 	</div>
@@ -118,7 +155,7 @@
 
 			<div class="text-center p-8">
 				{#if asciiIPS && drawStarsIPS && rotationIPS}
-					invocations/sec (starmap, rotation, ascii): {drawStarsIPS}, {rotationIPS}, {asciiIPS}
+					invocations/sec (starmap|rotation|ascii): {drawStarsIPS}|{rotationIPS}|{asciiIPS}
 				{:else}
 					measuring performance...
 				{/if}
@@ -180,10 +217,8 @@
 	}
 
 	pre {
-		@apply select-none whitespace-pre overflow-hidden;
-		font-size: 0.65rem;
-		line-height: 0.65rem;
-		width: 800px;
-		height: 800px;
+		@apply w-full select-none whitespace-pre overflow-hidden;
+		font-size: 10px;
+		line-height: calc(10px * 1.2);
 	}
 </style>

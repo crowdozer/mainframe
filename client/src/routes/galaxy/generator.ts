@@ -316,7 +316,7 @@ export class GalaxyGenerator {
 			const [starX, starY] = this.polarToCartesian(angle, distance);
 			const xpos = centerX + starX * centerX;
 			const ypos = centerY + starY * centerY;
-			this.ctx.arc(xpos, ypos, 1, 0, 2 * Math.PI);
+			this.ctx.arc(xpos, ypos, 1, 0, TwoPi);
 			this.ctx.fill();
 		}
 	}

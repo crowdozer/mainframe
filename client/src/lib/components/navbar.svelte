@@ -14,11 +14,9 @@
 		<!-- Buttons -->
 		<div class="inline-flex items-center ml-auto gap-2">
 			<div class="hidden lg:flex">
-				<div class="flex flex-row gap-2">
-					<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
-					<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
-				</div>
+				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
 			</div>
+			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
 			<Button icon="fas fa-handshake-angle" link="/resume">hire me</Button>
 		</div>
 	</div>
