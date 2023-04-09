@@ -1,7 +1,5 @@
 <script>
 	import Button from './button/button.svelte';
-	import Switch from './switch.svelte';
-	import { crt } from '$lib/stores/crt';
 </script>
 
 <nav class="relative">
@@ -22,9 +20,6 @@
 				</div>
 			</div>
 			<Button icon="fas fa-handshake-angle" link="/resume">hire me</Button>
-			<div class="hidden lg:flex">
-				<Switch bind:checked={$crt} title="CRT effect" />
-			</div>
 		</div>
 	</div>
 	<hr class="opacity-25 absolute bottom-0 left-0 right-0" />

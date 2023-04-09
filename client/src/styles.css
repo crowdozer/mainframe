@@ -88,16 +88,3 @@ a::selection {
 		bottom: 0%;
 	}
 }
-
-/** Animate the bezel jitter */
-@keyframes bezel {
-	0% {
-		box-shadow: inset 1px 1px 50px black;
-	}
-	30% {
-		box-shadow: inset 1px 1px 80px black;
-	}
-	60% {
-		box-shadow: inset 1px 1px 50px black;
-	}
-}

@@ -1,7 +1,5 @@
-<!-- crt screen (bezel + horizontal lines) + scanline -->
-<div class="crt-screen-container">
-	<!-- <div class="scanline" /> -->
-</div>
+<!-- crt screen horizontal lines) illusion -->
+<div class="crt-screen-container" />
 
 <style lang="postcss">
 	/** Draw the screen, including the black border */
@@ -10,8 +8,6 @@
 		height: 100vh;
 		width: 100%;
 		pointer-events: none;
-		box-shadow: inset 1px 1px 50px black;
-		animation: bezel 2s linear infinite;
 		z-index: 999;
 	}
 
@@ -28,22 +24,5 @@
 		background-size: 100% 8px;
 		z-index: 998;
 		pointer-events: none;
-	}
-
-	/** Draw the scanline */
-	.scanline {
-		width: 100%;
-		height: 100px;
-		z-index: 997;
-		background: linear-gradient(
-			0deg,
-			rgba(0, 0, 0, 0) 0%,
-			rgba(255, 255, 255, 0.4) 10%,
-			rgba(0, 0, 0, 0.2) 100%
-		);
-		opacity: 0.1;
-		position: absolute;
-		bottom: 100%;
-		animation: scanline 5s linear infinite;
 	}
 </style>
