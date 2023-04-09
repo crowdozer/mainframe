@@ -201,7 +201,7 @@
 		<Paper kind="info">
 			<div class="p-4">
 				<h1 class="text-xl mb-4">want to work together?</h1>
-				<p class="mono">if i contacted you, let me know you're interested</p>
+				<p class="mono">if i contacted you, let me know</p>
 				<p class="mono">if you have my info, reach out</p>
 				<p class="mono">otherwise, don't contact me</p>
 			</div>
