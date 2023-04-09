@@ -87,13 +87,6 @@
 
 <Container>
 	<div class="mb-4">
-		<Paper kind="info">
-			<div class="p-4">
-				<p class="mono">to hire me, please contact me via the channel you received this</p>
-			</div>
-		</Paper>
-	</div>
-	<div class="mb-4">
 		<Paper>
 			<div class="p-8">
 				<!-- Header -->
@@ -201,6 +194,16 @@
 						</p>
 					</div>
 				{/each}
+			</div>
+		</Paper>
+	</div>
+	<div class="mb-4">
+		<Paper kind="info">
+			<div class="p-4">
+				<h1 class="text-xl mb-4">want to work together?</h1>
+				<p class="mono">if i contacted you, let me know you're interested</p>
+				<p class="mono">if you have my info, reach out</p>
+				<p class="mono">otherwise, don't contact me</p>
 			</div>
 		</Paper>
 	</div>

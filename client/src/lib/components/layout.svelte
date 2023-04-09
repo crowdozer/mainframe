@@ -34,7 +34,7 @@
 
 	/** Background image */
 	.bg {
-		background-image: url(/images/bg.webp);
+		background-image: url('/images/bg.webp');
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: 50% 50%;
@@ -48,7 +48,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: rgba(0, 0, 0, 0.825);
+		background-color: rgba(0, 0, 0, 0.75);
 	}
 
 	.content {

@@ -106,20 +106,20 @@
 
 			<div class="p-8 rounded-lg">
 				<div>
-					<label for="alphabet" class="block text-green-500 text-sm font-mono">alphabet</label>
+					<label for="alphabet" class="block text-sm font-mono">alphabet</label>
 					<input
 						id="alphabet"
 						type="text"
-						class="block w-full mt-1 bg-black text-green-500 border-green-400 border rounded py-1 px-2 font-mono focus:border-green-500 focus:ring-green-500"
+						class="block w-full mt-1 bg-black border rounded py-1 px-2 font-mono"
 						bind:value={alphabet}
 					/>
 				</div>
 
 				<div>
-					<label for="fps" class="block mt-4 text-green-500 text-sm font-mono">FPS</label>
+					<label for="fps" class="block mt-4 text-sm font-mono">FPS</label>
 					<select
 						id="fps"
-						class="block w-full mt-1 bg-black text-green-500 border-green-400 border rounded py-2 px-4 font-mono focus:border-green-500 focus:ring-green-500"
+						class="block w-full mt-1 bg-black border rounded py-2 px-4 font-mono"
 						bind:value={fps}
 					>
 						<option value={144}>144 FPS</option>
@@ -132,10 +132,10 @@
 				</div>
 
 				<div>
-					<label for="speed" class="block mt-4 text-green-500 text-sm font-mono">revolutions</label>
+					<label for="speed" class="block mt-4 text-sm font-mono">revolutions</label>
 					<select
 						id="speed"
-						class="block w-full mt-1 bg-black text-green-500 border-green-400 border rounded py-2 px-4 font-mono focus:border-green-500 focus:ring-green-500"
+						class="block w-full mt-1 bg-black border rounded py-2 px-4 font-mono"
 						bind:value={speed}
 					>
 						<option value={1}>Once per minute</option>
