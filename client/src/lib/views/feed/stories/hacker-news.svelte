@@ -12,7 +12,7 @@
 {#if story.url && !story.text}
 	<ArticleLink {title} url={story.url}>
 		<span slot="meta" class="contents">
-			<span class="text-yellow-500">hacker news</span> • {story.by} • {new Date(
+			via <span class="text-yellow-500">hacker news</span> • {story.by} • {new Date(
 				story.time
 			).toLocaleDateString()}
 		</span>
@@ -20,7 +20,7 @@
 {:else}
 	<Article {title} {icon} url={story.url}>
 		<span slot="meta" class="contents">
-			<span class="text-yellow-500">hacker news</span> • {story.by} • {new Date(
+			via <span class="text-yellow-500">hacker news</span> • {story.by} • {new Date(
 				story.time
 			).toLocaleDateString()}
 		</span>

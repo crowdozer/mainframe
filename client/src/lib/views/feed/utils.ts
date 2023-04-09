@@ -11,8 +11,7 @@ export function getFeedItemDate(item: FeedItem): number {
 	switch (item.kind) {
 		case 'hacker-news':
 			return item.data.time;
-		case 'krebs-sec':
-		case 'infosec-mag':
+		default:
 			return item.data.pubDate;
 	}
 }

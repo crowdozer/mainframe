@@ -24,10 +24,19 @@ export type KrebsStory = {
 	guid: string;
 };
 
+export type CoinTeleStory = {
+	title: string;
+	link: string;
+	description: string;
+	pubDate: number;
+	guid: string;
+};
+
 export type FeedItem =
 	| { kind: 'hacker-news'; data: HackerNewsStory }
 	| { kind: 'infosec-mag'; data: InfoSecStory }
-	| { kind: 'krebs-sec'; data: KrebsStory };
+	| { kind: 'krebs-sec'; data: KrebsStory }
+	| { kind: 'coin-tele'; data: CoinTeleStory };
 
 export type Feed = {
 	feed: FeedItem[];

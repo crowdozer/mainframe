@@ -7,7 +7,9 @@
 
 <Article icon="fa-rss" title={story.title} url={story.link}>
 	<span slot="meta" class="contents">
-		<span class="text-red-500">krebs on sec</span> • {new Date(story.pubDate).toLocaleDateString()}
+		via <span class="text-red-500">krebs on sec</span> • {new Date(
+			story.pubDate
+		).toLocaleDateString()}
 	</span>
 	<div slot="content" class="contents">
 		<p>{story.description}</p>

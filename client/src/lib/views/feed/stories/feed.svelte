@@ -4,6 +4,7 @@
 	import InfosecMag from './infosec-mag.svelte';
 	import type { Feed } from '../types';
 	import KrebsSec from './krebs-sec.svelte';
+	import CoinTele from './coin-tele.svelte';
 
 	export let feed: Feed;
 
@@ -26,6 +27,10 @@
 					<KrebsSec story={story.data} />
 				{/if}
 
+				{#if story.kind === 'coin-tele'}
+					<CoinTele story={story.data} />
+				{/if}
+
 				<!-- dividers -->
 				{#if index < feedItems.length - 1}
 					<hr class="mt-4 mb-4 opacity-25" />
@@ -39,6 +44,7 @@
 	<p class="text-right" title={date.toISOString()}>
 		<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
 		<a href="https://krebsonsecurity.com/">krebsonsecurity.com</a> •
+		<a href="https://cointelegraph.com/">cointelegraph.com</a> •
 		<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 	</p>
 	<p class="text-right" title={date.toISOString()}>

@@ -1,17 +1,17 @@
 <script lang="ts">
-	import type { InfoSecStory } from '../types';
+	import type { CoinTeleStory } from '../types';
 	import Article from './article.svelte';
 
-	export let story: InfoSecStory;
+	export let story: CoinTeleStory;
 </script>
 
 <Article icon="fa-rss" title={story.title} url={story.link}>
 	<span slot="meta" class="contents">
-		via <span class="text-blue-500">infosec magazine</span> • {new Date(
+		via <span class="text-green-500">coin telegraph</span> • {new Date(
 			story.pubDate
 		).toLocaleDateString()}
 	</span>
 	<div slot="content" class="contents">
-		<p>{story.description}</p>
+		{@html story.description}
 	</div>
 </Article>

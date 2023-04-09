@@ -1,4 +1,4 @@
-import type { HackerNewsStory, InfoSecStory, KrebsStory } from './types';
+import type { HackerNewsStory, InfoSecStory, KrebsStory, CoinTeleStory } from './types';
 import parser from 'fast-xml-parser';
 
 /**
@@ -107,6 +107,35 @@ export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecS
 			});
 	} catch (error) {
 		console.log('error loading infosec rss');
+		console.error(error);
+
+		return [];
+	}
+}
+
+export async function getCoinTelegraphRSS(get: typeof fetch, n = 10): Promise<any[]> {
+	try {
+		const xml = await get('/api/feed/proxy-cointele').then((response) => response.text());
+		const xmlParser = new parser.XMLParser({
+			attributeNamePrefix: '',
+			ignoreAttributes: false,
+			parseAttributeValue: true
+		});
+		const result = xmlParser.parse(xml);
+
+		return result.rss.channel.item
+			.slice(0, n) // only get 10 stories
+			.map((item: any) => {
+				return {
+					description: item.description,
+					guid: item.guid['#text'],
+					link: item.link,
+					pubDate: new Date(item.pubDate).getTime(),
+					title: item.title
+				} satisfies CoinTeleStory;
+			});
+	} catch (error) {
+		console.log('error loading cointele rss');
 		console.error(error);
 
 		return [];
