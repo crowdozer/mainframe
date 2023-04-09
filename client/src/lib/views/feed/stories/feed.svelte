@@ -11,7 +11,7 @@
 
 	const { date, time, feed: feedItems } = feed;
 
-	let visibleFeedItems = feedItems.splice(0, 10);
+	let visibleFeedItems = feedItems.slice(0, 10);
 	let expanded = false;
 
 	function handleShowMore() {
