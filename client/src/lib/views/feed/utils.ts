@@ -1,5 +1,8 @@
 import type { FeedItem } from './types';
 
+/**
+ * Sorts the feed
+ */
 export function sortFeedHelper(a: FeedItem, b: FeedItem): number {
 	const aDate = getFeedItemDate(a);
 	const bDate = getFeedItemDate(b);
@@ -7,6 +10,9 @@ export function sortFeedHelper(a: FeedItem, b: FeedItem): number {
 	return aDate < bDate ? 1 : -1;
 }
 
+/**
+ * Extract posted date from a feed item
+ */
 export function getFeedItemDate(item: FeedItem): number {
 	switch (item.kind) {
 		case 'hacker-news':
@@ -16,6 +22,10 @@ export function getFeedItemDate(item: FeedItem): number {
 	}
 }
 
+/**
+ * Converts the given input string into a hex code that
+ * should be readable against black backgrounds
+ */
 export function stringToColor(inputString: string): string {
 	let hash = 0;
 	for (let i = 0; i < inputString.length; i++) {
