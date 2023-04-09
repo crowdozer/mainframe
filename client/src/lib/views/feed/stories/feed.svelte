@@ -50,7 +50,7 @@
 </div>
 
 {#if !expanded}
-	<div class="my-4">
+	<div class="my-4 mb-8">
 		<Button fullWidth size="lg" on:click={handleShowMore}>Load More</Button>
 	</div>
 {/if}
