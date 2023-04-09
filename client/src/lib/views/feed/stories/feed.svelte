@@ -5,16 +5,25 @@
 	import type { Feed } from '../types';
 	import KrebsSec from './krebs-sec.svelte';
 	import CoinTele from './coin-tele.svelte';
+	import Button from '$lib/components/button/button.svelte';
 
 	export let feed: Feed;
 
 	const { date, time, feed: feedItems } = feed;
+
+	let visibleFeedItems = feedItems.splice(0, 10);
+	let expanded = false;
+
+	function handleShowMore() {
+		visibleFeedItems = feedItems;
+		expanded = true;
+	}
 </script>
 
 <div class="my-4">
 	<Paper>
 		<div class="m-8">
-			{#each feedItems as story, index}
+			{#each visibleFeedItems as story, index}
 				{#if story.kind === 'hacker-news'}
 					<HackerNews story={story.data} />
 				{/if}
@@ -39,6 +48,12 @@
 		</div>
 	</Paper>
 </div>
+
+{#if !expanded}
+	<div class="my-4">
+		<Button fullWidth size="lg" on:click={handleShowMore}>Load More</Button>
+	</div>
+{/if}
 
 <div class="my-4">
 	<p class="text-right" title={date.toISOString()}>

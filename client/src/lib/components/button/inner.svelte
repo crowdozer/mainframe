@@ -1,8 +1,42 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
 	export let icon: string | undefined;
+	export let fullWidth: boolean;
+	export let size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+	// for dispatching on:click events
+	const dispatch = createEventDispatcher();
+	function handleClick(event: Event) {
+		dispatch('click', event);
+	}
+
+	// for any additional styling based on config opts
+	let addtlClasses = '';
+
+	if (fullWidth) {
+		addtlClasses += ' w-full';
+	}
+
+	switch (size) {
+		case 'xs':
+			addtlClasses += ' px-2 py-1 text-xs';
+			break;
+		case 'sm':
+			addtlClasses += ' px-2 py-1 text-sm';
+			break;
+		case 'md':
+			addtlClasses += ' px-4 py-2 text-md';
+			break;
+		case 'lg':
+			addtlClasses += ' px-8 py-4 text-lg';
+			break;
+		case 'xl':
+			addtlClasses += ' px-16 py-8 text-xl';
+			break;
+	}
 </script>
 
-<button class="button">
+<button class="button {addtlClasses}" on:click={handleClick}>
 	{#if icon}
 		<i class={icon} />
 	{/if}
@@ -11,7 +45,7 @@
 
 <style lang="postcss">
 	.button {
-		@apply rounded px-4 py-2;
+		@apply rounded;
 		text-decoration: none;
 		text-transform: uppercase;
 		transition: transform 0.1s;
