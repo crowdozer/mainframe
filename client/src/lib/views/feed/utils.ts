@@ -15,3 +15,19 @@ export function getFeedItemDate(item: FeedItem): number {
 			return item.data.pubDate;
 	}
 }
+
+export function stringToColor(inputString: string): string {
+	let hash = 0;
+	for (let i = 0; i < inputString.length; i++) {
+		hash = inputString.charCodeAt(i) + ((hash << 5) - hash);
+	}
+
+	let color = '#';
+	for (let i = 0; i < 3; i++) {
+		let value = (hash >> (i * 8)) & 0xff;
+		value = value + 64; // Add 64 to ensure the color is lighter and readable against a black background
+		color += ('00' + value.toString(16)).substr(-2);
+	}
+
+	return color;
+}

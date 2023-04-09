@@ -20,15 +20,15 @@
 				{/if}
 
 				{#if story.kind === 'infosec-mag'}
-					<InfosecMag story={story.data} />
+					<InfosecMag story={story.data} color={story.color} />
 				{/if}
 
 				{#if story.kind === 'krebs-sec'}
-					<KrebsSec story={story.data} />
+					<KrebsSec story={story.data} color={story.color} />
 				{/if}
 
 				{#if story.kind === 'coin-tele'}
-					<CoinTele story={story.data} />
+					<CoinTele story={story.data} color={story.color} />
 				{/if}
 
 				<!-- dividers -->

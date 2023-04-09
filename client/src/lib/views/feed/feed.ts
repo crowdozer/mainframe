@@ -1,6 +1,6 @@
 import type { Feed, FeedItem } from './types';
 import { getCoinTelegraphRSS, getHackerNewsStories, getInfosecRSS, getKrebsRSS } from './hydrators';
-import { sortFeedHelper } from './utils';
+import { sortFeedHelper, stringToColor } from './utils';
 
 export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
 	try {
@@ -10,6 +10,10 @@ export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
 		const infosec = await getInfosecRSS(fetcher);
 		const krebs = await getKrebsRSS(fetcher);
 		const cointele = await getCoinTelegraphRSS(fetcher);
+
+		const infoseccolor = stringToColor('infosec-mag');
+		const krebscolor = stringToColor('krebs-sec');
+		const cointelecolor = stringToColor('coin-telegraph');
 
 		const stories: FeedItem[] = [
 			...hnstories.map(
@@ -23,21 +27,24 @@ export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
 				(story) =>
 					({
 						kind: 'infosec-mag',
-						data: story
+						data: story,
+						color: infoseccolor
 					} as FeedItem)
 			),
 			...krebs.map(
 				(story) =>
 					({
 						kind: 'krebs-sec',
-						data: story
+						data: story,
+						color: krebscolor
 					} as FeedItem)
 			),
 			...cointele.map(
 				(story) =>
 					({
 						kind: 'coin-tele',
-						data: story
+						data: story,
+						color: cointelecolor
 					} as FeedItem)
 			)
 		].sort(sortFeedHelper);

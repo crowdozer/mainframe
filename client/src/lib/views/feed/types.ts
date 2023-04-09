@@ -34,9 +34,9 @@ export type CoinTeleStory = {
 
 export type FeedItem =
 	| { kind: 'hacker-news'; data: HackerNewsStory }
-	| { kind: 'infosec-mag'; data: InfoSecStory }
-	| { kind: 'krebs-sec'; data: KrebsStory }
-	| { kind: 'coin-tele'; data: CoinTeleStory };
+	| { kind: 'infosec-mag'; color: string; data: InfoSecStory }
+	| { kind: 'krebs-sec'; color: string; data: KrebsStory }
+	| { kind: 'coin-tele'; color: string; data: CoinTeleStory };
 
 export type Feed = {
 	feed: FeedItem[];

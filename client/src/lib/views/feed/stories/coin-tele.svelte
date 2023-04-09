@@ -3,11 +3,12 @@
 	import Article from './article.svelte';
 
 	export let story: CoinTeleStory;
+	export let color: string;
 </script>
 
 <Article icon="fa-rss" title={story.title} url={story.link}>
 	<span slot="meta" class="contents">
-		via <span class="text-green-500">coin telegraph</span> • {new Date(
+		via <span style="color: {color}">coin telegraph</span> • {new Date(
 			story.pubDate
 		).toLocaleDateString()}
 	</span>
