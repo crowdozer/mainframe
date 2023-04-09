@@ -15,10 +15,10 @@
 	let canvas: HTMLCanvasElement;
 	let galaxyElement: HTMLPreElement;
 	let generator: GalaxyGenerator;
-	let fps: number = 60;
+	let fps: number = 300;
 	let alphabet: string = ' .-+01';
 	let speed: number = 2;
-	const numStars = 800;
+	const numStars = 1200;
 	const numArms = getRandomInt(1, 3);
 	const asciiWidth = 150;
 	const asciiHeight = 75;
@@ -136,7 +136,7 @@
 				</div>
 
 				<div>
-					<label for="fps" class="block mt-4 text-sm font-mono">FPS</label>
+					<label for="fps" class="block mt-4 text-sm font-mono">FPS limit</label>
 					<select
 						id="fps"
 						class="block w-full mt-1 bg-black border rounded py-2 px-4 font-mono"
