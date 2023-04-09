@@ -15,16 +15,21 @@
 	let canvas: HTMLCanvasElement;
 	let galaxyElement: HTMLPreElement;
 	let generator: GalaxyGenerator;
-	let fps: number = 20;
+	let fps: number = 60;
 	let alphabet: string = ' .-+01';
 	let speed: number = 2;
 	const numStars = 800;
 	const numArms = getRandomInt(1, 3);
-	const asciiWidth = 124;
-	const asciiHeight = 54;
+	const asciiWidth = 150;
+	const asciiHeight = 75;
 
 	// Stores the ascii output
 	let asciiArt: string = '';
+
+	// Stores debug output
+	let asciiIPS = 0;
+	let drawStarsIPS = 0;
+	let rotationIPS = 0;
 
 	/**
 	 * Determines the rotation step.
@@ -68,7 +73,14 @@
 			asciiHeight,
 			alphabet: alphabet,
 			rotationStep: getRotationStep(),
-			onNewFrame: (ascii) => (asciiArt = ascii)
+			onNewFrame: (ascii) => {
+				asciiArt = ascii;
+			},
+			onPerformanceUpdate: (newAsciiIPS, newDrawStarsIPS, newRotationIPS) => {
+				asciiIPS = Math.round(newAsciiIPS);
+				drawStarsIPS = Math.round(newDrawStarsIPS);
+				rotationIPS = Math.round(newRotationIPS);
+			}
 		});
 		generator.initializeStars();
 
@@ -104,6 +116,14 @@
 				<pre bind:this={galaxyElement}>{asciiArt}</pre>
 			</div>
 
+			<div class="text-center p-8">
+				{#if asciiIPS && drawStarsIPS && rotationIPS}
+					invocations/sec (starmap, rotation, ascii): {drawStarsIPS}, {rotationIPS}, {asciiIPS}
+				{:else}
+					measuring performance...
+				{/if}
+			</div>
+
 			<div class="p-8 rounded-lg">
 				<div>
 					<label for="alphabet" class="block text-sm font-mono">alphabet</label>
@@ -122,6 +142,9 @@
 						class="block w-full mt-1 bg-black border rounded py-2 px-4 font-mono"
 						bind:value={fps}
 					>
+						<option value={300}>300 FPS</option>
+						<option value={240}>240 FPS</option>
+						<option value={165}>165 FPS</option>
 						<option value={144}>144 FPS</option>
 						<option value={60}>60 FPS</option>
 						<option value={30}>30 FPS</option>
@@ -157,7 +180,9 @@
 	}
 
 	pre {
-		@apply text-xs select-none whitespace-pre overflow-hidden;
+		@apply select-none whitespace-pre overflow-hidden;
+		font-size: 0.65rem;
+		line-height: 0.65rem;
 		width: 800px;
 		height: 800px;
 	}

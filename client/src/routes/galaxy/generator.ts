@@ -1,3 +1,9 @@
+type PerformanceInfo = {
+	asciiInvocations: number;
+	drawStarsInvocations: number;
+	rotationInvocations: number;
+};
+
 /**
  * Galaxy generation is adapted from this:
  * https://www.reddit.com/r/gamedev/comments/20ach8/how_to_generate_star_positions_in_a_2d_procedural/
@@ -13,14 +19,17 @@ export class GalaxyGenerator {
 	private tmpCanvas: HTMLCanvasElement;
 	private tmpCanvasCtx: CanvasRenderingContext2D;
 
+	// Allocate memory for the star positions
+	// A float angle and a float distance
+	private starPositionsAngle: Float32Array;
+	private starPositionsDistance: Float32Array;
+
 	// How many stars to keep track of
 	private numStars: number;
 	// How many arms the galaxy should have
 	private numArms: number;
 	// Distance between arms in degrees
 	private armSeparationDistance: number;
-	// All of the stars as x,y coordinates
-	private starPositions: { angle: number; distance: number }[];
 	// This constant determines the maximum offset that can be applied to a star's
 	// position along the spiral arm of the galaxy. The greater the value, the more
 	// scattered the stars will appear along the spiral arms, creating a more dispersed
@@ -45,6 +54,8 @@ export class GalaxyGenerator {
 	// Causes stars to drift towards the center
 	private distanceDecayPercentPerStep = 0.99995;
 
+	private lookup: Lookup;
+
 	// Configuration variables for ASCII art conversion
 
 	// Ascii width
@@ -57,11 +68,19 @@ export class GalaxyGenerator {
 	public rotationStep: number;
 	// What to do when a new ascii frame is delivered
 	private onNewFrame: (ascii: string) => void;
+	// Callback ran every performance update
+	private onPerformanceUpdate: (
+		asciiIPS: number,
+		drawStarsIPS: number,
+		rotationIPS: number
+	) => void;
 
-	// Debug
-	private asciiInvocations = 0;
-	private drawStarsInvocations = 0;
-	private rotationInvocations = 0;
+	// Performance monitoring
+	private performance: PerformanceInfo = {
+		asciiInvocations: 0,
+		drawStarsInvocations: 0,
+		rotationInvocations: 0
+	};
 
 	constructor(config: {
 		numStars: number;
@@ -78,14 +97,18 @@ export class GalaxyGenerator {
 		canvasWidth?: number;
 		canvasHeight?: number;
 		onNewFrame: (ascii: string) => void;
+		onPerformanceUpdate: (asciiIPS: number, drawStarsIPS: number, rotationIPS: number) => void;
+		lookupTablePrecision?: number;
 	}) {
+		// initialize sin/cos lookup tables
+		this.lookup = new Lookup(360);
+
 		this.numStars = config.numStars;
 		this.numArms = config.numArms;
-		this.armSeparationDistance = (2 * Math.PI) / this.numArms;
-		this.starPositions = [...new Array(this.numStars)].map(() => ({
-			angle: 0,
-			distance: 0
-		}));
+		this.armSeparationDistance = TwoPi / this.numArms;
+		this.starPositionsDistance = new Float32Array(this.numStars);
+		this.starPositionsAngle = new Float32Array(this.numStars);
+
 		this.armOffsetMax = config.armOffsetMax;
 		this.rotationFactor = config.rotationFactor;
 		this.randomOffsetXY = config.randomOffsetXY;
@@ -94,10 +117,11 @@ export class GalaxyGenerator {
 		this.alphabet = config.alphabet;
 		this.rotationStep = config.rotationStep;
 		this.canvas = config.canvas;
-		this.canvas.width = config.canvasWidth || 200;
-		this.canvas.height = config.canvasHeight || 200;
+		this.canvas.width = config.canvasWidth || 250;
+		this.canvas.height = config.canvasHeight || 250;
 		this.blackHoleOffset = config.blackHoleOffset || 0.05;
 		this.onNewFrame = config.onNewFrame;
+		this.onPerformanceUpdate = config.onPerformanceUpdate;
 		this.ctx = config.canvas.getContext('2d', {
 			willReadFrequently: true
 		}) as CanvasRenderingContext2D;
@@ -110,20 +134,52 @@ export class GalaxyGenerator {
 	}
 
 	/**
-	 * Runs the given callback at the given fps
+	 * Runs the given callback at the given fps using requestAnimationFrame
 	 */
-	private asFPSInterval(callback: () => void, fps: number): () => void {
-		const interval = setInterval(callback.bind(this), 1000 / fps);
+	private asAnimationInterval(callback: () => void, fps: number): () => void {
+		// Keeps recursion active until set to false
+		let running = true;
 
-		return () => clearInterval(interval);
+		// Store the timestamp of the previous frame
+		let previousTimestamp = 0;
+
+		// Calculate the duration of each frame based on the desired fps
+		const frameDuration = 1000 / fps;
+
+		// Define a loop function that will be called and re-called for each frame using requestAnimationFrame
+		const executeFrameRecursively = (timestamp: number) => {
+			// Calculate the elapsed time since the last frame
+			const elapsed = timestamp - previousTimestamp;
+
+			// Make sure enough time has elapsed to be on the next frame
+			if (elapsed >= frameDuration) {
+				// Update the previousTimestamp to the current timestamp
+				previousTimestamp = timestamp;
+				// Call the provided callback function
+				callback();
+			}
+
+			if (running) {
+				// Request the next frame using requestAnimationFrame and pass the loop function as the callback
+				requestAnimationFrame(executeFrameRecursively);
+			}
+		};
+
+		// Start the animation loop by calling requestAnimationFrame for the first time
+		requestAnimationFrame(executeFrameRecursively);
+
+		// Return a clear function to stop the loop
+		return () => {
+			running = false;
+		};
 	}
 
 	/**
 	 * Begins the ascii render interval
 	 */
 	private beginAsciiInterval(fps: number): () => void {
-		return this.asFPSInterval(() => {
-			this.asciiInvocations++;
+		return this.asAnimationInterval(() => {
+			this.performance.asciiInvocations++;
 			return this.canvasToAscii();
 		}, fps);
 	}
@@ -132,8 +188,8 @@ export class GalaxyGenerator {
 	 * Begins the star render interval
 	 */
 	private beginDrawStarsInterval(fps: number): () => void {
-		return this.asFPSInterval(() => {
-			this.drawStarsInvocations++;
+		return this.asAnimationInterval(() => {
+			this.performance.drawStarsInvocations++;
 			return this.drawStars();
 		}, fps);
 	}
@@ -142,8 +198,8 @@ export class GalaxyGenerator {
 	 * Begins the galaxy rotation interval
 	 */
 	private beginRotationInterval(fps: number): () => void {
-		return this.asFPSInterval(() => {
-			this.rotationInvocations++;
+		return this.asAnimationInterval(() => {
+			this.performance.rotationInvocations++;
 			return this.rotateGalaxy();
 		}, fps);
 	}
@@ -152,30 +208,19 @@ export class GalaxyGenerator {
 	 * Begins the performance interval
 	 */
 	private beginPerformanceInterval(): () => void {
-		let startTime = performance.now();
-
-		const interval = setInterval(() => {
-			// calculate IPS (invocations per second)
-			const elapsedTime = performance.now() - startTime;
-			const asciiIPS = this.asciiInvocations / (elapsedTime / 1000);
-			const drawStarsIPS = this.drawStarsInvocations / (elapsedTime / 1000);
-			const rotationIPS = this.rotationInvocations / (elapsedTime / 1000);
-
-			console.log(
-				'IPS (ascii, draw stars, rotation) %s - %s - %s',
-				asciiIPS,
-				drawStarsIPS,
-				rotationIPS
+		const clear = this.asAnimationInterval(() => {
+			this.onPerformanceUpdate(
+				this.performance.asciiInvocations,
+				this.performance.drawStarsInvocations,
+				this.performance.rotationInvocations
 			);
 
-			// restart
-			this.asciiInvocations = 0;
-			this.drawStarsInvocations = 0;
-			this.rotationInvocations = 0;
-			startTime = performance.now();
-		}, 5000);
+			this.performance.asciiInvocations = 0;
+			this.performance.drawStarsInvocations = 0;
+			this.performance.rotationInvocations = 0;
+		}, 1);
 
-		return () => clearInterval(interval);
+		return () => clear();
 	}
 
 	/**
@@ -197,12 +242,12 @@ export class GalaxyGenerator {
 	// Initialize star positions in the galaxy
 	public initializeStars() {
 		// Iterate through starPositions array and set each star's x and y coordinates
-		for (let i = 0; i < this.starPositions.length; i++) {
+		for (let i = 0; i < this.numStars; i++) {
 			// Calculate distance, angle, and armOffset for each star
 			let distance = this.randFloat();
 			distance = Math.pow(distance, 2);
 
-			let angle = this.randFloat() * 2 * Math.PI;
+			let angle = this.randFloat() * TwoPi;
 			let armOffset = this.randFloat() * this.armOffsetMax;
 			armOffset = armOffset - this.armOffsetMax / 2;
 			armOffset = armOffset * (1 / distance);
@@ -225,22 +270,24 @@ export class GalaxyGenerator {
 			// shrink the entire drawing down
 			distance *= 0.75;
 
-			this.starPositions[i] = { angle, distance };
+			// Store distance and angle
+			this.starPositionsAngle[i] = angle;
+			this.starPositionsDistance[i] = distance;
 		}
 	}
 
 	// Rotate the galaxy by a given step in degrees
 	public rotateGalaxy(stepDegrees: number = this.rotationStep) {
-		const stepRadians = stepDegrees * (Math.PI / 180);
+		const stepRadians = (stepDegrees * Math.PI) / 180;
 
-		for (let i = 0; i < this.starPositions.length; i++) {
-			const { distance } = this.starPositions[i];
+		for (let i = 0; i < this.numStars; i++) {
+			const distance = this.starPositionsDistance[i];
 
 			const percentDrag = distance * this.distanceRotationFalloffScale;
 			const radiansDrag = stepRadians * percentDrag;
 
-			this.starPositions[i].angle += stepRadians - radiansDrag;
-			this.starPositions[i].distance *= this.distanceDecayPercentPerStep;
+			this.starPositionsAngle[i] += stepRadians - radiansDrag;
+			this.starPositionsDistance[i] *= this.distanceDecayPercentPerStep;
 		}
 	}
 
@@ -262,9 +309,11 @@ export class GalaxyGenerator {
 
 		// Draw white dots for each star on the canvas
 		this.ctx.fillStyle = '#fff';
-		for (const star of this.starPositions) {
+		for (let i = 0; i < this.numStars; i++) {
+			const angle = this.starPositionsAngle[i];
+			const distance = this.starPositionsDistance[i];
 			this.ctx.beginPath();
-			const [starX, starY] = this.polarToCartesian(star.angle, star.distance);
+			const [starX, starY] = this.polarToCartesian(angle, distance);
 			const xpos = centerX + starX * centerX;
 			const ypos = centerY + starY * centerY;
 			this.ctx.arc(xpos, ypos, 1, 0, 2 * Math.PI);
@@ -272,9 +321,10 @@ export class GalaxyGenerator {
 		}
 	}
 
+	// Converts polar coordinates (angle, dist) to (x, y) coordinates
 	private polarToCartesian(angle: number, distance: number): [number, number] {
-		const x = distance * Math.cos(angle);
-		const y = distance * Math.sin(angle);
+		const x = distance * this.lookup.cosLookup(angle);
+		const y = distance * this.lookup.sinLookup(angle);
 		return [x, y];
 	}
 
@@ -289,7 +339,11 @@ export class GalaxyGenerator {
 		let asciiArt = '';
 
 		// Get all pixel data at once
-		const imageData = this.tmpCanvasCtx.getImageData(0, 0, this.asciiWidth, this.asciiHeight).data;
+		// Use a typed array for any potential performance optimizations, and to guarantee
+		// values are 0-255
+		const imageData = new Uint8ClampedArray(
+			this.tmpCanvasCtx.getImageData(0, 0, this.asciiWidth, this.asciiHeight).data
+		);
 
 		// Iterate through the downscaled canvas image and convert each pixel to an ASCII character
 		for (let y = 0; y < this.asciiHeight; y++) {
@@ -311,5 +365,46 @@ export class GalaxyGenerator {
 	private mapGrayscaleToAscii(value: number): string {
 		const index = Math.round(((this.alphabet.length - 1) * value) / 255);
 		return this.alphabet[index];
+	}
+}
+
+// Precompute 2pi
+const TwoPi = Math.PI * 2;
+
+// Calculates a lookup table for sine and cosine values
+class Lookup {
+	constructor(size = 360) {
+		this.LOOKUP_TABLE_SIZE = size;
+
+		this.sinLookupTable = new Float32Array(this.LOOKUP_TABLE_SIZE);
+		this.cosLookupTable = new Float32Array(this.LOOKUP_TABLE_SIZE);
+
+		for (let i = 0; i < this.LOOKUP_TABLE_SIZE; i++) {
+			const angleRadians = (i * TwoPi) / this.LOOKUP_TABLE_SIZE;
+			this.sinLookupTable[i] = Math.sin(angleRadians);
+			this.cosLookupTable[i] = Math.cos(angleRadians);
+		}
+	}
+
+	// The number of entries in the lookup table can be adjusted to balance memory usage and precision
+	private LOOKUP_TABLE_SIZE: number;
+
+	private sinLookupTable: Float32Array;
+	private cosLookupTable: Float32Array;
+
+	public sinLookup(angleRadians: number): number {
+		const index =
+			(Math.round((angleRadians * this.LOOKUP_TABLE_SIZE) / TwoPi) + this.LOOKUP_TABLE_SIZE) %
+			this.LOOKUP_TABLE_SIZE;
+
+		return this.sinLookupTable[index];
+	}
+
+	public cosLookup(angleRadians: number): number {
+		const index =
+			(Math.round((angleRadians * this.LOOKUP_TABLE_SIZE) / TwoPi) + this.LOOKUP_TABLE_SIZE) %
+			this.LOOKUP_TABLE_SIZE;
+
+		return this.cosLookupTable[index];
 	}
 }
