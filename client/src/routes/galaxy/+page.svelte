@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { GalaxyGenerator } from './generator';
 	import Paper from '$lib/components/paper.svelte';
 	import Container from '$lib/components/container.svelte';
@@ -62,7 +62,7 @@
 	/**
 	 * Determines and saves the dimensions of the ascii renderer
 	 */
-	function setDimensions() {
+	function setAsciiDimensions() {
 		const [charWidth, charHeight] = getCharSize();
 		const preWidth = galaxyElement.clientWidth;
 		const preHeight = galaxyElement.clientHeight;
@@ -74,32 +74,57 @@
 		asciiHeight = rows;
 	}
 
-	// Starts and restarts the galaxy sequence automatically
-	// Also handles cleanup of intervals on unmount
-	$: if (fps || speed || alphabet) {
+	/**
+	 * Stops the rendering sequence
+	 */
+	function performShutdown() {
 		if (cleanup) {
 			console.log('stopping rendering cycles');
 			cleanup();
 		}
-
-		if (generator) {
-			console.log('restarting rendering cycles');
-			generator.rotationStep = getRotationStep();
-			generator.alphabet = alphabet;
-			cleanup = generator.beginIntervals(fps);
-		}
 	}
 
-	onMount(async () => {
+	/**
+	 * Starts the rendering sequence
+	 */
+	function performStartup() {
+		if (!generator) {
+			return;
+		}
+
+		console.log('starting rendering cycles');
+		generator.rotationStep = getRotationStep();
+		generator.alphabet = alphabet;
+		cleanup = generator.beginIntervals(fps);
+	}
+
+	/**
+	 * Analyzes the machine's fps capabilities and then sets
+	 * a reasonable default value
+	 */
+	async function setFPS() {
 		const capableFPS = await measureFPS();
 		fps = roundToNearest(capableFPS, [144, 60, 30]);
+	}
 
-		// Force a 1:1 aspect ratio
+	/**
+	 * Fixes the height of the galaxyElement such that it's 1:1 ratio
+	 */
+	function fixAsciiHeight() {
 		galaxyElement.style.height = getComputedStyle(galaxyElement).width;
+	}
 
-		// Set the dimensions
-		setDimensions();
-
+	/**
+	 * Performs all required setup operations
+	 */
+	async function initialize() {
+		// Set sim speed
+		await setFPS();
+		// Force a 1:1 aspect ratio for output
+		fixAsciiHeight();
+		// Set the dimensions for ascii output
+		setAsciiDimensions();
+		// Instantiate the generator
 		generator = new GalaxyGenerator({
 			numStars,
 			numArms,
@@ -118,15 +143,26 @@
 				IPS = Math.round(newIPS);
 			}
 		});
-
+		// Initialize the generator
 		generator.initializeStars();
+		performStartup();
+	}
 
+	/**
+	 * Calls cleanupAndRestart() if a config value requires a reload
+	 */
+	$: if (fps || speed || alphabet) {
+		performShutdown();
+		performStartup();
+	}
+
+	onMount(async () => {
+		await initialize();
+	});
+
+	onDestroy(() => {
 		// Clear the interval when the component is unmounted
-		return () => {
-			if (cleanup) {
-				cleanup();
-			}
-		};
+		performShutdown();
 	});
 </script>
 

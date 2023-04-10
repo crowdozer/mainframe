@@ -168,7 +168,9 @@ export class GalaxyGenerator {
 		const clearIntervals = [this.beginGalaxyInterval(fps), this.beginPerformanceInterval()];
 
 		return () => {
-			clearIntervals.forEach((clear) => clear());
+			for (let i = 0; i < clearIntervals.length; i++) {
+				clearIntervals[i]();
+			}
 		};
 	}
 
