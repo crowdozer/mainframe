@@ -4,7 +4,8 @@
 	import Paper from '$lib/components/paper.svelte';
 	import Container from '$lib/components/container.svelte';
 	import { getRandomInt } from '$lib/utils/random-int';
-	import { sleep } from '$lib/utils/sleep';
+	import { measureFPS } from '$lib/utils/fps';
+	import { roundToNearest } from '$lib/utils/custom-round';
 
 	/**
 	 * Galaxy generation is adapted from this:
@@ -16,7 +17,7 @@
 	let canvas: HTMLCanvasElement;
 	let galaxyElement: HTMLPreElement;
 	let generator: GalaxyGenerator;
-	let fps: number = 300;
+	let fps: number = 30;
 	let alphabet: string = ' .-+01';
 	let speed: number = 2;
 	const numStars = 1200;
@@ -28,9 +29,7 @@
 	let asciiArt: string = '';
 
 	// Stores debug output
-	let asciiIPS = 0;
-	let drawStarsIPS = 0;
-	let rotationIPS = 0;
+	let IPS = 0;
 
 	/**
 	 * Determines the rotation step.
@@ -92,7 +91,8 @@
 	}
 
 	onMount(async () => {
-		await sleep(150);
+		const capableFPS = await measureFPS();
+		fps = roundToNearest(capableFPS, [144, 60, 30]);
 
 		// Force a 1:1 aspect ratio
 		galaxyElement.style.height = getComputedStyle(galaxyElement).width;
@@ -114,10 +114,8 @@
 			onNewFrame: (ascii) => {
 				asciiArt = ascii;
 			},
-			onPerformanceUpdate: (newAsciiIPS, newDrawStarsIPS, newRotationIPS) => {
-				asciiIPS = Math.round(newAsciiIPS);
-				drawStarsIPS = Math.round(newDrawStarsIPS);
-				rotationIPS = Math.round(newRotationIPS);
+			onPerformanceUpdate: (newIPS) => {
+				IPS = Math.round(newIPS);
 			}
 		});
 
@@ -135,16 +133,6 @@
 <Container>
 	<div class="mb-4">
 		<Paper>
-			<div class="p-4">
-				<p class="mono text-sm">
-					Galaxy simulation: {numStars} stars, {numArms}
-					{numArms > 1 ? 'arms' : 'arm'}, {asciiWidth * asciiHeight} ascii chars
-				</p>
-			</div>
-		</Paper>
-	</div>
-	<div class="mb-4">
-		<Paper>
 			<div>
 				<canvas bind:this={canvas} />
 			</div>
@@ -153,30 +141,46 @@
 				<pre bind:this={galaxyElement}>{asciiArt}</pre>
 			</div>
 
-			<div class="text-center p-8">
-				{#if asciiIPS && drawStarsIPS && rotationIPS}
-					invocations/sec (starmap|rotation|ascii): {drawStarsIPS}|{rotationIPS}|{asciiIPS}
-				{:else}
-					measuring performance...
-				{/if}
+			<div class="rounded p-8">
+				<div class="grid grid-cols-2">
+					<div class="px-4 py-2 font-bold">sim speed</div>
+					<div class="px-4 py-2">
+						{#if IPS}
+							{IPS}hz (targ {fps})
+						{:else}
+							measuring performance...
+						{/if}
+					</div>
+					<div class="px-4 py-2 font-bold">num arms</div>
+					<div class="px-4 py-2">
+						{numArms}
+						{numArms > 1 ? ' arms' : ' arm'}
+					</div>
+					<div class="px-4 py-2 font-bold">stars</div>
+					<div class="px-4 py-2">{numStars}</div>
+					<div class="px-4 py-2 font-bold">ascii</div>
+					<div class="px-4 py-2">
+						{asciiWidth * asciiHeight} ({asciiWidth} x {asciiHeight})
+					</div>
+				</div>
 			</div>
 
-			<div class="p-8 rounded-lg">
+			<div class="p-8">
 				<div>
-					<label for="alphabet" class="block text-sm font-mono">alphabet</label>
+					<label for="alphabet" class="mt-4 block text-sm">alphabet</label>
 					<input
 						id="alphabet"
 						type="text"
-						class="block w-full mt-1 bg-black border rounded py-1 px-2 font-mono"
+						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
 						bind:value={alphabet}
 					/>
 				</div>
 
 				<div>
-					<label for="fps" class="block mt-4 text-sm font-mono">FPS limit</label>
+					<label for="fps" class="mt-4 block text-sm">Target FPS</label>
 					<select
 						id="fps"
-						class="block w-full mt-1 bg-black border rounded py-2 px-4 font-mono"
+						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
 						bind:value={fps}
 					>
 						<option value={300}>300 FPS</option>
@@ -192,10 +196,10 @@
 				</div>
 
 				<div>
-					<label for="speed" class="block mt-4 text-sm font-mono">revolutions</label>
+					<label for="speed" class="mt-4 block text-sm">revolutions</label>
 					<select
 						id="speed"
-						class="block w-full mt-1 bg-black border rounded py-2 px-4 font-mono"
+						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
 						bind:value={speed}
 					>
 						<option value={1}>Once per minute</option>
@@ -217,7 +221,7 @@
 	}
 
 	pre {
-		@apply w-full select-none whitespace-pre overflow-hidden;
+		@apply w-full select-none overflow-hidden whitespace-pre;
 		font-size: 10px;
 		line-height: calc(10px * 1.2);
 	}

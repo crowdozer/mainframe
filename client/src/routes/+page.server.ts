@@ -1,4 +1,4 @@
-import type { PageLoad } from './$types';
+import type { PageServerLoad } from './$types';
 import { generateFeed } from '$lib/views/feed/feed';
 
 /**
@@ -18,4 +18,4 @@ export const config = {
  */
 export const load = async function ({ fetch }) {
 	return generateFeed(fetch);
-} satisfies PageLoad;
+} satisfies PageServerLoad;

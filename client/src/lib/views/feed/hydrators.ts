@@ -2,6 +2,15 @@ import type { HackerNewsStory, InfoSecStory, KrebsStory, CoinTeleStory } from '.
 import parser from 'fast-xml-parser';
 
 /**
+ * Generic fetch options to apply for rss hydrators
+ */
+const opts = {
+	headers: {
+		'Accept-Encoding': 'identity'
+	}
+};
+
+/**
  * Load top n stories from HackerNews
  */
 export async function getHackerNewsStories(get: typeof fetch, n = 20): Promise<HackerNewsStory[]> {
@@ -54,7 +63,9 @@ export async function getHackerNewsStoryIDs(get: typeof fetch): Promise<number[]
  */
 export async function getKrebsRSS(get: typeof fetch, n = 10): Promise<KrebsStory[]> {
 	try {
-		const xml = await get('/api/feed/proxy-krebs', {}).then((response) => response.text());
+		const xml = await get('https://krebsonsecurity.com/feed/', opts).then((response) =>
+			response.text()
+		);
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
@@ -86,7 +97,9 @@ export async function getKrebsRSS(get: typeof fetch, n = 10): Promise<KrebsStory
  */
 export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecStory[]> {
 	try {
-		const xml = await get('/api/feed/proxy-infosec', {}).then((response) => response.text());
+		const xml = await get('https://www.infosecurity-magazine.com/rss/news/', opts).then(
+			(response) => response.text()
+		);
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
@@ -115,7 +128,9 @@ export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecS
 
 export async function getCoinTelegraphRSS(get: typeof fetch, n = 10): Promise<any[]> {
 	try {
-		const xml = await get('/api/feed/proxy-cointele').then((response) => response.text());
+		const xml = await get('https://cointelegraph.com/rss/category/weekly-overview/', opts).then(
+			(response) => response.text()
+		);
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,

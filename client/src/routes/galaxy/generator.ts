@@ -1,7 +1,5 @@
 type PerformanceInfo = {
-	asciiInvocations: number;
-	drawStarsInvocations: number;
-	rotationInvocations: number;
+	invocations: number;
 };
 
 /**
@@ -69,17 +67,11 @@ export class GalaxyGenerator {
 	// What to do when a new ascii frame is delivered
 	private onNewFrame: (ascii: string) => void;
 	// Callback ran every performance update
-	private onPerformanceUpdate: (
-		asciiIPS: number,
-		drawStarsIPS: number,
-		rotationIPS: number
-	) => void;
+	private onPerformanceUpdate: (ips: number) => void;
 
 	// Performance monitoring
 	private performance: PerformanceInfo = {
-		asciiInvocations: 0,
-		drawStarsInvocations: 0,
-		rotationInvocations: 0
+		invocations: 0
 	};
 
 	constructor(config: {
@@ -97,7 +89,7 @@ export class GalaxyGenerator {
 		canvasWidth?: number;
 		canvasHeight?: number;
 		onNewFrame: (ascii: string) => void;
-		onPerformanceUpdate: (asciiIPS: number, drawStarsIPS: number, rotationIPS: number) => void;
+		onPerformanceUpdate: (ips: number) => void;
 		lookupTablePrecision?: number;
 	}) {
 		// initialize sin/cos lookup tables
@@ -134,73 +126,25 @@ export class GalaxyGenerator {
 	}
 
 	/**
-	 * Runs the given callback at the given fps using requestAnimationFrame
+	 * Runs the given callback at the given fps
 	 */
-	private asAnimationInterval(callback: () => void, fps: number): () => void {
-		// Keeps recursion active until set to false
-		let running = true;
+	private asInterval(callback: () => void, fps: number): () => void {
+		const interval = setInterval(() => {
+			callback();
+		}, 1000 / fps);
 
-		// Store the timestamp of the previous frame
-		let previousTimestamp = 0;
-
-		// Calculate the duration of each frame based on the desired fps
-		const frameDuration = 1000 / fps;
-
-		// Define a loop function that will be called and re-called for each frame using requestAnimationFrame
-		const executeFrameRecursively = (timestamp: number) => {
-			// Calculate the elapsed time since the last frame
-			const elapsed = timestamp - previousTimestamp;
-
-			// Make sure enough time has elapsed to be on the next frame
-			if (elapsed >= frameDuration) {
-				// Update the previousTimestamp to the current timestamp
-				previousTimestamp = timestamp;
-				// Call the provided callback function
-				callback();
-			}
-
-			if (running) {
-				// Request the next frame using requestAnimationFrame and pass the loop function as the callback
-				requestAnimationFrame(executeFrameRecursively);
-			}
-		};
-
-		// Start the animation loop by calling requestAnimationFrame for the first time
-		requestAnimationFrame(executeFrameRecursively);
-
-		// Return a clear function to stop the loop
-		return () => {
-			running = false;
-		};
+		return () => clearInterval(interval);
 	}
 
 	/**
 	 * Begins the ascii render interval
 	 */
-	private beginAsciiInterval(fps: number): () => void {
-		return this.asAnimationInterval(() => {
-			this.performance.asciiInvocations++;
-			return this.canvasToAscii();
-		}, fps);
-	}
-
-	/**
-	 * Begins the star render interval
-	 */
-	private beginDrawStarsInterval(fps: number): () => void {
-		return this.asAnimationInterval(() => {
-			this.performance.drawStarsInvocations++;
-			return this.drawStars();
-		}, fps);
-	}
-
-	/**
-	 * Begins the galaxy rotation interval
-	 */
-	private beginRotationInterval(fps: number): () => void {
-		return this.asAnimationInterval(() => {
-			this.performance.rotationInvocations++;
-			return this.rotateGalaxy();
+	private beginGalaxyInterval(fps: number): () => void {
+		return this.asInterval(() => {
+			this.performance.invocations++;
+			this.canvasToAscii();
+			this.drawStars();
+			this.rotateGalaxy();
 		}, fps);
 	}
 
@@ -208,31 +152,20 @@ export class GalaxyGenerator {
 	 * Begins the performance interval
 	 */
 	private beginPerformanceInterval(): () => void {
-		const clear = this.asAnimationInterval(() => {
-			this.onPerformanceUpdate(
-				this.performance.asciiInvocations,
-				this.performance.drawStarsInvocations,
-				this.performance.rotationInvocations
-			);
+		const interval = setInterval(() => {
+			this.onPerformanceUpdate(this.performance.invocations);
 
-			this.performance.asciiInvocations = 0;
-			this.performance.drawStarsInvocations = 0;
-			this.performance.rotationInvocations = 0;
-		}, 1);
+			this.performance.invocations = 0;
+		}, 1000);
 
-		return () => clear();
+		return () => clearInterval(interval);
 	}
 
 	/**
 	 * Begins all intervals and returns a cleanup function
 	 */
 	public beginIntervals(fps: number): () => void {
-		const clearIntervals = [
-			this.beginRotationInterval(fps),
-			this.beginDrawStarsInterval(fps),
-			this.beginAsciiInterval(fps),
-			this.beginPerformanceInterval()
-		];
+		const clearIntervals = [this.beginGalaxyInterval(fps), this.beginPerformanceInterval()];
 
 		return () => {
 			clearIntervals.forEach((clear) => clear());
