@@ -31,8 +31,7 @@
 	 * fps   = how many rotation steps to apply every second
 	 */
 	function getRotationStep(): number {
-		const rotations = targetRPM;
-		const totalDegrees = 360 * rotations;
+		const totalDegrees = 360 * targetRPM;
 		const framesPerMinute = targetFPS * 60;
 		const degreesPerFrame = totalDegrees / framesPerMinute;
 
