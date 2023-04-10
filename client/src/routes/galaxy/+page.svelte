@@ -7,29 +7,23 @@
 	import { measureFPS } from '$lib/utils/fps';
 	import { roundToNearest } from '$lib/utils/custom-round';
 
-	/**
-	 * Galaxy generation is adapted from this:
-	 * https://www.reddit.com/r/gamedev/comments/20ach8/how_to_generate_star_positions_in_a_2d_procedural/
-	 */
-
-	let cleanup: (() => void) | null = null;
-
+	// not mutable, but assigned during startup
 	let canvas: HTMLCanvasElement;
 	let galaxyElement: HTMLPreElement;
 	let generator: GalaxyGenerator;
-	let fps: number = 30;
+
+	// mutable
+	let targetFPS: number = 30;
+	let targetRPM: number = 2;
 	let alphabet: string = ' .-+01';
-	let speed: number = 2;
-	const numStars = 1200;
-	const numArms = getRandomInt(1, 3);
 	let asciiWidth = 0;
 	let asciiHeight = 0;
-
-	// Stores the ascii output
 	let asciiArt: string = '';
+	let debugIPS = 0;
 
-	// Stores debug output
-	let IPS = 0;
+	// not mutable, but referenced multiple times
+	const numStars = 1200;
+	const numArms = getRandomInt(1, 3);
 
 	/**
 	 * Determines the rotation step.
@@ -37,9 +31,9 @@
 	 * fps   = how many rotation steps to apply every second
 	 */
 	function getRotationStep(): number {
-		const rotations = speed;
+		const rotations = targetRPM;
 		const totalDegrees = 360 * rotations;
-		const framesPerMinute = fps * 60;
+		const framesPerMinute = targetFPS * 60;
 		const degreesPerFrame = totalDegrees / framesPerMinute;
 
 		return degreesPerFrame;
@@ -78,10 +72,11 @@
 	 * Stops the rendering sequence
 	 */
 	function performShutdown() {
-		if (cleanup) {
-			console.log('stopping rendering cycles');
-			cleanup();
+		if (!generator) {
+			return;
 		}
+
+		generator.stopRenderingSequence();
 	}
 
 	/**
@@ -95,7 +90,7 @@
 		console.log('starting rendering cycles');
 		generator.rotationStep = getRotationStep();
 		generator.alphabet = alphabet;
-		cleanup = generator.beginIntervals(fps);
+		generator.startRenderingSequence(targetFPS);
 	}
 
 	/**
@@ -104,7 +99,7 @@
 	 */
 	async function setFPS() {
 		const capableFPS = await measureFPS();
-		fps = roundToNearest(capableFPS, [144, 60, 30]);
+		targetFPS = roundToNearest(capableFPS, [144, 60, 30]);
 	}
 
 	/**
@@ -140,7 +135,7 @@
 				asciiArt = ascii;
 			},
 			onPerformanceUpdate: (newIPS) => {
-				IPS = Math.round(newIPS);
+				debugIPS = Math.round(newIPS);
 			}
 		});
 		// Initialize the generator
@@ -151,7 +146,7 @@
 	/**
 	 * Calls cleanupAndRestart() if a config value requires a reload
 	 */
-	$: if (fps || speed || alphabet) {
+	$: if (targetFPS || targetRPM || alphabet) {
 		performShutdown();
 		performStartup();
 	}
@@ -181,8 +176,8 @@
 				<div class="grid grid-cols-2">
 					<div class="px-4 py-2 font-bold">sim speed</div>
 					<div class="px-4 py-2">
-						{#if IPS}
-							{IPS}hz (targ {fps})
+						{#if debugIPS}
+							{debugIPS}hz (targ {targetFPS})
 						{:else}
 							measuring performance...
 						{/if}
@@ -217,7 +212,7 @@
 					<select
 						id="fps"
 						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
-						bind:value={fps}
+						bind:value={targetFPS}
 					>
 						<option value={300}>300 FPS</option>
 						<option value={240}>240 FPS</option>
@@ -236,7 +231,7 @@
 					<select
 						id="speed"
 						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
-						bind:value={speed}
+						bind:value={targetRPM}
 					>
 						<option value={1}>Once per minute</option>
 						<option value={2}>Twice per minute</option>

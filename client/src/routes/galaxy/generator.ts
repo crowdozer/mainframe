@@ -2,12 +2,17 @@ type PerformanceInfo = {
 	invocations: number;
 };
 
+// Precompute 2pi
+const TwoPi = Math.PI * 2;
+
 /**
  * Galaxy generation is adapted from this:
  * https://www.reddit.com/r/gamedev/comments/20ach8/how_to_generate_star_positions_in_a_2d_procedural/
  */
 export class GalaxyGenerator {
-	// Configuration variables for star creation and galaxy display
+	/**
+	 * Configuration variables for star creation and galaxy display
+	 */
 
 	// Canvas used in drawing the stars
 	private canvas: HTMLCanvasElement;
@@ -51,10 +56,14 @@ export class GalaxyGenerator {
 	private distanceRotationFalloffScale = 0.2;
 	// Causes stars to drift towards the center
 	private distanceDecayPercentPerStep = 0.99995;
-
+	// Sin/Cos lookup table (speeds up calculations)
 	private lookup: Lookup;
+	// Cleanup function
+	public cleanup: (() => void) | null;
 
-	// Configuration variables for ASCII art conversion
+	/**
+	 * Configuration variables for ASCII art conversion
+	 */
 
 	// Ascii width
 	private asciiWidth: number;
@@ -92,7 +101,8 @@ export class GalaxyGenerator {
 		onPerformanceUpdate: (ips: number) => void;
 		lookupTablePrecision?: number;
 	}) {
-		// initialize sin/cos lookup tables
+		// A higher value than 360 can be assigned for more precision,
+		// but it isn't necessary for an ascii sim lol
 		this.lookup = new Lookup(360);
 
 		this.numStars = config.numStars;
@@ -100,7 +110,6 @@ export class GalaxyGenerator {
 		this.armSeparationDistance = TwoPi / this.numArms;
 		this.starPositionsDistance = new Float32Array(this.numStars);
 		this.starPositionsAngle = new Float32Array(this.numStars);
-
 		this.armOffsetMax = config.armOffsetMax;
 		this.rotationFactor = config.rotationFactor;
 		this.randomOffsetXY = config.randomOffsetXY;
@@ -123,6 +132,85 @@ export class GalaxyGenerator {
 		this.tmpCanvasCtx = this.tmpCanvas.getContext('2d', {
 			willReadFrequently: true
 		}) as CanvasRenderingContext2D;
+		this.cleanup = null;
+	}
+
+	/**
+	 * Initialize star positions in the galaxy
+	 */
+	public initializeStars() {
+		// Iterate through starPositions array and set each star's x and y coordinates
+		for (let i = 0; i < this.numStars; i++) {
+			// Calculate distance, angle, and armOffset for each star
+			let distance = this.randFloat();
+			distance = Math.pow(distance, 2);
+
+			let angle = this.randFloat() * TwoPi;
+			let armOffset = this.randFloat() * this.armOffsetMax;
+			armOffset = armOffset - this.armOffsetMax / 2;
+			armOffset = armOffset * (1 / distance);
+
+			let squaredArmOffset = Math.pow(armOffset, 2);
+			if (armOffset < 0) squaredArmOffset = squaredArmOffset * -1;
+			armOffset = squaredArmOffset;
+
+			// inverting distance to reverse the spiral direction
+			const rotation = -distance * this.rotationFactor;
+
+			angle =
+				Math.floor(angle / this.armSeparationDistance) * this.armSeparationDistance +
+				armOffset +
+				rotation;
+
+			// put a black hole at the center
+			distance += this.blackHoleOffset;
+			distance += this.randFloat() * this.randomOffsetXY;
+			// shrink the entire drawing down
+			distance *= 0.75;
+
+			// Store distance and angle
+			this.starPositionsAngle[i] = angle;
+			this.starPositionsDistance[i] = distance;
+		}
+	}
+
+	/**
+	 * Begins all intervals and sets a cleanup function
+	 */
+	public startRenderingSequence(fps: number) {
+		const clearIntervals = [this.beginGalaxyInterval(fps), this.beginPerformanceInterval()];
+
+		this.cleanup = function () {
+			for (let i = 0; i < clearIntervals.length; i++) {
+				clearIntervals[i]();
+			}
+		};
+	}
+
+	/**
+	 * Stops the rendering sequence
+	 */
+	public stopRenderingSequence() {
+		if (this.cleanup) {
+			console.log('stopping rendering cycles');
+			this.cleanup();
+			this.cleanup = null;
+		}
+	}
+
+	// Rotate the galaxy by a given step in degrees
+	public rotateGalaxy(stepDegrees: number = this.rotationStep) {
+		const stepRadians = (stepDegrees * Math.PI) / 180;
+
+		for (let i = 0; i < this.numStars; i++) {
+			const distance = this.starPositionsDistance[i];
+
+			const percentDrag = distance * this.distanceRotationFalloffScale;
+			const radiansDrag = stepRadians * percentDrag;
+
+			this.starPositionsAngle[i] += stepRadians - radiansDrag;
+			this.starPositionsDistance[i] *= this.distanceDecayPercentPerStep;
+		}
 	}
 
 	/**
@@ -162,76 +250,15 @@ export class GalaxyGenerator {
 	}
 
 	/**
-	 * Begins all intervals and returns a cleanup function
+	 * Generate a random float between 0 and 1
 	 */
-	public beginIntervals(fps: number): () => void {
-		const clearIntervals = [this.beginGalaxyInterval(fps), this.beginPerformanceInterval()];
-
-		return () => {
-			for (let i = 0; i < clearIntervals.length; i++) {
-				clearIntervals[i]();
-			}
-		};
-	}
-
-	// Initialize star positions in the galaxy
-	public initializeStars() {
-		// Iterate through starPositions array and set each star's x and y coordinates
-		for (let i = 0; i < this.numStars; i++) {
-			// Calculate distance, angle, and armOffset for each star
-			let distance = this.randFloat();
-			distance = Math.pow(distance, 2);
-
-			let angle = this.randFloat() * TwoPi;
-			let armOffset = this.randFloat() * this.armOffsetMax;
-			armOffset = armOffset - this.armOffsetMax / 2;
-			armOffset = armOffset * (1 / distance);
-
-			let squaredArmOffset = Math.pow(armOffset, 2);
-			if (armOffset < 0) squaredArmOffset = squaredArmOffset * -1;
-			armOffset = squaredArmOffset;
-
-			// inverting distance to reverse the spiral direction
-			const rotation = -distance * this.rotationFactor;
-
-			angle =
-				Math.floor(angle / this.armSeparationDistance) * this.armSeparationDistance +
-				armOffset +
-				rotation;
-
-			// put a black hole at the center
-			distance += this.blackHoleOffset;
-			distance += this.randFloat() * this.randomOffsetXY;
-			// shrink the entire drawing down
-			distance *= 0.75;
-
-			// Store distance and angle
-			this.starPositionsAngle[i] = angle;
-			this.starPositionsDistance[i] = distance;
-		}
-	}
-
-	// Rotate the galaxy by a given step in degrees
-	public rotateGalaxy(stepDegrees: number = this.rotationStep) {
-		const stepRadians = (stepDegrees * Math.PI) / 180;
-
-		for (let i = 0; i < this.numStars; i++) {
-			const distance = this.starPositionsDistance[i];
-
-			const percentDrag = distance * this.distanceRotationFalloffScale;
-			const radiansDrag = stepRadians * percentDrag;
-
-			this.starPositionsAngle[i] += stepRadians - radiansDrag;
-			this.starPositionsDistance[i] *= this.distanceDecayPercentPerStep;
-		}
-	}
-
-	// Generate random float between 0 and 1
 	private randFloat(): number {
 		return Math.random();
 	}
 
-	// Draw stars on the canvas
+	/**
+	 * Draw stars on the invisible canvas
+	 */
 	private drawStars() {
 		const centerX = this.canvas.width / 2;
 		const centerY = this.canvas.height / 2;
@@ -256,14 +283,18 @@ export class GalaxyGenerator {
 		}
 	}
 
-	// Converts polar coordinates (angle, dist) to (x, y) coordinates
+	/**
+	 * Convert polar coordinates (angle, dist) to (x, y)
+	 */
 	private polarToCartesian(angle: number, distance: number): [number, number] {
 		const x = distance * this.lookup.cosLookup(angle);
 		const y = distance * this.lookup.sinLookup(angle);
 		return [x, y];
 	}
 
-	// Convert the canvas image to ASCII art
+	/**
+	 * Convert canvas image to ascii art based on brightness
+	 */
 	private canvasToAscii(): void {
 		// Downscale the canvas image to match the desired output resolution
 		this.tmpCanvas.width = this.asciiWidth;
@@ -296,15 +327,14 @@ export class GalaxyGenerator {
 		this.onNewFrame(asciiArt);
 	}
 
-	// Map grayscale pixel values to ASCII characters
+	/**
+	 * Map grayscale pixel values to ASCII characters
+	 */
 	private mapGrayscaleToAscii(value: number): string {
 		const index = Math.round(((this.alphabet.length - 1) * value) / 255);
 		return this.alphabet[index];
 	}
 }
-
-// Precompute 2pi
-const TwoPi = Math.PI * 2;
 
 // Calculates a lookup table for sine and cosine values
 class Lookup {
