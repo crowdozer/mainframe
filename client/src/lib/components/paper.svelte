@@ -1,24 +1,26 @@
 <script lang="ts">
 	export let kind: 'success' | 'warning' | 'info' | 'error' | 'neutral' = 'neutral';
+	export let bordered = false;
 
-	// function getBorderColor(): string {
-	// 	switch (kind) {
-	// 		case 'neutral':
-	// 			return 'border-gray-600';
-	// 		case 'warning':
-	// 			return 'border-yellow-600';
-	// 		case 'info':
-	// 			return 'border-cyan-600';
-	// 		case 'error':
-	// 			return 'border-red-600';
-	// 		case 'success':
-	// 			return 'border-green-600';
-	// 	}
-	// }
+	function getBorderColor(): string {
+		if (!bordered) return '';
+
+		switch (kind) {
+			case 'neutral':
+				return 'border border-dashed border-gray-600';
+			case 'warning':
+				return 'border border-dashed border-yellow-600';
+			case 'info':
+				return 'border border-dashed border-cyan-600';
+			case 'error':
+				return 'border border-dashed border-red-600';
+			case 'success':
+				return 'border border-dashed border-green-600';
+		}
+	}
 </script>
 
-<!-- border border-dashed {getBorderColor()} -->
-<div class="inline-block h-full w-full relative content">
+<div class="inline-block h-full w-full {getBorderColor()} content relative">
 	<slot />
 </div>
 

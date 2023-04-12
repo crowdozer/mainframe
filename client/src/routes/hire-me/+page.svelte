@@ -91,7 +91,15 @@
 
 <Container>
 	<div class="mb-4">
-		<Paper>
+		<Paper bordered kind="warning">
+			<div class="p-4">
+				<h1 class="mb-4 text-xl">want to work together?</h1>
+				<p class="mono">business@crwdzr.io</p>
+			</div>
+		</Paper>
+	</div>
+	<div class="mb-4">
+		<Paper bordered>
 			<div class="p-8">
 				<!-- Header -->
 				<h1 class="mb-2 text-3xl font-bold underline decoration-dotted underline-offset-8">
@@ -198,16 +206,6 @@
 						</p>
 					</div>
 				{/each}
-			</div>
-		</Paper>
-	</div>
-	<div class="mb-4">
-		<Paper kind="info">
-			<div class="p-4">
-				<h1 class="mb-4 text-xl">want to work together?</h1>
-				<p class="mono">if i contacted you, let me know</p>
-				<p class="mono">if you have my info, reach out</p>
-				<p class="mono">otherwise, don't contact me</p>
 			</div>
 		</Paper>
 	</div>

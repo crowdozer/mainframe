@@ -1,11 +1,15 @@
 <script lang="ts">
 	import Container from '$lib/components/container.svelte';
-	import Intro from '$lib/components/intro/intro.svelte';
+	// import Intro from '$lib/components/intro/intro.svelte';
 	import type { PageData } from './$types';
 	import Feed from '$lib/views/feed/stories/feed.svelte';
 
 	export let data: PageData;
 </script>
+
+<svelte:head>
+	<title>hi</title>
+</svelte:head>
 
 <Container>
 	<!-- Hero section -->
