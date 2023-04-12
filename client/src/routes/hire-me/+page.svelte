@@ -85,18 +85,22 @@
 	];
 </script>
 
+<svelte:head>
+	<title>hire me</title>
+</svelte:head>
+
 <Container>
 	<div class="mb-4">
 		<Paper>
 			<div class="p-8">
 				<!-- Header -->
-				<h1 class="text-3xl font-bold underline decoration-dotted underline-offset-8 mb-2">
+				<h1 class="mb-2 text-3xl font-bold underline decoration-dotted underline-offset-8">
 					Full Stack Developer
 				</h1>
 
 				<!-- Summary -->
 				<div>
-					<h2 class="text-2xl font-semibold mt-12 mb-2">
+					<h2 class="mb-2 mt-12 text-2xl font-semibold">
 						<Tag text="h2" open />Summary<Tag text="h2" />
 					</h2>
 					<p>
@@ -111,10 +115,10 @@
 				</div>
 
 				<!-- Skills -->
-				<h2 class="text-2xl font-semibold mt-12 mb-2">
+				<h2 class="mb-2 mt-12 text-2xl font-semibold">
 					<Tag text="h2" open />Skills<Tag text="h2" />
 				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
 					<div>
 						<h3 class="font-semibold">Frameworks</h3>
 						<ul>
@@ -141,7 +145,7 @@
 					</div>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+				<div class="grid grid-cols-1 gap-4 pt-4 md:grid-cols-2">
 					<div>
 						<h3 class="font-semibold">Miscellaneous</h3>
 						<ul>
@@ -162,7 +166,7 @@
 				</div>
 
 				<!-- Experience -->
-				<h2 class="text-2xl font-semibold mt-12 mb-2">
+				<h2 class="mb-2 mt-12 text-2xl font-semibold">
 					<Tag text="h2" open />Experience<Tag text="h2" />
 				</h2>
 				{#each experience as job}
@@ -181,7 +185,7 @@
 				{/each}
 
 				<!-- Education -->
-				<h2 class="text-2xl font-semibold mt-12 mb-2">
+				<h2 class="mb-2 mt-12 text-2xl font-semibold">
 					<Tag text="h2" open />Education<Tag text="h2" />
 				</h2>
 				{#each education as educate}
@@ -200,7 +204,7 @@
 	<div class="mb-4">
 		<Paper kind="info">
 			<div class="p-4">
-				<h1 class="text-xl mb-4">want to work together?</h1>
+				<h1 class="mb-4 text-xl">want to work together?</h1>
 				<p class="mono">if i contacted you, let me know</p>
 				<p class="mono">if you have my info, reach out</p>
 				<p class="mono">otherwise, don't contact me</p>

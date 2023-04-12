@@ -160,6 +160,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>galaxy sim</title>
+</svelte:head>
+
 <Container>
 	<div class="mb-4">
 		<Paper>

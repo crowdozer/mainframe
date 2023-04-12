@@ -3,7 +3,7 @@
 </script>
 
 <nav class="relative">
-	<div class="max-w-6xl flex mx-auto">
+	<div class="mx-auto flex max-w-6xl">
 		<!-- Logo -->
 		<div class="inline-flex items-center">
 			<h1 class="text-xl font-bold">
@@ -12,15 +12,15 @@
 		</div>
 
 		<!-- Buttons -->
-		<div class="inline-flex items-center ml-auto gap-2">
+		<div class="ml-auto inline-flex items-center gap-2">
 			<div class="hidden lg:flex">
 				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
 			</div>
 			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
-			<Button icon="fas fa-handshake-angle" link="/resume">hire me</Button>
+			<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
 		</div>
 	</div>
-	<hr class="opacity-25 absolute bottom-0 left-0 right-0" />
+	<hr class="absolute bottom-0 left-0 right-0 opacity-25" />
 </nav>
 
 <style lang="postcss">
@@ -28,7 +28,7 @@
 		text-decoration: none;
 	}
 	nav {
-		@apply sticky top-0 left-0 w-full py-2 px-4 z-50 bg-transparent;
+		@apply sticky left-0 top-0 z-50 w-full bg-transparent px-4 py-2;
 		backdrop-filter: blur(5px);
 	}
 </style>
