@@ -1,5 +1,6 @@
 <script>
 	import Container from '$lib/components/container.svelte';
+	import CopyClick from '$lib/components/copy-click.svelte';
 	import Paper from '$lib/components/paper.svelte';
 	import Tag from '$lib/components/tag.svelte';
 
@@ -94,7 +95,7 @@
 		<Paper bordered kind="warning">
 			<div class="p-4">
 				<h1 class="mb-4 text-xl">want to work together?</h1>
-				<p class="mono">business@crwdzr.io</p>
+				<p class="mono"><CopyClick text="business@crwdzr.io" /></p>
 			</div>
 		</Paper>
 	</div>
