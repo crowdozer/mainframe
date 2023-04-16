@@ -1,0 +1,3 @@
+hide the load button, the feed should infinite scroll 
+n number of times when the load button would have entered view 
+once it's scrolled that many times, show the button 

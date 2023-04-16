@@ -42,7 +42,7 @@
 
 				<!-- dividers -->
 				{#if index < feedItems.length - 1}
-					<hr class="mt-4 mb-4 opacity-25" />
+					<hr class="mb-4 mt-4 opacity-25" />
 				{/if}
 			{/each}
 		</div>

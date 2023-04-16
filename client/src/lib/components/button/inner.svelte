@@ -1,14 +1,8 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+	export let disabled: boolean;
 	export let icon: string | undefined;
 	export let fullWidth: boolean;
 	export let size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-	// for dispatching on:click events
-	const dispatch = createEventDispatcher();
-	function handleClick(event: Event) {
-		dispatch('click', event);
-	}
 
 	// for any additional styling based on config opts
 	let addtlClasses = '';
@@ -36,7 +30,7 @@
 	}
 </script>
 
-<button class="button {addtlClasses}" on:click={handleClick}>
+<button class="button {addtlClasses}" {disabled} on:click>
 	{#if icon}
 		<i class={icon} />
 	{/if}
