@@ -2,14 +2,14 @@
 	import Paper from '$lib/components/paper.svelte';
 	import HackerNews from './hacker-news.svelte';
 	import InfosecMag from './infosec-mag.svelte';
-	import type { Feed } from '../types';
+	import type { Feed } from './types';
 	import KrebsSec from './krebs-sec.svelte';
 	import CoinTele from './coin-tele.svelte';
 	import Button from '$lib/components/button/button.svelte';
 
 	export let feed: Feed;
 
-	const { date, time, feed: feedItems } = feed;
+	const { elapsed, feed: feedItems, ISR } = feed;
 
 	let visibleFeedItems = feedItems.slice(0, 10);
 	let expanded = false;
@@ -56,13 +56,16 @@
 {/if}
 
 <div class="my-4">
-	<p class="text-right" title={date.toISOString()}>
+	<p class="text-right">
 		<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
 		<a href="https://krebsonsecurity.com/">krebsonsecurity.com</a> •
 		<a href="https://cointelegraph.com/">cointelegraph.com</a> •
 		<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 	</p>
-	<p class="text-right" title={date.toISOString()}>
-		generated in {time.toFixed(2)} seconds • {date.toLocaleDateString()}
+	<p class="text-right">
+		generated in {elapsed.toFixed(2)} seconds •
+		<span title={'isr ' + ISR.toISOString()}>
+			{ISR.toLocaleDateString()}
+		</span>
 	</p>
 </div>

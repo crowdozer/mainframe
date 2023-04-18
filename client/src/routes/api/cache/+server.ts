@@ -19,17 +19,22 @@ export async function GET({ url }) {
 }
 
 /**
- * sets the new cache value at url.key
+ * sets the new cache value at url.key,
+ * optionally with an expiration timer in seconds
  */
 export async function POST(request) {
 	const key = request.url.searchParams.get('key') ?? '';
-	const { value } = await request.request.json();
+	const { value, expiration } = await request.request.json();
 
 	if (!key) {
 		throw error(400, 'body.key required');
 	}
 
 	await cache.set(key, value);
+
+	if (expiration) {
+		await cache.expire(key, Number(expiration));
+	}
 
 	return new Response();
 }

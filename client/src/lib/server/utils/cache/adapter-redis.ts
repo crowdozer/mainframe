@@ -21,6 +21,10 @@ const makeRedisAdapter: MakeAdapter = (prefix: string) => ({
 		await client.set(prefix + key, value);
 
 		return;
+	},
+
+	async expire(key: string, seconds: number) {
+		await client.expire(key, seconds);
 	}
 });
 

@@ -2,7 +2,7 @@
 	import Container from '$lib/components/container.svelte';
 	// import Intro from '$lib/components/intro/intro.svelte';
 	import type { PageData } from './$types';
-	import Feed from '$lib/views/feed/stories/feed.svelte';
+	import Feed from '$lib/views/feed/feed.svelte';
 
 	export let data: PageData;
 </script>

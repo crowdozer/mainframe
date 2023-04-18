@@ -40,6 +40,7 @@ export type FeedItem =
 
 export type Feed = {
 	feed: FeedItem[];
-	time: number;
-	date: Date;
+	elapsed: number;
+	generated: Date;
+	ISR: Date;
 };

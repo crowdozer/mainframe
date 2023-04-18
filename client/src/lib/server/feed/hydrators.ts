@@ -1,4 +1,9 @@
-import type { HackerNewsStory, InfoSecStory, KrebsStory, CoinTeleStory } from './types';
+import type {
+	HackerNewsStory,
+	InfoSecStory,
+	KrebsStory,
+	CoinTeleStory
+} from '$lib/views/feed/types';
 import parser from 'fast-xml-parser';
 
 /**
