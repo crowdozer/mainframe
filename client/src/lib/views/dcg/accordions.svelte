@@ -14,7 +14,7 @@
 	function render(data: any): string {
 		return (
 			// stringify everything, format it
-			JSON.stringify(data, null, 2)
+			JSON.stringify(data, null, 4)
 				// this goofy looking regex strips escaped quotes from the response
 				// so they just look like normal quotes
 				.replace(/\\\"|\"\\\""/g, '')
