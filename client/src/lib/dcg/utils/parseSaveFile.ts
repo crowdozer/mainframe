@@ -7,6 +7,8 @@ import JSZip from 'jszip';
 export async function parseSave(file: File): Promise<any | null> {
 	const result = await loadFromDisk(file);
 
+	console.log(result);
+
 	if (!result) {
 		return null;
 	}
@@ -112,14 +114,7 @@ export function serializeData(data: any): string {
 			result += getIndentation(indent) + '}';
 			return result;
 		} else {
-			// Check if the string contains spaces or special characters (excluding double quotes), and wrap it in quotes if necessary
-			if (/\s|[{}]/g.test(data)) {
-				// Escape any double quotes within the string
-				const cleanedData = data.replace(/"/g, '\\"');
-				return `"${cleanedData}"`;
-			} else {
-				return data;
-			}
+			return data;
 		}
 	}
 
