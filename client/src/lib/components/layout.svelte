@@ -10,13 +10,13 @@
 {/if}
 
 <!-- background image -->
-<div class="fixed h-screen w-screen bg" />
+<div class="bg fixed h-screen w-screen" />
 
 <!-- content display -->
-<div class="relative flex flex-col content">
+<div class="content relative flex flex-col">
 	<Navbar />
 
-	<main class="flex-1 flex justify-center px-4">
+	<main class="flex flex-1 justify-center px-4">
 		<slot />
 	</main>
 </div>
