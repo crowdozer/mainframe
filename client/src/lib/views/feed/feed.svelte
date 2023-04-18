@@ -55,14 +55,14 @@
 	</div>
 {/if}
 
-<div class="my-4">
+<div class="my-4 opacity-25">
 	<p class="text-right">
 		<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
 		<a href="https://krebsonsecurity.com/">krebsonsecurity.com</a> •
 		<a href="https://cointelegraph.com/">cointelegraph.com</a> •
 		<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 	</p>
-	<p class="text-right">
+	<p class="text-right text-gray-500">
 		generated in {elapsed.toFixed(2)} seconds •
 		<span title={'isr ' + ISR.toISOString()}>
 			{ISR.toLocaleDateString()}
