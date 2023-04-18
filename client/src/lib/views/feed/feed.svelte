@@ -55,7 +55,7 @@
 	</div>
 {/if}
 
-<div class="my-4 opacity-25">
+<div class="my-4">
 	<p class="text-right">
 		<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
 		<a href="https://krebsonsecurity.com/">krebsonsecurity.com</a> •
