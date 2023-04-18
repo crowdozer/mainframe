@@ -7,8 +7,6 @@ import JSZip from 'jszip';
 export async function parseSave(file: File): Promise<any | null> {
 	const result = await loadFromDisk(file);
 
-	console.log(result);
-
 	if (!result) {
 		return null;
 	}
