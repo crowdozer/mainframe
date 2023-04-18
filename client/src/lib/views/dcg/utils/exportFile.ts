@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
-import { serializeData } from './parseSaveFile';
+import { serializeData } from './serialization';
 
 /**
  * Accepts an unserialized savegame, serializes it, writes it to zip
@@ -17,7 +17,7 @@ export async function exportFile(filename: string, savegame: { status: any; camp
 	newZip.file('campaign.scn', campaign);
 
 	// Generate the new zip file for download
-	const newZipBlob = await newZip.generateAsync({ type: 'blob' });
+	const newZipBlob = await newZip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
 
 	saveAs(newZipBlob, filename);
 }
