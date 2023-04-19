@@ -8,6 +8,8 @@
 	import { exportFile } from './utils/exportFile';
 	import { get, set } from './utils/manipulation';
 	import { parseSave } from './utils/parseSaveFile';
+	import { lockUnitsToYear } from './utils/modifications';
+	import Label from '$lib/components/label.svelte';
 
 	let files: FileList;
 	let fileInput: HTMLInputElement;
@@ -32,9 +34,18 @@
 		};
 	}
 
-	/**
-	 * is it technical debt? maybe
-	 */
+	function handleSetByYear(event: Event) {
+		// @ts-ignore
+		const target_year = event.currentTarget.target_year.value;
+		// @ts-ignore
+		const faction = event.currentTarget.faction.value;
+
+		data = {
+			...data,
+			status: lockUnitsToYear(faction, target_year, data.status)
+		};
+	}
+
 	function handleClear() {
 		// @ts-ignore
 		fileInput.value = null;
@@ -72,6 +83,16 @@
 					<Input name={path} {label} on:change={handleChange} value={get(data.status, path)} />
 				{/each}
 			</div>
+			<hr class="mt-4 opacity-25" />
+			<div class="mt-4">
+				<p>Set research by year <Label>expiremental</Label></p>
+				<form class="flex flex-col gap-2" on:submit={handleSetByYear}>
+					<Input name="target_year" placeholder="Year (i.e 1940)" />
+					<Input name="faction" placeholder="Faction (i.e fin)" />
+					<Button type="submit">set</Button>
+				</form>
+			</div>
+			<hr class="mt-4 opacity-25" />
 			<div class="mt-4">
 				<Accordions save={data} />
 			</div>

@@ -2,6 +2,7 @@
 	export let disabled: boolean;
 	export let icon: string | undefined;
 	export let fullWidth: boolean;
+	export let type: 'button' | 'submit' | 'reset';
 	export let size: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 	// for any additional styling based on config opts
@@ -30,7 +31,7 @@
 	}
 </script>
 
-<button class="button {addtlClasses}" {disabled} on:click>
+<button class="button {addtlClasses}" {disabled} {type} on:click>
 	{#if icon}
 		<i class={icon} />
 	{/if}

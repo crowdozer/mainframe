@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let name: string;
-	export let value: any;
+	export let value: any = '';
 	export let label: string | undefined = '';
 	export let readonly: boolean = false;
 	export let fullWidth: boolean = true;

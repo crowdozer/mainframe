@@ -81,3 +81,13 @@ export type Save = {
 	status: SaveStatus;
 	campaign: CampaignEntry[];
 };
+
+export type UnitKind = 'special' | 'inf' | 'utility' | 'emplacement' | 'vehicle';
+export type UnitByYear = {
+	kind: UnitKind;
+	doctrines: string[];
+	unit: string;
+	introduced: number;
+	retired: number;
+	probability?: number;
+};

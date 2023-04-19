@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Accordion from '$lib/components/accordion/accordion.svelte';
 	import CopyClickIcon from '$lib/components/copy-click-icon.svelte';
+	import Label from '$lib/components/label.svelte';
 
 	export let save: { status: any; campaign: any };
 	let status: string;
@@ -13,24 +14,30 @@
 
 	function render(data: any): string {
 		return (
-			// stringify everything, format it
+			// Stringify everything, format it with indentation
 			JSON.stringify(data, null, 4)
-				// this goofy looking regex strips escaped quotes from the response
-				// so they just look like normal quotes
-				.replace(/\\\"|\"\\\""/g, '')
+				// Replaces escaped double quotes with double quotes,
+				// removes unescaped double quotes.
+				.replace(/(?:"\\")|(?:\\"")|(")/g, function (_, capture) {
+					if (!capture) {
+						return '"';
+					} else {
+						return '';
+					}
+				})
 		);
 	}
 </script>
 
 <Accordion>
-	<svelte:fragment slot="header">Status</svelte:fragment>
+	<svelte:fragment slot="header">Status <Label>debug</Label></svelte:fragment>
 	<svelte:fragment slot="content">
 		<pre class="p-4">{status}</pre>
 		<CopyClickIcon text={status} />
 	</svelte:fragment>
 </Accordion>
 <Accordion>
-	<svelte:fragment slot="header">Campaign</svelte:fragment>
+	<svelte:fragment slot="header">Campaign <Label>debug</Label></svelte:fragment>
 	<svelte:fragment slot="content">
 		<pre class="p-4">{campaign}</pre>
 		<CopyClickIcon text={campaign} />
