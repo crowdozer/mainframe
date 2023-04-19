@@ -8,6 +8,10 @@
 	 */
 </script>
 
+<svelte:head>
+	<title>Bloggo</title>
+</svelte:head>
+
 <Container>
 	<Paper>
 		<div class="appcontainer">

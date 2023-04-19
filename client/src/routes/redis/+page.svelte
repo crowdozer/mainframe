@@ -24,6 +24,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Redis Demo</title>
+</svelte:head>
+
 <div class="container mx-auto max-w-sm py-16">
 	<div class="m-4">
 		<Paper bordered>
