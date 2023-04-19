@@ -10,6 +10,7 @@
 	import { parseSave } from './utils/parseSaveFile';
 	import { lockUnitsToYear } from './utils/modifications';
 	import Label from '$lib/components/label.svelte';
+	import Mods from './mods.svelte';
 
 	let files: FileList;
 	let fileInput: HTMLInputElement;
@@ -100,6 +101,8 @@
 		</div>
 	</div>
 	{#if data}
+		<Mods status={data.status} />
+
 		<div in:slide={{ duration: 200 }}>
 			<div class="mt-4">
 				<Paper bordered>
