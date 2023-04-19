@@ -1,3 +1,5 @@
+import { intersects } from '$lib/utils/arrays';
+import { handleAlert } from '$lib/utils/error';
 import { getRandomInt } from '$lib/utils/random-int';
 import type { DCG_Army, UnitByYear, UnitKind } from '../types';
 import { fin } from '../unitsByYear';
@@ -13,6 +15,9 @@ import { set } from './manipulation';
  */
 export function lockUnitsToYear(faction: DCG_Army, year: number, data: any): any {
 	const unlocks = getUnitsByYear(faction, year);
+
+	// getUnitsByYear() is allowed to fail
+	if (!unlocks) return;
 
 	return set(data, 'saveinfo.unlockedResearch', [...unlocks]);
 }
@@ -33,26 +38,31 @@ export function getUnitsByYear(
 	kindWhitelist: UnitKind[] = [],
 	doctrinesBlacklist: string[] = [],
 	doctrinesWhitelist: string[] = []
-) {
-	const units = getUnitListByFaction(faction);
+): string[][] | null {
+	try {
+		const units = getUnitListByFaction(faction);
 
-	return (
-		units
-			// filter out all units beyond the year limit
-			.filter(
-				makeFilterCallback(
-					year,
-					kindBlacklist,
-					doctrinesBlacklist,
-					kindWhitelist,
-					doctrinesWhitelist
+		return (
+			units
+				// filter out all units beyond the year limit
+				.filter(
+					makeFilterCallback(
+						year,
+						kindBlacklist,
+						doctrinesBlacklist,
+						kindWhitelist,
+						doctrinesWhitelist
+					)
 				)
-			)
-			// return it in a savefile compatible format
-			.map(({ unit }) => {
-				return [`"${unit}"`];
-			})
-	);
+				// return it in a savefile compatible format
+				.map(({ unit }) => {
+					return [`"${unit}"`];
+				})
+		);
+	} catch (error: any) {
+		handleAlert(error, 'error setting faction units: ');
+		return null;
+	}
 }
 
 /**
@@ -66,21 +76,10 @@ export function getUnitListByFaction(faction: DCG_Army) {
 	switch (faction) {
 		case 'fin':
 			return fin;
-		default:
-			throw new Error('this faction is not supported yet');
+		default: {
+			throw new Error('faction not supported yet');
+		}
 	}
-}
-
-/**
- * Utility Functions
- */
-
-/**
- * Checks whether two arrays contain any intersections
- * (shared values)
- */
-function intersects(arr1: string[], arr2: string[]): boolean {
-	return arr1.some((value) => arr2.includes(value));
 }
 
 /**

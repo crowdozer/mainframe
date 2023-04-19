@@ -21,19 +21,19 @@
 		@apply p-8;
 	}
 	.appcontainer :global(h1) {
-		@apply text-2xl font-bold mt-8 mb-5;
+		@apply mb-5 mt-8 text-2xl font-bold;
 		text-decoration: dotted;
 		text-decoration-line: underline;
 		text-underline-offset: 8px;
 	}
 	.appcontainer :global(h2) {
-		@apply text-xl font-bold mt-8 mb-4;
+		@apply mb-4 mt-8 text-xl font-bold;
 	}
 	.appcontainer :global(h3) {
-		@apply text-lg font-bold mt-8 mb-4;
+		@apply mb-4 mt-8 text-lg font-bold;
 	}
 	.appcontainer :global(hr) {
-		@apply border-gray-300 mt-4 mb-4;
+		@apply mb-4 mt-4 border-gray-300;
 		border-width: 2px;
 		border-style: dashed;
 	}
@@ -41,9 +41,16 @@
 		@apply mb-2;
 	}
 	.appcontainer :global(ul) {
-		@apply ml-4 mt-2 mb-4;
+		@apply mb-4 ml-4 mt-2;
 	}
 	.appcontainer :global(li) {
 		@apply ml-4;
+	}
+	.appcontainer :global(li > p) {
+		display: inline-block;
+	}
+	.appcontainer :global(input[type='checkbox']) {
+		width: 1rem;
+		height: 1rem;
 	}
 </style>
