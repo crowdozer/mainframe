@@ -6,15 +6,17 @@
 	import Paper from '$lib/components/paper.svelte';
 	import Accordions from './accordions.svelte';
 	import { exportFile } from './utils/exportFile';
-	import { get, set } from './utils/manipulation';
+	import { get, set, isAttacking } from './utils/manipulation';
 	import { parseSave } from './utils/parseSaveFile';
 	import { lockUnitsToYear } from './utils/modifications';
 	import Label from '$lib/components/label.svelte';
 	import Mods from './mods.svelte';
+	import Maps from './maps.svelte';
 
 	let files: FileList;
 	let fileInput: HTMLInputElement;
 	let data: { campaign: any; status: any };
+	let attacking = false;
 
 	/**
 	 * React to the FileList changing. If it does,
@@ -24,6 +26,10 @@
 		(async function () {
 			if (files.length) {
 				data = await parseSave(files[0]);
+				attacking = isAttacking(data.status);
+			} else {
+				// @ts-ignore
+				data = undefined;
 			}
 		})();
 	}
@@ -71,8 +77,6 @@
 		fileInput.value = null;
 		// @ts-ignore
 		files = fileInput.files;
-		// @ts-ignore
-		data = null;
 	}
 
 	const resourceForm = [
@@ -90,6 +94,7 @@
 		click <a href="/blog/2023/04/18/goh-editor" rel="noopener noreferrer" target="_blank">here</a> for
 		an explanation
 	</p>
+	<!-- Uploader -->
 	<div class={data ? 'hidden' : 'block'}>
 		<p class="mt-16">To begin, locate your savefile.</p>
 		<p class="mt-1">Save files are commonly located at:</p>
@@ -100,10 +105,23 @@
 			<input type="file" bind:files bind:this={fileInput} />
 		</div>
 	</div>
+	<!-- Savegame Editor -->
 	{#if data}
 		<Mods status={data.status} />
 
 		<div in:slide={{ duration: 200 }}>
+			<!-- Maps -->
+			<div class="mt-4">
+				<Paper bordered>
+					<div class="flex flex-col gap-2 p-4">
+						<h3 class="text-lg">
+							Next Map <Label kind="warning">{attacking ? 'Attacking' : 'Defending'}</Label>
+						</h3>
+						<Maps status={data.status} />
+					</div>
+				</Paper>
+			</div>
+			<!-- Campaign State -->
 			<div class="mt-4">
 				<Paper bordered>
 					<div class="flex flex-col gap-2 p-4">
@@ -114,6 +132,7 @@
 					</div>
 				</Paper>
 			</div>
+			<!-- Research Year -->
 			<div class="mt-4">
 				<Paper bordered>
 					<div class="flex flex-col gap-2 p-4">
@@ -126,9 +145,11 @@
 					</div>
 				</Paper>
 			</div>
+			<!-- Debug Accordions -->
 			<div class="mt-4">
 				<Accordions save={data} />
 			</div>
+			<!-- Controls -->
 			<hr class="mt-4 opacity-25" />
 			<div class="mt-4 text-right">
 				<Button on:click={handleClear}>clear</Button>
@@ -136,6 +157,7 @@
 			</div>
 		</div>
 	{/if}
+	<!-- Disclaimer Messages -->
 	<div class="mt-16">
 		<Paper kind="error" bordered>
 			<div class="p-4">

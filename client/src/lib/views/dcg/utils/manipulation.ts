@@ -1,3 +1,9 @@
+export function isAttacking(status: any): boolean {
+	const value = get(status, 'saveinfo.attacking');
+
+	return Array.isArray(value);
+}
+
 /**
  * access a given entry in the savefile by a path of keys
  *

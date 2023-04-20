@@ -15,7 +15,6 @@
 
 	$: if (status) {
 		mods = getMods();
-		console.log(mods);
 	}
 </script>
 
