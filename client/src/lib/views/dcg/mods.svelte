@@ -7,6 +7,7 @@
 
 	function getMods(): string[] {
 		const mods = get(status, 'saveinfo.mods');
+		if (!mods) return [];
 
 		return mods.map((mod: string) => {
 			return mod.split('_')[1].split(':')[0];
