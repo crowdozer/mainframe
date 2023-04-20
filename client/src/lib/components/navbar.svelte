@@ -16,6 +16,7 @@
 			<div class="hidden lg:flex">
 				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
 			</div>
+			<Button icon="fas fa-person-rifle" link="/gates-of-hell">ostfront</Button>
 			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
 			<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
 		</div>
