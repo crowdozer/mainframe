@@ -22,7 +22,7 @@
 	 * React to the FileList changing. If it does,
 	 * try to parse the first one as a savefile
 	 */
-	$: if (files) {
+	$: if (files && !data) {
 		(async function () {
 			if (files.length) {
 				data = await parseSave(files[0]);
@@ -39,16 +39,6 @@
 	 */
 	function handleExport() {
 		exportFile('new.sav', data);
-	}
-
-	/**
-	 * Handle changing a reactive formfield
-	 */
-	function handleChange(event: any) {
-		data = {
-			...data,
-			status: set(data.status, event.target.name, event.target.value)
-		};
 	}
 
 	/**
@@ -70,6 +60,14 @@
 		} catch (error) {
 			data = { ...old };
 		}
+	}
+
+	function handleInputChange(event: any) {
+		const { name, value } = event.target;
+		data = {
+			...data,
+			status: set(data.status, name, value)
+		};
 	}
 
 	function handleClear() {
@@ -127,7 +125,12 @@
 					<div class="flex flex-col gap-2 p-4">
 						<h3 class="text-lg">Campaign State</h3>
 						{#each resourceForm as [path, label]}
-							<Input name={path} {label} on:change={handleChange} value={get(data.status, path)} />
+							<Input
+								name={path}
+								{label}
+								on:change={handleInputChange}
+								value={get(data.status, path)}
+							/>
 						{/each}
 					</div>
 				</Paper>
