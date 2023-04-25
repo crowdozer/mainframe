@@ -85,6 +85,10 @@ a::selection {
 	color: var(--link);
 }
 
+input::placeholder {
+	color: var(--contrast-soft);
+}
+
 /* Animations */
 
 /** Animate the scanline */
