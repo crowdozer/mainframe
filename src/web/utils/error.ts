@@ -6,12 +6,10 @@ export function toast(message: string) {
 	});
 }
 
-export function autotoast(prefix = '') {
-	return function (error: any): void {
-		const message = error.message || 'An unknown error occurred';
+export function autotoast(error: any) {
+	const message = error.message || 'An unknown error occurred';
 
-		showToast(prefix + message, {
-			position: 'bottom-center',
-		});
-	};
+	showToast(`(E${error.data.httpStatus}) ${message}`, {
+		position: 'bottom-center',
+	});
 }

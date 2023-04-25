@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
-import { generateFeed } from '$api/feed/generate';
-import { STALE_TIMER } from '$api/feed/const';
+import { generateFeed } from '$server/feed/generate';
+import { STALE_TIMER } from '$server/feed/const';
 import type { Feed } from '$web/components/Feed/types';
 
 /**

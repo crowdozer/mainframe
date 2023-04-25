@@ -34,7 +34,8 @@ const config = {
 		},
 		alias: {
 			$web: 'src/web',
-			$api: 'src/server',
+			$api: 'src/api',
+			$server: 'src/server',
 		},
 	},
 };

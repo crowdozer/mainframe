@@ -2,8 +2,8 @@
 	import Input from '$web/components/ui/Input.svelte';
 	import Paper from '$web/components/ui/Paper.svelte';
 	import Button from '$web/components/ui/Button/Button.svelte';
-	import { get, set } from '$web/utils/cache';
 	import { clerkUser } from '$web/stores/clerk';
+	import { useTRPC } from '$api/client';
 
 	let key: string = 'foo';
 	let getLoading: boolean = false;
@@ -14,13 +14,16 @@
 
 	async function handleGet() {
 		getLoading = true;
-		getValue = await get(key);
+		await useTRPC(async (t) => {
+			const result = await t().cache.get.query({ key });
+			getValue = result.value;
+		});
 		getLoading = false;
 	}
 
 	async function handleSet() {
 		setLoading = true;
-		await set(key, setValue);
+		await useTRPC((t) => t().cache.set.mutate({ key, value: setValue }));
 		setLoading = false;
 	}
 </script>

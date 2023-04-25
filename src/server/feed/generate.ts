@@ -2,7 +2,7 @@ import { CACHE_NAME, STALE_TIMER } from './const';
 import type { Feed, FeedItem } from '$web/components/Feed/types';
 import { getCoinTelegraphRSS, getHackerNewsStories, getInfosecRSS, getKrebsRSS } from './hydrators';
 import { sortFeedHelper, stringToColor } from './utils';
-import { cache } from '../utils/cache';
+import { cache } from '../cache';
 
 type FeedWithoutISR = Omit<Feed, 'ISR'>;
 
