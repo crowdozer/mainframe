@@ -2,15 +2,29 @@
  * Throws an error if a request falls outside of the 2xx status range
  * Must be thrown early in the promise chain to satisfy the Response parameter
  */
-export function enforceStatusCode<T extends Response>(response: T): T {
-	if (!response.ok) {
-		const status = response.status;
-		const message = inferStatusMessage(status) || response.statusText || 'Unknown';
+export async function enforceStatusCode<T extends Response>(response: T): T {
+	if (response.ok) {
+		return response;
+	}
+
+	const status = response.status;
+
+	try {
+		/**
+		 * Try to get the message from the response body
+		 */
+		const responseBody = await response.json();
+		const { message } = responseBody;
+
+		throw new Error(`[${response.status}] ${message}`);
+	} catch (error) {
+		/**
+		 * If that fails, try reasonably hard to infer an error message
+		 */
+		const message = inferStatusMessage(status) || 'Unknown';
 
 		throw new Error(`[${response.status}] ${message}`);
 	}
-
-	return response;
 }
 
 export function inferStatusMessage(code: number): string | null {
@@ -22,5 +36,5 @@ export const statusCodes: { [key: number]: string } = {
 	401: 'Unauthorized',
 	404: 'Not Found',
 	420: 'Rate Limit',
-	500: 'Server Error'
+	500: 'Server Error',
 };
