@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Input from '$web/components/ui/Input.svelte';
 	import Paper from '$web/components/ui/Paper.svelte';
-	import Button from '$web/components/ui/Button/button.svelte';
+	import Button from '$web/components/ui/Button/Button.svelte';
 	import { get, set } from '$web/utils/cache';
 	import { clerkUser } from '$web/stores/clerk';
 
