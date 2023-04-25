@@ -85,7 +85,7 @@ export function set(data: any, keyPath: string, value: any): any {
 			} else {
 				// Find the index of the node to update
 				const nodeIndex = currentNode.findIndex(
-					(item: any) => Array.isArray(item) && item[0] === key
+					(item: any) => Array.isArray(item) && item[0] === key,
 				);
 				// If the node doesn't exist, create it
 				if (nodeIndex === -1) {

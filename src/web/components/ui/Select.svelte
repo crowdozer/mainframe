@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let name: string;
-	export let defaultValue: any = ''
+	export let defaultValue: any = '';
 	export let value: any = defaultValue;
 	export let label: string | undefined = '';
 	export let fullWidth: boolean = true;

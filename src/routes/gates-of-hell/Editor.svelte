@@ -56,7 +56,7 @@
 
 			data = {
 				...data,
-				status: lockUnitsToYear(faction, target_year, data.status)
+				status: lockUnitsToYear(faction, target_year, data.status),
 			};
 		} catch (error) {
 			data = { ...old };
@@ -67,15 +67,15 @@
 		const { name, value } = event.target;
 		data = {
 			...data,
-			status: set(data.status, name, value)
+			status: set(data.status, name, value),
 		};
 	}
 
 	function handleClear() {
 		// @ts-ignore
 		fileInput.value = null;
-		// @ts-ignore 
-		data = null 
+		// @ts-ignore
+		data = null;
 		// @ts-ignore
 		files = fileInput.files;
 	}
@@ -85,7 +85,7 @@
 		['saveinfo.mp', 'MP (purchasing power)'],
 		['saveinfo.rp', 'RP (research points)'],
 		['saveinfo.ap', 'AP (ammo points)'],
-		['saveinfo.sp', 'SP (special points)']
+		['saveinfo.sp', 'SP (special points)'],
 	];
 </script>
 
@@ -143,9 +143,9 @@
 				<Paper bordered>
 					<div class="flex flex-col gap-2 p-4">
 						<h3 class="text-lg">Set research to year <Label>expiremental</Label></h3>
-						<form class="flex flex-col gap-4 mt-4" on:submit={handleSetByYear}>
+						<form class="mt-4 flex flex-col gap-4" on:submit={handleSetByYear}>
 							<Input name="target_year" placeholder="Year (i.e 1940)" />
-							<Select name='faction' defaultValue="fin">
+							<Select name="faction" defaultValue="fin">
 								<option value="fin">Finland</option>
 							</Select>
 							<Button type="submit">set</Button>

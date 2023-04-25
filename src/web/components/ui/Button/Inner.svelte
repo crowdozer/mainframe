@@ -46,14 +46,12 @@
 		transition: transform 0.1s;
 	}
 	.button:hover {
-		background: rgba(255,255,255,.05);
+		background: rgba(255, 255, 255, 0.05);
 		color: var(--link);
 	}
 	.button:active {
-		background: rgba(255,255,255,.05);
+		background: rgba(255, 255, 255, 0.05);
 		color: var(--link-em);
 		transform: translateY(1px);
 	}
 </style>
-
-

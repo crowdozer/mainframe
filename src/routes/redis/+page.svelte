@@ -20,7 +20,7 @@
 
 	async function handleSet() {
 		setLoading = true;
-		await set(key, setValue)
+		await set(key, setValue);
 		setLoading = false;
 	}
 </script>
@@ -38,7 +38,7 @@
 				<Input name="cache-key" label="key" placeholder="key" bind:value={key} />
 
 				<!-- Get Section -->
-				<h1 class="text-xl mt-8">Get Value</h1>
+				<h1 class="mt-8 text-xl">Get Value</h1>
 				<Input
 					name="cache-get-value"
 					label="value"
@@ -48,10 +48,10 @@
 					readonly
 				/>
 				<Button loading={getLoading} disabled={getLoading} on:click={handleGet}>Get</Button>
-				
+
 				<!-- Set Section -->
 				{#if $clerkUser.user}
-					<h1 class="text-xl mt-4">Set Value</h1>
+					<h1 class="mt-4 text-xl">Set Value</h1>
 					<Input
 						name="cache-set-value"
 						label="value"

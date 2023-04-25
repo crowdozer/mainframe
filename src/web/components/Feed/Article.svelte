@@ -6,7 +6,7 @@
 
 <article class="flex flex-col gap-1">
 	<!-- header line -->
-	<h1 class="text-xl text-ellipsis whitespace-nowrap overflow-hidden" {title}>
+	<h1 class="overflow-hidden text-ellipsis whitespace-nowrap text-xl" {title}>
 		<span class="text-gray-300">
 			<i class="fas {icon} self-center" />
 			<span class="ml-2">
@@ -16,7 +16,7 @@
 	</h1>
 
 	<!-- author/meta line -->
-	<h2 class="text-sm text-gray-500 not-mono mb-6 lg:pl-10">
+	<h2 class="not-mono mb-6 text-sm text-gray-500 lg:pl-10">
 		<slot name="meta" />
 	</h2>
 
@@ -29,7 +29,7 @@
 	{#if url}
 		<a
 			href={url}
-			class="text-ellipsis whitespace-nowrap overflow-hidden pr-4 py-2 lg:pl-10"
+			class="overflow-hidden text-ellipsis whitespace-nowrap py-2 pr-4 lg:pl-10"
 			target="_blank"
 			rel="noopener noreferrer">read more > {url}</a
 		>

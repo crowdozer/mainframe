@@ -24,15 +24,15 @@ export async function set(
 	key: string,
 	value: string,
 	expiration?: number,
-	fetcher = fetch
+	fetcher = fetch,
 ): Promise<void> {
 	await fetcher('/api/cache?key=' + key, {
 		method: 'post',
 		body: JSON.stringify({
 			key,
 			value,
-			expiration
-		})
+			expiration,
+		}),
 	})
 		.then(enforceStatusCode)
 		.catch(autotoast());

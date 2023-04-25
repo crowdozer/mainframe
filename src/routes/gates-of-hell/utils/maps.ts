@@ -54,5 +54,5 @@ export const maps: { [key: string]: string } = {
 	dcg_black_sea_coast: 'Black Sea Coast',
 	dcg_radusha_airfield: 'Radusha Airfield',
 	dcg_hungarian_swamps: 'Hungarian Swamps',
-	dcg_stalingrad_outskirts: 'Stalingrad Outskirts'
+	dcg_stalingrad_outskirts: 'Stalingrad Outskirts',
 };

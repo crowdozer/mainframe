@@ -16,7 +16,7 @@ export async function parseSave(file: File): Promise<any | null> {
 	try {
 		return {
 			status: parseSaveFilePart(result.status),
-			campaign: parseSaveFilePart(result.campaign)
+			campaign: parseSaveFilePart(result.campaign),
 		};
 	} catch (error: any) {
 		autotoast('error deserializing data: ')(error);
@@ -38,7 +38,7 @@ export function parseSaveFilePart(data: string) {
  * Loads savefile from disk
  */
 export async function loadFromDisk(
-	file: File
+	file: File,
 ): Promise<{ status: string; campaign: string } | null> {
 	const zip = new JSZip();
 
@@ -54,7 +54,7 @@ export async function loadFromDisk(
 
 		return {
 			status: await status.async('string'),
-			campaign: await campaign.async('string')
+			campaign: await campaign.async('string'),
 		};
 	} catch (error: any) {
 		autotoast('error parsing savefile: ')(error);

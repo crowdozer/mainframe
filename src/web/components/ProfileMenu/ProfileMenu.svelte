@@ -4,20 +4,20 @@
 	import { clerkInstance, clerkUser } from '$web/stores/clerk';
 
 	function handleSignIn() {
-		$clerkInstance.openSignIn()
+		$clerkInstance.openSignIn();
 	}
 
 	async function handleSignOut() {
 		if (window.confirm('Sign out?')) {
-			await $clerkInstance.signOut()
-			window.location.reload()
+			await $clerkInstance.signOut();
+			window.location.reload();
 		}
 	}
 </script>
 
 <div class="root relative">
 	{#if $clerkUser.user}
-		<button class="peer avatar" on:click={handleSignOut}>
+		<button class="avatar peer" on:click={handleSignOut}>
 			<Avatar />
 		</button>
 	{:else}
@@ -25,7 +25,9 @@
 			<Button icon="fas fa-bars" />
 		</div>
 	{/if}
-	<div class="menu hidden absolute peer-hover:block hover:block top-10 right-0 w-[200px] flex-col bg-neutral-900 drop-shadow-lg rounded-xl overflow-hidden">
+	<div
+		class="menu absolute right-0 top-10 hidden w-[200px] flex-col overflow-hidden rounded-xl bg-neutral-900 drop-shadow-lg hover:block peer-hover:block"
+	>
 		<div class="flex flex-col gap-1">
 			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
 			<Button icon="fas fa-person-rifle" link="/gates-of-hell">ostfront</Button>
@@ -41,7 +43,7 @@
 
 <style>
 	.menu {
-		z-index: 999
+		z-index: 999;
 	}
 	.root:hover .menu {
 		z-index: 999;

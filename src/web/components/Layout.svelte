@@ -3,7 +3,7 @@
 	import CRT from './CRT.svelte';
 	import NavigationProgress from './NavigationProgress.svelte';
 
-	export let showNavbar: boolean = true 
+	export let showNavbar: boolean = true;
 </script>
 
 <NavigationProgress />
@@ -18,7 +18,7 @@
 
 	<!-- background image -->
 	<div class="bg" />
-	
+
 	<main class="content-inner">
 		<slot />
 	</main>
@@ -55,10 +55,14 @@
 		left: 0;
 		right: 0;
 		height: 100vh;
-		background: linear-gradient(195deg, theme('colors.emerald.950', darken(50%)) 0%, theme(colors.neutral.950) 50%);
+		background: linear-gradient(
+			195deg,
+			theme('colors.emerald.950', darken(50%)) 0%,
+			theme(colors.neutral.950) 50%
+		);
 	}
 	.bg::after {
-		content: "";
+		content: '';
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -68,5 +72,4 @@
 		height: 16em; /* adjust the height of the fade-out effect */
 		box-shadow: 0 0 8em 8em theme(colors.neutral.950); /* adjust the shadow properties */
 	}
-
 </style>

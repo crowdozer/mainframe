@@ -80,7 +80,7 @@ export class GalaxyGenerator {
 
 	// Performance monitoring
 	private performance: PerformanceInfo = {
-		invocations: 0
+		invocations: 0,
 	};
 
 	constructor(config: {
@@ -124,13 +124,13 @@ export class GalaxyGenerator {
 		this.onNewFrame = config.onNewFrame;
 		this.onPerformanceUpdate = config.onPerformanceUpdate;
 		this.ctx = config.canvas.getContext('2d', {
-			willReadFrequently: true
+			willReadFrequently: true,
 		}) as CanvasRenderingContext2D;
 
 		// Downscale the canvas image to match the desired output resolution
 		this.tmpCanvas = document.createElement('canvas');
 		this.tmpCanvasCtx = this.tmpCanvas.getContext('2d', {
-			willReadFrequently: true
+			willReadFrequently: true,
 		}) as CanvasRenderingContext2D;
 		this.cleanup = null;
 	}
@@ -308,7 +308,7 @@ export class GalaxyGenerator {
 		// Use a typed array for any potential performance optimizations, and to guarantee
 		// values are 0-255
 		const imageData = new Uint8ClampedArray(
-			this.tmpCanvasCtx.getImageData(0, 0, this.asciiWidth, this.asciiHeight).data
+			this.tmpCanvasCtx.getImageData(0, 0, this.asciiWidth, this.asciiHeight).data,
 		);
 
 		// Iterate through the downscaled canvas image and convert each pixel to an ASCII character
@@ -316,7 +316,7 @@ export class GalaxyGenerator {
 			for (let x = 0; x < this.asciiWidth; x++) {
 				const index = (y * this.asciiWidth + x) * 4;
 				const grayscale = Math.round(
-					(imageData[index] + imageData[index + 1] + imageData[index + 2]) / 3
+					(imageData[index] + imageData[index + 1] + imageData[index + 2]) / 3,
 				);
 				const asciiChar = this.mapGrayscaleToAscii(grayscale);
 				asciiArt += asciiChar;

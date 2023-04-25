@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte'
+	import { onMount } from 'svelte';
 	import Layout from '$web/components/Layout.svelte';
 	import { initializeClerk } from '$web/utils/clerk';
 	import { clerkUser } from '$web/stores/clerk';
@@ -7,17 +7,17 @@
 	import { Toaster } from 'svelte-french-toast';
 
 	onMount(() => {
-		initializeClerk()
-	})
+		initializeClerk();
+	});
 </script>
 
 <Toaster />
 
 <Layout showNavbar={!$clerkUser.loading}>
-	{#if (!$clerkUser.loading)}
+	{#if !$clerkUser.loading}
 		<slot />
 	{:else}
-		<div class="w-screen h-screen">
+		<div class="h-screen w-screen">
 			<Loading />
 		</div>
 	{/if}

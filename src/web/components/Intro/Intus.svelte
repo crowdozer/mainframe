@@ -62,13 +62,13 @@ LICE THE INSTAR IT IS ONLY THROVGH GONG WITHIN THAT WE MAY EMERGE`;
 
 <div class="relative">
 	<!-- render the final text invisible to establish spacing -->
-	<h2 class="invisible text-lg font-bold whitespace-pre-line break-all heading">
+	<h2 class="heading invisible whitespace-pre-line break-all text-lg font-bold">
 		{text}
 	</h2>
 
 	<!-- absolutely position this in that space to render the real text -->
 	<h2
-		class="absolute top-0 left-0 right-0 text-lg font-bold text-green-600 whitespace-pre-line break-all heading"
+		class="heading absolute left-0 right-0 top-0 whitespace-pre-line break-all text-lg font-bold text-green-600"
 		style="min-height: 310px"
 	>
 		{$textStore.trim()}<span class="cursor">█</span>

@@ -12,7 +12,7 @@
 		'NextJS',
 		'Codeigniter',
 		'Laravel',
-		'Frameworkless'
+		'Frameworkless',
 	];
 
 	const databases = ['MySQL (MariaDB, CloudSQL)', 'Firebase', 'Supabase', 'MongoDB', 'ArangoDB'];
@@ -22,7 +22,7 @@
 		'AWS',
 		'Google Cloud',
 		'Kubernetes',
-		'Serverless/Cloud Functions)'
+		'Serverless/Cloud Functions)',
 	];
 
 	const otherTech = [
@@ -33,7 +33,7 @@
 		'SSH, FTP, SFTP, Linux Terminal, WSL',
 		'Google maps and other geolocation APIs',
 		'Socket.io integrations for server/client',
-		'Stripe integrations for server/client'
+		'Stripe integrations for server/client',
 	];
 
 	const coolStuff = [
@@ -44,7 +44,7 @@
 		'Idempotency',
 		'Cryptography, Steganography',
 		'Generative AI (Text and Images)',
-		'Event Sourcing'
+		'Event Sourcing',
 	];
 
 	const experience = [
@@ -55,7 +55,7 @@
 				'I designed and built a luxury condo rental website for Luxorts. ' +
 				'It features both regional and popularity based filtering, complex geolocation queries, ' +
 				'stripe API integration for checkouts, realtime chat, and a responsive mobile first design. ' +
-				'I also integrated the Luxorts API into existing CMS systems.'
+				'I also integrated the Luxorts API into existing CMS systems.',
 		},
 		{
 			title: 'We the Family Resorts - Full Stack Developer (2 years)',
@@ -63,7 +63,7 @@
 				'In this position, I helped maintain and update legacy code while developing new in-house tools. ' +
 				'I designed a high volume leads intake and distribution system for a call center with external API support. ' +
 				'I also assisted in optimizing legacy cloud functions, reducing server reads ' +
-				'by nearly a factor of 100.'
+				'by nearly a factor of 100.',
 		},
 		{
 			title: 'Vacation Management Group - Full Stack Developer (2 years)',
@@ -72,8 +72,8 @@
 				'to replace excel databases. In addition to better performance and ' +
 				'adding complex data visualization, I implemented comprehensive business logic, ' +
 				' a robust user permissions system, and integrated with several external APIs (soap, xml, json). ' +
-				' I also automated and optimized many in-office processes, cutting the workload by a factor of 10 in some cases.'
-		}
+				' I also automated and optimized many in-office processes, cutting the workload by a factor of 10 in some cases.',
+		},
 	];
 
 	const education = [
@@ -81,8 +81,8 @@
 			title: 'AAS Web Design - Jefferson College, MO',
 			text:
 				'I graduated from Jefferson College in 2015. ' +
-				'I primarily studied PHP, Javascript, SQL, and graphic design.'
-		}
+				'I primarily studied PHP, Javascript, SQL, and graphic design.',
+		},
 	];
 </script>
 

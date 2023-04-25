@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let name: string;
-	export let defaultValue: any = ''
+	export let defaultValue: any = '';
 	export let value: any = defaultValue;
 	export let label: string | undefined = '';
 	export let readonly: boolean = false;
@@ -16,7 +16,7 @@
 		<label class="block pb-1 text-sm" for="input-{name}">{label}</label>
 	{/if}
 	<input
-		class="{widthClass}"
+		class={widthClass}
 		id="input-{name}"
 		{name}
 		bind:value
@@ -30,6 +30,6 @@
 <style lang="postcss">
 	input {
 		@apply border border-dashed bg-transparent p-2 disabled:opacity-75;
-		border-color: var(--contrast-soft)
+		border-color: var(--contrast-soft);
 	}
 </style>

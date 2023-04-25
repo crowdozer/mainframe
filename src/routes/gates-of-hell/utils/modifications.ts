@@ -37,7 +37,7 @@ export function getUnitsByYear(
 	kindBlacklist: UnitKind[] = [],
 	kindWhitelist: UnitKind[] = [],
 	doctrinesBlacklist: string[] = [],
-	doctrinesWhitelist: string[] = []
+	doctrinesWhitelist: string[] = [],
 ): string[][] | null {
 	try {
 		const units = getUnitListByFaction(faction);
@@ -51,8 +51,8 @@ export function getUnitsByYear(
 						kindBlacklist,
 						doctrinesBlacklist,
 						kindWhitelist,
-						doctrinesWhitelist
-					)
+						doctrinesWhitelist,
+					),
 				)
 				// return it in a savefile compatible format
 				.map(({ unit }) => {
@@ -90,7 +90,7 @@ function makeFilterCallback(
 	kindBlacklist: UnitKind[],
 	doctrinesBlacklist: string[],
 	kindWhitelist: UnitKind[],
-	doctrinesWhitelist: string[]
+	doctrinesWhitelist: string[],
 ) {
 	// Flags to quickly tell if the whitelist is specified
 	const hasKindWhitelist = kindWhitelist.length > 0;

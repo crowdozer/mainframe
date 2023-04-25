@@ -137,7 +137,7 @@
 			},
 			onPerformanceUpdate: (newIPS) => {
 				debugIPS = Math.round(newIPS);
-			}
+			},
 		});
 		// Initialize the generator
 		generator.initializeStars();
@@ -178,7 +178,7 @@
 					<Loading />
 				</div>
 			{/if}
-				
+
 			<div class="flex flex-col justify-center">
 				<pre bind:this={galaxyElement}>{asciiArt}</pre>
 			</div>
@@ -208,13 +208,9 @@
 			</div>
 
 			<div class="p-8">
-				<Input
-					name='alphabet'
-					label='alphabet'
-					bind:value={alphabet}
-				/>
+				<Input name="alphabet" label="alphabet" bind:value={alphabet} />
 				<br />
-				<Select name='fps' label='Target FPS' bind:value={targetFPS}>
+				<Select name="fps" label="Target FPS" bind:value={targetFPS}>
 					<option value={300}>300 FPS</option>
 					<option value={240}>240 FPS</option>
 					<option value={165}>165 FPS</option>
@@ -226,7 +222,7 @@
 					<option value={10}>10 FPS</option>
 				</Select>
 				<br />
-				<Select name='revolutions' label='Revolutions' bind:value={targetRPM}>
+				<Select name="revolutions" label="Revolutions" bind:value={targetRPM}>
 					<option value={1}>Once per minute</option>
 					<option value={2}>Twice per minute</option>
 					<option value={4}>Four per minute</option>

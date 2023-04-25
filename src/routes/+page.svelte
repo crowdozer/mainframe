@@ -16,7 +16,7 @@
 	<div class="my-8 lg:my-32">
 		<Intro />
 	</div>
-	<div class="mx-auto text-center text-2xl my-8 lg:my-16">
+	<div class="mx-auto my-8 text-center text-2xl lg:my-16">
 		<i class="fas fa-chevron-down" />
 	</div>
 
