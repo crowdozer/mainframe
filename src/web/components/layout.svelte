@@ -12,7 +12,7 @@
 
 	<!-- background image -->
 	<div class="bg"></div>
-
+	
 	<main class="content-inner">
 		<slot />
 	</main>
@@ -42,23 +42,25 @@
 	}
 
 	.bg {
+		overflow: hidden;
 		z-index: 1;
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		height: 100vh;
-		background: linear-gradient(192deg, theme(colors.emerald.950), theme(colors.neutral.950));
+		background: linear-gradient(195deg, theme('colors.emerald.950', darken(50%)) 0%, theme(colors.neutral.950) 50%);
+	}
+	.bg::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		margin-bottom: -16em;
+		height: 16em; /* adjust the height of the fade-out effect */
+		box-shadow: 0 0 8em 8em theme(colors.neutral.950); /* adjust the shadow properties */
 	}
 
-	/** A shade to darken the BG gradient further */
-	.bg::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 5, 10, 0.5);
-	}
 </style>
