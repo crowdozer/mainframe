@@ -1,12 +1,16 @@
 <script lang="ts">
-	import Navbar from '$web/components/navbar.svelte';
-	import CRT from './crt.svelte';
+	import Navbar from '$web/components/Navbar.svelte';
+	import CRT from './CRT.svelte';
+
+	export let showNavbar: boolean = true 
 </script>
 
 
 <!-- content display -->
 <div class="content">
-	<Navbar />
+	{#if showNavbar}
+		<Navbar />
+	{/if}
 
 	<CRT />
 

@@ -1,8 +1,8 @@
 <script>
-	import Container from '$web/components/ui/container.svelte';
-	import CopyClick from '$web/components/ui/copy-click.svelte';
-	import Paper from '$web/components/ui/paper.svelte';
-	import Tag from '$web/components/ui/tag.svelte';
+	import Container from '$web/components/ui/Container.svelte';
+	import CopyClick from '$web/components/ui/CopyClick.svelte';
+	import Paper from '$web/components/ui/Paper.svelte';
+	import Tag from '$web/components/ui/Tag.svelte';
 
 	const frameworks = [
 		'Express',

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Paper from './paper.svelte';
+	import Paper from './Paper.svelte';
 
 	export let image: string;
 	export let header: string;

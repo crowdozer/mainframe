@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Accordion from '$web/components/ui/accordion/accordion.svelte';
-	import CopyClickIcon from '$web/components/ui/copy-click-icon.svelte';
-	import Label from '$web/components/ui/label.svelte';
+	import Accordion from '$web/components/ui/Accordion/Accordion.svelte';
+	import CopyClickIcon from '$web/components/ui/CopyClickIcon.svelte';
+	import Label from '$web/components/ui/Label.svelte';
 
 	export let save: { status: any; campaign: any };
 	let status: string;

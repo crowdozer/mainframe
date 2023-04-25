@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import Paper from '$web/components/ui/paper.svelte';
-	import Container from '$web/components/ui/container.svelte';
+	import Container from '$web/components/ui/Container.svelte';
+	import Input from '$web/components/ui/Input.svelte';
+	import Loading from '$web/components/ui/Loading.svelte';
+	import Paper from '$web/components/ui/Paper.svelte';
+	import Select from '$web/components/ui/Select.svelte';
 	import { getRandomInt } from '$web/utils/random-int';
-	import Input from '$web/components/ui/input.svelte';
-	import Select from '$web/components/ui/select.svelte';
 	import { measureFPS, roundToNearest } from './utils';
 	import { GalaxyGenerator } from './generator';
 
@@ -172,7 +173,13 @@
 				<canvas bind:this={canvas} />
 			</div>
 
-			<div class="flex justify-center">
+			{#if !asciiArt}
+				<div class="relative h-64">
+					<Loading />
+				</div>
+			{/if}
+				
+			<div class="flex flex-col justify-center">
 				<pre bind:this={galaxyElement}>{asciiArt}</pre>
 			</div>
 

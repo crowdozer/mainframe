@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import Button from '$web/components/ui/button/button.svelte';
-	import Container from '$web/components/ui/container.svelte';
-	import Input from '$web/components/ui/input.svelte';
-	import Paper from '$web/components/ui/paper.svelte';
-	import Select from '$web/components/ui/select.svelte';
-	import Label from '$web/components/ui/label.svelte';
+	import Button from '$web/components/ui/Button/Button.svelte';
+	import Container from '$web/components/ui/Container.svelte';
+	import Input from '$web/components/ui/Input.svelte';
+	import Paper from '$web/components/ui/Paper.svelte';
+	import Select from '$web/components/ui/Select.svelte';
+	import Label from '$web/components/ui/Label.svelte';
 	import { exportFile } from './utils/exportFile';
 	import { get, set, isAttacking } from './utils/manipulation';
 	import { parseSave } from './utils/parseSaveFile';
 	import { lockUnitsToYear } from './utils/modifications';
-	import Accordions from './accordions.svelte';
-	import Mods from './mods.svelte';
-	import Maps from './maps.svelte';
+	import Accordions from './Accordions.svelte';
+	import Mods from './Mods.svelte';
+	import Maps from './Maps.svelte';
 
 	let files: FileList;
 	let fileInput: HTMLInputElement;
@@ -74,6 +74,8 @@
 	function handleClear() {
 		// @ts-ignore
 		fileInput.value = null;
+		// @ts-ignore 
+		data = null 
 		// @ts-ignore
 		files = fileInput.files;
 	}

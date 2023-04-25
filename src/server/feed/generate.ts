@@ -1,5 +1,5 @@
 import { CACHE_NAME, STALE_TIMER } from './const';
-import type { Feed, FeedItem } from '$web/components/feed/types';
+import type { Feed, FeedItem } from '$web/components/Feed/types';
 import { getCoinTelegraphRSS, getHackerNewsStories, getInfosecRSS, getKrebsRSS } from './hydrators';
 import { sortFeedHelper, stringToColor } from './utils';
 import { cache } from '../utils/cache';
@@ -37,40 +37,40 @@ export async function generateFeed(fetcher: typeof fetch): Promise<FeedWithoutIS
 				(story) =>
 					({
 						kind: 'hacker-news',
-						data: story
-					} as FeedItem)
+						data: story,
+					} as FeedItem),
 			),
 			...infosec.map(
 				(story) =>
 					({
 						kind: 'infosec-mag',
 						data: story,
-						color: infoseccolor
-					} as FeedItem)
+						color: infoseccolor,
+					} as FeedItem),
 			),
 			...krebs.map(
 				(story) =>
 					({
 						kind: 'krebs-sec',
 						data: story,
-						color: krebscolor
-					} as FeedItem)
+						color: krebscolor,
+					} as FeedItem),
 			),
 			...cointele.map(
 				(story) =>
 					({
 						kind: 'coin-tele',
 						data: story,
-						color: cointelecolor
-					} as FeedItem)
-			)
+						color: cointelecolor,
+					} as FeedItem),
+			),
 		].sort(sortFeedHelper);
 
 		// this is the final set of props exposed to the page
 		const finalFeed = {
 			feed: stories,
 			elapsed: getElapsedTime(start),
-			generated: new Date()
+			generated: new Date(),
 		};
 
 		// push the final feed to the cache
@@ -84,7 +84,7 @@ export async function generateFeed(fetcher: typeof fetch): Promise<FeedWithoutIS
 		return {
 			feed: [],
 			elapsed: 0,
-			generated: new Date()
+			generated: new Date(),
 		};
 	}
 }
@@ -106,7 +106,7 @@ async function getFeedFromCache(): Promise<FeedWithoutISR | null> {
 		return {
 			feed,
 			elapsed,
-			generated: new Date(generated as string)
+			generated: new Date(generated as string),
 		};
 	} catch (error) {
 		console.log('error fetching feed from cache');

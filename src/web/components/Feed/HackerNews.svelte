@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { HackerNewsStory } from './types';
-	import ArticleLink from './article-link.svelte';
-	import Article from './article.svelte';
+	import ArticleLink from './ArticleLink.svelte';
+	import Article from './Article.svelte';
 
 	export let story: HackerNewsStory;
 

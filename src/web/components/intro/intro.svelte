@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Intus from './intus.svelte';
+	import Intus from './Intus.svelte';
 </script>
 
 <div style="min-height: 310px">

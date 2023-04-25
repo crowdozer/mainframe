@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { InfoSecStory } from './types';
-	import Article from './article.svelte';
+	import Article from './Article.svelte';
 
 	export let story: InfoSecStory;
 	export let color: string;

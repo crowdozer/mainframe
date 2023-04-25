@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Container from '$web/components/ui/container.svelte';
-	import Intro from '$web/components/intro/intro.svelte';
+	import Container from '$web/components/ui/Container.svelte';
+	import Intro from '$web/components/Intro/Intro.svelte';
+	import Feed from '$web/components/Feed/Feed.svelte';
 	import type { PageData } from './$types';
-	import Feed from '$web/components/feed/feed.svelte';
 
 	export let data: PageData;
 </script>

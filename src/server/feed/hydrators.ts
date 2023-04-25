@@ -2,8 +2,8 @@ import type {
 	HackerNewsStory,
 	InfoSecStory,
 	KrebsStory,
-	CoinTeleStory
-} from '$web/components/feed/types';
+	CoinTeleStory,
+} from '$web/components/Feed/types';
 import { enforceStatusCode } from '$web/utils/fetch';
 import parser from 'fast-xml-parser';
 
@@ -12,8 +12,8 @@ import parser from 'fast-xml-parser';
  */
 const opts = {
 	headers: {
-		'Accept-Encoding': 'identity'
-	}
+		'Accept-Encoding': 'identity',
+	},
 };
 
 /**
@@ -77,7 +77,7 @@ export async function getKrebsRSS(get: typeof fetch, n = 10): Promise<KrebsStory
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
-			parseAttributeValue: true
+			parseAttributeValue: true,
 		});
 		const result = xmlParser.parse(xml);
 
@@ -89,7 +89,7 @@ export async function getKrebsRSS(get: typeof fetch, n = 10): Promise<KrebsStory
 					guid: item.guid['#text'],
 					link: item.link,
 					pubDate: new Date(item.pubDate).getTime(),
-					title: item.title
+					title: item.title,
 				} satisfies KrebsStory;
 			});
 	} catch (error) {
@@ -111,7 +111,7 @@ export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecS
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
-			parseAttributeValue: true
+			parseAttributeValue: true,
 		});
 		const result = xmlParser.parse(xml);
 
@@ -123,7 +123,7 @@ export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecS
 					guid: item.guid['#text'],
 					link: item.link,
 					pubDate: new Date(item.pubDate).getTime(),
-					title: item.title
+					title: item.title,
 				} satisfies InfoSecStory;
 			});
 	} catch (error) {
@@ -142,7 +142,7 @@ export async function getCoinTelegraphRSS(get: typeof fetch, n = 10): Promise<an
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
-			parseAttributeValue: true
+			parseAttributeValue: true,
 		});
 		const result = xmlParser.parse(xml);
 
@@ -154,7 +154,7 @@ export async function getCoinTelegraphRSS(get: typeof fetch, n = 10): Promise<an
 					guid: item.guid['#text'],
 					link: item.link,
 					pubDate: new Date(item.pubDate).getTime(),
-					title: item.title
+					title: item.title,
 				} satisfies CoinTeleStory;
 			});
 	} catch (error) {

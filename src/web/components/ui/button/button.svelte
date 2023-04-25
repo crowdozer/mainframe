@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Inner from './inner.svelte';
-	import Loader from './loader.svelte';
+	import Inner from './Inner.svelte';
+	import Loader from './Loader.svelte';
 
 	// If the button is loading
 	export let loading: boolean = false;

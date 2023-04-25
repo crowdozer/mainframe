@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Paper from '$web/components/ui/paper.svelte';
+	import Paper from '$web/components/ui/Paper.svelte';
 	import { get } from './utils/manipulation';
 
 	export let status: any[];

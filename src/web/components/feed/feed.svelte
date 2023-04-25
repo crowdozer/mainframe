@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Paper from '$web/components/ui/paper.svelte';
-	import HackerNews from './hacker-news.svelte';
-	import InfosecMag from './infosec-mag.svelte';
+	import Paper from '$web/components/ui/Paper.svelte';
+	import Button from '$web/components/ui/Button/Button.svelte';
+	import HackerNews from './HackerNews.svelte';
+	import InfosecMag from './InfosecMag.svelte';
+	import KrebsSec from './KrebsSec.svelte';
+	import CoinTele from './CoinTele.svelte';
 	import type { Feed } from './types';
-	import KrebsSec from './krebs-sec.svelte';
-	import CoinTele from './coin-tele.svelte';
-	import Button from '$web/components/ui/button/button.svelte';
 
 	export let feed: Feed;
 

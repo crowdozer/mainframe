@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Input from '$web/components/ui/input.svelte';
-	import Paper from '$web/components/ui/paper.svelte';
-	import Button from '$web/components/ui/button/button.svelte';
+	import Input from '$web/components/ui/Input.svelte';
+	import Paper from '$web/components/ui/Paper.svelte';
+	import Button from '$web/components/ui/Button/button.svelte';
 	import { get, set } from '$web/utils/cache';
 
 	let key: string = 'foo';

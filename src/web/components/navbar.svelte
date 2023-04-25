@@ -1,5 +1,6 @@
 <script>
-	import Button from './ui/button/button.svelte';
+	import Button from '$web/components/ui/Button/Button.svelte';
+	import ProfileMenu from '$web/components/ProfileMenu/ProfileMenu.svelte';
 </script>
 
 <nav class="relative">
@@ -21,6 +22,7 @@
 			<Button icon="fas fa-person-rifle" link="/gates-of-hell">ostfront</Button>
 			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
 			<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
+			<ProfileMenu />
 		</div>
 	</div>
 	<hr class="absolute bottom-0 left-0 right-0 opacity-25" />
