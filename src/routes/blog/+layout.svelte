@@ -1,6 +1,6 @@
 <script>
-	import Container from '$web/components/container.svelte';
-	import Paper from '$web/components/paper.svelte';
+	import Container from '$web/components/ui/container.svelte';
+	import Paper from '$web/components/ui/paper.svelte';
 
 	/**
 	 * TODO: finish

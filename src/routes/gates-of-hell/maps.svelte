@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from '$web/components/card.svelte';
+	import Card from '$web/components/ui/card.svelte';
 	import { get } from './utils/manipulation';
 	import { maps } from './utils/maps';
 

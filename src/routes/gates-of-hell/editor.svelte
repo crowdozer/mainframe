@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import Button from '$web/components/button/button.svelte';
-	import Container from '$web/components/container.svelte';
+	import Button from '$web/components/ui/button/button.svelte';
+	import Container from '$web/components/ui/container.svelte';
 	import Input from '$web/components/ui/input.svelte';
-	import Paper from '$web/components/paper.svelte';
+	import Paper from '$web/components/ui/paper.svelte';
 	import Select from '$web/components/ui/select.svelte';
-	import Accordions from './accordions.svelte';
+	import Label from '$web/components/ui/label.svelte';
 	import { exportFile } from './utils/exportFile';
 	import { get, set, isAttacking } from './utils/manipulation';
 	import { parseSave } from './utils/parseSaveFile';
 	import { lockUnitsToYear } from './utils/modifications';
-	import Label from '$web/components/label.svelte';
+	import Accordions from './accordions.svelte';
 	import Mods from './mods.svelte';
 	import Maps from './maps.svelte';
 
@@ -165,7 +165,7 @@
 	{/if}
 	<!-- Disclaimer Messages -->
 	<div class="mt-16">
-		<Paper kind="error" bordered>
+		<Paper bordered>
 			<div class="p-4">
 				<h1 class="mb-2 text-2xl text-red-600">WARNING</h1>
 				<p>Please back up your save before using this utility.</p>
@@ -174,7 +174,7 @@
 		</Paper>
 	</div>
 	<div class="mt-4">
-		<Paper kind="warning" bordered>
+		<Paper bordered>
 			<div class="p-4">
 				<h1 class="mb-2 text-lg text-yellow-600">SLIGHTLY LESS SERIOUS WARNING</h1>
 				<p>This utility is not type-safe for you.</p>

@@ -1,5 +1,5 @@
 <script>
-	import Button from './button/button.svelte';
+	import Button from './ui/button/button.svelte';
 </script>
 
 <nav class="relative">

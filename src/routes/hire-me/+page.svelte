@@ -1,8 +1,8 @@
 <script>
-	import Container from '$web/components/container.svelte';
-	import CopyClick from '$web/components/copy-click.svelte';
-	import Paper from '$web/components/paper.svelte';
-	import Tag from '$web/components/tag.svelte';
+	import Container from '$web/components/ui/container.svelte';
+	import CopyClick from '$web/components/ui/copy-click.svelte';
+	import Paper from '$web/components/ui/paper.svelte';
+	import Tag from '$web/components/ui/tag.svelte';
 
 	const frameworks = [
 		'Express',
@@ -92,7 +92,7 @@
 
 <Container>
 	<div class="mb-4">
-		<Paper bordered kind="info">
+		<Paper bordered>
 			<div class="p-4">
 				<h1 class="mb-4 text-xl">want to work together?</h1>
 				<p class="mono"><CopyClick text="business@crwdzr.io" /></p>

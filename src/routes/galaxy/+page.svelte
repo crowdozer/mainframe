@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import Paper from '$web/components/paper.svelte';
-	import Container from '$web/components/container.svelte';
+	import Paper from '$web/components/ui/paper.svelte';
+	import Container from '$web/components/ui/container.svelte';
 	import { getRandomInt } from '$web/utils/random-int';
 	import Input from '$web/components/ui/input.svelte';
 	import Select from '$web/components/ui/select.svelte';

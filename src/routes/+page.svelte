@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Container from '$web/components/container.svelte';
+	import Container from '$web/components/ui/container.svelte';
 	import Intro from '$web/components/intro/intro.svelte';
 	import type { PageData } from './$types';
 	import Feed from '$web/components/feed/feed.svelte';
