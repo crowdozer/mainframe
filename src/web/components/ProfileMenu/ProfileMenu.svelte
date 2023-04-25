@@ -17,7 +17,7 @@
 
 <div class="root relative">
 	{#if $clerkUser.user}
-		<button class="avatar peer" on:click={handleSignOut}>
+		<button class="avatar peer align-middle" on:click={handleSignOut}>
 			<Avatar />
 		</button>
 	{:else}
