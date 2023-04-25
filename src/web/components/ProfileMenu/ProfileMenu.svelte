@@ -29,6 +29,7 @@
 		<div class="flex flex-col gap-1">
 			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
 			<Button icon="fas fa-person-rifle" link="/gates-of-hell">ostfront</Button>
+			<Button icon="fas fa-database" link="/redis">redis</Button>
 			{#if $clerkUser.user}
 				<Button icon="fas fa-sign-out" on:click={handleSignOut}>Sign Out</Button>
 			{:else}

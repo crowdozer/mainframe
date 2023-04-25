@@ -20,10 +20,15 @@ import dotenv from 'dotenv';
  * ```
  */
 const Schema = z.object({
+	// PRIVATE
 	SRV_REDIS_URL: z.string(),
 	CLERK_UNPUBLISHABLE: z.string(),
-	PUBLIC_CLERK_PUBLISHABLE: z.string(),
 	CLERK_PEM: z.string(),
+	UPSTASH_REDIS_REST_URL: z.string(),
+	UPSTASH_REDIS_REST_TOKEN: z.string(),
+
+	// PUBLIC
+	PUBLIC_CLERK_PUBLISHABLE: z.string(),
 });
 
 /**

@@ -9,7 +9,7 @@ if (!SRV_REDIS_URL) {
 }
 
 // create the redis client
-const client = new Redis(SRV_REDIS_URL);
+export const client = new Redis(SRV_REDIS_URL);
 
 // create the adapter
 const makeRedisAdapter: MakeAdapter = (prefix: string) => ({
@@ -25,7 +25,7 @@ const makeRedisAdapter: MakeAdapter = (prefix: string) => ({
 
 	async expire(key: string, seconds: number) {
 		await client.expire(prefix + key, seconds);
-	}
+	},
 });
 
 // expose adapter, but not client
