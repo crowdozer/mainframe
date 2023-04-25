@@ -2,7 +2,7 @@
  * Throws an error if a request falls outside of the 2xx status range
  * Must be thrown early in the promise chain to satisfy the Response parameter
  */
-export async function enforceStatusCode<T extends Response>(response: T): T {
+export async function enforceStatusCode<T extends Response>(response: T): Promise<T> {
 	if (response.ok) {
 		return response;
 	}
