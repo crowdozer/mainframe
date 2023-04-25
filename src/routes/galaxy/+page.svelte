@@ -6,6 +6,8 @@
 	import { getRandomInt } from '$web/utils/random-int';
 	import { measureFPS } from '$web/utils/fps';
 	import { roundToNearest } from '$web/utils/custom-round';
+	import Input from '$web/components/ui/input.svelte';
+	import Select from '$web/components/ui/select.svelte';
 
 	// not mutable, but assigned during startup
 	let canvas: HTMLCanvasElement;
@@ -200,48 +202,30 @@
 			</div>
 
 			<div class="p-8">
-				<div>
-					<label for="alphabet" class="mt-4 block text-sm">alphabet</label>
-					<input
-						id="alphabet"
-						type="text"
-						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
-						bind:value={alphabet}
-					/>
-				</div>
-
-				<div>
-					<label for="fps" class="mt-4 block text-sm">Target FPS</label>
-					<select
-						id="fps"
-						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
-						bind:value={targetFPS}
-					>
-						<option value={300}>300 FPS</option>
-						<option value={240}>240 FPS</option>
-						<option value={165}>165 FPS</option>
-						<option value={144}>144 FPS</option>
-						<option value={60}>60 FPS</option>
-						<option value={30}>30 FPS</option>
-						<option value={20}>20 FPS</option>
-						<option value={15}>15 FPS</option>
-						<option value={10}>10 FPS</option>
-					</select>
-				</div>
-
-				<div>
-					<label for="speed" class="mt-4 block text-sm">revolutions</label>
-					<select
-						id="speed"
-						class="mt-1 block w-full rounded border border-dashed bg-black px-4 py-2"
-						bind:value={targetRPM}
-					>
-						<option value={1}>Once per minute</option>
-						<option value={2}>Twice per minute</option>
-						<option value={4}>Four per minute</option>
-						<option value={10}>Ten per minute</option>
-					</select>
-				</div>
+				<Input
+					name='alphabet'
+					label='alphabet'
+					bind:value={alphabet}
+				/>
+				<br />
+				<Select name='fps' label='Target FPS' bind:value={targetFPS}>
+					<option value={300}>300 FPS</option>
+					<option value={240}>240 FPS</option>
+					<option value={165}>165 FPS</option>
+					<option value={144}>144 FPS</option>
+					<option value={60}>60 FPS</option>
+					<option value={30}>30 FPS</option>
+					<option value={20}>20 FPS</option>
+					<option value={15}>15 FPS</option>
+					<option value={10}>10 FPS</option>
+				</Select>
+				<br />
+				<Select name='revolutions' label='Revolutions' bind:value={targetRPM}>
+					<option value={1}>Once per minute</option>
+					<option value={2}>Twice per minute</option>
+					<option value={4}>Four per minute</option>
+					<option value={10}>Ten per minute</option>
+				</Select>
 			</div>
 		</Paper>
 	</div>

@@ -1,4 +1,4 @@
-import type { FeedItem } from '$lib/components/feed/types';
+import type { FeedItem } from '$web/components/feed/types';
 
 /**
  * Sorts the feed

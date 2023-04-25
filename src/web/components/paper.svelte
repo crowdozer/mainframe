@@ -7,15 +7,15 @@
 
 		switch (kind) {
 			case 'neutral':
-				return 'border border-dashed border-gray-600';
+				return 'border border-slate-700';
 			case 'warning':
-				return 'border border-dashed border-yellow-600';
+				return 'border border-yellow-700';
 			case 'info':
-				return 'border border-dashed border-cyan-600';
+				return 'border border-cyan-700';
 			case 'error':
-				return 'border border-dashed border-red-600';
+				return 'border border-red-700';
 			case 'success':
-				return 'border border-dashed border-green-600';
+				return 'border border-green-700';
 		}
 	}
 </script>

@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import Button from '$web/components/button/button.svelte';
 	import Container from '$web/components/container.svelte';
-	import Input from '$web/components/input.svelte';
+	import Input from '$web/components/ui/input.svelte';
 	import Paper from '$web/components/paper.svelte';
 	import Accordions from './accordions.svelte';
 	import { exportFile } from './utils/exportFile';
@@ -12,6 +12,7 @@
 	import Label from '$web/components/label.svelte';
 	import Mods from './mods.svelte';
 	import Maps from './maps.svelte';
+	import Select from '../ui/select.svelte';
 
 	let files: FileList;
 	let fileInput: HTMLInputElement;
@@ -122,7 +123,7 @@
 			<!-- Campaign State -->
 			<div class="mt-4">
 				<Paper bordered>
-					<div class="flex flex-col gap-2 p-4">
+					<div class="flex flex-col gap-4 p-4">
 						<h3 class="text-lg">Campaign State</h3>
 						{#each resourceForm as [path, label]}
 							<Input
@@ -140,9 +141,11 @@
 				<Paper bordered>
 					<div class="flex flex-col gap-2 p-4">
 						<h3 class="text-lg">Set research to year <Label>expiremental</Label></h3>
-						<form class="flex flex-col gap-2" on:submit={handleSetByYear}>
+						<form class="flex flex-col gap-4 mt-4" on:submit={handleSetByYear}>
 							<Input name="target_year" placeholder="Year (i.e 1940)" />
-							<Input name="faction" placeholder="Faction (i.e fin)" />
+							<Select name='faction' defaultValue="fin">
+								<option value="fin">Finland</option>
+							</Select>
 							<Button type="submit">set</Button>
 						</form>
 					</div>

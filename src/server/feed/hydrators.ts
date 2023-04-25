@@ -3,7 +3,7 @@ import type {
 	InfoSecStory,
 	KrebsStory,
 	CoinTeleStory
-} from '$lib/components/feed/types';
+} from '$web/components/feed/types';
 import parser from 'fast-xml-parser';
 
 /**

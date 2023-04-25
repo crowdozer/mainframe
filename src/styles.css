@@ -7,8 +7,10 @@
 :root {
 	--dark: theme(colors.zinc.950);
 	--dark-em: theme(colors.zinc.900);
+	--dark-neutral: theme(colors.neutral.950);
 	--contrast: theme(colors.zinc.300);
 	--contrast-em: theme(colors.zinc.100);
+	--contrast-soft: theme(colors.zinc.700);
 	--link: theme(colors.zinc.200);
 	--link-em: theme(colors.zinc.300);
 }

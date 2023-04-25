@@ -92,7 +92,7 @@
 
 <Container>
 	<div class="mb-4">
-		<Paper bordered kind="warning">
+		<Paper bordered kind="info">
 			<div class="p-4">
 				<h1 class="mb-4 text-xl">want to work together?</h1>
 				<p class="mono"><CopyClick text="business@crwdzr.io" /></p>

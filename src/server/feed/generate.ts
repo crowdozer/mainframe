@@ -1,14 +1,16 @@
 import { CACHE_NAME, STALE_TIMER } from './const';
-import type { Feed, FeedItem } from '$lib/components/feed/types';
+import type { Feed, FeedItem } from '$web/components/feed/types';
 import { getCoinTelegraphRSS, getHackerNewsStories, getInfosecRSS, getKrebsRSS } from './hydrators';
 import { sortFeedHelper, stringToColor } from './utils';
-import { cache } from '../../server/utils/cache';
+import { cache } from '../utils/cache';
+
+type FeedWithoutISR = Omit<Feed, 'ISR'>;
 
 /**
  * Generates the homepage feed. First it checks for a cached value,
  * and if one isn't found, it generates one.
  */
-export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
+export async function generateFeed(fetcher: typeof fetch): Promise<FeedWithoutISR> {
 	try {
 		const cachedFeed = await getFeedFromCache();
 		if (cachedFeed) {
@@ -90,9 +92,14 @@ export async function generateFeed(fetcher: typeof fetch): Promise<Feed> {
 /**
  * Checks the cache for a feed entry
  */
-async function getFeedFromCache(): Promise<Feed | null> {
+async function getFeedFromCache(): Promise<FeedWithoutISR | null> {
 	try {
 		const value = await cache.get(CACHE_NAME);
+
+		if (!value) {
+			// No error, the cache is just empty.
+			return null;
+		}
 
 		const { feed, elapsed, generated } = JSON.parse(value as string);
 
@@ -100,7 +107,7 @@ async function getFeedFromCache(): Promise<Feed | null> {
 			feed,
 			elapsed,
 			generated: new Date(generated as string)
-		} as Feed;
+		};
 	} catch (error) {
 		console.log('error fetching feed from cache');
 		console.error(error);
@@ -111,7 +118,7 @@ async function getFeedFromCache(): Promise<Feed | null> {
 /**
  * Sets a cache entry for the feed
  */
-async function setFeed(feed: Feed): Promise<void> {
+async function setFeed(feed: FeedWithoutISR): Promise<void> {
 	try {
 		await cache.set(CACHE_NAME, JSON.stringify(feed));
 		await cache.expire(CACHE_NAME, STALE_TIMER);

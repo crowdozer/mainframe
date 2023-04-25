@@ -15,7 +15,7 @@
 		<label class="block pb-1 text-sm" for="input-{name}">{label}</label>
 	{/if}
 	<input
-		class="{widthClass} border border-gray-600 bg-transparent p-2 disabled:border-gray-700"
+		class="{widthClass}"
 		id="input-{name}"
 		{name}
 		bind:value
@@ -25,3 +25,10 @@
 		{disabled}
 	/>
 </div>
+
+<style lang="postcss">
+	input {
+		@apply border border-dashed bg-transparent p-2 disabled:opacity-75;
+		border-color: var(--contrast-soft)
+	}
+</style>
