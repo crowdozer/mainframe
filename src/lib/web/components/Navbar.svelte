@@ -16,9 +16,14 @@
 
 		<!-- Buttons -->
 		<div class="ml-auto inline-flex items-center gap-2">
-			<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
-			<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
-			<ProfileMenu />
+			<div class="hidden sm:contents">
+				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
+				<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
+			</div>
+			<ProfileMenu>
+				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
+				<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
+			</ProfileMenu>
 		</div>
 	</div>
 	<hr class="absolute bottom-0 left-0 right-0 opacity-25" />

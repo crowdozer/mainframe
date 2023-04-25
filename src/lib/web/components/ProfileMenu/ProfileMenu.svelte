@@ -29,6 +29,7 @@
 		class="menu absolute right-0 top-10 hidden w-[200px] flex-col overflow-hidden rounded-xl bg-neutral-900 drop-shadow-lg hover:block peer-hover:block"
 	>
 		<div class="flex flex-col gap-1">
+			<slot />
 			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
 			<Button icon="fas fa-person-rifle" link="/gates-of-hell">ostfront</Button>
 			<Button icon="fas fa-database" link="/redis">redis</Button>
