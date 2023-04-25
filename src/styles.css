@@ -1,0 +1,99 @@
+/* Consolas */
+@font-face {
+	font-family: 'Consolas';
+	src: url('/fonts/Consolas-Font/CONSOLAB.TTF') format('truetype');
+}
+
+:root {
+	--dark: theme(colors.zinc.950);
+	--dark-em: theme(colors.zinc.900);
+	--contrast: theme(colors.zinc.300);
+	--contrast-em: theme(colors.zinc.100);
+	--link: theme(colors.zinc.200);
+	--link-em: theme(colors.zinc.300);
+}
+
+/* Global setup */
+body {
+	background: var(--dark);
+	color: var(--contrast);
+	font-size: 16px;
+}
+
+/* Some decorative elements */
+pre {
+	white-space: pre-wrap;
+}
+strong {
+	font-weight: bold;
+}
+
+/* Style links */
+a {
+	display: inline-block;
+	color: var(--link);
+	font-weight: bold;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-underline-offset: 3px;
+}
+a:hover {
+	text-decoration: none;
+	background: var(--link);
+	color: var(--dark);
+}
+a::focus {
+	text-decoration: none;
+	background: var(--link-em);
+	color: var(--dark);
+}
+
+/* Apply coloring to headers */
+h1,
+h2,
+h3 {
+	color: var(--contrast-em);
+}
+
+/* Apply conditional fonts to various elements */
+body {
+	font-family: Consolas, monospace;
+}
+.not-mono {
+	font-family: Open Sans, arial, sans-serif;
+}
+
+/* replace list styling */
+ul {
+	list-style-type: none;
+}
+li:before {
+	@apply mr-4 text-gray-400;
+	content: '\f054'; /* unicode for chevron symbol */
+	font-family: FontAwesome; /* font that contains the chevron symbol */
+	font-size: 0.65rem;
+}
+
+/* Selection styling */
+*::selection {
+	background: var(--contrast);
+	color: var(--dark);
+}
+a::selection {
+	color: var(--link);
+}
+
+/* Animations */
+
+/** Animate the scanline */
+@keyframes scanline {
+	0% {
+		bottom: 100%;
+	}
+	40% {
+		bottom: 100%;
+	}
+	100% {
+		bottom: 0%;
+	}
+}
