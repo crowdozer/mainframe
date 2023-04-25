@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import { GalaxyGenerator } from './generator';
 	import Paper from '$web/components/paper.svelte';
 	import Container from '$web/components/container.svelte';
 	import { getRandomInt } from '$web/utils/random-int';
-	import { measureFPS } from '$web/utils/fps';
-	import { roundToNearest } from '$web/utils/custom-round';
 	import Input from '$web/components/ui/input.svelte';
 	import Select from '$web/components/ui/select.svelte';
+	import { measureFPS, roundToNearest } from './utils';
+	import { GalaxyGenerator } from './generator';
 
 	// not mutable, but assigned during startup
 	let canvas: HTMLCanvasElement;

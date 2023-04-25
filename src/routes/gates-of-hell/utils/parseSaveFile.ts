@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 import { deserializeData } from './serialization';
-import { handleAlert } from '$web/utils/error';
+import { autotoast } from '$web/utils/error';
 
 /**
  * Accepts a file pointer, laods it to disk,
@@ -19,7 +19,7 @@ export async function parseSave(file: File): Promise<any | null> {
 			campaign: parseSaveFilePart(result.campaign)
 		};
 	} catch (error: any) {
-		handleAlert(error, 'error deserializing data: ');
+		autotoast('error deserializing data: ')(error);
 		return null;
 	}
 }
@@ -57,7 +57,7 @@ export async function loadFromDisk(
 			campaign: await campaign.async('string')
 		};
 	} catch (error: any) {
-		handleAlert(error, 'error parsing savefile: ');
+		autotoast('error parsing savefile: ')(error);
 		return null;
 	}
 }

@@ -1,16 +1,19 @@
+import { autotoast } from './error';
+import { enforceStatusCode } from './fetch';
+
 /**
  * Client side function to hit the back-end cache
  * Gets the given key:value pair, or null if not found
  */
 export async function get(key: string, fetcher = fetch): Promise<string | null> {
-	const { value } = await fetcher('/api/cache?key=' + key)
+	const result = await fetcher('/api/cache?key=' + key)
 		.then((data) => data.json())
-		.catch((error) => {
-			console.error(error);
-			return { value: null };
-		});
+		.then(enforceStatusCode)
+		.catch(autotoast());
 
-	return value;
+	if (result) return result.value;
+
+	return null;
 }
 
 /**
@@ -30,5 +33,7 @@ export async function set(
 			value,
 			expiration
 		})
-	});
+	})
+		.then(enforceStatusCode)
+		.catch(autotoast());
 }

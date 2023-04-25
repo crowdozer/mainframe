@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Input from '$web/components/input.svelte';
+	import Input from '$web/components/ui/input.svelte';
 	import Paper from '$web/components/paper.svelte';
 	import Button from '$web/components/button/button.svelte';
 	import { get, set } from '$web/utils/cache';
@@ -19,7 +19,7 @@
 
 	async function handleSet() {
 		setLoading = true;
-		await set(key, setValue);
+		await set(key, setValue)
 		setLoading = false;
 	}
 </script>

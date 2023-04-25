@@ -4,6 +4,7 @@
 	import Container from '$web/components/container.svelte';
 	import Input from '$web/components/ui/input.svelte';
 	import Paper from '$web/components/paper.svelte';
+	import Select from '$web/components/ui/select.svelte';
 	import Accordions from './accordions.svelte';
 	import { exportFile } from './utils/exportFile';
 	import { get, set, isAttacking } from './utils/manipulation';
@@ -12,7 +13,6 @@
 	import Label from '$web/components/label.svelte';
 	import Mods from './mods.svelte';
 	import Maps from './maps.svelte';
-	import Select from '../ui/select.svelte';
 
 	let files: FileList;
 	let fileInput: HTMLInputElement;

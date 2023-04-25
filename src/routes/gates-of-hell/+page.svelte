@@ -1,5 +1,5 @@
 <script>
-	import Editor from '$web/components/dcg/editor.svelte';
+	import Editor from './editor.svelte';
 </script>
 
 <svelte:head>

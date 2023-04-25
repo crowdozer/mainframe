@@ -1,6 +1,9 @@
 <script>
 	import Layout from '$web/components/layout.svelte';
+	import { Toaster } from 'svelte-french-toast';
 </script>
+	
+<Toaster />
 
 <Layout>
 	<slot />

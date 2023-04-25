@@ -1,9 +1,9 @@
-import { intersects } from '$web/utils/arrays';
-import { handleAlert } from '$web/utils/error';
+import { autotoast } from '$web/utils/error';
 import { getRandomInt } from '$web/utils/random-int';
 import type { DCG_Army, UnitByYear, UnitKind } from '../types';
 import { fin } from '../unitsByYear';
 import { set } from './manipulation';
+import { intersects } from './arrays';
 
 /**
  * Locks the units available to a faction up to the specified year.
@@ -60,7 +60,7 @@ export function getUnitsByYear(
 				})
 		);
 	} catch (error: any) {
-		handleAlert(error, 'error setting faction units: ');
+		autotoast('error collecting units: ')(error);
 		return null;
 	}
 }

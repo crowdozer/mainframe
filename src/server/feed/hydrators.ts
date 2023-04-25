@@ -4,6 +4,7 @@ import type {
 	KrebsStory,
 	CoinTeleStory
 } from '$web/components/feed/types';
+import { enforceStatusCode } from '$web/utils/fetch';
 import parser from 'fast-xml-parser';
 
 /**
@@ -26,9 +27,9 @@ export async function getHackerNewsStories(get: typeof fetch, n = 20): Promise<H
 
 		// load all of those stories
 		const storyPromises: Promise<HackerNewsStory>[] = selection.map((id) => {
-			return get('https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty').then(
-				(data) => data.json() as Promise<HackerNewsStory>
-			);
+			return get('https://hacker-news.firebaseio.com/v0/item/' + id + '.json?print=pretty')
+				.then(enforceStatusCode)
+				.then((data) => data.json() as Promise<HackerNewsStory>);
 		});
 		const stories = await Promise.all(storyPromises);
 
@@ -52,7 +53,9 @@ export async function getHackerNewsStories(get: typeof fetch, n = 20): Promise<H
 export async function getHackerNewsStoryIDs(get: typeof fetch): Promise<number[]> {
 	try {
 		const url = 'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty';
-		const ids = await get(url).then((data) => data.json());
+		const ids = await get(url)
+			.then(enforceStatusCode)
+			.then((data) => data.json());
 
 		return ids;
 	} catch (error) {
@@ -68,9 +71,9 @@ export async function getHackerNewsStoryIDs(get: typeof fetch): Promise<number[]
  */
 export async function getKrebsRSS(get: typeof fetch, n = 10): Promise<KrebsStory[]> {
 	try {
-		const xml = await get('https://krebsonsecurity.com/feed/', opts).then((response) =>
-			response.text()
-		);
+		const xml = await get('https://krebsonsecurity.com/feed/', opts)
+			.then(enforceStatusCode)
+			.then((response) => response.text());
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
@@ -102,9 +105,9 @@ export async function getKrebsRSS(get: typeof fetch, n = 10): Promise<KrebsStory
  */
 export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecStory[]> {
 	try {
-		const xml = await get('https://www.infosecurity-magazine.com/rss/news/', opts).then(
-			(response) => response.text()
-		);
+		const xml = await get('https://www.infosecurity-magazine.com/rss/news/', opts)
+			.then(enforceStatusCode)
+			.then((response) => response.text());
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,
@@ -133,9 +136,9 @@ export async function getInfosecRSS(get: typeof fetch, n = 10): Promise<InfoSecS
 
 export async function getCoinTelegraphRSS(get: typeof fetch, n = 10): Promise<any[]> {
 	try {
-		const xml = await get('https://cointelegraph.com/rss/category/weekly-overview/', opts).then(
-			(response) => response.text()
-		);
+		const xml = await get('https://cointelegraph.com/rss/category/weekly-overview/', opts)
+			.then(enforceStatusCode)
+			.then((response) => response.text());
 		const xmlParser = new parser.XMLParser({
 			attributeNamePrefix: '',
 			ignoreAttributes: false,

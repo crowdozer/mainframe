@@ -1,13 +1,18 @@
 /**
- * Runs the given callback at the desired framerate,
- * returns a fn to clear the interval
+ * Round the given number to the nearest digit present in an array of numbers
+ * The function uses the Array.reduce() method to iterate over each value in the
+ * array and find the value with the smallest absolute difference to the given number.
+ * It then returns that value.
  */
-export function asFPSinterval(callback: () => void, fps: number): () => void {
-	const interval = setInterval(callback, 1000 / fps);
-
-	return () => clearInterval(interval);
+export function roundToNearest(num: number, arr: number[]): number {
+	return arr.reduce((prev, curr) => {
+		return Math.abs(curr - num) < Math.abs(prev - num) ? curr : prev;
+	});
 }
 
+/**
+ * Attempts to measure device FPS
+ */
 export async function measureFPS(): Promise<number> {
 	// Define the duration of the performance testing in milliseconds
 	const testDuration = 1000;
