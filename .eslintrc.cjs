@@ -8,11 +8,6 @@ module.exports = {
 		{
 			files: ['*.svelte'],
 			processor: 'svelte3/svelte3',
-			rules: {
-				'@typescript-eslint/no-explicit-any': 'off',
-				'@typescript-eslint/no-inferrable': 'off',
-				'@typescript-eslint/ban-ts-comment': 'warn',
-			},
 		},
 	],
 	settings: {
@@ -26,5 +21,10 @@ module.exports = {
 		browser: true,
 		es2017: true,
 		node: true,
+	},
+	rules: {
+		'@typescript-eslint/no-inferrable-types': 'off',
+		'@typescript-eslint/no-explicit-any': 'off',
+		'@typescript-eslint/ban-ts-comment': 'warn',
 	},
 };
