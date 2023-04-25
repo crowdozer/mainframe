@@ -1,7 +1,7 @@
 import type { Handle } from '@sveltejs/kit';
 import { CLERK_PEM } from '$env/static/private';
 import jwt from 'jsonwebtoken';
-import type { AuthState } from '../../types';
+import type { AuthState } from '~/types';
 
 const splitPem = CLERK_PEM.match(/.{1,64}/g) as RegExpMatchArray;
 const publicKey =

@@ -33,9 +33,10 @@ const config = {
 			assets: 'static',
 		},
 		alias: {
-			$web: 'src/web',
-			$api: 'src/api',
-			$server: 'src/server',
+			$web: 'src/lib/web',
+			$api: 'src/lib/api',
+			$server: 'src/lib/server',
+			'~': 'src/',
 		},
 	},
 };

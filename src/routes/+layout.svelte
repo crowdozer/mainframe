@@ -1,14 +1,8 @@
-<script>
-	import { onMount } from 'svelte';
+<script lang="ts">
 	import Layout from '$web/components/Layout.svelte';
-	import { initializeClerk } from '$web/utils/clerk';
 	import { clerkUser } from '$web/stores/clerk';
 	import Loading from '$web/components/ui/Loading.svelte';
 	import { Toaster } from 'svelte-french-toast';
-
-	onMount(() => {
-		initializeClerk();
-	});
 </script>
 
 <Toaster />
