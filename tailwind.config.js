@@ -1,9 +1,9 @@
 module.exports = {
 	mode: 'jit',
-	purge: ['./src/**/*.html', './src/**/*.svelte'],
+	content: ['./src/**/*.html', './src/**/*.svelte'],
 	theme: {
-		extend: {}
+		extend: {},
 	},
 	variants: {},
-	plugins: []
+	plugins: [],
 };

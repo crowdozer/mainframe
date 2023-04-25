@@ -24,8 +24,4 @@
 		@apply border border-dashed bg-transparent p-2 disabled:opacity-75;
 		border-color: var(--contrast-soft);
 	}
-
-	select > option {
-		@apply bg-transparent p-2;
-	}
 </style>

@@ -25,9 +25,6 @@
 </nav>
 
 <style lang="postcss">
-	a {
-		text-decoration: none;
-	}
 	nav {
 		@apply sticky left-0 top-0 z-50 w-full bg-transparent px-4 py-2;
 		backdrop-filter: blur(5px);

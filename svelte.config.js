@@ -2,6 +2,7 @@ import { mdsvex } from 'mdsvex';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 import adapter from '@sveltejs/adapter-vercel';
 import tailwindcss from 'tailwindcss';
+import postcss from 'postcss';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,14 +11,14 @@ const config = {
 	preprocess: [
 		vitePreprocess({
 			style: {
-				// tailwindcss support
-				plugins: [tailwindcss()]
-			}
+				// tailwindcss support and postcss support
+				plugins: [tailwindcss(), postcss()],
+			},
 		}),
 		// markdown file support
 		mdsvex({
-			extensions: ['.md']
-		})
+			extensions: ['.md'],
+		}),
 	],
 
 	// markdown file support
@@ -29,13 +30,13 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
 		files: {
-			assets: 'static'
+			assets: 'static',
 		},
 		alias: {
 			$web: 'src/web',
-			$api: 'src/server'
-		}
-	}
+			$api: 'src/server',
+		},
+	},
 };
 
 export default config;
