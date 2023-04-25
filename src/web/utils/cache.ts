@@ -7,8 +7,8 @@ import { enforceStatusCode } from './fetch';
  */
 export async function get(key: string, fetcher = fetch): Promise<string | null> {
 	const result = await fetcher('/api/cache?key=' + key)
-		.then((data) => data.json())
 		.then(enforceStatusCode)
+		.then((data) => data.json())
 		.catch(autotoast());
 
 	if (result) return result.value;

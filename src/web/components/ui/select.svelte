@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let name: string;
-	export let defaultValue: string | number = ''
-	export let value: string | number = defaultValue;
+	export let defaultValue: any = ''
+	export let value: any = defaultValue;
 	export let label: string | undefined = '';
 	export let fullWidth: boolean = true;
 	export let disabled: boolean = false;
