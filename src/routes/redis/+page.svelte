@@ -3,6 +3,7 @@
 	import Paper from '$web/components/ui/Paper.svelte';
 	import Button from '$web/components/ui/Button/button.svelte';
 	import { get, set } from '$web/utils/cache';
+	import { clerkUser } from '$web/stores/clerk';
 
 	let key: string = 'foo';
 	let getLoading: boolean = false;
@@ -35,10 +36,9 @@
 				<!-- Key Section -->
 				<h1 class="text-xl">Redis Cache Key</h1>
 				<Input name="cache-key" label="key" placeholder="key" bind:value={key} />
-				<hr class="opacity-25" />
 
 				<!-- Get Section -->
-				<h1 class="text-xl">Get Value</h1>
+				<h1 class="text-xl mt-8">Get Value</h1>
 				<Input
 					name="cache-get-value"
 					label="value"
@@ -48,18 +48,19 @@
 					readonly
 				/>
 				<Button loading={getLoading} disabled={getLoading} on:click={handleGet}>Get</Button>
-				<hr class="opacity-25" />
-
+				
 				<!-- Set Section -->
-				<h1 class="text-xl">Set Value</h1>
-				<Input
-					name="cache-set-value"
-					label="value"
-					placeholder="value"
-					bind:value={setValue}
-					disabled={setLoading}
-				/>
-				<Button loading={setLoading} disabled={setLoading} on:click={handleSet}>Set</Button>
+				{#if $clerkUser.user}
+					<h1 class="text-xl mt-4">Set Value</h1>
+					<Input
+						name="cache-set-value"
+						label="value"
+						placeholder="value"
+						bind:value={setValue}
+						disabled={setLoading}
+					/>
+					<Button loading={setLoading} disabled={setLoading} on:click={handleSet}>Set</Button>
+				{/if}
 			</div>
 		</Paper>
 	</div>

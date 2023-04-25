@@ -6,10 +6,11 @@
 	import KrebsSec from './KrebsSec.svelte';
 	import CoinTele from './CoinTele.svelte';
 	import type { Feed } from './types';
+	import { fromNow } from '$web/utils/dates';
 
 	export let feed: Feed;
 
-	const { elapsed, feed: feedItems, ISR } = feed;
+	const { feed: feedItems, ISR } = feed;
 
 	let visibleFeedItems = feedItems.slice(0, 10);
 	let expanded = false;
@@ -62,10 +63,12 @@
 		<a href="https://cointelegraph.com/">cointelegraph.com</a> •
 		<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 	</p>
+	<br />
+	<p class="text-right text-gray-500" title={feed.generated.toISOString()}>
+		<!-- feed compiled in {elapsed.toFixed(2)} seconds • {fromNow(feed.generated)} -->
+		feed regenerated {fromNow(feed.generated)}
+	</p>
 	<p class="text-right text-gray-500">
-		generated in {elapsed.toFixed(2)} seconds •
-		<span title={'isr ' + ISR.toISOString()}>
-			{ISR.toLocaleDateString()}
-		</span>
+		webpage cached <span title={ISR.toISOString()}>{fromNow(ISR)}</span>
 	</p>
 </div>

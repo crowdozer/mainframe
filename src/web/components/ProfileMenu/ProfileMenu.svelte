@@ -15,10 +15,35 @@
 	}
 </script>
 
-{#if $clerkUser.user}
-    <button class="hover:cursor-pointer" on:click={handleSignOut}>
-        <Avatar />
-    </button>
-{:else}
-    <Button icon="fas fa-user" on:click={handleSignIn} />
-{/if}
+<div class="root relative">
+	{#if $clerkUser.user}
+		<button class="peer avatar" on:click={handleSignOut}>
+			<Avatar />
+		</button>
+	{:else}
+		<div class="peer">
+			<Button icon="fas fa-bars" />
+		</div>
+	{/if}
+	<div class="menu hidden absolute peer-hover:block hover:block top-10 right-0 w-[200px] flex-col bg-neutral-900 drop-shadow-lg rounded-xl overflow-hidden">
+		<div class="flex flex-col gap-1">
+			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
+			<Button icon="fas fa-person-rifle" link="/gates-of-hell">ostfront</Button>
+			{#if $clerkUser.user}
+				<Button icon="fas fa-sign-out" on:click={handleSignOut}>Sign Out</Button>
+			{:else}
+				<Button icon="fas fa-user" on:click={handleSignIn}>Sign In</Button>
+			{/if}
+		</div>
+	</div>
+</div>
+
+<style>
+	.menu {
+		z-index: 999
+	}
+	.root:hover .menu {
+		z-index: 999;
+		display: block;
+	}
+</style>

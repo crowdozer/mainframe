@@ -18,10 +18,8 @@ export const config = {
 /**
  * Loads necessary page data
  */
-export const load = async function ({ fetch, locals }) {
+export const load = async function ({ fetch }) {
 	const feed = await generateFeed(fetch);
-
-	console.log('locals', locals);
 
 	return {
 		...feed,

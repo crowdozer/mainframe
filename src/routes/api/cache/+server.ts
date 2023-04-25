@@ -17,7 +17,7 @@ export async function GET({ url }) {
 	const value = await cache.get(prefix + key);
 
 	return json({
-		value
+		value,
 	});
 }
 
@@ -26,8 +26,9 @@ export async function GET({ url }) {
  * optionally with an expiration timer in seconds
  */
 export async function POST(request) {
-	// to be reimplemented once auth works
-	throw error(401, 'unauthorized');
+	if (!request.locals.user.isLoggedIn) {
+		throw error(401, 'unauthorized');
+	}
 
 	const key = request.url.searchParams.get('key') ?? '';
 	const { value } = await request.request.json();

@@ -43,4 +43,7 @@ export type Feed = {
 	elapsed: number;
 	generated: Date;
 	ISR: Date;
+	user: {
+		id: string | undefined;
+	};
 };

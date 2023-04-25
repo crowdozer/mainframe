@@ -23,6 +23,7 @@ const Schema = z.object({
 	SRV_REDIS_URL: z.string(),
 	CLERK_UNPUBLISHABLE: z.string(),
 	PUBLIC_CLERK_PUBLISHABLE: z.string(),
+	CLERK_PEM: z.string(),
 });
 
 /**

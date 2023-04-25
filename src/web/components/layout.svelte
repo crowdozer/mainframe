@@ -1,10 +1,12 @@
 <script lang="ts">
 	import Navbar from '$web/components/Navbar.svelte';
 	import CRT from './CRT.svelte';
+	import NavigationProgress from './NavigationProgress.svelte';
 
 	export let showNavbar: boolean = true 
 </script>
 
+<NavigationProgress />
 
 <!-- content display -->
 <div class="content">
@@ -15,7 +17,7 @@
 	<CRT />
 
 	<!-- background image -->
-	<div class="bg"></div>
+	<div class="bg" />
 	
 	<main class="content-inner">
 		<slot />

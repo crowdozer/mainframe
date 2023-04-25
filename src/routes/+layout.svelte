@@ -6,8 +6,6 @@
 	import Loading from '$web/components/ui/Loading.svelte';
 	import { Toaster } from 'svelte-french-toast';
 
-	clerkUser.subscribe(console.log)
-
 	onMount(() => {
 		initializeClerk()
 	})
