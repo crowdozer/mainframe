@@ -1,4 +1,4 @@
-import { autotoast } from '$web/utils/error';
+import { toasted } from '$web/utils/toast';
 import { getRandomInt } from '$web/utils/random-int';
 import type { DCG_Army, UnitByYear, UnitKind } from '../types';
 import { fin } from '../unitsByYear';
@@ -39,7 +39,7 @@ export function getUnitsByYear(
 	doctrinesBlacklist: string[] = [],
 	doctrinesWhitelist: string[] = [],
 ): string[][] | null {
-	try {
+	return toasted('error collecting units', () => {
 		const units = getUnitListByFaction(faction);
 
 		return (
@@ -59,10 +59,7 @@ export function getUnitsByYear(
 					return [`"${unit}"`];
 				})
 		);
-	} catch (error: any) {
-		autotoast('error collecting units: ')(error);
-		return null;
-	}
+	});
 }
 
 /**

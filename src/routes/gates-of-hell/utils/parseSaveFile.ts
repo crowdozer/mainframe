@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
 import { deserializeData } from './serialization';
-import { autotoast } from '$web/utils/error';
+import { toasted } from '$web/utils/toast';
 
 /**
  * Accepts a file pointer, laods it to disk,
@@ -13,15 +13,12 @@ export async function parseSave(file: File): Promise<any | null> {
 		return null;
 	}
 
-	try {
+	return toasted('error deserializing data', () => {
 		return {
 			status: parseSaveFilePart(result.status),
 			campaign: parseSaveFilePart(result.campaign),
 		};
-	} catch (error: any) {
-		autotoast('error deserializing data: ')(error);
-		return null;
-	}
+	});
 }
 
 /**
@@ -45,7 +42,7 @@ export async function loadFromDisk(
 	// Load the save file as a zip
 	await zip.loadAsync(file);
 
-	try {
+	return toasted('error parsing savefile', async () => {
 		const status = zip.file('status');
 		const campaign = zip.file('campaign.scn');
 		if (!status || !campaign) {
@@ -56,8 +53,5 @@ export async function loadFromDisk(
 			status: await status.async('string'),
 			campaign: await campaign.async('string'),
 		};
-	} catch (error: any) {
-		autotoast('error parsing savefile: ')(error);
-		return null;
-	}
+	});
 }

@@ -2,7 +2,7 @@ import type { Router } from '$api/router';
 import { httpBatchLink, loggerLink } from '@trpc/client';
 import { createTRPCClient, type TRPCClientInit } from 'trpc-sveltekit';
 import superjson from 'superjson';
-import { autotoast } from '$web/utils/error';
+import { tRPCToast } from '$web/utils/toast';
 
 let browserClient: ReturnType<typeof createTRPCClient<Router>>;
 
@@ -43,6 +43,6 @@ export async function useTRPC<T>(callback: useTRPCCallback<T>) {
 	try {
 		return await callback(trpc);
 	} catch (error: unknown) {
-		autotoast(error);
+		tRPCToast(error);
 	}
 }
