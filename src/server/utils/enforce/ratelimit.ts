@@ -1,7 +1,8 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import { dev } from '$app/environment';
-import { error, type RequestEvent } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
+import type { Enforcer } from './types';
 
 // process.env fix for Redis.fromEnv()
 import { UPSTASH_REDIS_REST_TOKEN, UPSTASH_REDIS_REST_URL } from '$env/static/private';
@@ -23,7 +24,10 @@ export const ratelimiter = new Ratelimit({
 	prefix: prefix,
 });
 
-export async function ratelimit({ locals, getClientAddress }: RequestEvent) {
+/**
+ * Enforces that the user isn't spamming requests
+ */
+const ratelimitedRequest: Enforcer = async ({ locals, getClientAddress }) => {
 	const key = locals.user.isLoggedIn
 		? // use their userid
 		  'user:' + locals.user.id
@@ -35,4 +39,6 @@ export async function ratelimit({ locals, getClientAddress }: RequestEvent) {
 	if (!success) {
 		throw error(420, 'Too many requests');
 	}
-}
+};
+
+export default ratelimitedRequest;

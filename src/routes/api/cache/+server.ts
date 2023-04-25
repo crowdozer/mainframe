@@ -1,6 +1,6 @@
 import { cache } from '$api/utils/cache/index.js';
-import { ratelimit } from '$api/utils/ratelimit.js';
 import { error, json } from '@sveltejs/kit';
+import enforce, { ratelimitedRequest, authedRequest } from '$api/utils/enforce/index.js';
 
 const prefix = 'web:';
 const expiration = 60 * 60 * 24 * 7; // 7 days
@@ -9,7 +9,7 @@ const expiration = 60 * 60 * 24 * 7; // 7 days
  * returns whatever is in the cache at url.key
  */
 export async function GET(request) {
-	await ratelimit(request);
+	await enforce(request, ratelimitedRequest);
 
 	const key = request.url.searchParams.get('key') ?? '';
 	if (!key) {
@@ -28,11 +28,7 @@ export async function GET(request) {
  * optionally with an expiration timer in seconds
  */
 export async function POST(request) {
-	if (!request.locals.user.isLoggedIn) {
-		throw error(401, 'unauthorized');
-	}
-
-	await ratelimit(request);
+	await enforce(request, authedRequest, ratelimitedRequest);
 
 	const key = request.url.searchParams.get('key') ?? '';
 	if (!key) {
