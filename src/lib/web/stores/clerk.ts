@@ -29,11 +29,9 @@ export const clerkUser = derived([clerkInstance], function ([clerk]) {
  * Intended for prehydration during SSR
  */
 export async function initialize() {
-	const clerk = new Clerk(PUBLIC_CLERK_PUBLISHABLE);
-
 	if (typeof window !== 'undefined') {
+		const clerk = new Clerk(PUBLIC_CLERK_PUBLISHABLE);
 		await clerk.load();
+		clerkInstance.set(clerk);
 	}
-
-	clerkInstance.set(clerk);
 }
