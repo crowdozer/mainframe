@@ -15,7 +15,7 @@
 
 {#if $clerkUser.user}
 	<div class="avatar flex" style="width: {size}; height: {size}">
-		<div class="rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+		<div class="rounded-full ring-2 ring-primary ring-offset-2 ring-offset-base-100">
 			<img
 				id="avatar"
 				src={getURL($clerkUser.user)}
