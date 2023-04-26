@@ -1,4 +1,4 @@
-import type { Enforcer } from '$server/guard/types';
+import type { Enforcer } from '$server/trpc/guard/types';
 import { TRPCError } from '@trpc/server';
 
 /**
