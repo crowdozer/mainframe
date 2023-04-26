@@ -99,7 +99,7 @@
 	<div class={data ? 'hidden' : 'block'}>
 		<p class="mt-16">To begin, locate your savefile.</p>
 		<p class="mt-1">Save files are commonly located at:</p>
-		<p class="mt-1 bg-gray-900 p-4">
+		<p class="mt-1 bg-zinc-900 p-4">
 			Documents\my games\gates of hell\profiles\(steam id)\campaign\(file).sav
 		</p>
 		<div class="mt-4">
@@ -158,7 +158,7 @@
 				<Accordions save={data} />
 			</div>
 			<!-- Controls -->
-			<hr class="mt-4 opacity-25" />
+			<hr class="mt-4" />
 			<div class="mt-4 text-right">
 				<Button on:click={handleClear}>clear</Button>
 				<Button on:click={handleExport}>Export</Button>

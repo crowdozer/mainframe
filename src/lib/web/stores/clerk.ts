@@ -30,6 +30,7 @@ export const clerkUser = derived([clerkInstance], function ([clerk]) {
  */
 export async function initialize() {
 	if (typeof window !== 'undefined') {
+		console.log('initializing Clerk');
 		const clerk = new Clerk(PUBLIC_CLERK_PUBLISHABLE);
 		await clerk.load();
 		clerkInstance.set(clerk);

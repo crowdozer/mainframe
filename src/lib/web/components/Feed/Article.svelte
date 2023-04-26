@@ -14,7 +14,7 @@
 	</h1>
 
 	<!-- author/meta line -->
-	<h2 class="not-mono mb-6 text-sm text-gray-500 lg:pl-10">
+	<h2 class="not-mono mb-6 text-sm text-zinc-500 lg:pl-10">
 		<slot name="meta" />
 	</h2>
 

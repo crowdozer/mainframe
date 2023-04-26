@@ -22,7 +22,7 @@
 			<ProfileMenu />
 		</div>
 	</div>
-	<hr class="absolute bottom-0 left-0 right-0 opacity-25" />
+	<hr class="absolute bottom-0 left-0 right-0" />
 </nav>
 
 <style lang="postcss">

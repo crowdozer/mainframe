@@ -16,23 +16,24 @@
 </script>
 
 {#if !$clerkUser.user}
-	<Button icon="fas fa-user" size="lg" on:click={handleSignIn}>In</Button>
+	<button class="btn-ghost btn-circle btn text-lg" on:click={handleSignIn}>
+		<i class="fas fa-user" />
+	</button>
 {/if}
 
 {#if $clerkUser.user}
-	<!-- <Button icon="fas fa-sign-out" size="lg" on:click={handleSignOut}>Out</Button> -->
 	<div class="dropdown-end dropdown">
 		<label for="menu" tabIndex={0} class="btn-ghost btn-circle btn">
 			<Avatar />
 		</label>
 		<ul
 			tabIndex={0}
-			class="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
+			class="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-zinc-900 p-2 shadow"
 		>
 			<li>
 				<a href="https://www.github.com/crowdozer" rel="noopener noreferrer" target="_blank">
 					<i class="fab fa-fw fa-github" />
-					Galaxy
+					Github
 				</a>
 			</li>
 			<li>
@@ -41,7 +42,7 @@
 						<i class="fas fa-fw fa-handshake-angle mr-1" />
 						Hire Me
 					</div>
-					<span class="badge badge-success">avail</span>
+					<span class="badge-success badge">avail</span>
 				</a>
 			</li>
 			<li>

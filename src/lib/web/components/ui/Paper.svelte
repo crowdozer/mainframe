@@ -7,7 +7,7 @@
 
 		switch (kind) {
 			case 'neutral':
-				return 'border border-slate-700';
+				return 'border border-zinc-700';
 			case 'warning':
 				return 'border border-yellow-700';
 			case 'info':

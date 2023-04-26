@@ -6,14 +6,14 @@
 	export let subheader: string;
 </script>
 
-<!-- <div class="max-w-md overflow-hidden rounded-xl border border-dashed border-gray-600">
+<!-- <div class="max-w-md overflow-hidden rounded-xl border border-dashed border-zinc-600">
 	<Paper>
 		<div class="flex flex-col">
 			<div />
 			<div class="grow px-4 py-2">
 				<h3 class="text-lg">{header}</h3>
 				{#if subheader}
-					<h3 class="text-md text-gray-400">{subheader}</h3>
+					<h3 class="text-md text-zinc-400">{subheader}</h3>
 				{/if}
 			</div>
 		</div>

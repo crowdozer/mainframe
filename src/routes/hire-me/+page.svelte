@@ -181,7 +181,7 @@
 				{#each experience as job}
 					<div class="py-2">
 						<p>
-							<strong class="text-gray-300">{job.title}</strong>
+							<strong class="text-zinc-300">{job.title}</strong>
 							{#if job.link}
 								<br />
 								<a href={job.link} target="_blank" rel="noopener noreferrer">{job.link}</a>
@@ -200,7 +200,7 @@
 				{#each education as educate}
 					<div class="py-2">
 						<p>
-							<strong class="text-gray-300">{educate.title}</strong>
+							<strong class="text-zinc-300">{educate.title}</strong>
 						</p>
 						<p>
 							{educate.text}
@@ -214,7 +214,7 @@
 
 <style lang="postcss">
 	li:before {
-		@apply mr-4 text-gray-400;
+		@apply mr-4 text-zinc-400;
 		content: '\f054'; /* unicode for chevron symbol */
 		font-family: FontAwesome; /* font that contains the chevron symbol */
 		font-size: 0.65rem;

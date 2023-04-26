@@ -43,7 +43,7 @@
 
 				<!-- dividers -->
 				{#if index < feedItems.length - 1}
-					<hr class="mb-4 mt-4 opacity-25" />
+					<hr class="mb-4 mt-4" />
 				{/if}
 			{/each}
 		</div>
@@ -64,11 +64,11 @@
 		<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 	</p>
 	<br />
-	<p class="text-right text-gray-500" title={feed.generated.toISOString()}>
+	<p class="text-right text-zinc-500" title={feed.generated.toISOString()}>
 		<!-- feed compiled in {elapsed.toFixed(2)} seconds • {fromNow(feed.generated)} -->
 		feed regenerated {fromNow(feed.generated)}
 	</p>
-	<p class="text-right text-gray-500">
+	<p class="text-right text-zinc-500">
 		webpage cached <span title={ISR.toISOString()}>{fromNow(ISR)}</span>
 	</p>
 </div>

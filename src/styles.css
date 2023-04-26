@@ -7,7 +7,7 @@
 :root {
 	--dark: theme(colors.zinc.950);
 	--dark-em: theme(colors.zinc.900);
-	--dark-neutral: theme(colors.gray.950);
+	--dark-zinc: theme(colors.gray.950);
 	--contrast: theme(colors.zinc.300);
 	--contrast-em: theme(colors.zinc.100);
 	--contrast-soft: theme(colors.zinc.700);
@@ -20,6 +20,10 @@ body {
 	background: var(--dark);
 	color: var(--contrast);
 	font-size: 16px;
+}
+
+hr {
+	border-color: var(--contrast-soft);
 }
 
 /* Style links */

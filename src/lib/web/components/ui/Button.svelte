@@ -29,9 +29,7 @@
 		rel = 'noopener noreferrer';
 	}
 
-	const classes = `btn-ghost btn btn-${size} text-${size} ${loading && 'loading'} ${
-		fullWidth && 'btn-block'
-	}`;
+	const classes = `btn-ghost btn text-${size} ${loading && 'loading'} ${fullWidth && 'btn-block'}`;
 
 	const iconClasses = `${icon} text-${size} mr-3`;
 </script>

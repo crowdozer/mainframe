@@ -5,7 +5,7 @@
 
 <article class="flex flex-col gap-1">
 	<!-- header line -->
-	<h1 class="text-md flex flex-row gap-4 text-gray-300" {title}>
+	<h1 class="text-md flex flex-row gap-4 text-zinc-300" {title}>
 		<i class="fas fa-link self-center" />
 		<a
 			href={url}
@@ -16,7 +16,7 @@
 	</h1>
 
 	<!-- author/meta line -->
-	<h2 class="not-mono text-sm text-gray-500 lg:pl-10">
+	<h2 class="not-mono text-sm text-zinc-500 lg:pl-10">
 		<slot name="meta" />
 	</h2>
 </article>

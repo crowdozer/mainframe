@@ -37,7 +37,7 @@
 		@apply mb-4 mt-8 text-lg font-bold;
 	}
 	.appcontainer :global(hr) {
-		@apply mb-4 mt-4 border-gray-300;
+		@apply mb-4 mt-4 border-zinc-300;
 		border-width: 2px;
 		border-style: dashed;
 	}
@@ -52,7 +52,7 @@
 		@apply ml-4;
 	}
 	.appcontainer :global(li):before {
-		@apply mr-3 text-gray-400;
+		@apply mr-3 text-zinc-400;
 		content: '\f054'; /* unicode for chevron symbol */
 		font-family: FontAwesome; /* font that contains the chevron symbol */
 		font-size: 0.65rem;
