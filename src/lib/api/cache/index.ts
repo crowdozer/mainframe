@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { createTRPCRouter, procedure } from '$api/trpc';
-import enforceTRPC, { ratelimitedRequest, authedRequest } from '$server/guardTRPC/index.js';
+import { createTRPCRouter, guardedProcedure } from '$server/trpc';
+import enforceTRPC, { ratelimitedRequest, authedRequest } from '$server/trpc/guard/index.js';
 import { cache } from '$server/cache/index.js';
+import { z } from 'zod';
 
 const prefix = 'web:';
 const expiration = 60 * 60 * 24 * 7; // 7 days
@@ -10,7 +10,7 @@ const router = createTRPCRouter({
 	/**
 	 * returns whatever is in the cache at url.key
 	 */
-	get: procedure
+	get: guardedProcedure(ratelimitedRequest)
 		.input(
 			z.object({
 				key: z.string(),
@@ -27,7 +27,7 @@ const router = createTRPCRouter({
 	 * sets the new cache value at url.key,
 	 * optionally with an expiration timer in seconds
 	 */
-	set: procedure
+	set: guardedProcedure(authedRequest, ratelimitedRequest)
 		.input(
 			z.object({
 				key: z.string(),

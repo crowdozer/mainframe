@@ -1,6 +1,6 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import type { Enforcer } from './types';
-import authedRequest from './guards/authed';
+import authedRequest from '$server/trpc/guard/guards/authed';
 import ratelimitedRequest from './guards/ratelimit';
 
 /**

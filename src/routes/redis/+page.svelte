@@ -3,7 +3,7 @@
 	import Paper from '$web/components/ui/Paper.svelte';
 	import Button from '$web/components/ui/Button.svelte';
 	import { clerkUser } from '$web/stores/clerk';
-	import { useTRPC } from '$api/client';
+	import { useTRPC } from '$web/utils/trpc';
 
 	let key: string = 'foo';
 	let getLoading: boolean = false;

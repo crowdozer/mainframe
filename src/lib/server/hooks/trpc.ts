@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import { createContext } from '$api/trpc';
+import { createContext } from '$server/trpc';
 import { router } from '$api/router';
 import { createTRPCHandle } from 'trpc-sveltekit';
 

@@ -1,8 +1,8 @@
 import type { Router } from '$api/router';
+import { tRPCToast } from '$web/utils/toast';
 import { httpBatchLink, loggerLink } from '@trpc/client';
 import { createTRPCClient, type TRPCClientInit } from 'trpc-sveltekit';
 import superjson from 'superjson';
-import { tRPCToast } from '$web/utils/toast';
 
 let browserClient: ReturnType<typeof createTRPCClient<Router>>;
 

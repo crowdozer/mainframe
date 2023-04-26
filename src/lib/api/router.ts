@@ -1,4 +1,4 @@
-import { createTRPCRouter } from '$api/trpc';
+import { createTRPCRouter } from '$server/trpc';
 import cacheRouter from './cache';
 
 /**

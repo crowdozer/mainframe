@@ -1,7 +1,9 @@
 import { initTRPC } from '@trpc/server';
 import superjson from 'superjson';
-// import { ZodError } from 'zod';
+import { ZodError } from 'zod';
 import type { RequestEvent } from '@sveltejs/kit';
+import type { Enforcer } from './guard/types';
+import { authedRequest, ratelimitedRequest } from './guard';
 
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
@@ -36,15 +38,15 @@ export async function createContext(event: RequestEvent) {
 
 export const t = initTRPC.context<typeof createContext>().create({
 	transformer: superjson,
-	// errorFormatter({ shape, error }) {
-	// 	return {
-	// 		...shape,
-	// 		data: {
-	// 			...shape.data,
-	// 			zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
-	// 		},
-	// 	};
-	// },
+	errorFormatter({ shape, error }) {
+		return {
+			...shape,
+			data: {
+				...shape.data,
+				zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
+			},
+		};
+	},
 });
 
 /**
@@ -66,3 +68,23 @@ export const createTRPCRouter = t.router;
  */
 
 export const procedure = t.procedure;
+
+/**
+ * Protected procedure
+ *
+ * Runs an array of gaurds against the request, one at a time, in order
+ * Request is aborted as soon as one throws
+ */
+export const guardedProcedure = (...guards: Enforcer[]) => {
+	const middleware = t.middleware(async ({ ctx, next }) => {
+		for (const guard of guards) {
+			await guard(ctx.event);
+		}
+
+		return next({ ctx });
+	});
+
+	return t.procedure.use(middleware);
+};
+
+export { type Enforcer, authedRequest, ratelimitedRequest };
