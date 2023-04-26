@@ -7,11 +7,9 @@
 <article class="flex flex-col gap-1">
 	<!-- header line -->
 	<h1 class="overflow-hidden text-ellipsis whitespace-nowrap text-xl" {title}>
-		<span class="text-gray-300">
-			<i class="fas {icon} self-center" />
-			<span class="ml-2">
-				{@html title}
-			</span>
+		<i class="fas {icon} self-center" />
+		<span class="ml-2">
+			{@html title}
 		</span>
 	</h1>
 
@@ -27,12 +25,16 @@
 
 	<!-- story URL -->
 	{#if url}
-		<a
-			href={url}
-			class="overflow-hidden text-ellipsis whitespace-nowrap py-2 pr-4 lg:pl-10"
-			target="_blank"
-			rel="noopener noreferrer">read more > {url}</a
-		>
+		<div class="ml-10 flex flex-row gap-1">
+			<span class="self-center"> read more > </span>
+			<a
+				href={url}
+				class="grow overflow-hidden text-ellipsis whitespace-nowrap p-2"
+				target="_blank"
+				rel="noopener
+		noreferrer">{url}</a
+			>
+		</div>
 	{/if}
 </article>
 

@@ -6,22 +6,23 @@
 	export let fullWidth: boolean = true;
 	export let disabled: boolean = false;
 
-	let widthClass = fullWidth ? 'w-full' : '';
+	let widthClass = fullWidth ? '' : 'max-w-lg';
 </script>
 
-<div>
+<div class="form-control w-full {widthClass}">
 	{#if label}
-		<label class="block pb-1 text-sm" for="input-{name}">{label}</label>
+		<label for="select-{name}" class="label">
+			<span class="label-text">{label}}</span>
+		</label>
 	{/if}
-
-	<select class={widthClass} id="select-{name}" {name} bind:value on:change {disabled}>
+	<select
+		id="select-{name}"
+		class="select-bordered select-ghost select"
+		{name}
+		bind:value
+		on:change
+		{disabled}
+	>
 		<slot />
 	</select>
 </div>
-
-<style lang="postcss">
-	select {
-		@apply border border-dashed bg-transparent p-2 disabled:opacity-75;
-		border-color: var(--contrast-soft);
-	}
-</style>

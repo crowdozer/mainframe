@@ -8,28 +8,24 @@
 	export let disabled: boolean = false;
 	export let placeholder: string = '';
 
-	let widthClass = fullWidth ? 'w-full' : '';
+	let widthClass = fullWidth ? '' : 'max-w-lg';
 </script>
 
-<div>
+<div class="form-control w-full {widthClass}">
 	{#if label}
-		<label class="block pb-1 text-sm" for="input-{name}">{label}</label>
+		<label for="input-{name}" class="label">
+			<span class="label-text">{label}</span>
+		</label>
 	{/if}
 	<input
-		class={widthClass}
 		id="input-{name}"
+		type="text"
+		class="input-bordered input-ghost input w-full {widthClass}"
 		{name}
-		bind:value
-		on:change
 		{placeholder}
 		{readonly}
 		{disabled}
+		bind:value
+		on:change
 	/>
 </div>
-
-<style lang="postcss">
-	input {
-		@apply border border-dashed bg-transparent p-2 disabled:opacity-75;
-		border-color: var(--contrast-soft);
-	}
-</style>

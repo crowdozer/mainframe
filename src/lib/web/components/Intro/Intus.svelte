@@ -68,7 +68,7 @@ LICE THE INSTAR IT IS ONLY THROVGH GONG WITHIN THAT WE MAY EMERGE`;
 
 	<!-- absolutely position this in that space to render the real text -->
 	<h2
-		class="heading absolute left-0 right-0 top-0 whitespace-pre-line break-all text-lg font-bold text-green-600"
+		class="heading absolute left-0 right-0 top-0 whitespace-pre-line break-all text-lg font-bold"
 		style="min-height: 310px"
 	>
 		{$textStore.trim()}<span class="cursor">█</span>
@@ -76,6 +76,9 @@ LICE THE INSTAR IT IS ONLY THROVGH GONG WITHIN THAT WE MAY EMERGE`;
 </div>
 
 <style>
+	.heading {
+		color: var(--link);
+	}
 	.cursor {
 		opacity: 1;
 		animation: flash 0.5s linear infinite;

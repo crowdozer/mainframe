@@ -1,5 +1,5 @@
 <script>
-	import Button from '$web/components/ui/Button/Button.svelte';
+	import Button from '$web/components/ui/Button.svelte';
 	import ProfileMenu from '$web/components/ProfileMenu/ProfileMenu.svelte';
 </script>
 
@@ -7,23 +7,19 @@
 	<div class="mx-auto flex max-w-6xl">
 		<!-- Logo -->
 		<div class="inline-flex items-center">
-			<h1 class="text-xl font-bold">
-				<Button link="/">
-					<span style="text-transform: none;">crwdzr.io</span>
-				</Button>
-			</h1>
+			<Button link="/" size="lg">
+				<span style="text-transform: none;">crwdzr.io</span>
+			</Button>
 		</div>
 
 		<!-- Buttons -->
 		<div class="ml-auto inline-flex items-center gap-2">
 			<div class="hidden sm:contents">
-				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
-				<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
+				<Button icon="fab fa-github" link="https://www.github.com/crowdozer" size="lg">git</Button>
+				<Button icon="fas fa-handshake-angle" link="/hire-me" size="lg">hire me</Button>
+				<div />
 			</div>
-			<ProfileMenu>
-				<Button icon="fab fa-github" link="https://www.github.com/crowdozer">git</Button>
-				<Button icon="fas fa-handshake-angle" link="/hire-me">hire me</Button>
-			</ProfileMenu>
+			<ProfileMenu />
 		</div>
 	</div>
 	<hr class="absolute bottom-0 left-0 right-0 opacity-25" />

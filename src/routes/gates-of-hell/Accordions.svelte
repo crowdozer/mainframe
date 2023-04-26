@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Accordion from '$web/components/ui/Accordion/Accordion.svelte';
-	import CopyClickIcon from '$web/components/ui/CopyClickIcon.svelte';
+	import Accordion from '$web/components/ui/Accordion.svelte';
+	import Code from '$web/components/ui/Code.svelte';
 	import Label from '$web/components/ui/Label.svelte';
 
 	export let save: { status: any; campaign: any };
@@ -32,14 +32,12 @@
 <Accordion>
 	<svelte:fragment slot="header">Status <Label>debug</Label></svelte:fragment>
 	<svelte:fragment slot="content">
-		<pre class="p-4">{status}</pre>
-		<CopyClickIcon text={status} />
+		<Code code={status} />
 	</svelte:fragment>
 </Accordion>
 <Accordion>
 	<svelte:fragment slot="header">Campaign <Label>debug</Label></svelte:fragment>
 	<svelte:fragment slot="content">
-		<pre class="p-4">{campaign}</pre>
-		<CopyClickIcon text={campaign} />
+		<Code code={campaign} />
 	</svelte:fragment>
 </Accordion>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Paper from '$web/components/ui/Paper.svelte';
-	import Button from '$web/components/ui/Button/Button.svelte';
+	import Button from '$web/components/ui/Button.svelte';
 	import HackerNews from './HackerNews.svelte';
 	import InfosecMag from './InfosecMag.svelte';
 	import KrebsSec from './KrebsSec.svelte';

@@ -7,12 +7,12 @@
 :root {
 	--dark: theme(colors.zinc.950);
 	--dark-em: theme(colors.zinc.900);
-	--dark-neutral: theme(colors.neutral.950);
+	--dark-neutral: theme(colors.gray.950);
 	--contrast: theme(colors.zinc.300);
 	--contrast-em: theme(colors.zinc.100);
 	--contrast-soft: theme(colors.zinc.700);
-	--link: theme(colors.zinc.200);
-	--link-em: theme(colors.zinc.300);
+	--link: theme(colors.emerald.500);
+	--link-em: theme(colors.emerald.600);
 }
 
 /* Global setup */
@@ -35,9 +35,6 @@ a {
 	display: inline-block;
 	color: var(--link);
 	font-weight: bold;
-	text-decoration: underline;
-	text-decoration-style: dotted;
-	text-underline-offset: 3px;
 }
 a:hover {
 	text-decoration: none;
@@ -57,23 +54,16 @@ h3 {
 	color: var(--contrast-em);
 }
 
+i.fa-fw {
+	width: 1.5rem;
+}
+
 /* Apply conditional fonts to various elements */
 body {
 	font-family: Consolas, monospace;
 }
 .not-mono {
 	font-family: Open Sans, arial, sans-serif;
-}
-
-/* replace list styling */
-ul {
-	list-style-type: none;
-}
-li:before {
-	@apply mr-4 text-gray-400;
-	content: '\f054'; /* unicode for chevron symbol */
-	font-family: FontAwesome; /* font that contains the chevron symbol */
-	font-size: 0.65rem;
 }
 
 /* Selection styling */

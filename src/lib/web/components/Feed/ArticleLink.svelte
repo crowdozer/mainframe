@@ -9,7 +9,7 @@
 		<i class="fas fa-link self-center" />
 		<a
 			href={url}
-			class="overflow-hidden text-ellipsis whitespace-nowrap p-1"
+			class="overflow-hidden text-ellipsis whitespace-nowrap px-2 py-1"
 			target="_blank"
 			rel="noopener noreferrer">{title}</a
 		>

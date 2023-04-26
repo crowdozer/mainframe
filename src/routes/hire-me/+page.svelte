@@ -211,3 +211,12 @@
 		</Paper>
 	</div>
 </Container>
+
+<style lang="postcss">
+	li:before {
+		@apply mr-4 text-gray-400;
+		content: '\f054'; /* unicode for chevron symbol */
+		font-family: FontAwesome; /* font that contains the chevron symbol */
+		font-size: 0.65rem;
+	}
+</style>

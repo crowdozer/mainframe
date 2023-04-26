@@ -1,5 +1,5 @@
 <script>
-	import Button from '$web/components/ui/Button/Button.svelte';
+	import Button from '$web/components/ui/Button.svelte';
 	import Avatar from '$web/components/ui/Avatar.svelte';
 	import { clerkInstance, clerkUser } from '$web/stores/clerk';
 
@@ -15,39 +15,59 @@
 	}
 </script>
 
-<div class="root relative">
-	{#if $clerkUser.user}
-		<button class="avatar peer align-middle" on:click={handleSignOut}>
-			<Avatar />
-		</button>
-	{:else}
-		<div class="peer">
-			<Button icon="fas fa-bars" />
-		</div>
-	{/if}
-	<div
-		class="menu absolute right-0 top-10 hidden w-[200px] flex-col overflow-hidden rounded-xl bg-neutral-900 drop-shadow-lg hover:block peer-hover:block"
-	>
-		<div class="flex flex-col gap-1">
-			<slot />
-			<Button icon="fas fa-user-astronaut" link="/galaxy">galaxy</Button>
-			<Button icon="fas fa-person-rifle" link="/gates-of-hell">ostfront</Button>
-			<Button icon="fas fa-database" link="/redis">redis</Button>
-			{#if $clerkUser.user}
-				<Button icon="fas fa-sign-out" on:click={handleSignOut}>Sign Out</Button>
-			{:else}
-				<Button icon="fas fa-user" on:click={handleSignIn}>Sign In</Button>
-			{/if}
-		</div>
-	</div>
-</div>
+{#if !$clerkUser.user}
+	<Button icon="fas fa-user" size="lg" on:click={handleSignIn}>In</Button>
+{/if}
 
-<style>
-	.menu {
-		z-index: 999;
-	}
-	.root:hover .menu {
-		z-index: 999;
-		display: block;
-	}
-</style>
+{#if $clerkUser.user}
+	<!-- <Button icon="fas fa-sign-out" size="lg" on:click={handleSignOut}>Out</Button> -->
+	<div class="dropdown-end dropdown">
+		<label for="menu" tabIndex={0} class="btn-ghost btn-circle btn">
+			<Avatar />
+		</label>
+		<ul
+			tabIndex={0}
+			class="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
+		>
+			<li>
+				<a href="https://www.github.com/crowdozer" rel="noopener noreferrer" target="_blank">
+					<i class="fab fa-fw fa-github" />
+					Galaxy
+				</a>
+			</li>
+			<li>
+				<a class="justify-between" href="/hire-me">
+					<div>
+						<i class="fas fa-fw fa-handshake-angle mr-1" />
+						Hire Me
+					</div>
+					<span class="badge badge-success">avail</span>
+				</a>
+			</li>
+			<li>
+				<a href="/galaxy">
+					<i class="fas fa-fw fa-user-astronaut" />
+					Galaxy
+				</a>
+			</li>
+			<li>
+				<a href="/gates-of-hell">
+					<i class="fas fa-fw fa-person-rifle" />
+					Ostfront
+				</a>
+			</li>
+			<li>
+				<a href="/redis">
+					<i class="fas fa-fw fa-database" />
+					Redis
+				</a>
+			</li>
+			<li>
+				<button on:click={handleSignOut}>
+					<i class="fas fa-fw fa-sign-out" />
+					Sign Out
+				</button>
+			</li>
+		</ul>
+	</div>
+{/if}

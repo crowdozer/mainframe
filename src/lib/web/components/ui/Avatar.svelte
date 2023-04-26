@@ -14,11 +14,15 @@
 </script>
 
 {#if $clerkUser.user}
-	<img
-		class="rounded-full"
-		src={getURL($clerkUser.user)}
-		alt="{$clerkUser.user.id}'s avatar"
-		width={size}
-		height={size}
-	/>
+	<div class="avatar flex" style="width: {size}; height: {size}">
+		<div class="rounded-full ring ring-primary ring-offset-2 ring-offset-base-100">
+			<img
+				id="avatar"
+				src={getURL($clerkUser.user)}
+				alt="{$clerkUser.user.id}'s avatar"
+				width={size}
+				height={size}
+			/>
+		</div>
+	</div>
 {/if}

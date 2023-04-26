@@ -38,7 +38,7 @@
 
 	.content {
 		@apply relative flex flex-col;
-		background: theme(colors.neutral.950);
+		background: theme(colors.gray.950);
 		z-index: 10;
 	}
 
@@ -58,7 +58,7 @@
 		background: linear-gradient(
 			195deg,
 			theme('colors.emerald.950', darken(50%)) 0%,
-			theme(colors.neutral.950) 50%
+			theme(colors.gray.950) 50%
 		);
 	}
 	.bg::after {
@@ -70,6 +70,6 @@
 		width: 100%;
 		margin-bottom: -16em;
 		height: 16em; /* adjust the height of the fade-out effect */
-		box-shadow: 0 0 8em 8em theme(colors.neutral.950); /* adjust the shadow properties */
+		box-shadow: 0 0 8em 8em theme(colors.gray.950); /* adjust the shadow properties */
 	}
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import Button from '$web/components/ui/Button/Button.svelte';
+	import Button from '$web/components/ui/Button.svelte';
 	import Container from '$web/components/ui/Container.svelte';
 	import Input from '$web/components/ui/Input.svelte';
 	import Paper from '$web/components/ui/Paper.svelte';

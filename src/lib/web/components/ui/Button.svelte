@@ -1,19 +1,22 @@
 <script lang="ts">
-	import Inner from './Inner.svelte';
-	import Loader from './Loader.svelte';
-
 	// If the button is loading
 	export let loading: boolean = false;
+
 	// If the button is disabled
 	export let disabled: boolean = false;
+
 	// Icon to display on the button
 	export let icon: string | undefined = undefined;
+
 	// If this is specified, the button is wrapped in an anchor
 	export let link: string | undefined = undefined;
-	// If the button is full width orn ot
+
+	// If the button is full width or not
 	export let fullWidth: boolean = false;
+
 	// How big the button should be
-	export let size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md';
+	export let size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
+
 	// What button type to use
 	export let type: 'button' | 'submit' | 'reset' = 'button';
 
@@ -25,20 +28,26 @@
 		target = '_blank';
 		rel = 'noopener noreferrer';
 	}
+
+	const classes = `btn-ghost btn btn-${size} text-${size} ${loading && 'loading'} ${
+		fullWidth && 'btn-block'
+	}`;
+
+	const iconClasses = `${icon} text-${size} mr-3`;
 </script>
 
 {#if link}
-	<a href={link} class="contents" {target} {rel}>
-		<Inner {icon} {fullWidth} {disabled} {size} {type} on:click>
-			<Loader {loading}>
-				<slot />
-			</Loader>
-		</Inner>
+	<a href={link} {rel} {target} class={classes} on:click>
+		{#if icon}
+			<i class={iconClasses} />
+		{/if}
+		<slot />
 	</a>
 {:else}
-	<Inner {icon} {fullWidth} {disabled} {size} {type} on:click>
-		<Loader {loading}>
-			<slot />
-		</Loader>
-	</Inner>
+	<button {type} class={classes} {disabled} on:click>
+		{#if icon}
+			<i class={iconClasses} />
+		{/if}
+		<slot />
+	</button>
 {/if}
