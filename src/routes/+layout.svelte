@@ -16,11 +16,17 @@
 	// Finally, your application's global stylesheet (sometimes labeled 'app.css')
 	import '~/app.postcss';
 
+	// Vercel Analytics
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+	inject({ mode: dev ? 'development' : 'production' });
+
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
 <Toaster />
 <NavigationProgress />
+<Analytics />
 
 <Layout showNavbar={!$clerkUser.loading}>
 	{#if !$clerkUser.loading}

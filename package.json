@@ -51,6 +51,7 @@
 		"@trpc/client": "^10.21.1",
 		"@trpc/server": "^10.21.1",
 		"@upstash/ratelimit": "^0.4.2",
+		"@vercel/analytics": "^1.0.0",
 		"cookies": "^0.8.0",
 		"dayjs": "^1.11.7",
 		"fast-xml-parser": "^4.1.4",
