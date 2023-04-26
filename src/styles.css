@@ -22,14 +22,6 @@ body {
 	font-size: 16px;
 }
 
-/* Some decorative elements */
-pre {
-	white-space: pre-wrap;
-}
-strong {
-	font-weight: bold;
-}
-
 /* Style links */
 a {
 	display: inline-block;

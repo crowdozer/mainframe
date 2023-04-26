@@ -2,7 +2,7 @@
 	import CopyClickIcon from './CopyClickIcon.svelte';
 
 	export let code: string = '';
-	export let lines: number = 500;
+	export let lines: number = 1500;
 
 	const split = code.split('\n');
 	const visible = split.slice(0, lines);
