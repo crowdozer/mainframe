@@ -62,23 +62,20 @@ LICE THE INSTAR IT IS ONLY THROVGH GONG WITHIN THAT WE MAY EMERGE`;
 
 <div class="relative">
 	<!-- render the final text invisible to establish spacing -->
-	<h2 class="heading invisible whitespace-pre-line break-all text-lg font-bold">
+	<h4 class="invisible whitespace-pre-line break-all font-bold text-primary-500">
 		{text}
-	</h2>
+	</h4>
 
 	<!-- absolutely position this in that space to render the real text -->
-	<h2
-		class="heading absolute left-0 right-0 top-0 whitespace-pre-line break-all text-lg font-bold"
+	<h4
+		class="absolute left-0 right-0 top-0 whitespace-pre-line break-all font-bold text-primary-500"
 		style="min-height: 310px"
 	>
 		{$textStore.trim()}<span class="cursor">█</span>
-	</h2>
+	</h4>
 </div>
 
 <style>
-	.heading {
-		color: var(--link);
-	}
 	.cursor {
 		opacity: 1;
 		animation: flash 0.5s linear infinite;

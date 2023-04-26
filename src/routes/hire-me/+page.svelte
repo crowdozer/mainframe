@@ -94,7 +94,7 @@
 	<div class="mb-4">
 		<Paper bordered>
 			<div class="p-4">
-				<h1 class="mb-4 text-xl">want to work together?</h1>
+				<h3 class="mb-4 text-xl">want to work together?</h3>
 				<p class="mono"><CopyClick text="business@crwdzr.io" /></p>
 			</div>
 		</Paper>

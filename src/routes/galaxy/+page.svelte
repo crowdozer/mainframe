@@ -242,7 +242,9 @@
 
 	pre {
 		@apply w-full select-none overflow-hidden whitespace-pre;
-		font-size: 10px;
-		line-height: calc(10px * 1.2);
+		background: transparent !important;
+		color: var(--theme-font-color-base) !important;
+		font-size: 10px !important;
+		line-height: calc(10px * 1.2) !important;
 	}
 </style>

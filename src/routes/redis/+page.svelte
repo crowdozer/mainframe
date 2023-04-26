@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Input from '$web/components/ui/Input.svelte';
 	import Paper from '$web/components/ui/Paper.svelte';
-	import Button from '$web/components/ui/Button.svelte';
 	import { clerkUser } from '$web/stores/clerk';
 	import { useTRPC } from '$web/utils/trpc';
 
@@ -37,11 +36,11 @@
 		<Paper bordered>
 			<div class="m-4 flex flex-col gap-4">
 				<!-- Key Section -->
-				<h1 class="text-xl">Redis Cache Key</h1>
+				<h2>Redis Cache Key</h2>
 				<Input name="cache-key" label="key" placeholder="key" bind:value={key} />
 
 				<!-- Get Section -->
-				<h1 class="mt-8 text-xl">Get Value</h1>
+				<h3 class="mt-8 text-xl">Get Value</h3>
 				<Input
 					name="cache-get-value"
 					label="value"
@@ -50,11 +49,17 @@
 					disabled={getLoading}
 					readonly
 				/>
-				<Button loading={getLoading} disabled={getLoading} on:click={handleGet}>Get</Button>
+				<button class="btn variant-ringed-primary" on:click={handleGet} disabled={getLoading}>
+					{#if getLoading}
+						<span><i class="fa fa-spin fa-spinner" /></span>
+					{:else}
+						get
+					{/if}
+				</button>
 
 				<!-- Set Section -->
 				{#if $clerkUser.user}
-					<h1 class="mt-4 text-xl">Set Value</h1>
+					<h3 class="mt-4 text-xl">Set Value</h3>
 					<Input
 						name="cache-set-value"
 						label="value"
@@ -62,7 +67,13 @@
 						bind:value={setValue}
 						disabled={setLoading}
 					/>
-					<Button loading={setLoading} disabled={setLoading} on:click={handleSet}>Set</Button>
+					<button class="btn variant-ringed-primary" on:click={handleSet} disabled={setLoading}>
+						{#if setLoading}
+							<span><i class="fa fa-spin fa-spinner" /></span>
+						{:else}
+							set
+						{/if}
+					</button>
 				{/if}
 			</div>
 		</Paper>

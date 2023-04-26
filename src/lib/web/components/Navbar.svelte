@@ -1,23 +1,21 @@
 <script>
-	import Button from '$web/components/ui/Button.svelte';
 	import ProfileMenu from '$web/components/ProfileMenu/ProfileMenu.svelte';
 </script>
 
 <nav class="relative">
 	<div class="mx-auto flex max-w-6xl">
 		<!-- Logo -->
-		<div class="inline-flex items-center">
-			<Button link="/" size="lg">
-				<span style="text-transform: none;">crwdzr.io</span>
-			</Button>
-		</div>
+		<a href="/" class="btn self-center"> crwdzr.io </a>
 
 		<!-- Buttons -->
 		<div class="ml-auto inline-flex items-center gap-2">
 			<div class="hidden sm:contents">
-				<Button icon="fab fa-github" link="https://www.github.com/crowdozer" size="lg">git</Button>
-				<Button icon="fas fa-handshake-angle" link="/hire-me" size="lg">hire me</Button>
-				<div />
+				<a href="https://www.github.com/crowdozer" class="btn">
+					<span><i class="fab fa-github mr-1" /> github</span>
+				</a>
+				<a href="/hire-me" class="btn">
+					<span><i class="fas fa-fw fa-handshake-angle mr-2" /></span> hire me
+				</a>
 			</div>
 			<ProfileMenu />
 		</div>

@@ -6,17 +6,17 @@
 
 <article class="flex flex-col gap-1">
 	<!-- header line -->
-	<h1 class="overflow-hidden text-ellipsis whitespace-nowrap text-xl" {title}>
+	<h3 class="overflow-hidden text-ellipsis whitespace-nowrap text-xl" {title}>
 		<i class="fas {icon} self-center" />
 		<span class="ml-2">
 			{@html title}
 		</span>
-	</h1>
+	</h3>
 
 	<!-- author/meta line -->
-	<h2 class="not-mono mb-6 text-sm text-zinc-500 lg:pl-10">
+	<p class="not-mono mb-6 text-sm text-zinc-500 lg:pl-10">
 		<slot name="meta" />
-	</h2>
+	</p>
 
 	<!-- story content -->
 	<div class="story not-mono break-words lg:pl-10" style="word-break:break-word;">
@@ -26,7 +26,7 @@
 	<!-- story URL -->
 	{#if url}
 		<div class="ml-10 flex flex-row gap-1">
-			<span class="self-center"> read more > </span>
+			<span class="shrink-0 self-center"> read more > </span>
 			<a
 				href={url}
 				class="grow overflow-hidden text-ellipsis whitespace-nowrap p-2"

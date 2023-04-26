@@ -1,7 +1,8 @@
-<script>
-	import Button from '$web/components/ui/Button.svelte';
+<script lang="ts">
 	import Avatar from '$web/components/ui/Avatar.svelte';
 	import { clerkInstance, clerkUser } from '$web/stores/clerk';
+	import { popup } from '@skeletonlabs/skeleton';
+	import type { PopupSettings } from '@skeletonlabs/skeleton';
 
 	function handleSignIn() {
 		$clerkInstance.openSignIn();
@@ -13,67 +14,60 @@
 			window.location.reload();
 		}
 	}
+
+	const links = [
+		['/hire-me', 'fas fa-handshake-angle mr-1', 'Hire me'],
+		['https://www.github.com/crowdozer', 'fab fa-github', 'Github'],
+		['/galaxy', 'fas fa-user-astronaut', 'Galaxy', 'Galaxy'],
+		['/gates-of-hell', 'fas fa-person-rifle', 'Ostfront'],
+		['/redis', 'fas fa-database', 'Redis'],
+	];
+
+	let popupSettings: PopupSettings = {
+		// Set the event as: click | hover | hover-click | focus | focus-click
+		event: 'click',
+		// Provide a matching 'data-popup' value.
+		target: 'profile',
+	};
 </script>
 
-<div class="dropdown-end dropdown">
-	<label for="menu" tabIndex={0} class="btn-ghost btn-circle btn">
-		{#if $clerkUser.user}
-			<Avatar />
-		{:else}
-			<i class="fas fa-user" />
-		{/if}
-	</label>
+<div>
+	<div use:popup={popupSettings}>
+		<Avatar />
+	</div>
 
-	<ul
-		tabIndex={0}
-		class="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-zinc-900 p-2 shadow"
-	>
-		<li>
-			<a href="https://www.github.com/crowdozer" rel="noopener noreferrer" target="_blank">
-				<i class="fab fa-fw fa-github" />
-				Github
-			</a>
-		</li>
-		<li>
-			<a class="justify-between" href="/hire-me">
-				<div>
-					<i class="fas fa-fw fa-handshake-angle mr-1" />
-					Hire Me
-				</div>
-				<span class="badge-success badge">avail</span>
-			</a>
-		</li>
-		<li>
-			<a href="/galaxy">
-				<i class="fas fa-fw fa-user-astronaut" />
-				Galaxy
-			</a>
-		</li>
-		<li>
-			<a href="/gates-of-hell">
-				<i class="fas fa-fw fa-person-rifle" />
-				Ostfront
-			</a>
-		</li>
-		<li>
-			<a href="/redis">
-				<i class="fas fa-fw fa-database" />
-				Redis
-			</a>
-		</li>
-		<hr class="my-2" />
-		<li>
-			{#if $clerkUser.user}
-				<button on:click={handleSignOut}>
-					<i class="fas fa-fw fa-sign-out" />
-					Sign Out
-				</button>
-			{:else}
-				<button on:click={handleSignIn}>
-					<i class="fas fa-fw fa-user" />
-					Sign In
-				</button>
-			{/if}
-		</li>
-	</ul>
+	<div data-popup="profile" class="card absolute right-0 top-10 z-10 w-52 p-2">
+		<!-- Append the arrow element -->
+		<div class="arrow variant-filled-surface" />
+
+		<ul class="list-nav">
+			{#each links as link}
+				<li class="mt-1">
+					<a
+						class="no-underline"
+						href={link[0]}
+						target={link[0][0] !== '/' ? '_blank' : ''}
+						rel={link[0][0] !== '/' ? 'noopener noreferrer' : ''}
+					>
+						<span class="badge"><i class={link[1]} /></span>
+						<span class="flex-auto">{link[2]}</span>
+					</a>
+				</li>
+			{/each}
+			<hr class="mt-1" />
+			<li class="mt-1">
+				{#if $clerkUser.user}
+					<a href="#" on:click={handleSignOut}>
+						<span class="badge"><i class="fas fa-sign-out" /></span>
+						<span class="flex-auto">Sign Out</span>
+					</a>
+				{:else}
+					<a href="#" on:click={handleSignIn}>
+						<span class="badge"><i class="fas fa-user" /></span>
+						<span class="flex-auto">Sign In</span>
+					</a>
+				{/if}
+			</li>
+		</ul>
+	</div>
 </div>

@@ -6,7 +6,7 @@
 	}
 </script>
 
-<div class="absolute right-4 top-4">
+<div class="absolute right-2 top-2">
 	<button class="btn-square btn" on:click={handleClick} title="copy">
 		<i class="fas fa-copy m-4" />
 	</button>

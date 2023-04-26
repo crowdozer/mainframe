@@ -3,8 +3,8 @@
 </script>
 
 <div style="min-height: 310px">
-	<h1 class="mb-4 text-3xl font-bold">
+	<h2 class="mb-4 text-3xl font-bold">
 		<span class="chevron">></span> Welcome
-	</h1>
+	</h2>
 	<Intus />
 </div>

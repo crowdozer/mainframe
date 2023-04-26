@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Paper from '$web/components/ui/Paper.svelte';
-	import Button from '$web/components/ui/Button.svelte';
 	import HackerNews from './HackerNews.svelte';
 	import InfosecMag from './InfosecMag.svelte';
 	import KrebsSec from './KrebsSec.svelte';
@@ -23,7 +22,7 @@
 
 <div class="my-4">
 	<Paper>
-		<div class="m-8">
+		<div class="mt-8">
 			{#each visibleFeedItems as story, index}
 				{#if story.kind === 'hacker-news'}
 					<HackerNews story={story.data} />
@@ -42,8 +41,8 @@
 				{/if}
 
 				<!-- dividers -->
-				{#if index < feedItems.length - 1}
-					<hr class="mb-4 mt-4" />
+				{#if index < visibleFeedItems.length - 1}
+					<hr class="my-8" />
 				{/if}
 			{/each}
 		</div>
@@ -51,8 +50,8 @@
 </div>
 
 {#if !expanded}
-	<div class="my-4 mb-8">
-		<Button fullWidth size="lg" on:click={handleShowMore}>Load More</Button>
+	<div class="mb-16 mt-12">
+		<button class="btn btn-lg variant-ringed w-full" on:click={handleShowMore}> Load More </button>
 	</div>
 {/if}
 

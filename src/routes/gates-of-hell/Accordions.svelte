@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Accordion from '$web/components/ui/Accordion.svelte';
+	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 	import Code from '$web/components/ui/Code.svelte';
 	import Label from '$web/components/ui/Label.svelte';
 
@@ -29,15 +29,14 @@
 	}
 </script>
 
-<Accordion>
-	<svelte:fragment slot="header">Status <Label>debug</Label></svelte:fragment>
-	<svelte:fragment slot="content">
-		<Code code={status} />
-	</svelte:fragment>
-</Accordion>
-<Accordion>
-	<svelte:fragment slot="header">Campaign <Label>debug</Label></svelte:fragment>
-	<svelte:fragment slot="content">
-		<Code code={campaign} />
-	</svelte:fragment>
+<Accordion autocollapse>
+	<AccordionItem>
+		<svelte:fragment slot="summary">Status <Label>debug</Label></svelte:fragment>
+		<svelte:fragment slot="content"><Code code={status} /></svelte:fragment>
+	</AccordionItem>
+
+	<AccordionItem>
+		<svelte:fragment slot="summary">Campaign <Label>debug</Label></svelte:fragment>
+		<svelte:fragment slot="content"><Code code={campaign} /></svelte:fragment>
+	</AccordionItem>
 </Accordion>

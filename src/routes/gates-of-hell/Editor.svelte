@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { slide } from 'svelte/transition';
-	import Button from '$web/components/ui/Button.svelte';
 	import Container from '$web/components/ui/Container.svelte';
 	import Input from '$web/components/ui/Input.svelte';
 	import Paper from '$web/components/ui/Paper.svelte';
@@ -13,9 +12,9 @@
 	import Accordions from './Accordions.svelte';
 	import Mods from './Mods.svelte';
 	import Maps from './Maps.svelte';
+	import { FileDropzone } from '@skeletonlabs/skeleton';
 
 	let files: FileList;
-	let fileInput: HTMLInputElement;
 	let data: { campaign: any; status: any };
 	let attacking = false;
 
@@ -24,15 +23,22 @@
 	 * try to parse the first one as a savefile
 	 */
 	$: if (files && !data) {
-		(async function () {
-			if (files.length) {
-				data = await parseSave(files[0]);
-				attacking = isAttacking(data.status);
-			} else {
-				// @ts-ignore
-				data = undefined;
+		parseFiles();
+	}
+
+	async function parseFiles() {
+		try {
+			if (!files.length) {
+				throw new Error('nothing to parse');
 			}
-		})();
+
+			data = await parseSave(files[0]);
+			attacking = isAttacking(data.status);
+		} catch (error) {
+			console.error(error);
+			// @ts-ignore
+			data = undefined;
+		}
 	}
 
 	/**
@@ -73,11 +79,10 @@
 
 	function handleClear() {
 		// @ts-ignore
-		fileInput.value = null;
+		files = [];
+
 		// @ts-ignore
 		data = null;
-		// @ts-ignore
-		files = fileInput.files;
 	}
 
 	const resourceForm = [
@@ -90,7 +95,7 @@
 </script>
 
 <Container>
-	<h1 class="mt-8 text-2xl">Gates of Hell Editor</h1>
+	<h1 class="mt-8">Gates of Hell Editor</h1>
 	<p>
 		click <a href="/blog/2023/04/18/goh-editor" rel="noopener noreferrer" target="_blank">here</a> for
 		an explanation
@@ -99,11 +104,11 @@
 	<div class={data ? 'hidden' : 'block'}>
 		<p class="mt-16">To begin, locate your savefile.</p>
 		<p class="mt-1">Save files are commonly located at:</p>
-		<p class="mt-1 bg-zinc-900 p-4">
+		<p class="unstyled mt-1 bg-surface-900 p-4 text-surface-50">
 			Documents\my games\gates of hell\profiles\(steam id)\campaign\(file).sav
 		</p>
 		<div class="mt-4">
-			<input type="file" bind:files bind:this={fileInput} />
+			<FileDropzone bind:files name="files" on:change={parseFiles} />
 		</div>
 	</div>
 	<!-- Savegame Editor -->
@@ -116,7 +121,7 @@
 				<Paper bordered>
 					<div class="flex flex-col gap-2 p-4">
 						<h3 class="text-lg">
-							Next Map <Label kind="warning">{attacking ? 'Attacking' : 'Defending'}</Label>
+							Next Map <Label kind="error">{attacking ? 'Attacking' : 'Defending'}</Label>
 						</h3>
 						<Maps status={data.status} />
 					</div>
@@ -148,7 +153,9 @@
 							<Select name="faction" defaultValue="fin">
 								<option value="fin">Finland</option>
 							</Select>
-							<Button type="submit">set</Button>
+							<div class="text-right">
+								<button type="submit" class="btn variant-ringed-secondary">set year</button>
+							</div>
 						</form>
 					</div>
 				</Paper>
@@ -160,8 +167,8 @@
 			<!-- Controls -->
 			<hr class="mt-4" />
 			<div class="mt-4 text-right">
-				<Button on:click={handleClear}>clear</Button>
-				<Button on:click={handleExport}>Export</Button>
+				<button class="btn" on:click={handleClear}>clear</button>
+				<button class="btn variant-filled-primary" on:click={handleExport}>export</button>
 			</div>
 		</div>
 	{/if}
@@ -169,7 +176,7 @@
 	<div class="mt-16">
 		<Paper bordered>
 			<div class="p-4">
-				<h1 class="mb-2 text-2xl text-red-600">WARNING</h1>
+				<h3 class="mb-2 text-red-600">WARNING</h3>
 				<p>Please back up your save before using this utility.</p>
 				<p>I am not liable for damages to your savegame.</p>
 			</div>
@@ -178,7 +185,7 @@
 	<div class="mt-4">
 		<Paper bordered>
 			<div class="p-4">
-				<h1 class="mb-2 text-lg text-yellow-600">SLIGHTLY LESS SERIOUS WARNING</h1>
+				<h3 class="mb-2 text-yellow-600">SLIGHTLY LESS SERIOUS WARNING</h3>
 				<p>This utility is not type-safe for you.</p>
 				<p>Please use common sense for values that you enter.</p>
 				<p>Be mindful of data types, "quotation marks", and "id10T" errors.</p>

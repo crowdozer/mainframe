@@ -11,16 +11,14 @@
 	let widthClass = fullWidth ? '' : 'max-w-lg';
 </script>
 
-<div class="form-control w-full {widthClass}">
+<label for="input-{name}" class="label w-full {widthClass}">
 	{#if label}
-		<label for="input-{name}" class="label">
-			<span class="label-text">{label}</span>
-		</label>
+		<span>{label}</span>
 	{/if}
 	<input
 		id="input-{name}"
 		type="text"
-		class="input-bordered input-ghost input w-full {widthClass}"
+		class="input"
 		{name}
 		{placeholder}
 		{readonly}
@@ -28,4 +26,4 @@
 		bind:value
 		on:change
 	/>
-</div>
+</label>

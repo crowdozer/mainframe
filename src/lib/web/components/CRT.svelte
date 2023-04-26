@@ -10,7 +10,7 @@
 		pointer-events: none;
 		z-index: 999;
 		/** Control the darkness of the crt lines with this*/
-		opacity: 0.05;
+		opacity: 0.01;
 	}
 
 	/** Draw the horizontal lines */
