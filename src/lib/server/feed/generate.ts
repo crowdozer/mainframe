@@ -21,10 +21,14 @@ export async function generateFeed(fetcher: typeof fetch): Promise<FeedWithoutIS
 		const start = performance.now();
 
 		// load all rss feeds
-		const hnstories = await getHackerNewsStories(fetcher);
-		const infosec = await getInfosecRSS(fetcher);
-		const krebs = await getKrebsRSS(fetcher);
-		const cointele = await getCoinTelegraphRSS(fetcher);
+		const feedPromises = [
+			getHackerNewsStories(fetcher),
+			getInfosecRSS(fetcher),
+			getKrebsRSS(fetcher),
+			getCoinTelegraphRSS(fetcher),
+		];
+
+		const [hnstories, infosec, krebs, cointele] = await Promise.all(feedPromises);
 
 		// colorize their names deterministically
 		const infoseccolor = stringToColor('infosec-mag');
