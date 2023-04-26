@@ -26,7 +26,6 @@
 
 <Toaster />
 <NavigationProgress />
-<Analytics />
 
 <Layout showNavbar={!$clerkUser.loading}>
 	{#if !$clerkUser.loading}
