@@ -20,15 +20,20 @@ import dotenv from 'dotenv';
  * ```
  */
 const Schema = z.object({
-	// PRIVATE
-	SRV_REDIS_URL: z.string(),
-	CLERK_UNPUBLISHABLE: z.string(),
-	CLERK_PEM: z.string(),
-	UPSTASH_REDIS_REST_URL: z.string(),
-	UPSTASH_REDIS_REST_TOKEN: z.string(),
+	// Redis Ratelimiting requirements
+	S7S_UPSTASH_REDIS_REST_URL: z.string(),
+	S7S_UPSTASH_REDIS_REST_TOKEN: z.string(),
 
-	// PUBLIC
-	PUBLIC_CLERK_PUBLISHABLE: z.string(),
+	// Clerk requirements
+	S7S_CLERK_UNPUBLISHABLE: z.string(),
+	S7S_CLERK_PEM: z.string(),
+	PUBLIC_S7S_CLERK_PUBLISHABLE: z.string(),
+
+	// Prisma DB requirements
+	S7S_PRISMA_URL: z.string(),
+
+	// Custom
+	UPSTASH_REDIS_URL: z.string(),
 });
 
 /**

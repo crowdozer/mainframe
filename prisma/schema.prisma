@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("S7S_PRISMA_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id      String  @id @default(cuid())
+  isAdmin Boolean @default(false)
+}

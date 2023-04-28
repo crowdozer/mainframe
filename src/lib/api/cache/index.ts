@@ -1,5 +1,9 @@
-import { createTRPCRouter, guardedProcedure } from '$server/trpc';
-import enforceTRPC, { ratelimitedRequest, authedRequest } from '$server/trpc/guard/index.js';
+import {
+	createTRPCRouter,
+	guardedProcedure,
+	ratelimitedRequest,
+	authedRequest,
+} from '$server/trpc';
 import { cache } from '$server/cache/index.js';
 import { z } from 'zod';
 
@@ -17,8 +21,6 @@ const router = createTRPCRouter({
 			}),
 		)
 		.query(async (request) => {
-			await enforceTRPC(request.ctx.event, ratelimitedRequest);
-
 			const key = prefix + request.input.key;
 			const value = await cache.get(key);
 			return { value };
@@ -35,8 +37,6 @@ const router = createTRPCRouter({
 			}),
 		)
 		.mutation(async (request) => {
-			await enforceTRPC(request.ctx.event, authedRequest, ratelimitedRequest);
-
 			const key = prefix + request.input.key;
 			await cache.set(key, request.input.value);
 			await cache.expire(key, expiration);

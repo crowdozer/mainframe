@@ -10,9 +10,11 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"preflight": "node ./_env.mjs"
+		"preflight": "node ./_env.mjs",
+		"postinstall": "prisma generate"
 	},
 	"devDependencies": {
+		"@prisma/client": "^4.13.0",
 		"@skeletonlabs/skeleton": "^1.2.5",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
@@ -30,10 +32,12 @@
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
 		"mdsvex": "^0.10.6",
+		"nprogress": "^0.2.0",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.7",
 		"prettier-plugin-svelte": "^2.8.1",
 		"prettier-plugin-tailwindcss": "^0.2.7",
+		"prisma": "^4.13.0",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.2.0",
 		"svelte-preprocess": "^5.0.3",
@@ -61,7 +65,6 @@
 		"jsonwebtoken": "^9.0.0",
 		"jszip": "^3.10.1",
 		"npm": "^9.6.5",
-		"nprogress": "^0.2.0",
 		"qs": "^6.11.1",
 		"superjson": "^1.12.3",
 		"svelte-french-toast": "^1.0.4-beta.0",
