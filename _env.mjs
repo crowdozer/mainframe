@@ -34,6 +34,8 @@ const Schema = z.object({
 
 	// Custom
 	UPSTASH_REDIS_URL: z.string(),
+	SPOTIFY_CLIENT_ID: z.string(),
+	SPOTIFY_CLIENT_SECRET: z.string(),
 });
 
 /**

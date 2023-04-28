@@ -11,4 +11,10 @@ datasource db {
 model User {
   id      String  @id @default(cuid())
   isAdmin Boolean @default(false)
+
+  // Spotify auth stuff 
+  spotifyAuthCode     String? @db.Text
+  spotifyAuthState    String? @db.Text
+  spotifyAccessToken  String? @db.Text
+  spotifyRefreshToken String? @db.Text
 }

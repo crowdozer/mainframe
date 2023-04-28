@@ -39,6 +39,10 @@ export function trpc(init?: TRPCClientInit) {
 
 type useTRPCCallback<T> = (client: typeof trpc) => Promise<T>;
 
+/**
+ * Utility function - runs the callback within an error boundary that
+ * automatically toasts tRPC errors
+ */
 export async function useTRPC<T>(callback: useTRPCCallback<T>) {
 	try {
 		return await callback(trpc);

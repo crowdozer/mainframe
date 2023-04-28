@@ -1,11 +1,15 @@
 import { TRPCError } from '@trpc/server';
 import type { EdgeAuthStateGuaranteed } from '~/types';
-import type { InferredRequestContext, WithLocals } from '../';
+import type { Guard, InferredRequestContext, WithLocals } from '../config';
+
+type ModifiedContext = WithLocals<{ user: EdgeAuthStateGuaranteed }>;
 
 /**
  * Enforces that a user is authorized
  */
-const authedRequest = async (req: InferredRequestContext) => {
+const authedRequest: Guard<InferredRequestContext, ModifiedContext> = async (
+	req: InferredRequestContext,
+) => {
 	const { locals } = req.event;
 
 	if (!locals.user.isLoggedIn) {
@@ -15,7 +19,7 @@ const authedRequest = async (req: InferredRequestContext) => {
 		});
 	}
 
-	return req as WithLocals<{ user: EdgeAuthStateGuaranteed }>;
+	return req as ModifiedContext;
 };
 
 export default authedRequest;
