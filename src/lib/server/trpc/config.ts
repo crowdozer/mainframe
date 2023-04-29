@@ -90,14 +90,14 @@ export type ServerTRPCEnforcer<T extends InferredRequestContext = InferredReques
  * Utility type. Merges `Custom` into `request`.
  * You can use this to help set up your Guards.
  */
-export type With<Custom> = Custom & InferredRequestContext;
+export type With<Custom> = DeepMerge<InferredRequestContext, InferredRequestContext, Custom>;
 
 /**
  * Utility type. Merges `Custom` into `request.event`
  * You can use this to help set up your Guards.
  */
 export type WithEvent<Custom> = With<{
-	event: Custom & InferredRequestContext['event'];
+	event: DeepMerge<InferredRequestContext['event'], InferredRequestContext['event'], Custom>;
 }>;
 
 /**
@@ -105,7 +105,11 @@ export type WithEvent<Custom> = With<{
  * You can use this to help set up your Guards.
  */
 export type WithLocals<Custom> = WithEvent<{
-	locals: Custom & InferredRequestContext['event']['locals'];
+	locals: DeepMerge<
+		InferredRequestContext['event']['locals'],
+		InferredRequestContext['event']['locals'],
+		Custom
+	>;
 }>;
 
 /**
@@ -159,9 +163,7 @@ export const procedure = t.procedure;
 /**
  * Utility type - you may find this useful when building Guards.
  */
-export type Guard<I extends InferredRequestContext, O extends InferredRequestContext> = (
-	ctx: I,
-) => Promise<O>;
+export type Guard<I, O> = (ctx: I) => Promise<O>;
 
 /**
  * Internal helper
@@ -169,9 +171,31 @@ export type Guard<I extends InferredRequestContext, O extends InferredRequestCon
  * Helps resolve the return type for a chain of guards.
  * You probably won't ever need to use this, so don't worry about it much.
  */
-export type GuardChain<T, G extends any[]> = {
-	[K in keyof G]: G[K] extends Guard<infer I, infer O> ? DeepMerge<T, O> : never;
-}[number];
+// prettier-ignore
+type GuardsReducer<
+	OriginalCTX,
+	LastCTX extends OriginalCTX,
+	Guards extends Guard<OriginalCTX, OriginalCTX>[],
+> =
+	// If it's an array of 2+ guards, we want to start processing from the head guard
+	Guards extends [
+		infer HeadGuard extends Guard<OriginalCTX, OriginalCTX>,
+		...infer RestGuards extends Guard<OriginalCTX, OriginalCTX>[],
+	]
+		? // Begin reducing it down to a single item via recursion
+		  HeadGuard extends Guard<OriginalCTX, infer NextCTX extends OriginalCTX>
+			? GuardsReducer<
+					OriginalCTX,
+					// resolve and merge
+					DeepMerge<OriginalCTX, LastCTX, NextCTX>,
+					RestGuards
+			  >
+			: never
+		: // If we are on the last guard, resolve and merge
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		Guards[0] extends Guard<infer _, infer NextCTX extends OriginalCTX>
+			? DeepMerge<OriginalCTX, LastCTX, NextCTX>
+			: never;
 
 /**
  * Protected procedure
@@ -179,18 +203,18 @@ export type GuardChain<T, G extends any[]> = {
  * Runs an array of gaurds against the request, one at a time, in order
  * Request is aborted as soon as one throws
  */
-export function guardedProcedure<T extends InferredRequestContext, G extends Guard<T, T>[]>(
-	...guards: G
-) {
+export function guardedProcedure<
+	Guards extends Guard<InferredRequestContext, InferredRequestContext>[],
+>(...guards: Guards) {
 	const middleware = t.middleware(async ({ ctx, next }) => {
-		let context = ctx as T;
+		let context = ctx as InferredRequestContext;
 
 		for (const guard of guards) {
 			context = await guard(context);
 		}
 
 		return next({
-			ctx: context as GuardChain<T, G>,
+			ctx: context as GuardsReducer<InferredRequestContext, InferredRequestContext, Guards>,
 		});
 	});
 

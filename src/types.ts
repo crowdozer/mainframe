@@ -10,14 +10,34 @@ export type ResolvedType<T> = T extends Promise<infer R> ? R : T;
  * recursively merging their nested properties. The properties of B
  * take precedence over the properties of A. It works for both object
  * and union types.
+ *
+ * It only applies the merge to keys that are not present within O,
+ * with O representing the original type's structure.
  */
-export type DeepMerge<A, B> = {
-	[K in keyof A | keyof B]: K extends keyof A
-		? K extends keyof B
-			? DeepMerge<A[K], B[K]>
-			: A[K]
-		: K extends keyof B
-		? B[K]
+// export type DeepMerge<
+// 	Original,
+// 	Previous extends Original,
+// 	Next extends Original,
+// > = {
+// 	// prettier-ignore
+// 	[Key in keyof Previous | keyof Next]: Key extends keyof Next
+// 		// If next, use next
+// 		? Next[Key]
+// 		: // If not next but previous, use previous
+// 		Key extends keyof Previous
+// 		? Previous[Key]
+// 		: // Otherwise, use original
+// 		Key extends keyof Original
+// 		? Original[Key]
+// 		: never;
+// };
+export type DeepMerge<Original, Previous extends Original, Next> = {
+	[Key in keyof Previous | keyof Next]: Key extends keyof Next
+		? Next[Key]
+		: Key extends keyof Previous
+		? Previous[Key]
+		: Key extends keyof Original
+		? Original[Key]
 		: never;
 };
 
