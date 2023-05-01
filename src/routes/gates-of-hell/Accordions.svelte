@@ -29,7 +29,7 @@
 	}
 </script>
 
-<Accordion autocollapse>
+<Accordion>
 	<AccordionItem>
 		<svelte:fragment slot="summary">Status <Label>debug</Label></svelte:fragment>
 		<svelte:fragment slot="content"><Code code={status} /></svelte:fragment>

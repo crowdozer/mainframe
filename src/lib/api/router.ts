@@ -1,5 +1,6 @@
 import { createTRPCRouter } from '$server/trpc';
 import cacheRouter from './cache';
+import spotifyRouter from './spotify';
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import cacheRouter from './cache';
  */
 export const router = createTRPCRouter({
 	cache: cacheRouter,
+	spotify: spotifyRouter,
 });
 
 // export type definition of API

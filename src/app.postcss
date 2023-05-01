@@ -24,15 +24,15 @@ body {
 }
 
 /* Style links */
-a {
+a:not(.btn) {
 	text-decoration: none !important;
 }
-a:hover {
+a:not(.btn):hover {
 	background: rgb(var(--color-primary-800)) !important;
 	color: rgb(var(--theme-font-color-dark)) !important;
 }
-a:active,
-a:focused {
+a:not(.btn):active,
+a:not(.btn):focused {
 	background: rgb(var(--color-primary-800)) !important;
 	color: rgb(var(--theme-font-color-dark)) !important;
 }

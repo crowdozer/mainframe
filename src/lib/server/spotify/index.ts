@@ -11,6 +11,7 @@ import type {
 	AuthCodeTradeResponse,
 } from './types';
 import SpotifyWebAPI from 'spotify-web-api-node';
+import { TRPCError } from '@trpc/server';
 
 const redirect_uri = `${dev ? 'http://localhost:5173' : 'https://crwdzr.io'}/spotify/auth`;
 
@@ -25,7 +26,7 @@ const spotifyApi = new SpotifyWebAPI({
  */
 export function getAuthURI(): string {
 	const state = generateRandomString(16);
-	const scope = 'user-read-private';
+	const scope = 'user-read-private user-read-playback-state';
 
 	const uri =
 		'https://accounts.spotify.com/authorize?' +
@@ -152,4 +153,57 @@ export async function tradeAuthCodeForToken(
 	}
 }
 
-export async function getCurrentPlaying(userID: string): Promise<any> {}
+export async function updateAccessToken(userID: string, access: SpotifyAccessToken): Promise<void> {
+	void (await prisma.user.update({
+		where: {
+			id: userID,
+		},
+		data: {
+			spotifyAccessToken: access,
+		},
+	}));
+}
+
+export async function refreshAccessToken(
+	userID: string,
+	access: string,
+	refresh: string,
+): Promise<void> {
+	spotifyApi.setAccessToken(access);
+	spotifyApi.setRefreshToken(refresh);
+	const result = await spotifyApi.refreshAccessToken();
+
+	void (await updateAccessToken(userID, result.body.access_token));
+}
+
+export async function getCurrentPlaying(userID: string, retry = true): Promise<any> {
+	const auth = await getAuthState(userID);
+
+	if (!auth.access || !auth.refresh) {
+		throw new TRPCError({
+			code: 'BAD_REQUEST',
+			message: 'user is not connected to spotify',
+		});
+	}
+
+	try {
+		spotifyApi.setAccessToken(auth.access);
+
+		const result = await spotifyApi.getMyCurrentPlaybackState();
+
+		return result.body;
+	} catch (error: any) {
+		if (!retry) {
+			throw error;
+		}
+
+		const msg = error?.body?.error?.message || '';
+		if (msg === 'The access token expired') {
+			void (await refreshAccessToken(userID, auth.access, auth.refresh));
+
+			return getCurrentPlaying(userID, false);
+		}
+
+		throw error;
+	}
+}

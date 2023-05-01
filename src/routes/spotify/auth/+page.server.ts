@@ -32,8 +32,10 @@ export const load = async function ({ locals, url }): Promise<Data> {
 
 		// Step 1
 		if (!userID) {
-			console.log('1. Not logged in');
-			return {};
+			return {
+				error: 'You must log in first',
+				reload: false,
+			};
 		}
 
 		// Step 2
@@ -43,7 +45,7 @@ export const load = async function ({ locals, url }): Promise<Data> {
 		if (credentials.access && credentials.refresh) {
 			console.log('3. Access token found', credentials.access, credentials.refresh);
 
-			throw redirect(307, '/');
+			throw redirect(307, '/spotify');
 		}
 
 		// Step 4

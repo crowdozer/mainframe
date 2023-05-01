@@ -21,6 +21,7 @@
 		['/galaxy', 'fas fa-user-astronaut', 'Galaxy', 'Galaxy'],
 		['/gates-of-hell', 'fas fa-person-rifle', 'Ostfront'],
 		['/redis', 'fas fa-database', 'Redis'],
+		['/spotify', 'fab fa-spotify', 'Spotify'],
 	];
 
 	let popupSettings: PopupSettings = {

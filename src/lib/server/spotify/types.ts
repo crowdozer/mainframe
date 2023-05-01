@@ -2,8 +2,8 @@ export type SpotifyAuthCode = {
 	code: string;
 	state: string;
 };
-export type SpotifyAccessToken = any;
-export type SpotifyRefreshToken = any;
+export type SpotifyAccessToken = string | null;
+export type SpotifyRefreshToken = string | null;
 
 export type SpotifyCredentials = {
 	access: SpotifyAccessToken | null;

@@ -19,6 +19,6 @@ export const load = async function ({ locals }) {
 	void (await setCredentials(locals.user.id, null, null));
 
 	return {
-		resume: '/spotify/auth',
+		resume: '/spotify',
 	};
 } satisfies PageServerLoad;
