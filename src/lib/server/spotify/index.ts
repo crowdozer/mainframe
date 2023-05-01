@@ -1,7 +1,7 @@
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 import { dev } from '$app/environment';
 import qs from 'qs';
-import { generateRandomString } from './utils';
+import { generateRandomString, getErrorDescription } from './utils';
 import { prisma } from '$server/prisma';
 import type {
 	SpotifyAccessToken,
@@ -152,13 +152,4 @@ export async function tradeAuthCodeForToken(
 	}
 }
 
-/**
- * Helper that tries to parse spotify errors for certain descriptions
- */
-function getErrorDescription(error: any): string {
-	if (error && error.body && error.body.error_description) {
-		return error.body.error_description;
-	}
-
-	return error.message || 'An unknown error has occurred';
-}
+export async function getCurrentPlaying(userID: string): Promise<any> {}

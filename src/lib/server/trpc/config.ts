@@ -12,12 +12,10 @@
  * If that sounded foreign, then you can safely leave this file alone =)
  *
  * SUMMARY:
- *
  * This file is a configuration and utility file for tRPC, a strongly typed API
  * layer for backend communication. It provides the means to create contexts for the API,
- * define guards for secure procedures, and handle errors.
- *
- * Here's an overview of the main sections in the file:
+ * define guards for secure procedures, and handle errors. It also contains several utility
+ * types to help you set up and manage guards, request context, and procedure execution.
  *
  * 1. CONTEXT:
  * This section defines the "contexts" available in the backend API.
@@ -37,15 +35,6 @@
  * queries and mutations for your tRPC API. The guardedProcedure function is used
  * to create protected procedures that require a series of guards to pass before
  * executing the procedure.
- *
- * The file also contains several utility types to help you set up and manage guards,
- * request context, and procedure execution. Some of these utility types include
- * InferredRequestContext, ServerTRPCEnforcer, With, WithEvent, WithLocals, Guard, and GuardChain.
- *
- * In summary, this file sets up the tRPC API for a SvelteKit application and provides utilities
- * for creating and managing procedures, guards, and contexts. You would typically need to edit
- * this file if you need to add more context to each request, customize the tRPC server, or create
- * a custom tRPC procedure.
  */
 
 /**
@@ -59,7 +48,7 @@
 
 import type { RequestEvent } from '@sveltejs/kit';
 import { prisma } from '$server/prisma';
-import type { DeepMerge, ResolvedType } from '~/types';
+import type { DeepMerge, DeepPartial, ResolvedType } from '~/types';
 
 export async function createContext(event: RequestEvent) {
 	return {
@@ -75,16 +64,6 @@ export async function createContext(event: RequestEvent) {
  * request context, you probably need to use this.
  */
 export type InferredRequestContext = ResolvedType<ReturnType<typeof createContext>>;
-
-/**
- * Generic type for tRPC Enforcers
- *
- * You can import this type to help build your Guards,
- * but it isn't very useful if if they do not modify the request context.
- */
-export type ServerTRPCEnforcer<T extends InferredRequestContext = InferredRequestContext> = (
-	state: T,
-) => Promise<T>;
 
 /**
  * Utility type. Merges `Custom` into `request`.
@@ -157,45 +136,15 @@ export const createTRPCRouter = t.router;
  * The pieces you will need to use are documented accordingly near the end.
  */
 
+import { merge } from 'lodash';
+
 // base piece you use to build new queries and mutations on your tRPC API
 export const procedure = t.procedure;
 
 /**
  * Utility type - you may find this useful when building Guards.
  */
-export type Guard<I, O> = (ctx: I) => Promise<O>;
-
-/**
- * Internal helper
- *
- * Helps resolve the return type for a chain of guards.
- * You probably won't ever need to use this, so don't worry about it much.
- */
-// prettier-ignore
-type GuardsReducer<
-	OriginalCTX,
-	LastCTX extends OriginalCTX,
-	Guards extends Guard<OriginalCTX, OriginalCTX>[],
-> =
-	// If it's an array of 2+ guards, we want to start processing from the head guard
-	Guards extends [
-		infer HeadGuard extends Guard<OriginalCTX, OriginalCTX>,
-		...infer RestGuards extends Guard<OriginalCTX, OriginalCTX>[],
-	]
-		? // Begin reducing it down to a single item via recursion
-		  HeadGuard extends Guard<OriginalCTX, infer NextCTX extends OriginalCTX>
-			? GuardsReducer<
-					OriginalCTX,
-					// resolve and merge
-					DeepMerge<OriginalCTX, LastCTX, NextCTX>,
-					RestGuards
-			  >
-			: never
-		: // If we are on the last guard, resolve and merge
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		Guards[0] extends Guard<infer _, infer NextCTX extends OriginalCTX>
-			? DeepMerge<OriginalCTX, LastCTX, NextCTX>
-			: never;
+export type Guard<I> = (ctx: I) => Promise<DeepPartial<I> | void>;
 
 /**
  * Protected procedure
@@ -204,19 +153,31 @@ type GuardsReducer<
  * Request is aborted as soon as one throws
  */
 export function guardedProcedure<
-	Guards extends Guard<InferredRequestContext, InferredRequestContext>[],
+	Guards extends Guard<InferredRequestContext>[],
+	NextContext = InferredRequestContext,
 >(...guards: Guards) {
 	const middleware = t.middleware(async ({ ctx, next }) => {
-		let context = ctx as InferredRequestContext;
+		let context = ctx;
 
 		for (const guard of guards) {
-			context = await guard(context);
+			const nextContext = await guard(context);
+			if (nextContext) {
+				context = merge(context, nextContext);
+			}
 		}
 
 		return next({
-			ctx: context as GuardsReducer<InferredRequestContext, InferredRequestContext, Guards>,
+			ctx: context as NextContext,
 		});
 	});
 
 	return t.procedure.use(middleware);
+}
+
+/**
+ * A helper to simplify typing guarded procedures
+ * Context = the final context available to the application after gaurds execute
+ */
+export function makeGuardedProcedure<Context = InferredRequestContext>(...guards: any[]) {
+	return guardedProcedure<typeof guards, Context>(...guards);
 }

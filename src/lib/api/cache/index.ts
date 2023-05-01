@@ -1,9 +1,4 @@
-import {
-	createTRPCRouter,
-	guardedProcedure,
-	ratelimitedRequest,
-	authedRequest,
-} from '$server/trpc';
+import { createTRPCRouter, RateLimitedProcedure, AuthedRateLimitedProcedure } from '$server/trpc';
 import { cache } from '$server/cache/index.js';
 import { z } from 'zod';
 
@@ -14,33 +9,29 @@ const router = createTRPCRouter({
 	/**
 	 * returns whatever is in the cache at url.key
 	 */
-	get: guardedProcedure(ratelimitedRequest)
-		.input(
-			z.object({
-				key: z.string(),
-			}),
-		)
-		.query(async (request) => {
-			const key = prefix + request.input.key;
-			const value = await cache.get(key);
-			return { value };
+	get: RateLimitedProcedure.input(
+		z.object({
+			key: z.string(),
 		}),
+	).query(async (request) => {
+		const key = prefix + request.input.key;
+		const value = await cache.get(key);
+		return { value };
+	}),
 	/**
 	 * sets the new cache value at url.key,
 	 * optionally with an expiration timer in seconds
 	 */
-	set: guardedProcedure(authedRequest, ratelimitedRequest)
-		.input(
-			z.object({
-				key: z.string(),
-				value: z.string(),
-			}),
-		)
-		.mutation(async (request) => {
-			const key = prefix + request.input.key;
-			await cache.set(key, request.input.value);
-			await cache.expire(key, expiration);
+	set: AuthedRateLimitedProcedure.input(
+		z.object({
+			key: z.string(),
+			value: z.string(),
 		}),
+	).mutation(async (request) => {
+		const key = prefix + request.input.key;
+		await cache.set(key, request.input.value);
+		await cache.expire(key, expiration);
+	}),
 });
 
 export type Router = typeof router;

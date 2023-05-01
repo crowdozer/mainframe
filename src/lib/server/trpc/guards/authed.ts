@@ -1,15 +1,16 @@
-import { TRPCError } from '@trpc/server';
+import { TRPCError, type DeepPartial } from '@trpc/server';
 import type { EdgeAuthStateGuaranteed } from '~/types';
-import type { Guard, InferredRequestContext, WithLocals } from '../config';
-
-type ModifiedContext = WithLocals<{ user: EdgeAuthStateGuaranteed }>;
+import {
+	makeGuardedProcedure,
+	type Guard,
+	type InferredRequestContext,
+	type WithLocals,
+} from '../config';
 
 /**
  * Enforces that a user is authorized
  */
-const authedRequest: Guard<InferredRequestContext, ModifiedContext> = async (
-	req: InferredRequestContext,
-) => {
+export const authedRequest: Guard<InferredRequestContext> = async (req) => {
 	const { locals } = req.event;
 
 	if (!locals.user.isLoggedIn) {
@@ -19,7 +20,14 @@ const authedRequest: Guard<InferredRequestContext, ModifiedContext> = async (
 		});
 	}
 
-	return req as ModifiedContext;
+	return {
+		event: {
+			locals: {
+				user: req.event.locals.user as EdgeAuthStateGuaranteed,
+			},
+		},
+	} satisfies DeepPartial<InferredRequestContext>;
 };
 
-export default authedRequest;
+export const AuthedProcedure =
+	makeGuardedProcedure<WithLocals<{ user: EdgeAuthStateGuaranteed }>>(authedRequest);

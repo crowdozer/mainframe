@@ -24,3 +24,14 @@ export function getCode(url: URLSearchParams): SpotifyAuthCode | null {
 		return null;
 	}
 }
+
+/**
+ * Helper that tries to parse spotify errors for certain descriptions
+ */
+export function getErrorDescription(error: any): string {
+	if (error && error.body && error.body.error_description) {
+		return error.body.error_description;
+	}
+
+	return error.message || 'An unknown error has occurred';
+}

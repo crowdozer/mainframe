@@ -1,4 +1,4 @@
-import authedRequest from './authed';
-import ratelimitedRequest from './ratelimit';
+import { RateLimitedProcedure, AuthedRateLimitedProcedure } from './ratelimit';
+import { AuthedProcedure } from './authed';
 
-export { authedRequest, ratelimitedRequest };
+export { RateLimitedProcedure, AuthedRateLimitedProcedure, AuthedProcedure };
