@@ -45,6 +45,8 @@ export const ratelimitedRequest: Guard<InferredRequestContext> = async (req) => 
 			message: 'Rate limited',
 		});
 	}
+
+	return req;
 };
 
 export const RateLimitedProcedure = makeGuardedProcedure(ratelimitedRequest);

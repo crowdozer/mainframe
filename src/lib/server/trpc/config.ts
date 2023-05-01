@@ -48,7 +48,7 @@
 
 import type { RequestEvent } from '@sveltejs/kit';
 import { prisma } from '$server/prisma';
-import type { DeepMerge, DeepPartial, ResolvedType } from '~/types';
+import type { DeepMerge, ResolvedType } from '~/types';
 
 export async function createContext(event: RequestEvent) {
 	return {
@@ -69,14 +69,14 @@ export type InferredRequestContext = ResolvedType<ReturnType<typeof createContex
  * Utility type. Merges `Custom` into `request`.
  * You can use this to help set up your Guards.
  */
-export type With<Custom> = DeepMerge<InferredRequestContext, InferredRequestContext, Custom>;
+export type With<Custom> = DeepMerge<InferredRequestContext, Custom>;
 
 /**
  * Utility type. Merges `Custom` into `request.event`
  * You can use this to help set up your Guards.
  */
 export type WithEvent<Custom> = With<{
-	event: DeepMerge<InferredRequestContext['event'], InferredRequestContext['event'], Custom>;
+	event: DeepMerge<InferredRequestContext['event'], Custom>;
 }>;
 
 /**
@@ -84,11 +84,7 @@ export type WithEvent<Custom> = With<{
  * You can use this to help set up your Guards.
  */
 export type WithLocals<Custom> = WithEvent<{
-	locals: DeepMerge<
-		InferredRequestContext['event']['locals'],
-		InferredRequestContext['event']['locals'],
-		Custom
-	>;
+	locals: DeepMerge<InferredRequestContext['event']['locals'], Custom>;
 }>;
 
 /**
@@ -136,15 +132,13 @@ export const createTRPCRouter = t.router;
  * The pieces you will need to use are documented accordingly near the end.
  */
 
-import { merge } from 'lodash';
-
 // base piece you use to build new queries and mutations on your tRPC API
 export const procedure = t.procedure;
 
 /**
  * Utility type - you may find this useful when building Guards.
  */
-export type Guard<I> = (ctx: I) => Promise<DeepPartial<I> | void>;
+export type Guard<I> = (ctx: I) => Promise<I>;
 
 /**
  * Protected procedure
@@ -160,10 +154,7 @@ export function guardedProcedure<
 		let context = ctx;
 
 		for (const guard of guards) {
-			const nextContext = await guard(context);
-			if (nextContext) {
-				context = merge(context, nextContext);
-			}
+			context = await guard(context);
 		}
 
 		return next({

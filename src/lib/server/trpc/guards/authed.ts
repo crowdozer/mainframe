@@ -1,4 +1,4 @@
-import { TRPCError, type DeepPartial } from '@trpc/server';
+import { TRPCError } from '@trpc/server';
 import type { EdgeAuthStateGuaranteed } from '~/types';
 import {
 	makeGuardedProcedure,
@@ -20,13 +20,7 @@ export const authedRequest: Guard<InferredRequestContext> = async (req) => {
 		});
 	}
 
-	return {
-		event: {
-			locals: {
-				user: req.event.locals.user as EdgeAuthStateGuaranteed,
-			},
-		},
-	} satisfies DeepPartial<InferredRequestContext>;
+	return req;
 };
 
 export const AuthedProcedure =
