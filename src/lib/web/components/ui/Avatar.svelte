@@ -23,7 +23,7 @@
 			width={size}
 		/>
 	{:else}
-		<button class="btn btn-icon variant-ringed-secondary">
+		<button class="btn btn-icon variant-ringed-secondary hover:ring-2">
 			<i class="fas fa-user" />
 		</button>
 	{/if}

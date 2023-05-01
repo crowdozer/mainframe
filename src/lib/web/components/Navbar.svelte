@@ -5,15 +5,15 @@
 <nav class="relative">
 	<div class="mx-auto flex max-w-6xl">
 		<!-- Logo -->
-		<a href="/" class="btn self-center"> crwdzr.io </a>
+		<a href="/" class="btn self-center hover:variant-ringed-primary"> crwdzr.io </a>
 
 		<!-- Buttons -->
 		<div class="ml-auto inline-flex items-center gap-2">
 			<div class="hidden sm:contents">
-				<a href="https://www.github.com/crowdozer" class="btn">
+				<a href="https://www.github.com/crowdozer" class="btn hover:variant-ringed-primary">
 					<span><i class="fab fa-github mr-1" /> github</span>
 				</a>
-				<a href="/hire-me" class="btn">
+				<a href="/hire-me" class="btn hover:variant-ringed-primary">
 					<span><i class="fas fa-fw fa-handshake-angle mr-2" /></span> hire me
 				</a>
 			</div>
