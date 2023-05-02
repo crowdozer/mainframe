@@ -243,12 +243,18 @@ export async function setCachedCurrentlyPlaying(
 	return value;
 }
 
-export async function getCurrentPlaying(userID: string, retry = true): Promise<any> {
+/**
+ * First checks the cache for non-expired playback state. If it's found, it's returned
+ * Otherwise playback state is requested from Spotify, cached, and returned
+ */
+export async function getCurrentPlaying(
+	userID: string,
+	retry = true,
+): Promise<CachedCurrentlyPlaying> {
 	const cached = await getCachedCurrentlyPlaying(userID);
 	if (cached) return cached;
 
 	const auth = await getAuthState(userID);
-
 	if (!auth.access || !auth.refresh) {
 		throw new TRPCError({
 			code: 'BAD_REQUEST',
@@ -263,17 +269,27 @@ export async function getCurrentPlaying(userID: string, retry = true): Promise<a
 		const result = await setCachedCurrentlyPlaying(userID, response.body);
 		return result;
 	} catch (error: any) {
-		if (!retry) {
-			throw error;
+		/**
+		 * It's allowed to fail once, if the access token is expired
+		 */
+		if (retry) {
+			const msg = error?.body?.error?.message || '';
+			if (msg === 'The access token expired') {
+				void (await refreshAccessToken(userID, auth.access, auth.refresh));
+
+				return getCurrentPlaying(userID, false);
+			}
 		}
 
-		const msg = error?.body?.error?.message || '';
-		if (msg === 'The access token expired') {
-			void (await refreshAccessToken(userID, auth.access, auth.refresh));
-
-			return getCurrentPlaying(userID, false);
-		}
-
-		throw error;
+		/**
+		 * The spotify sdk we're using is broken sometimes.
+		 */
+		throw new TRPCError({
+			code: 'INTERNAL_SERVER_ERROR',
+			message:
+				error.message === '[object Object]' || !error.message
+					? 'An unknown error has occurred'
+					: error.message,
+		});
 	}
 }
