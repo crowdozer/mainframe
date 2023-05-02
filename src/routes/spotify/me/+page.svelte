@@ -122,12 +122,6 @@
 			});
 	}
 
-	function stop() {
-		// console.log('stopping intervals');
-		if (progInterval) clearInterval(progInterval);
-		if (reqInterval) clearInterval(reqInterval);
-	}
-
 	async function start() {
 		// console.log('starting intervals');
 		await getData();
@@ -139,6 +133,12 @@
 		progInterval = setInterval(async () => {
 			progress = getProgress();
 		}, progress_interval_length);
+	}
+
+	function stop() {
+		// console.log('stopping intervals');
+		if (progInterval) clearInterval(progInterval);
+		if (reqInterval) clearInterval(reqInterval);
 	}
 
 	/**
