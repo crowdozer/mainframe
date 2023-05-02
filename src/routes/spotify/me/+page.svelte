@@ -154,12 +154,12 @@
 	onDestroy(() => stop());
 </script>
 
-<div class="container mx-auto my-16 max-w-4xl">
+<div class="container mx-auto my-16 max-w-4xl p-4 lg:p-0">
 	<div class="flex flex-col gap-16">
 		<div class="flex flex-col gap-2">
 			<h3>Spotify Connection</h3>
 			<hr class="mb-2" />
-			<div class="flex flex-row gap-2">
+			<div class="flex flex-col gap-2 lg:flex-row">
 				<a
 					class="btn variant-ringed-error"
 					href="/spotify/auth/logout"
@@ -177,16 +177,14 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<h3>Spotify Data</h3>
-			<hr class="mb-2" />
 			{#if data}
 				<div class="flex flex-col gap-8">
 					<!-- Track Info -->
-					<div class="flex flex-row gap-8">
+					<div class="flex flex-col gap-8 lg:flex-row">
 						<!-- Track art -->
-						<div class="aspect-[1/1] h-32 w-32">
+						<div class="aspect-[1/1] h-full w-full lg:h-32 lg:w-32">
 							{#if preview}
-								<img src={preview} alt={'spotify'} class="apsect-[1/1] h-32 w-32" />
+								<img src={preview} alt={'spotify'} class="h-full w-full" />
 							{/if}
 						</div>
 						<!-- Artist Info -->
