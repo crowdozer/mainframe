@@ -15,3 +15,13 @@ export type AuthCodeTradeResponse = {
 	success: boolean;
 	reload: boolean;
 };
+
+export type CurrentlyPlaying = Pick<
+	SpotifyApi.CurrentPlaybackResponse,
+	'progress_ms' | 'item' | 'is_playing' | 'currently_playing_type'
+>;
+
+export type CachedCurrentlyPlaying = {
+	on: Date;
+	data: CurrentlyPlaying;
+};

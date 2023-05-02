@@ -9,11 +9,15 @@ import type {
 	SpotifyRefreshToken,
 	SpotifyCredentials,
 	AuthCodeTradeResponse,
+	CurrentlyPlaying,
+	CachedCurrentlyPlaying,
 } from './types';
 import SpotifyWebAPI from 'spotify-web-api-node';
 import { TRPCError } from '@trpc/server';
+import { cache } from '$server/cache';
 
 const redirect_uri = `${dev ? 'http://localhost:5173' : 'https://crwdzr.io'}/spotify/auth`;
+const cache_expiration = 5; // 5 seconds
 
 const spotifyApi = new SpotifyWebAPI({
 	clientId: SPOTIFY_CLIENT_ID,
@@ -176,7 +180,50 @@ export async function refreshAccessToken(
 	void (await updateAccessToken(userID, result.body.access_token));
 }
 
+export async function getCachedCurrentlyPlaying(
+	userID: string,
+): Promise<CachedCurrentlyPlaying | null> {
+	const key = `spotify:${userID}`;
+
+	const value = await cache.get(key);
+	if (!value) return null;
+
+	try {
+		const values = JSON.parse(value) as CachedCurrentlyPlaying;
+		values.on = new Date(values.on);
+		return values;
+	} catch (error) {
+		return null;
+	}
+}
+
+export async function setCachedCurrentlyPlaying(
+	userID: string,
+	data: CurrentlyPlaying,
+): Promise<CachedCurrentlyPlaying> {
+	const key = `spotify:${userID}`;
+	const value = {
+		// to infer how much time has passed
+		on: new Date(),
+		// to avoid leaking data to the client like device
+		data: {
+			currently_playing_type: data.currently_playing_type,
+			is_playing: data.is_playing,
+			item: data.item,
+			progress_ms: data.progress_ms,
+		},
+	} satisfies CachedCurrentlyPlaying;
+
+	void (await cache.set(key, JSON.stringify(value)));
+	void (await cache.expire(key, cache_expiration));
+
+	return value;
+}
+
 export async function getCurrentPlaying(userID: string, retry = true): Promise<any> {
+	const cached = await getCachedCurrentlyPlaying(userID);
+	if (cached) return cached;
+
 	const auth = await getAuthState(userID);
 
 	if (!auth.access || !auth.refresh) {
@@ -189,9 +236,10 @@ export async function getCurrentPlaying(userID: string, retry = true): Promise<a
 	try {
 		spotifyApi.setAccessToken(auth.access);
 
-		const result = await spotifyApi.getMyCurrentPlaybackState();
+		const response = await spotifyApi.getMyCurrentPlaybackState();
+		const result = await setCachedCurrentlyPlaying(userID, response.body);
 
-		return result.body;
+		return result;
 	} catch (error: any) {
 		if (!retry) {
 			throw error;

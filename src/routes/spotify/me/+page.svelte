@@ -1,21 +1,146 @@
 <script lang="ts">
+	import type { CachedCurrentlyPlaying } from '$server/spotify/types';
 	import Code from '$web/components/ui/Code.svelte';
 	import Label from '$web/components/ui/Label.svelte';
 	import { trpc } from '$web/utils/trpc';
-	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
-	import { onMount } from 'svelte';
+	import { Accordion, AccordionItem, ProgressBar } from '@skeletonlabs/skeleton';
+	import { onMount, onDestroy } from 'svelte';
 
-	let data: any = '';
+	const progress_interval_length = 1000; // how many ms to recaulate progress after
+	const sync_interval_length = 10000; // how many ms to sync with spotify
 
-	onMount(async () => {
-		const response = await trpc()
+	/**
+	 * The interval that estimates playback %, runs every second
+	 */
+	let progInterval: any;
+
+	/**
+	 * The interval that requests current playback state
+	 * This is less frequent than the interval that estimates progress %
+	 */
+	let reqInterval: any;
+
+	// data about the current track
+	let data: CachedCurrentlyPlaying | null = null;
+
+	// current track title
+	let title: string = '';
+	// current track preview image
+	let preview: string | null = null;
+	// [url, name, isLastArtist]
+	let artists: [string, string, boolean][] = [];
+	// [currentProgressInSeconds, lengthInSeconds]
+	let progress: [number, number] = [0, 0];
+
+	function getTitle() {
+		if (!data?.data?.item) return '';
+		const { item } = data.data;
+
+		switch (item.type) {
+			case 'track':
+				return item.name;
+			default:
+				return 'unhandled track type';
+		}
+	}
+
+	function getPreview(): string | null {
+		if (!data?.data?.item) return null;
+		const { item } = data.data;
+
+		switch (item.type) {
+			case 'track':
+				return item.album.images[0].url;
+			default:
+				return null;
+		}
+	}
+
+	function getArtists(): [string, string, boolean][] {
+		if (!data?.data?.item) return [];
+		const { item } = data.data;
+
+		switch (item.type) {
+			case 'track':
+				const len = item.artists.length;
+				return item.artists.map((artist, i) => [
+					artist.external_urls.spotify,
+					artist.name,
+					i < len - 1,
+				]);
+			default:
+				return [];
+		}
+	}
+
+	function getProgress(): [number, number] {
+		// console.log('recalculating progress');
+
+		if (!data?.data?.item) return [0, 0];
+		const { item } = data.data;
+
+		const now = new Date();
+		const cacheAgeMS = now.getTime() - data.on.getTime();
+		const spotifyProgressMS = data.data.progress_ms || 0;
+		const trackDurationMS = item.duration_ms;
+
+		let realProgressMS = spotifyProgressMS + cacheAgeMS;
+
+		if (realProgressMS > trackDurationMS) {
+			realProgressMS = trackDurationMS;
+		}
+
+		return [Math.round(realProgressMS / 1000), Math.round(trackDurationMS / 1000)];
+	}
+
+	function secondsToTime(duration: number): string {
+		const minutes = Math.floor(duration / 60);
+		const seconds = duration % 60;
+
+		const mPad = minutes.toString().padStart(2, '0');
+		const sPad = seconds.toString().padStart(2, '0');
+
+		return `${mPad}:${sPad}`;
+	}
+
+	// reactivity for viewing data
+	$: if (data) {
+		title = getTitle();
+		preview = getPreview();
+		artists = getArtists();
+	}
+
+	async function getData() {
+		// console.log('fetching data');
+		data = await trpc()
 			.spotify.getMyStatus.query()
 			.catch((error) => {
+				console.error(error);
+				stop();
 				return null;
 			});
+	}
 
-		data = JSON.stringify(response, null, 4);
-	});
+	function stop() {
+		// console.log('stopping intervals');
+		if (progInterval) clearInterval(progInterval);
+		if (reqInterval) clearInterval(reqInterval);
+	}
+
+	async function start() {
+		// console.log('starting intervals');
+		await getData();
+		reqInterval = setInterval(() => {
+			getData();
+		}, sync_interval_length);
+
+		progInterval = setInterval(async () => {
+			progress = getProgress();
+		}, progress_interval_length);
+	}
+
+	onMount(() => start());
+	onDestroy(() => stop());
 </script>
 
 <div class="container mx-auto my-16 max-w-4xl">
@@ -44,12 +169,63 @@
 			<h3>Spotify Data</h3>
 			<hr class="mb-2" />
 			{#if data}
-				<Accordion>
-					<AccordionItem open>
-						<svelte:fragment slot="summary">Status <Label>debug</Label></svelte:fragment>
-						<svelte:fragment slot="content"><Code lines={1000} code={data} /></svelte:fragment>
-					</AccordionItem>
-				</Accordion>
+				<div class="flex flex-col gap-8">
+					<!-- Track Info -->
+					<div class="flex flex-row gap-8">
+						<!-- Track art -->
+						<div class="aspect-[1/1] h-32 w-32">
+							{#if preview}
+								<img src={preview} alt={'spotify'} class="apsect-[1/1] h-32 w-32" />
+							{/if}
+						</div>
+						<!-- Artist Info -->
+						<div class="flex grow">
+							<div class="flex flex-row gap-8">
+								<div>
+									<h3>{title}</h3>
+									<p class="flex flex-row gap-2">
+										{#each artists as artist, i}
+											<span class="flex">
+												<a href={artist[0]} target="_blank" rel="noopener noreferrer">
+													{artist[1]}
+												</a>
+												<span>{artist[2] ? ', ' : ''}</span>
+											</span>
+										{/each}
+									</p>
+								</div>
+								<div class="grow" />
+								<!-- <div>
+								<a class="btn btn-icon hover:variant-ghost-primary">
+									<i class="fab fa-spotify text-2xl" />
+								</a>
+							</div> -->
+							</div>
+						</div>
+					</div>
+
+					<!-- Player -->
+					<div class="flex flex-col gap-2">
+						<div class="flex flex-row gap-8">
+							<div>{secondsToTime(progress[0])}</div>
+							<div class="flex grow">
+								<ProgressBar value={progress[0]} max={progress[1]} class="self-center" />
+							</div>
+							<div>{secondsToTime(progress[1])}</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="mt-8">
+					<Accordion>
+						<AccordionItem>
+							<svelte:fragment slot="summary">Status <Label>debug</Label></svelte:fragment>
+							<svelte:fragment slot="content"
+								><Code lines={1000} code={JSON.stringify(data, null, 4)} /></svelte:fragment
+							>
+						</AccordionItem>
+					</Accordion>
+				</div>
 			{:else}
 				<p>Nothing to show</p>
 			{/if}
