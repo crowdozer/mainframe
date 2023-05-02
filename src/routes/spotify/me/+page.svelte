@@ -7,7 +7,7 @@
 	import { onMount, onDestroy } from 'svelte';
 
 	const progress_interval_length = 1000; // how many ms to recaulate progress after
-	const sync_interval_length = 10000; // how many ms to sync with spotify
+	const sync_interval_length = 5000; // how many ms to sync with spotify
 
 	/**
 	 * The interval that estimates playback %, runs every second
@@ -83,10 +83,14 @@
 		const { item } = data.data;
 
 		const now = new Date();
-		const cacheAgeMS = now.getTime() - data.on.getTime();
 		const spotifyProgressMS = data.data.progress_ms || 0;
 		const trackDurationMS = item.duration_ms;
 
+		if (!data.data.is_playing) {
+			return [Math.round(spotifyProgressMS / 1000), Math.round(trackDurationMS / 1000)];
+		}
+
+		const cacheAgeMS = now.getTime() - data.on.getTime();
 		let realProgressMS = spotifyProgressMS + cacheAgeMS;
 
 		if (realProgressMS > trackDurationMS) {
