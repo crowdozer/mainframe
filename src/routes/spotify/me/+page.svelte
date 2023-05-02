@@ -110,13 +110,6 @@
 		return `${mPad}:${sPad}`;
 	}
 
-	// reactivity for viewing data
-	$: if (data) {
-		title = getTitle();
-		preview = getPreview();
-		artists = getArtists();
-	}
-
 	async function getData() {
 		// console.log('fetching data');
 		data = await trpc()
@@ -142,9 +135,19 @@
 			getData();
 		}, sync_interval_length);
 
+		progress = getProgress();
 		progInterval = setInterval(async () => {
 			progress = getProgress();
 		}, progress_interval_length);
+	}
+
+	/**
+	 * Reactivity for viewing data
+	 */
+	$: if (data) {
+		title = getTitle();
+		preview = getPreview();
+		artists = getArtists();
 	}
 
 	onMount(() => start());
