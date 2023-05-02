@@ -15,6 +15,7 @@ import type {
 import SpotifyWebAPI from 'spotify-web-api-node';
 import { TRPCError } from '@trpc/server';
 import { cache } from '$server/cache';
+import { updateOrCreateUser } from '$server/prisma/utils';
 
 const redirect_uri = `${dev ? 'http://localhost:5173' : 'https://crwdzr.io'}/spotify/auth`;
 const cache_expiration = 5; // 5 seconds
@@ -46,14 +47,23 @@ export function getAuthURI(): string {
 }
 
 /**
- * Load the user's auth state from db
+ * Load the user's auth state from db. Allow it to fail bc they
+ * may not have an account yet.
  */
 export async function getAuthState(userID: string): Promise<SpotifyCredentials> {
-	const user = await prisma.user.findFirstOrThrow({
+	const user = await prisma.user.findFirst({
 		where: {
 			id: userID,
 		},
 	});
+
+	if (!user) {
+		return {
+			access: null,
+			refresh: null,
+			auth: null,
+		};
+	}
 
 	let auth = null;
 	if (user.spotifyAuthCode && user.spotifyAuthState) {
@@ -71,26 +81,23 @@ export async function getAuthState(userID: string): Promise<SpotifyCredentials> 
 }
 
 /**
- * Push the user's auth code/state to db
+ * Push the user's auth code/state to db. Use updateOrCreate bc
+ * they may not be registered yet.
  */
 export async function setAuthState(
 	userID: string,
 	code: string | null,
 	state: string | null,
 ): Promise<void> {
-	void (await prisma.user.update({
-		where: {
-			id: userID,
-		},
-		data: {
-			spotifyAuthCode: code,
-			spotifyAuthState: state,
-		},
+	void (await updateOrCreateUser(userID, {
+		spotifyAuthCode: code,
+		spotifyAuthState: state,
 	}));
 }
 
 /**
- * Push the user's access token to db
+ * Push the user's access token to db.
+ * We don't have to use updateOrCreate bc it should have already happened.
  */
 export async function setCredentials(
 	userID: string,
