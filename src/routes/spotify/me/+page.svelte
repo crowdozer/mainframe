@@ -32,6 +32,9 @@
 	// [currentProgressInSeconds, lengthInSeconds]
 	let progress: [number, number] = [0, 0];
 
+	// Error to show if fetching playback state fails
+	let playbackError: string | null = null;
+
 	function getTitle() {
 		if (!data?.data?.item) return '';
 		const { item } = data.data;
@@ -115,6 +118,7 @@
 		data = await trpc()
 			.spotify.getMyStatus.query()
 			.catch((error) => {
+				playbackError = error.message || 'An unknown error occurred';
 				console.error(error);
 				stop();
 				return null;
@@ -226,8 +230,8 @@
 						</AccordionItem>
 					</Accordion>
 				</div>
-			{:else}
-				<p>Nothing to show</p>
+			{:else if playbackError}
+				<p class="mt-8 text-error-500">error: {playbackError}</p>
 			{/if}
 		</div>
 	</div>
