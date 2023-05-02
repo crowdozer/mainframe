@@ -18,7 +18,7 @@ import type {
 import { generateRandomString, getErrorDescription } from './utils';
 
 const redirect_uri = `${dev ? 'http://localhost:5173' : 'https://crwdzr.io'}/spotify/auth`;
-const cache_expiration = 5; // 5 seconds
+const cache_expiration = 3; // 3 seconds
 
 /**
  * A memory cache of the various web API clients that may be instantiated for each user
