@@ -1,8 +1,11 @@
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 import { dev } from '$app/environment';
-import qs from 'qs';
-import { generateRandomString, getErrorDescription } from './utils';
+import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '$env/static/private';
 import { prisma } from '$server/prisma';
+import { cache } from '$server/cache';
+import { updateOrCreateUser } from '$server/prisma/utils';
+import SpotifyWebAPI from 'spotify-web-api-node';
+import { TRPCError } from '@trpc/server';
+import qs from 'qs';
 import type {
 	SpotifyAccessToken,
 	SpotifyAuthCode,
@@ -12,19 +15,30 @@ import type {
 	CurrentlyPlaying,
 	CachedCurrentlyPlaying,
 } from './types';
-import SpotifyWebAPI from 'spotify-web-api-node';
-import { TRPCError } from '@trpc/server';
-import { cache } from '$server/cache';
-import { updateOrCreateUser } from '$server/prisma/utils';
+import { generateRandomString, getErrorDescription } from './utils';
 
 const redirect_uri = `${dev ? 'http://localhost:5173' : 'https://crwdzr.io'}/spotify/auth`;
 const cache_expiration = 5; // 5 seconds
 
-const spotifyApi = new SpotifyWebAPI({
-	clientId: SPOTIFY_CLIENT_ID,
-	clientSecret: SPOTIFY_CLIENT_SECRET,
-	redirectUri: redirect_uri,
-});
+/**
+ * A memory cache of the various web API clients that may be instantiated for each user
+ */
+const clients: { [key: string]: SpotifyWebAPI } = {};
+
+/**
+ * Gets the current userID's web client
+ */
+function getClient(userID: string): SpotifyWebAPI {
+	if (!clients[userID]) {
+		clients[userID] = new SpotifyWebAPI({
+			clientId: SPOTIFY_CLIENT_ID,
+			clientSecret: SPOTIFY_CLIENT_SECRET,
+			redirectUri: redirect_uri,
+		});
+	}
+
+	return clients[userID];
+}
 
 /**
  * Generate a sign-in link for spotify
@@ -131,7 +145,8 @@ export async function tradeAuthCodeForToken(
 			throw new Error('state mismatch');
 		}
 
-		const res = await spotifyApi.authorizationCodeGrant(code);
+		const client = getClient(userID);
+		const res = await client.authorizationCodeGrant(code);
 
 		const {
 			body: { access_token, refresh_token },
@@ -180,9 +195,10 @@ export async function refreshAccessToken(
 	access: string,
 	refresh: string,
 ): Promise<void> {
-	spotifyApi.setAccessToken(access);
-	spotifyApi.setRefreshToken(refresh);
-	const result = await spotifyApi.refreshAccessToken();
+	const client = getClient(userID);
+	client.setAccessToken(access);
+	client.setRefreshToken(refresh);
+	const result = await client.refreshAccessToken();
 
 	void (await updateAccessToken(userID, result.body.access_token));
 }
@@ -241,11 +257,10 @@ export async function getCurrentPlaying(userID: string, retry = true): Promise<a
 	}
 
 	try {
-		spotifyApi.setAccessToken(auth.access);
-
-		const response = await spotifyApi.getMyCurrentPlaybackState();
+		const client = getClient(userID);
+		client.setAccessToken(auth.access);
+		const response = await client.getMyCurrentPlaybackState();
 		const result = await setCachedCurrentlyPlaying(userID, response.body);
-
 		return result;
 	} catch (error: any) {
 		if (!retry) {
