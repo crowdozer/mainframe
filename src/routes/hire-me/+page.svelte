@@ -22,7 +22,8 @@
 		'AWS',
 		'Google Cloud',
 		'Kubernetes',
-		'Serverless/Cloud Functions)',
+		'Serverless/Cloud Functions',
+		'Vercel/Netlify',
 	];
 
 	const otherTech = [
