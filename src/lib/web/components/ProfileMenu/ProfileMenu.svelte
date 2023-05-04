@@ -17,7 +17,7 @@
 
 	const links = [
 		['/hire-me', 'fas fa-handshake-angle mr-1', 'Hire me'],
-		['https://www.github.com/crowdozer', 'fab fa-github', 'Github'],
+		['https://github.com/crowdozer/mainframe', 'fab fa-github', 'Github'],
 		['/galaxy', 'fas fa-user-astronaut', 'Galaxy', 'Galaxy'],
 		['/gates-of-hell', 'fas fa-person-rifle', 'Ostfront'],
 		['/redis', 'fas fa-database', 'Redis'],
