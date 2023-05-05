@@ -1,13 +1,23 @@
 import { createTRPCRouter, AuthedRateLimitedProcedure } from '$server/trpc';
 import { getCurrentPlaying } from '$server/spotify';
-// import { z } from 'zod';
 
 const router = createTRPCRouter({
 	/**
-	 * returns whatever is in the cache at url.key
+	 * returns whatever the logged in user is playing
 	 */
 	getMyStatus: AuthedRateLimitedProcedure.query(async (request) => {
 		const userID = request.ctx.event.locals.user.id;
+
+		const currentlyPlaying = await getCurrentPlaying(userID);
+
+		return currentlyPlaying;
+	}),
+	/**
+	 * returns my spotify status
+	 */
+	getOwnersStatus: AuthedRateLimitedProcedure.query(async () => {
+		// It's fine to hardcode this here, it's always going to be mine
+		const userID = 'user_2Ov8DOL5rDbLToEnkCdzpbMbkOb';
 
 		const currentlyPlaying = await getCurrentPlaying(userID);
 

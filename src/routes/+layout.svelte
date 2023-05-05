@@ -4,7 +4,7 @@
 	import Loading from '$web/components/ui/Loading.svelte';
 	import NavigationProgress from '$web/components/NavigationProgress.svelte';
 	import { Toaster } from 'svelte-french-toast';
-	import { AppShell, storePopup } from '@skeletonlabs/skeleton';
+	import { storePopup } from '@skeletonlabs/skeleton';
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 
 	// Your selected Skeleton theme:
