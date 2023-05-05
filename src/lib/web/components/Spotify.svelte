@@ -102,7 +102,7 @@
 		const minutes = Math.floor(duration / 60);
 		const seconds = duration % 60;
 
-		const mPad = minutes.toString().padStart(2, '0');
+		const mPad = minutes.toString().padStart(1, '0');
 		const sPad = seconds.toString().padStart(2, '0');
 
 		return `${mPad}:${sPad}`;
