@@ -1,4 +1,4 @@
-import { createTRPCRouter, AuthedRateLimitedProcedure } from '$server/trpc';
+import { createTRPCRouter, AuthedRateLimitedProcedure, RateLimitedProcedure } from '$server/trpc';
 import { getCurrentPlaying } from '$server/spotify';
 
 const router = createTRPCRouter({
@@ -15,7 +15,7 @@ const router = createTRPCRouter({
 	/**
 	 * returns my spotify status
 	 */
-	getOwnersStatus: AuthedRateLimitedProcedure.query(async () => {
+	getOwnersStatus: RateLimitedProcedure.query(async () => {
 		// It's fine to hardcode this here, it's always going to be mine
 		const userID = 'user_2Ov8DOL5rDbLToEnkCdzpbMbkOb';
 
