@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Navbar from '$web/components/Navbar.svelte';
-	// import CRT from './CRT.svelte';
 	import { AppShell } from '@skeletonlabs/skeleton';
-	import Footer from './Footer.svelte';
+	import Footer from '$web/components/Footer.svelte';
 
 	export let showNavbar: boolean = true;
 	export let showFooter: boolean = true;
@@ -29,5 +28,3 @@
 	</svelte:fragment>
 	<!-- <svelte:fragment slot="footer">Footer</svelte:fragment> -->
 </AppShell>
-
-<!-- <CRT /> -->
