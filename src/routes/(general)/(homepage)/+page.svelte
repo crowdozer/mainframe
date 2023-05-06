@@ -3,7 +3,7 @@
 	import Intro from '$web/components/Intro/Intro.svelte';
 	import Feed from '$web/components/Feed/Feed.svelte';
 	import type { PageData } from './$types';
-	import AsciiRipple from '$web/components/AsciiRipple/AsciiRipple.svelte';
+	// import AsciiRipple from '$web/components/AsciiRipple/AsciiRipple.svelte';
 
 	export let data: PageData;
 </script>
@@ -16,7 +16,7 @@
 <div class="relative py-8 lg:py-32">
 	<Container>
 		<Intro />
-		<AsciiRipple />
+		<!-- <AsciiRipple /> -->
 	</Container>
 </div>
 
