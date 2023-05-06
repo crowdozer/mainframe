@@ -11,7 +11,7 @@
 
 <label for="select-{name}" class="label w-full {widthClass}">
 	{#if label}
-		<span>{label}}</span>
+		<span>{label}</span>
 	{/if}
 	<select id="select-{name}" class="select" {name} bind:value on:change {disabled}>
 		<slot />
