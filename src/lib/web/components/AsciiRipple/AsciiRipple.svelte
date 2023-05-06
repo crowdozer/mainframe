@@ -65,7 +65,7 @@
 		ripples.push(new Ripple(x, y, ctx));
 
 		if (!animating) {
-			console.log('animating');
+			// console.log('animating');
 			animating = true;
 			animateRipples();
 			asciiGenerator.startRenderingSequence(targetFPS);
