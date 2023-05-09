@@ -21,7 +21,7 @@
 	// Target animation fps
 	let targetFPS: number = 15;
 	// Alphabet for ascii conversion
-	let alphabet: string = '    ..-+0101011011';
+	let alphabet: string = '     . . + +0101011011';
 	// How fast do the rings decay
 	const decay = 0.05 / targetFPS;
 	// Random decay multipliers
