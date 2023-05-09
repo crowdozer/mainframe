@@ -3,51 +3,51 @@
 	import Container from '$web/components/ui/Container.svelte';
 	import CopyClick from '$web/components/ui/CopyClick.svelte';
 	import Paper from '$web/components/ui/Paper.svelte';
-	import Tag from '$web/components/ui/Tag.svelte';
+	// import Tag from '$web/components/ui/Tag.svelte';
 
-	const frameworks = [
-		'Express',
-		'React 16-18',
-		'Svelte',
-		'Svelte-Kit',
-		'NextJS',
-		'Codeigniter',
-		'Laravel',
-		'Frameworkless',
-	];
+	// const frameworks = [
+	// 	'Express',
+	// 	'React 16-18',
+	// 	'Svelte',
+	// 	'Svelte-Kit',
+	// 	'NextJS',
+	// 	'Codeigniter',
+	// 	'Laravel',
+	// 	'Frameworkless',
+	// ];
 
-	const databases = ['MySQL (MariaDB, CloudSQL)', 'Firebase', 'Supabase', 'MongoDB', 'ArangoDB'];
+	// const databases = ['MySQL (MariaDB, CloudSQL)', 'Firebase', 'Supabase', 'MongoDB', 'ArangoDB'];
 
-	const servers = [
-		'DigitalOcean',
-		'AWS',
-		'Google Cloud',
-		'Kubernetes',
-		'Serverless/Cloud Functions',
-		'Vercel/Netlify',
-	];
+	// const servers = [
+	// 	'DigitalOcean',
+	// 	'AWS',
+	// 	'Google Cloud',
+	// 	'Kubernetes',
+	// 	'Serverless/Cloud Functions',
+	// 	'Vercel/Netlify',
+	// ];
 
-	const otherTech = [
-		'API Integration (JWT/JSON, SOAP, AJAX)',
-		'Webhosting (DigitalOcean, Netlify, Vercel)',
-		'CI/CD (Testing, Deployment, Images)',
-		'Error monitoring (Sentry)',
-		'SSH, FTP, SFTP, Linux Terminal, WSL',
-		'Google maps and other geolocation APIs',
-		'Socket.io integrations for server/client',
-		'Stripe integrations for server/client',
-	];
+	// const otherTech = [
+	// 	'API Integration (JWT/JSON, SOAP, AJAX)',
+	// 	'Webhosting (DigitalOcean, Netlify, Vercel)',
+	// 	'CI/CD (Testing, Deployment, Images)',
+	// 	'Error monitoring (Sentry)',
+	// 	'SSH, FTP, SFTP, Linux Terminal, WSL',
+	// 	'Google maps and other geolocation APIs',
+	// 	'Socket.io integrations for server/client',
+	// 	'Stripe integrations for server/client',
+	// ];
 
-	const coolStuff = [
-		'Data Visualization',
-		'Automation',
-		'Composability',
-		'Optimization',
-		'Idempotency',
-		'Cryptography, Steganography',
-		'Generative AI (Text and Images)',
-		'Event Sourcing',
-	];
+	// const coolStuff = [
+	// 	'Data Visualization',
+	// 	'Automation',
+	// 	'Composability',
+	// 	'Optimization',
+	// 	'Idempotency',
+	// 	'Cryptography, Steganography',
+	// 	'Generative AI (Text and Images)',
+	// 	'Event Sourcing',
+	// ];
 </script>
 
 <svelte:head>
@@ -134,10 +134,10 @@
 			<div class="flex flex-col gap-4">
 				<h3 class="text-surface-700-200-token">Proprietary Leads System</h3>
 				<p>
-					I helped a timeshare exit company design a replacement for their straining leads system. I
-					redesigned and optimized their round robins, reducing reads and writes by a factor of
-					almost 100. We removed countless bugs by consolidating scattered business logic into a
-					simple, uniform, robust server.
+					I redesigned a timeshare exit companies overstressed leads system. I redesigned and
+					optimized their round robins, reducing reads and writes by a factor of almost 100. We
+					removed countless bugs by consolidating scattered business logic into a simple, uniform,
+					robust server.
 				</p>
 			</div>
 		</div>
