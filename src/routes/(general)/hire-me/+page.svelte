@@ -106,7 +106,7 @@
 			<div class="flex flex-col gap-4">
 				<h3>
 					<a href="https://www.luxorts.com/" target="_blank" rel="noopener noreferrer">
-						www.luxorts.com
+						luxorts.com
 					</a>
 				</h3>
 				<p>
@@ -140,6 +140,20 @@
 					optimized their round robins, reducing reads and writes by a factor of almost 100. We
 					removed countless bugs by consolidating scattered business logic into a simple, uniform,
 					robust server.
+				</p>
+			</div>
+		</div>
+
+		<div>
+			<div class="flex flex-col gap-4">
+				<h3>
+					<a href="https://www.crwdzr.io/" target="_blank" rel="noopener noreferrer"> crwdzr.io </a>
+				</h3>
+				<p>
+					My website is 100% free and open source on github. It's built with Svelte, Tailwind,
+					Typescript, and tRPC. Features include user auth, api connections, rss feed connections,
+					client side routing, server side rendering, user auth available on the edge with zero
+					network requests, prisma, and redis integration.
 				</p>
 			</div>
 		</div>
