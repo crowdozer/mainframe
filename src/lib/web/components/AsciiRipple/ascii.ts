@@ -7,31 +7,6 @@ type PerformanceInfo = {
  * https://www.reddit.com/r/gamedev/comments/20ach8/how_to_generate_star_positions_in_a_2d_procedural/
  */
 export class AsciiGenerator {
-	// Canvas used in drawing the stars
-	private canvas: HTMLCanvasElement;
-	// Canvas used in transforming the star canvas to grayscale bitmap
-	private tmpCanvas: HTMLCanvasElement;
-	private tmpCanvasCtx: CanvasRenderingContext2D;
-	// Cleanup function
-	public cleanup: (() => void) | null;
-	// Ascii width
-	private asciiWidth: number;
-	// Ascii height
-	private asciiHeight: number;
-	// The characters to use in converting grayscale intensity to ascii
-	public alphabet: string;
-	// Callback ran every performance update
-	private onPerformanceUpdate: (ips: number) => void;
-	// Performance monitoring
-	private performance: PerformanceInfo = {
-		invocations: 0,
-	};
-	private fontFamily: string;
-	private fontSizePx: number;
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-	// @ts-ignore
-	private asciiOutputElement: HTMLPreElement | never;
-
 	constructor(config: {
 		alphabet: string;
 		canvas: HTMLCanvasElement;
@@ -64,6 +39,31 @@ export class AsciiGenerator {
 		// Cleanup function
 		this.cleanup = null;
 	}
+
+	// Canvas used in drawing the stars
+	private canvas: HTMLCanvasElement;
+	// Canvas used in transforming the star canvas to grayscale bitmap
+	private tmpCanvas: HTMLCanvasElement;
+	private tmpCanvasCtx: CanvasRenderingContext2D;
+	// Cleanup function
+	public cleanup: (() => void) | null;
+	// Ascii width
+	private asciiWidth: number;
+	// Ascii height
+	private asciiHeight: number;
+	// The characters to use in converting grayscale intensity to ascii
+	public alphabet: string;
+	// Callback ran every performance update
+	private onPerformanceUpdate: (ips: number) => void;
+	// Performance monitoring
+	private performance: PerformanceInfo = {
+		invocations: 0,
+	};
+	private fontFamily: string;
+	private fontSizePx: number;
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
+	private asciiOutputElement: HTMLPreElement | never;
 
 	/**
 	 * Mount, then return info about created elements
@@ -108,10 +108,10 @@ export class AsciiGenerator {
 		const preWidth = this.asciiOutputElement.clientWidth;
 		const preHeight = this.asciiOutputElement.clientHeight;
 
-		const columns = Math.ceil(preWidth / charWidth) + 20;
+		const columns = Math.ceil((preWidth / charWidth) * 0.75);
 		const rows = Math.ceil(preHeight / charHeight);
 
-		console.log('new ascii: %s', columns * rows);
+		// console.log('new ascii: %s', columns * rows);
 		return [columns, rows];
 	}
 
@@ -145,7 +145,7 @@ export class AsciiGenerator {
 	 */
 	public stopRenderingSequence() {
 		if (this.cleanup) {
-			console.log('stopping rendering cycles');
+			// console.log('stopping rendering cycles');
 
 			this.cleanup();
 			this.cleanup = null;

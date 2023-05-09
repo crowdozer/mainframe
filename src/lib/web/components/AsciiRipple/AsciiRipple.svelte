@@ -2,6 +2,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { AsciiGenerator } from './ascii';
 	import { Ripple } from './ripple';
+	import { getRandomInt } from '$web/utils/random-int';
 
 	// Canvas to draw ripples on
 	let canvas: HTMLCanvasElement;
@@ -10,7 +11,7 @@
 	// Ripples currently animating
 	const ripples: Ripple[] = [];
 	// How often to spawn a new ripple
-	const rippleEvery = 2000;
+	const rippleEvery = 1250;
 	// Timer responsible for spawning ripples
 	let rippleInterval: NodeJS.Timer;
 	// Canvas to ascii generator instance
@@ -18,9 +19,14 @@
 	// Whether or not we're animating
 	let animating = false;
 	// Target animation fps
-	let targetFPS: number = 15;
+	let targetFPS: number = 10;
 	// Alphabet for ascii conversion
 	let alphabet: string = '    ..-+0101011011';
+
+	const decay = 0.05 / targetFPS;
+	const decayMinCoef = 3;
+	const decayMaxCoef = 7;
+	const propagation = 15 / targetFPS;
 
 	/**
 	 * Animates current frame and then returns if there should be another
@@ -45,12 +51,19 @@
 	 */
 	function animateRipples() {
 		const animationInterval = setInterval(() => {
-			const more = animateFrame();
-
-			if (!more) {
-				animating = false;
+			// if we're not animating anymore, cleanup
+			if (!animating) {
 				asciiGenerator.stopRenderingSequence();
 				clearInterval(animationInterval);
+				return;
+			}
+
+			// animate the current frame, and get whether or not another
+			// animation frame is necessary
+			const ripplesNeedAnimating = animateFrame();
+			if (!ripplesNeedAnimating) {
+				// we'll cleanup on next frame
+				animating = false;
 			}
 		}, 1000 / targetFPS);
 	}
@@ -62,7 +75,8 @@
 		const x = Math.floor(Math.random() * canvas.width);
 		const y = Math.floor(Math.random() * canvas.height);
 
-		ripples.push(new Ripple(x, y, ctx));
+		const randomDecay = decay * getRandomInt(decayMinCoef, decayMaxCoef);
+		ripples.push(new Ripple(x, y, ctx, randomDecay, propagation));
 
 		if (!animating) {
 			// console.log('animating');
@@ -80,7 +94,7 @@
 	 * Setup
 	 */
 	onMount(async () => {
-		ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+		ctx = canvas.getContext('2d', { willReadFrequently: true }) as CanvasRenderingContext2D;
 
 		// Instantiate the generator
 		asciiGenerator = new AsciiGenerator({
@@ -99,6 +113,7 @@
 	 * Teardown
 	 */
 	onDestroy(() => {
+		animating = false;
 		asciiGenerator.stopRenderingSequence();
 		clearInterval(rippleInterval);
 		window.removeEventListener('resize', handleResize);

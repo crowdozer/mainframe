@@ -55,7 +55,7 @@
 </svelte:head>
 
 <div class="relative mx-auto max-w-7xl py-8 md:py-32">
-	<!-- <AsciiRipple /> -->
+	<AsciiRipple />
 
 	<Container>
 		<h1 class="text-9xl font-bold">Let's work together</h1>

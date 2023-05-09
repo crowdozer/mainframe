@@ -1,13 +1,18 @@
-export const decay = 0.0125 / 4;
-export const propagation = 0.5 * 2;
-
 export class Ripple {
-	constructor(x: number, y: number, ctx: CanvasRenderingContext2D) {
+	constructor(
+		x: number,
+		y: number,
+		ctx: CanvasRenderingContext2D,
+		decay: number,
+		propagation: number,
+	) {
 		this.x = x;
 		this.y = y;
 		this.radius = 0;
 		this.alpha = 1;
 		this.ctx = ctx;
+		this.decay = decay;
+		this.propagation = propagation;
 	}
 
 	public x: number;
@@ -15,10 +20,12 @@ export class Ripple {
 	public alpha: number;
 	public radius: number;
 	private ctx: CanvasRenderingContext2D;
+	private decay: number;
+	private propagation: number;
 
 	update() {
-		this.radius += propagation;
-		this.alpha -= decay;
+		this.radius += this.propagation;
+		this.alpha -= this.decay;
 		if (this.alpha < 0) this.alpha = 0;
 	}
 
