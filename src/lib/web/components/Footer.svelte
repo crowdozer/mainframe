@@ -2,7 +2,7 @@
 	import Spotify from './Spotify.svelte';
 </script>
 
-<hr class="mt-32" />
+<hr class="mt-8 md:mt-32" />
 <footer class="relative mx-auto flex max-w-4xl flex-col gap-4 px-4 py-8">
 	<!-- <Spotify /> -->
 

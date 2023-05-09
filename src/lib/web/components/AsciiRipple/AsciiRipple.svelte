@@ -10,7 +10,7 @@
 	// Ripples currently animating
 	const ripples: Ripple[] = [];
 	// How often to spawn a new ripple
-	const rippleEvery = 2500;
+	const rippleEvery = 2000;
 	// Timer responsible for spawning ripples
 	let rippleInterval: NodeJS.Timer;
 	// Canvas to ascii generator instance
@@ -114,7 +114,7 @@
 
 <style lang="postcss">
 	#container :global(pre) {
-		@apply select-none overflow-hidden whitespace-pre opacity-50;
+		@apply select-none overflow-hidden whitespace-pre opacity-75;
 		/* Gradient setup */
 		@apply !box-decoration-clone !bg-clip-text !text-transparent;
 		/* Direction */

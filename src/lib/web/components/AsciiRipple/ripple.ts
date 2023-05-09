@@ -1,5 +1,5 @@
-export const decay = 0.0125 / 8;
-export const propagation = 0.5;
+export const decay = 0.0125 / 4;
+export const propagation = 0.5 * 2;
 
 export class Ripple {
 	constructor(x: number, y: number, ctx: CanvasRenderingContext2D) {
