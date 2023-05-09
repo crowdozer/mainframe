@@ -94,6 +94,8 @@
 					</span>
 				</div>
 			</div>
+
+			<h3 class="mt-8 text-surface-700-200-token md:mt-16 md:text-center">and many more</h3>
 		</Container>
 	</div>
 </div>
