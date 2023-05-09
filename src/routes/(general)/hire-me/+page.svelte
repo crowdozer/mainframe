@@ -57,43 +57,45 @@
 <div class="relative mx-auto max-w-7xl py-8 md:py-32">
 	<AsciiRipple />
 
-	<Container>
-		<h1 class="text-9xl font-bold">Let's work together</h1>
-		<h2 class="mt-8 text-surface-700-200-token">
-			6+ years of experience delivering rich user experiences, full stack
-		</h2>
+	<div class="z-1">
+		<Container>
+			<h1 class="text-9xl font-bold">Let's work together</h1>
+			<h2 class="mt-8 text-surface-700-200-token">
+				6+ years of experience delivering rich user experiences, full stack
+			</h2>
 
-		<div class="mt-8 md:mt-32">
-			<div
-				class="tech_icons mt-4 flex flex-col flex-wrap justify-center gap-2 gap-y-1 md:flex-row md:gap-16 md:gap-y-8"
-			>
-				<span class="btn justify-start md:variant-ringed-primary md:justify-center">
-					<i class="fa-brands fa-js text-primary-500" />
-					JS/TS
-				</span>
-				<span class="btn justify-start md:variant-ringed-primary md:justify-center">
-					<i class="fa-brands fa-react text-primary-500" />
-					React & Next
-				</span>
-				<span class="btn justify-start md:variant-ringed-primary md:justify-center">
-					<i class="fa-brands fa-docker text-primary-500" />
-					Docker & K8S
-				</span>
-				<span class="btn justify-start md:variant-ringed-primary md:justify-center">
-					<i class="fa-brands fa-aws text-primary-500" />
-					AWS
-				</span>
-				<span class="btn justify-start md:variant-ringed-primary md:justify-center">
-					<i class="fa-brands fa-google text-primary-500" />
-					GCP
-				</span>
-				<span class="btn justify-start md:variant-ringed-primary md:justify-center">
-					<i class="fas fa-cloud text-primary-500" />
-					Serverless
-				</span>
+			<div class="mt-8 md:mt-32">
+				<div
+					class="tech_icons mt-4 flex flex-col flex-wrap justify-center gap-2 gap-y-1 md:flex-row md:gap-16 md:gap-y-8"
+				>
+					<span class="btn justify-start md:variant-ringed-primary md:justify-center">
+						<i class="fa-brands fa-js text-primary-500" />
+						JS/TS
+					</span>
+					<span class="btn justify-start md:variant-ringed-primary md:justify-center">
+						<i class="fa-brands fa-react text-primary-500" />
+						React & Next
+					</span>
+					<span class="btn justify-start md:variant-ringed-primary md:justify-center">
+						<i class="fa-brands fa-docker text-primary-500" />
+						Docker & K8S
+					</span>
+					<span class="btn justify-start md:variant-ringed-primary md:justify-center">
+						<i class="fa-brands fa-aws text-primary-500" />
+						AWS
+					</span>
+					<span class="btn justify-start md:variant-ringed-primary md:justify-center">
+						<i class="fa-brands fa-google text-primary-500" />
+						GCP
+					</span>
+					<span class="btn justify-start md:variant-ringed-primary md:justify-center">
+						<i class="fas fa-cloud text-primary-500" />
+						Serverless
+					</span>
+				</div>
 			</div>
-		</div>
-	</Container>
+		</Container>
+	</div>
 </div>
 
 <Container>

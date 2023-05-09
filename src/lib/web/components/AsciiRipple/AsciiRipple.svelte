@@ -11,7 +11,7 @@
 	// Ripples currently animating
 	const ripples: Ripple[] = [];
 	// How often to spawn a new ripple
-	const rippleEvery = 1250;
+	const rippleEvery = 2500;
 	// Timer responsible for spawning ripples
 	let rippleInterval: NodeJS.Timer;
 	// Canvas to ascii generator instance
@@ -19,14 +19,16 @@
 	// Whether or not we're animating
 	let animating = false;
 	// Target animation fps
-	let targetFPS: number = 10;
+	let targetFPS: number = 15;
 	// Alphabet for ascii conversion
 	let alphabet: string = '    ..-+0101011011';
-
+	// How fast do the rings decay
 	const decay = 0.05 / targetFPS;
-	const decayMinCoef = 3;
-	const decayMaxCoef = 7;
-	const propagation = 15 / targetFPS;
+	// Random decay multipliers
+	const decayMinCoef = 1;
+	const decayMaxCoef = 3;
+	// Propagation speed
+	const propagation = 20 / targetFPS;
 
 	/**
 	 * Animates current frame and then returns if there should be another
@@ -121,7 +123,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div id="container" class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 opacity-50">
+<div id="container" class="pointer-events-none absolute bottom-0 left-0 right-0 top-0 select-none">
 	<div class="relative h-full w-full">
 		<canvas class="invisible h-full w-full" id="canvas" bind:this={canvas} />
 	</div>
@@ -129,7 +131,7 @@
 
 <style lang="postcss">
 	#container :global(pre) {
-		@apply select-none overflow-hidden whitespace-pre opacity-75;
+		@apply overflow-hidden whitespace-pre;
 		/* Gradient setup */
 		@apply !box-decoration-clone !bg-clip-text !text-transparent;
 		/* Direction */
@@ -140,13 +142,12 @@
 		font-size: 12px !important;
 		line-height: calc(10px * 1.2) !important;
 
+		z-index: -1;
+
 		position: absolute;
 		top: 0;
 		left: 0;
 		bottom: 0;
 		right: 0;
-
-		/* helpers */
-		/* border: 1px solid blue; */
 	}
 </style>
