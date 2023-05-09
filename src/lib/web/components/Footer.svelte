@@ -4,7 +4,7 @@
 
 <hr class="mt-32" />
 <footer class="relative mx-auto flex max-w-4xl flex-col gap-4 px-4 py-8">
-	<Spotify />
+	<!-- <Spotify /> -->
 
 	<div class="mt-8 text-center">
 		<a href="https://vercel.com/">vercel</a>

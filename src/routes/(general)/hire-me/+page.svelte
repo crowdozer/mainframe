@@ -47,44 +47,6 @@
 		'Generative AI (Text and Images)',
 		'Event Sourcing',
 	];
-
-	const experience = [
-		{
-			title: 'Luxorts LLC - Full Stack Developer (2 years)',
-			link: 'https://www.luxorts.com/',
-			text:
-				'I designed and built a luxury condo rental website for Luxorts. ' +
-				'It features both regional and popularity based filtering, complex geolocation queries, ' +
-				'stripe API integration for checkouts, realtime chat, and a responsive mobile first design. ' +
-				'I also integrated the Luxorts API into existing CMS systems.',
-		},
-		{
-			title: 'We the Family Resorts - Full Stack Developer (2 years)',
-			text:
-				'In this position, I helped maintain and update legacy code while developing new in-house tools. ' +
-				'I designed a high volume leads intake and distribution system for a call center with external API support. ' +
-				'I also assisted in optimizing legacy cloud functions, reducing server reads ' +
-				'by nearly a factor of 100.',
-		},
-		{
-			title: 'Vacation Management Group - Full Stack Developer (2 years)',
-			text:
-				'I worked closely with management to design and build an in-house CMS ' +
-				'to replace excel databases. In addition to better performance and ' +
-				'adding complex data visualization, I implemented comprehensive business logic, ' +
-				' a robust user permissions system, and integrated with several external APIs (soap, xml, json). ' +
-				' I also automated and optimized many in-office processes, cutting the workload by a factor of 10 in some cases.',
-		},
-	];
-
-	const education = [
-		{
-			title: 'AAS Web Design - Jefferson College, MO',
-			text:
-				'I graduated from Jefferson College in 2015. ' +
-				'I primarily studied PHP, Javascript, SQL, and graphic design.',
-		},
-	];
 </script>
 
 <svelte:head>
@@ -92,7 +54,89 @@
 </svelte:head>
 
 <Container>
-	<div class="mb-4">
+	<div class="root contents">
+		<h1 class="mt-32 text-9xl font-bold">Let's work together</h1>
+		<h2 class="mt-8 text-surface-700-200-token">
+			6+ years of experience delivering rich user experiences, full stack
+		</h2>
+
+		<div class="my-32">
+			<div class="tech_icons mt-4 flex flex-row flex-wrap justify-center gap-16">
+				<span class="btn variant-ringed-primary">
+					<i class="fa-brands fa-js text-primary-500" />
+					JS/TS
+				</span>
+				<span class="btn variant-ringed-primary">
+					<i class="fa-brands fa-react text-primary-500" />
+					React & Next
+				</span>
+				<span class="btn variant-ringed-primary">
+					<i class="fa-brands fa-docker text-primary-500" />
+					Docker & K8S
+				</span>
+				<span class="btn variant-ringed-primary">
+					<i class="fa-brands fa-aws text-primary-500" />
+					AWS
+				</span>
+				<span class="btn variant-ringed-primary">
+					<i class="fa-brands fa-google text-primary-500" />
+					GCP
+				</span>
+				<span class="btn variant-ringed-primary">
+					<i class="fas fa-cloud text-primary-500" />
+					Serverless
+				</span>
+			</div>
+		</div>
+
+		<h1 class="mt-32">Here's what I've built</h1>
+
+		<div class="mt-16 flex flex-col gap-16">
+			<div>
+				<div class="flex flex-col gap-4">
+					<h3>
+						<a href="https://www.luxorts.com/" target="_blank" rel="noopener noreferrer">
+							www.luxorts.com
+						</a>
+					</h3>
+					<p>
+						Luxorts offers a luxury condo rental service. I helped them build a web presence with
+						NextJS and Express. Features include detailed listing pages, stripe integration for
+						payments, realtime chat, a responsive mobile first design, and an easy to use dashboard.
+						The back end also delivers complex popularity, feature and distance based geo queries
+						for the web client.
+					</p>
+				</div>
+			</div>
+
+			<div>
+				<div class="flex flex-col gap-4">
+					<h3 class="text-surface-700-200-token">Proprietary CMS</h3>
+					<p>
+						I helped migrate data from excel sheets into into a rich sql driven cms. It was designed
+						and built from the ground up to perform extremely specific business logic. Example
+						features include a rich permissions based auth system, tools to track timepunches for
+						each week, tools to send and receive forms from clients and complex reports for tracking
+						business data.
+					</p>
+				</div>
+			</div>
+
+			<div>
+				<div class="flex flex-col gap-4">
+					<h3 class="text-surface-700-200-token">Proprietary Leads System</h3>
+					<p>
+						I helped a timeshare exit company design a replacement for their straining leads system.
+						I redesigned and optimized their round robins, reducing reads and writes by a factor of
+						almost 100. We removed countless bugs by consolidating scattered business logic into a
+						simple, uniform, robust server.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mt-32">
 		<Paper bordered>
 			<div class="p-4">
 				<h3 class="mb-4 text-xl">want to work together?</h3>
@@ -100,124 +144,16 @@
 			</div>
 		</Paper>
 	</div>
-	<div class="mb-4">
-		<Paper bordered>
-			<div class="p-8">
-				<!-- Header -->
-				<h1 class="mb-2 text-3xl font-bold underline decoration-dotted underline-offset-8">
-					Full Stack Developer
-				</h1>
-
-				<!-- Summary -->
-				<div>
-					<h2 class="mb-2 mt-12 text-2xl font-semibold">
-						<Tag text="h2" open />Summary<Tag text="h2" />
-					</h2>
-					<p>
-						Over half a decade of experience in a wide array of web technologies, including
-						JS/NodeJS, PHP, React, NextJS, Svelte, and even JQuery. I have a comprehensive skill set
-						that enables rapid adaptation to challenges and the development of innovative solutions.
-						I bring strong problem-solving and exceptional debugging abilities for multiple JS and
-						PHP frameworks, cloud platforms, and databases. My familiarity with web hosting, CI/CD
-						processes, and error monitoring brings a well-rounded and valuable set of skills to any
-						project or team.
-					</p>
-				</div>
-
-				<!-- Skills -->
-				<h2 class="mb-2 mt-12 text-2xl font-semibold">
-					<Tag text="h2" open />Skills<Tag text="h2" />
-				</h2>
-				<div class="grid grid-cols-1 gap-4 md:grid-cols-3">
-					<div>
-						<h3 class="font-semibold">Frameworks</h3>
-						<ul>
-							{#each frameworks as framework}
-								<li>{framework}</li>
-							{/each}
-						</ul>
-					</div>
-					<div>
-						<h3 class="font-semibold">Databases</h3>
-						<ul>
-							{#each databases as db}
-								<li>{db}</li>
-							{/each}
-						</ul>
-					</div>
-					<div>
-						<h3 class="font-semibold">Servers</h3>
-						<ul>
-							{#each servers as server}
-								<li>{server}</li>
-							{/each}
-						</ul>
-					</div>
-				</div>
-
-				<div class="grid grid-cols-1 gap-4 pt-4 md:grid-cols-2">
-					<div>
-						<h3 class="font-semibold">Miscellaneous</h3>
-						<ul>
-							{#each otherTech as tech}
-								<li>{tech}</li>
-							{/each}
-						</ul>
-					</div>
-
-					<div>
-						<h3 class="font-semibold">Cool Stuff</h3>
-						<ul>
-							{#each coolStuff as stuff}
-								<li>{stuff}</li>
-							{/each}
-						</ul>
-					</div>
-				</div>
-
-				<!-- Experience -->
-				<h2 class="mb-2 mt-12 text-2xl font-semibold">
-					<Tag text="h2" open />Experience<Tag text="h2" />
-				</h2>
-				{#each experience as job}
-					<div class="py-2">
-						<p>
-							<strong class="text-zinc-300">{job.title}</strong>
-							{#if job.link}
-								<br />
-								<a href={job.link} target="_blank" rel="noopener noreferrer">{job.link}</a>
-							{/if}
-						</p>
-						<p>
-							{job.text}
-						</p>
-					</div>
-				{/each}
-
-				<!-- Education -->
-				<h2 class="mb-2 mt-12 text-2xl font-semibold">
-					<Tag text="h2" open />Education<Tag text="h2" />
-				</h2>
-				{#each education as educate}
-					<div class="py-2">
-						<p>
-							<strong class="text-zinc-300">{educate.title}</strong>
-						</p>
-						<p>
-							{educate.text}
-						</p>
-					</div>
-				{/each}
-			</div>
-		</Paper>
-	</div>
 </Container>
 
 <style lang="postcss">
-	li:before {
-		@apply mr-4 text-zinc-400;
-		content: '\f054'; /* unicode for chevron symbol */
-		font-family: FontAwesome; /* font that contains the chevron symbol */
-		font-size: 0.65rem;
+	.tech_icons {
+		row-gap: 2rem;
+	}
+	.tech_icons i {
+		@apply mr-4 text-4xl;
+	}
+	.tech_icons span {
+		@apply flex flex-row items-center text-xl text-surface-700-200-token;
 	}
 </style>
