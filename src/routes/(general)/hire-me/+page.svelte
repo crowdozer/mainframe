@@ -61,7 +61,7 @@
 		<Container>
 			<h1 class="text-9xl font-bold">Let's work together</h1>
 			<h2 class="mt-8 text-surface-700-200-token">
-				6+ years of experience delivering rich user experiences, full stack
+				6+ years delivering rich user experiences, full stack
 			</h2>
 
 			<div class="mt-8 md:mt-32">
