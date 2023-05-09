@@ -29,6 +29,8 @@
 	const decayMaxCoef = 3;
 	// Propagation speed
 	const propagation = 20 / targetFPS;
+	// Prevent spam
+	const maxRipples = 3;
 
 	/**
 	 * Animates current frame and then returns if there should be another
@@ -74,6 +76,11 @@
 	 * Creates a new ripple and begins animation if necessary
 	 */
 	function createRipple() {
+		// prevent ripple spam
+		if (ripples.length >= maxRipples) {
+			return;
+		}
+
 		const x = Math.floor(Math.random() * canvas.width);
 		const y = Math.floor(Math.random() * canvas.height);
 
