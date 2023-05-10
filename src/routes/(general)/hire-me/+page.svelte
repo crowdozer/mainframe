@@ -3,6 +3,7 @@
 	import Container from '$web/components/ui/Container.svelte';
 	import CopyClick from '$web/components/ui/CopyClick.svelte';
 	import Paper from '$web/components/ui/Paper.svelte';
+	import Item from './Item.svelte';
 	// import Tag from '$web/components/ui/Tag.svelte';
 
 	// const frameworks = [
@@ -103,62 +104,37 @@
 <Container>
 	<h1>Here's what I've built</h1>
 
-	<div class="mt-8 flex flex-col gap-16 md:mt-16">
-		<div>
-			<div class="flex flex-col gap-4">
-				<h3>
-					<a href="https://www.luxorts.com/" target="_blank" rel="noopener noreferrer">
-						luxorts.com
-					</a>
-				</h3>
-				<p>
-					Luxorts offers a luxury condo rental service. I helped them build a web presence with
-					NextJS and Express. Features include detailed listing pages, stripe integration for
-					payments, realtime chat, a responsive mobile first design, and an easy to use dashboard.
-					The back end also delivers complex popularity, feature and distance based geo queries for
-					the web client.
-				</p>
-			</div>
-		</div>
-
-		<div>
-			<div class="flex flex-col gap-4">
-				<h3 class="text-surface-700-200-token">Proprietary CMS</h3>
-				<p>
-					I helped migrate data from excel sheets into into a rich sql driven cms. It was designed
-					and built from the ground up to perform extremely specific business logic. Example
-					features include a rich permissions based auth system, tools to track timepunches for each
-					week, tools to send and receive forms from clients and complex reports for tracking
-					business data.
-				</p>
-			</div>
-		</div>
-
-		<div>
-			<div class="flex flex-col gap-4">
-				<h3 class="text-surface-700-200-token">Proprietary Leads System</h3>
-				<p>
-					I redesigned a timeshare exit companies overstressed leads system. I redesigned and
-					optimized their round robins, reducing reads and writes by a factor of almost 100. We
-					removed countless bugs by consolidating scattered business logic into a simple, uniform,
-					robust server.
-				</p>
-			</div>
-		</div>
-
-		<div>
-			<div class="flex flex-col gap-4">
-				<h3>
-					<a href="https://www.crwdzr.io/" target="_blank" rel="noopener noreferrer"> crwdzr.io </a>
-				</h3>
-				<p>
-					My website is 100% free and open source on github. It's built with Svelte, Tailwind,
-					Typescript, and tRPC. Features include user auth, api connections, rss feed connections,
-					client side routing, server side rendering, user auth available on the edge with zero
-					network requests, prisma, and redis integration.
-				</p>
-			</div>
-		</div>
+	<div class="-mx-2 my-8 flex flex-col">
+		<Item
+			link="https://www.luxorts.com"
+			title="luxorts.com"
+			description="Luxorts offers a luxury condo rental service. I helped them build a web presence with NextJS and Express. Features include detailed listing pages, stripe integration for payments, realtime chat, a responsive mobile first design, and an easy to use dashboard. The back end also delivers complex popularity, feature and distance based geo queries for the web client."
+			isFirst
+		/>
+		<Item
+			title="Proprietary CMS"
+			description="I helped migrate data from excel sheets into into a rich sql driven cms. It was designed
+			and built from the ground up to perform extremely specific business logic. Example
+			features include a rich permissions based auth system, tools to track timepunches for
+			each week, tools to send and receive forms from clients and complex reports for tracking
+			business data."
+		/>
+		<Item
+			title="Proprietary Leads System"
+			description="I redesigned a timeshare exit companies overstressed leads system. I redesigned and
+			optimized their round robins, reducing reads and writes by a factor of almost 100. We
+			removed countless bugs by consolidating scattered business logic into a simple, uniform,
+			robust server."
+		/>
+		<Item
+			link="https://www.crwdzr.io"
+			title="crwdzr.io"
+			description="My website is 100% free and open source on github. It's built with Svelte, Tailwind,
+			Typescript, and tRPC. Features include user auth, api connections, rss feed connections,
+			client side routing, server side rendering, user auth available on the edge with zero
+			network requests, prisma, and redis integration."
+			isLast
+		/>
 	</div>
 
 	<div class="mt-16 md:mt-32">
