@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let title: string;
-	export let link: string | undefined;
+	export let link: string;
 	export let description: string;
 	export let isFirst = false;
 	export let isLast = false;
