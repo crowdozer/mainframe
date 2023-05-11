@@ -2,9 +2,32 @@
 	import Navbar from '$web/components/Navbar.svelte';
 	import { AppShell } from '@skeletonlabs/skeleton';
 	import Footer from '$web/components/Footer.svelte';
+	import { onMount } from 'svelte';
 
 	export let showNavbar: boolean = true;
 	export let showFooter: boolean = true;
+
+	/**
+	 * For some reason, scroll to top doesn't work on nav
+	 * Doesn't appear to be skeleton-ui related, svelte-kit
+	 * related most likely
+	 *
+	 * This is a workaround to listen to nav and force scroll
+	 */
+	onMount(() => {
+		const content = document.getElementById('page');
+		if (!content) return;
+		history.pushState = new Proxy(history.pushState, {
+			apply(target, thisArg, argumentsList) {
+				content.scrollTo({
+					top: 0,
+					left: 0,
+					behavior: 'smooth',
+				});
+				Reflect.apply(target, thisArg, argumentsList);
+			},
+		});
+	});
 </script>
 
 <AppShell>
