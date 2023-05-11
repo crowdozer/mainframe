@@ -16,9 +16,7 @@
 	import { afterNavigate } from '$app/navigation';
 
 	afterNavigate(() => {
-		const content = document.getElementById('page');
-		if (!content) return;
-		content.scrollTo({
+		document.getElementById('page')?.scrollTo({
 			top: 0,
 			left: 0,
 			behavior: 'smooth',
