@@ -19,7 +19,9 @@
 	// Whether or not we're animating
 	let animating = false;
 	// Target animation fps
-	let targetFPS: number = 15;
+	// Fractional numbers are fine, 13.5 is the lowest
+	// you can go without looking choppy
+	export let targetFPS: number = 13.5;
 	// Alphabet for ascii conversion
 	let alphabet: string = '     . . + +0101011011';
 	// How fast do the rings decay
