@@ -10,11 +10,19 @@
 		<!-- Buttons -->
 		<div class="ml-auto inline-flex items-center gap-2">
 			<div class="hidden sm:contents">
-				<a href="https://github.com/crowdozer/mainframe" class="btn hover:variant-ringed-primary">
-					<span><i class="fab fa-github mr-1" /> github</span>
+				<a href="/feed" class="btn hover:variant-ringed-primary">
+					<span><i class="fas fa-rss" /> rss feeds</span>
 				</a>
-				<a href="/hire-me" class="btn hover:variant-ringed-primary">
-					<span><i class="fas fa-fw fa-handshake-angle mr-2" /></span> hire me
+			</div>
+
+			<div class="hidden sm:contents">
+				<a
+					href="https://github.com/crowdozer/mainframe"
+					class="btn hover:variant-ringed-primary"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<span><i class="fab fa-github mr-1" /> github</span>
 				</a>
 			</div>
 			<ProfileMenu />

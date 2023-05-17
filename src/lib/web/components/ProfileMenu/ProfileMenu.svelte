@@ -16,11 +16,10 @@
 	}
 
 	const links = [
-		['/hire-me', 'fas fa-handshake-angle mr-1', 'Hire me'],
 		['https://github.com/crowdozer/mainframe', 'fab fa-github', 'Github'],
+		['/feed', 'fas fa-rss', 'RSS Feeds'],
 		['/galaxy', 'fas fa-user-astronaut', 'Galaxy', 'Galaxy'],
 		['/gates-of-hell', 'fas fa-person-rifle', 'Ostfront'],
-		['/redis', 'fas fa-database', 'Redis'],
 		['/spotify', 'fab fa-spotify', 'Spotify'],
 	];
 

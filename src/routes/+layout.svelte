@@ -19,6 +19,10 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
+<svelte:head>
+	<title>crwdzr.io</title>
+</svelte:head>
+
 <Toaster />
 <NavigationProgress />
 <Analytics />

@@ -1,10 +1,16 @@
 <script lang="ts">
 	import type { CachedCurrentlyPlaying } from '$server/spotify/types';
+	import Spotify from '$web/components/Spotify.svelte';
 	import Code from '$web/components/ui/Code.svelte';
 	import Label from '$web/components/ui/Label.svelte';
 	import { trpc } from '$web/utils/trpc';
 	import { Accordion, AccordionItem, ProgressBar } from '@skeletonlabs/skeleton';
 	import { onMount, onDestroy } from 'svelte';
+
+	/**
+	 * TODO: most of this script is for viewing your own spotify status
+	 * it can be cleanly extracted and merged with the "Owner's Spotify" component
+	 */
 
 	const progress_interval_length = 1000; // how many ms to recaulate progress after
 	const sync_interval_length = 5000; // how many ms to sync with spotify
@@ -155,11 +161,17 @@
 </script>
 
 <div class="container mx-auto my-16 max-w-4xl p-4 lg:p-0">
-	<div class="flex flex-col gap-16">
-		<div class="flex flex-col gap-2">
-			<h3>Spotify Connection</h3>
-			<hr class="mb-2" />
-			<div class="flex flex-col gap-2 lg:flex-row">
+	<div class="flex flex-col gap-32">
+		<div class="flex flex-col gap-4">
+			<div>
+				<h3>Spotify api demo</h3>
+				<hr class="mb-2" />
+			</div>
+			<p>
+				You can connect your spotify account to display your current playback state. You can also
+				disconnect it or reconnect it if it's not working.
+			</p>
+			<div class="mt-4 flex flex-col gap-2 lg:flex-row">
 				<a
 					class="btn variant-ringed-error"
 					href="/spotify/auth/logout"
@@ -174,9 +186,14 @@
 					>Connect</a
 				>
 			</div>
+			<p class="unstyled mb-4 text-sm text-surface-700-200-token">
+				* podcasts/"episodes" aren't supported
+			</p>
 		</div>
 
-		<div class="flex flex-col gap-2">
+		<div class="flex flex-col gap-8">
+			<h1>Your Status</h1>
+			<p>If you're connected and listening to a track, it will display below.</p>
 			{#if data}
 				<div class="flex flex-col gap-8">
 					<!-- Track Info -->
@@ -225,19 +242,23 @@
 					</div>
 				</div>
 
-				<div class="mt-8">
-					<Accordion>
-						<AccordionItem>
-							<svelte:fragment slot="summary">Status <Label>debug</Label></svelte:fragment>
-							<svelte:fragment slot="content"
-								><Code lines={1000} code={JSON.stringify(data, null, 4)} /></svelte:fragment
-							>
-						</AccordionItem>
-					</Accordion>
-				</div>
+				<Accordion>
+					<AccordionItem>
+						<svelte:fragment slot="summary">Status <Label>debug</Label></svelte:fragment>
+						<svelte:fragment slot="content"
+							><Code lines={1000} code={JSON.stringify(data, null, 4)} /></svelte:fragment
+						>
+					</AccordionItem>
+				</Accordion>
 			{:else if playbackError}
 				<p class="mt-8 text-error-500">error: {playbackError}</p>
 			{/if}
+		</div>
+
+		<div class="flex flex-col gap-8">
+			<h1>My Status</h1>
+			<p>If I'm connected and listening, it'll display below:</p>
+			<Spotify />
 		</div>
 	</div>
 </div>
