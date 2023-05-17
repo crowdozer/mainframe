@@ -8,6 +8,8 @@ const TwoPi = Math.PI * 2;
 /**
  * Galaxy generation is adapted from this:
  * https://www.reddit.com/r/gamedev/comments/20ach8/how_to_generate_star_positions_in_a_2d_procedural/
+ *
+ * Demo @ crwdzr.io/galaxy
  */
 export class GalaxyGenerator {
 	/**

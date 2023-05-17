@@ -3,8 +3,7 @@ type PerformanceInfo = {
 };
 
 /**
- * Galaxy generation is adapted from this:
- * https://www.reddit.com/r/gamedev/comments/20ach8/how_to_generate_star_positions_in_a_2d_procedural/
+ * Converts a canvas image to ascii output
  */
 export class AsciiGenerator {
 	constructor(config: {
