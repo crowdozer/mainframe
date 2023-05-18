@@ -183,7 +183,7 @@
 				<pre bind:this={galaxyElement}>{asciiArt}</pre>
 			</div>
 
-			<div class="rounded p-8">
+			<div class="mono rounded p-8">
 				<div class="grid grid-cols-2">
 					<div class="px-4 py-2 font-bold">sim speed</div>
 					<div class="px-4 py-2">
@@ -243,7 +243,6 @@
 	pre {
 		@apply w-full select-none overflow-hidden whitespace-pre;
 		background: transparent !important;
-		color: var(--theme-font-color-base) !important;
 		font-size: 10px !important;
 		line-height: calc(10px * 1.2) !important;
 	}

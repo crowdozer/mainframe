@@ -3,14 +3,11 @@
 	import Article from './Article.svelte';
 
 	export let story: InfoSecStory;
-	export let color: string;
 </script>
 
 <Article icon="fa-rss" title={story.title} url={story.link}>
 	<span slot="meta" class="contents">
-		via <span style="color: {color}">infosec magazine</span> • {new Date(
-			story.pubDate,
-		).toLocaleDateString()}
+		<span>infosec magazine</span> • {new Date(story.pubDate).toLocaleDateString()}
 	</span>
 	<div slot="content" class="contents">
 		<p>{story.description}</p>

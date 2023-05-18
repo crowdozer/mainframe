@@ -29,8 +29,12 @@
 		<AsciiRipple />
 	{/if}
 
+	<div class="lg:mt-32">
+		<Feed feed={data} />
+	</div>
+
 	<!-- info -->
-	<div class="my-8 p-4 md:my-16">
+	<div class="my-8 p-4 lg:mt-16">
 		<p class="text-center">
 			<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
 			<a href="https://krebsonsecurity.com/">krebsonsecurity.com</a> •
@@ -46,6 +50,4 @@
 			</button>
 		</p>
 	</div>
-
-	<Feed feed={data} />
 </Container>

@@ -10,30 +10,32 @@
 	const { feed: feedItems } = feed;
 </script>
 
-<div class="flex flex-col gap-8">
+<div class="-mx-4 flex flex-col lg:-mx-0 lg:p-4">
 	<!-- feed -->
-	<div class="p-4">
-		{#each feedItems as story, index}
+	{#each feedItems as story, index}
+		<div
+			class="border-b border-t border-secondary-900 px-6 py-12 odd:bg-surface-900 even:bg-surface-800"
+		>
 			{#if story.kind === 'hacker-news'}
 				<HackerNews story={story.data} />
 			{/if}
 
 			{#if story.kind === 'infosec-mag'}
-				<InfosecMag story={story.data} color={story.color} />
+				<InfosecMag story={story.data} />
 			{/if}
 
 			{#if story.kind === 'krebs-sec'}
-				<KrebsSec story={story.data} color={story.color} />
+				<KrebsSec story={story.data} />
 			{/if}
 
 			{#if story.kind === 'coin-tele'}
-				<CoinTele story={story.data} color={story.color} />
+				<CoinTele story={story.data} />
 			{/if}
 
 			<!-- dividers -->
 			{#if index < feedItems.length - 1}
-				<hr class="my-8" />
+				<!-- <hr class="my-8" /> -->
 			{/if}
-		{/each}
-	</div>
+		</div>
+	{/each}
 </div>

@@ -5,7 +5,7 @@
 
 <article class="flex flex-col gap-1">
 	<!-- header line -->
-	<h5 class="text-md flex flex-row gap-4 text-zinc-300" {title}>
+	<h5 class="text-md flex flex-row gap-4 text-surface-500-400-token" {title}>
 		<i class="fas fa-link self-center" />
 		<a
 			href={url}
@@ -16,7 +16,7 @@
 	</h5>
 
 	<!-- author/meta line -->
-	<p class="not-mono text-sm text-zinc-500 lg:pl-10">
+	<p class="text-sm italic text-surface-500-400-token lg:pl-12">
 		<slot name="meta" />
 	</p>
 </article>

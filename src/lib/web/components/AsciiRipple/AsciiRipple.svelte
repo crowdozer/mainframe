@@ -124,9 +124,14 @@
 	 * Teardown
 	 */
 	onDestroy(() => {
+		// might run during ssg/isr
+		if (typeof window === 'undefined') {
+			return;
+		}
+
 		animating = false;
-		asciiGenerator.stopRenderingSequence();
 		clearInterval(rippleInterval);
+		asciiGenerator.stopRenderingSequence();
 		window.removeEventListener('resize', handleResize);
 	});
 </script>

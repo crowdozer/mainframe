@@ -26,7 +26,6 @@ export const clerkUser = derived([clerkInstance], function ([clerk]) {
 
 /**
  * Function to initialize clerk for the app
- * Intended for prehydration during SSR
  */
 export async function initialize() {
 	if (typeof window !== 'undefined') {

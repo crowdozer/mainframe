@@ -14,27 +14,25 @@
 	</h3>
 
 	<!-- author/meta line -->
-	<p class="not-mono mb-6 text-sm text-zinc-500 lg:pl-10">
+	<p class="mb-6 text-sm italic text-surface-500-400-token lg:pl-12">
 		<slot name="meta" />
 	</p>
 
 	<!-- story content -->
-	<div class="story not-mono break-words lg:pl-10" style="word-break:break-word;">
+	<div class="story break-words lg:pl-12" style="word-break:break-word;">
 		<slot name="content" />
 	</div>
 
 	<!-- story URL -->
 	{#if url}
-		<div class="ml-10 flex flex-row gap-1">
-			<span class="shrink-0 self-center"> read more > </span>
-			<a
-				href={url}
-				class="grow overflow-hidden text-ellipsis whitespace-nowrap p-2"
-				target="_blank"
-				rel="noopener
-		noreferrer">{url}</a
-			>
-		</div>
+		<a
+			href={url}
+			class=" overflow-hidden text-ellipsis whitespace-nowrap p-2 lg:ml-10"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			{url}
+		</a>
 	{/if}
 </article>
 

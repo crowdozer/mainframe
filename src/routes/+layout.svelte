@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { clerkUser } from '$web/stores/clerk';
-	import Layout from '$web/components/Layout.svelte';
-	import Loading from '$web/components/ui/Loading.svelte';
 	import Analytics from '$web/components/Analytics.svelte';
+	import { initialize } from '$web/stores/clerk';
+	import { onMount } from 'svelte';
 
 	import NavigationProgress from '$web/components/NavigationProgress.svelte';
 	import { Toaster } from 'svelte-french-toast';
@@ -17,6 +16,10 @@
 
 	// Allows for toast
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	onMount(() => {
+		initialize();
+	});
 </script>
 
 <svelte:head>
@@ -27,10 +30,4 @@
 <NavigationProgress />
 <Analytics />
 
-{#if $clerkUser.loading}
-	<Layout showNavbar={false} showFooter={false}>
-		<Loading />
-	</Layout>
-{:else}
-	<slot />
-{/if}
+<slot />
