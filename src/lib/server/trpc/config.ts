@@ -1,43 +1,4 @@
 /**
- * --------------------------------------------------
- *             PREFACE - READ THIS FIRST
- * --------------------------------------------------
- *
- * You *probably* don't need to edit this file unless:
- *
- * 1. You need to add extra CONTEXT to each REQUEST     (section #1)
- * 2. You need to customize the tRPC SERVER             (section #2)
- * 3. You need to create a custom tRPC PROCEDURE        (section #3)
- *
- * If that sounded foreign, then you can safely leave this file alone =)
- *
- * SUMMARY:
- * This file is a configuration and utility file for tRPC, a strongly typed API
- * layer for backend communication. It provides the means to create contexts for the API,
- * define guards for secure procedures, and handle errors. It also contains several utility
- * types to help you set up and manage guards, request context, and procedure execution.
- *
- * 1. CONTEXT:
- * This section defines the "contexts" available in the backend API.
- * Contexts allow you to access resources like databases or sessions when
- * processing a request. The createContext function returns an object containing
- * the request event and an instance of Prisma (an ORM used to interact with databases).
- *
- * 2. tRPC API:
- * This section initializes the tRPC API, connects the context and transformer,
- * and sets up error handling. The initTRPC function initializes the tRPC API with the
- * context created earlier. The createTRPCRouter function is an export that helps create
- * tRPC routers in the application.
- *
- * 3. tRPC Procedures:
- * This section provides utilities for creating tRPC procedures,
- * guards, and protected procedures. The procedure export allows you to build new
- * queries and mutations for your tRPC API. The guardedProcedure function is used
- * to create protected procedures that require a series of guards to pass before
- * executing the procedure.
- */
-
-/**
  * 1. CONTEXT
  *
  * This section defines the "contexts" that are available in the backend API.
