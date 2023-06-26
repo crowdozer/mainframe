@@ -18,7 +18,7 @@
 	const links = [
 		['https://github.com/crowdozer/mainframe', 'fab fa-github', 'Github'],
 		['/feed', 'fas fa-rss', 'RSS Feeds'],
-		['/galaxy', 'fas fa-user-astronaut', 'Galaxy', 'Galaxy'],
+		['https://galactus-snowy.vercel.app/', 'fas fa-user-astronaut', 'Galaxy', 'Galaxy'],
 		['/gates-of-hell', 'fas fa-person-rifle', 'Ostfront'],
 		['/spotify', 'fab fa-spotify', 'Spotify'],
 	];
