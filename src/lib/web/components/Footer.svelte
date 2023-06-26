@@ -1,5 +1,5 @@
 <script>
-	import Spotify from './Spotify.svelte';
+	// import Spotify from './Spotify.svelte';
 </script>
 
 <hr class="mt-8 md:mt-32" />
