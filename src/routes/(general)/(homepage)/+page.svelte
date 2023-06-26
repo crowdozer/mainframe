@@ -8,12 +8,12 @@
 	<title>Let's build something</title>
 </svelte:head>
 
-<div class="my-32">
+<div class="my-8 md:my-32">
 	<Container>
-		<div class="flex flex-col gap-32">
+		<div class="flex flex-col gap-16 md:gap-32">
 			<div>
 				<h2 class="text-lg">projects</h2>
-				<div class="mt-8 grid grid-cols-2 gap-4">
+				<div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
 					<Item
 						link="https://www.luxorts.com"
 						title="luxorts"
