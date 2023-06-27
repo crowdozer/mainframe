@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Analytics from '$web/components/Analytics.svelte';
-	import { initialize } from '$web/stores/clerk';
 	import { onMount } from 'svelte';
 
 	import NavigationProgress from '$web/components/NavigationProgress.svelte';
@@ -16,10 +15,6 @@
 
 	// Allows for toast
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
-
-	onMount(() => {
-		initialize();
-	});
 </script>
 
 <svelte:head>

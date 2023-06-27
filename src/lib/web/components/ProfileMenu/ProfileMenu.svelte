@@ -1,25 +1,12 @@
 <script lang="ts">
-	import Avatar from '$web/components/ui/Avatar.svelte';
-	import { clerkInstance, clerkUser } from '$web/stores/clerk';
 	import { popup } from '@skeletonlabs/skeleton';
 	import type { PopupSettings } from '@skeletonlabs/skeleton';
-
-	function handleSignIn() {
-		$clerkInstance.openSignIn();
-	}
-
-	async function handleSignOut() {
-		if (window.confirm('Sign out?')) {
-			await $clerkInstance.signOut();
-			window.location.reload();
-		}
-	}
+	import Avatar from '$web/components/ui/Avatar.svelte';
 
 	const links = [
 		['https://github.com/crowdozer/mainframe', 'fab fa-github', 'Github'],
 		['/feed', 'fas fa-rss', 'RSS Feeds'],
 		['/gates-of-hell', 'fas fa-person-rifle', 'Ostfront'],
-		['/spotify', 'fab fa-spotify', 'Spotify'],
 	];
 
 	let popupSettings: PopupSettings = {
@@ -53,20 +40,6 @@
 					</a>
 				</li>
 			{/each}
-			<hr class="mt-1" />
-			<li class="mt-1">
-				{#if $clerkUser.user}
-					<a href="#" on:click={handleSignOut}>
-						<span class="badge"><i class="fas fa-sign-out" /></span>
-						<span class="flex-auto">Sign Out</span>
-					</a>
-				{:else}
-					<a href="#" on:click={handleSignIn}>
-						<span class="badge"><i class="fas fa-user" /></span>
-						<span class="flex-auto">Sign In</span>
-					</a>
-				{/if}
-			</li>
 		</ul>
 	</div>
 </div>

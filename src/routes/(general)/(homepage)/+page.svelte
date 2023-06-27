@@ -1,7 +1,7 @@
 <script>
-	import Container from '$web/components/ui/Container.svelte';
-	import CopyClick from '$web/components/ui/CopyClick.svelte';
 	import Item from './Item.svelte';
+	import Tech from './Tech.svelte';
+	import Social from './Social.svelte';
 </script>
 
 <svelte:head>
@@ -9,20 +9,63 @@
 </svelte:head>
 
 <div class="my-8 md:my-32">
-	<Container>
-		<div class="flex flex-col gap-16 md:gap-32">
+	<div class="mx-auto max-w-xl">
+		<div class="flex flex-col gap-16 md:gap-48">
 			<div>
-				<h2 class="text-lg">projects</h2>
-				<div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+				<h1>hi there</h1>
+				<h4 class="mt-8">I'm a developer based out of St. Louis</h4>
+				<div class="mt-8 flex flex-col gap-2">
+					<Social
+						header="dev.to"
+						subheader="crowdozer"
+						icon="fa-brands fa-dev"
+						url="https://dev.to/crowdozer"
+					/>
+					<Social
+						header="github"
+						subheader="crowdozer"
+						icon="fa-brands fa-github"
+						url="https://github.com/crowdozer"
+					/>
+					<Social
+						header="twitch"
+						subheader="crowdozer"
+						icon="fa-brands fa-twitch"
+						url="https://www.twitch.tv/crowdozer"
+					/>
+					<Social
+						header="twitter"
+						subheader="crowdoze"
+						icon="fa-brands fa-twitter"
+						url="https://twitter.com/crowdoze"
+					/>
+				</div>
+			</div>
+
+			<div>
+				<h2>
+					🧪 tech <span class="mt-8 text-sm opacity-50">by usage, not proficiency</span>
+				</h2>
+				<hr />
+
+				<div class="mt-4 grid grid-cols-1 gap-2 md:grid-cols-2">
+					<Tech name="JS/TS" icon="fa-brands fa-js" level={5} />
+					<Tech name="React" icon="fa-brands fa-react" level={4} />
+					<Tech name="MySQL" icon="fas fa-cloud" level={4} />
+					<Tech name="NextJS" level={4} />
+					<Tech name="SvelteKit" level={3} />
+					<Tech name="Docker" level={3} />
+				</div>
+			</div>
+
+			<div>
+				<h2>🏆 public projects</h2>
+				<hr />
+				<div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-1">
 					<Item
 						link="https://www.luxorts.com"
 						title="luxorts"
 						description="luxury condo rental website for Luxorts"
-					/>
-					<Item
-						link="https://portal.luxorts.com/"
-						title="luxorts CMS"
-						description="in house CMS with a secure web interface"
 					/>
 					<Item
 						link="https://www.crwdzr.io"
@@ -34,6 +77,18 @@
 						title="galactus"
 						description="ascii galaxy sim"
 					/>
+				</div>
+			</div>
+
+			<div>
+				<h2>🔒 private projects</h2>
+				<hr />
+				<div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-1">
+					<Item
+						link="https://portal.luxorts.com/"
+						title="luxorts CMS"
+						description="in house CMS with a secure web interface"
+					/>
 					<Item title="leads system" description="high volume intake and distribution system" />
 					<Item
 						title="timeshare release system"
@@ -41,46 +96,12 @@
 					/>
 				</div>
 			</div>
-
-			<div>
-				<h2 class="text-lg">tech</h2>
-				<div class="mt-8 flex flex-col flex-wrap gap-2 gap-y-1 md:flex-row md:gap-2 md:gap-y-2">
-					<div class="tech btn">
-						<i class="fa-brands fa-js text-primary-500" /> JS/TS
-					</div>
-					<div class="tech btn">
-						<i class="fa-brands fa-react text-primary-500" /> React & Next
-					</div>
-					<div class="tech btn">
-						<i class="fa-brands fa-docker text-primary-500" /> Docker & K8S
-					</div>
-					<div class="tech btn">
-						<i class="fa-brands fa-aws text-primary-500" /> AWS
-					</div>
-					<div class="tech btn">
-						<i class="fa-brands fa-google text-primary-500" /> GCP
-					</div>
-					<div class="tech btn">
-						<i class="fas fa-cloud text-primary-500" /> MySQL
-					</div>
-					<div class="tech btn">Firebase</div>
-					<div class="tech btn">MongoDB</div>
-					<div class="tech btn border-none text-stone-500">and more</div>
-				</div>
-			</div>
-
-			<div class="p-4">
-				<h3 class="mb-4 text-xl">want to work together?</h3>
-				<p class="mono">
-					<CopyClick text="business@crwdzr.io" />
-				</p>
-			</div>
 		</div>
-	</Container>
+	</div>
 </div>
 
 <style lang="postcss">
-	.tech {
-		@apply inline-block rounded border border-stone-700 p-2 text-xl;
+	hr {
+		@apply mt-2;
 	}
 </style>

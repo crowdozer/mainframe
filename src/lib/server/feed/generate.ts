@@ -1,8 +1,6 @@
-import { CACHE_NAME, STALE_TIMER } from './const';
 import type { Feed, FeedItem } from '$web/components/Feed/types';
 import { getCoinTelegraphRSS, getHackerNewsStories, getInfosecRSS, getKrebsRSS } from './hydrators';
 import { sortFeedHelper, stringToColor } from './utils';
-import { cache } from '../cache';
 
 type FeedWithoutISR = Omit<Feed, 'ISR'>;
 
@@ -12,11 +10,6 @@ type FeedWithoutISR = Omit<Feed, 'ISR'>;
  */
 export async function generateFeed(fetcher: typeof fetch): Promise<FeedWithoutISR> {
 	try {
-		const cachedFeed = await getFeedFromCache();
-		if (cachedFeed) {
-			return cachedFeed;
-		}
-
 		// begin timing this
 		const start = performance.now();
 
@@ -77,9 +70,6 @@ export async function generateFeed(fetcher: typeof fetch): Promise<FeedWithoutIS
 			generated: new Date(),
 		};
 
-		// push the final feed to the cache
-		await setFeed(finalFeed);
-
 		return finalFeed;
 	} catch (error) {
 		console.log('error aggregating feed');
@@ -90,45 +80,6 @@ export async function generateFeed(fetcher: typeof fetch): Promise<FeedWithoutIS
 			elapsed: 0,
 			generated: new Date(),
 		};
-	}
-}
-
-/**
- * Checks the cache for a feed entry
- */
-async function getFeedFromCache(): Promise<FeedWithoutISR | null> {
-	try {
-		const value = await cache.get(CACHE_NAME);
-
-		if (!value) {
-			// No error, the cache is just empty.
-			return null;
-		}
-
-		const { feed, elapsed, generated } = JSON.parse(value as string);
-
-		return {
-			feed,
-			elapsed,
-			generated: new Date(generated as string),
-		};
-	} catch (error) {
-		console.log('error fetching feed from cache');
-		console.error(error);
-		return null;
-	}
-}
-
-/**
- * Sets a cache entry for the feed
- */
-async function setFeed(feed: FeedWithoutISR): Promise<void> {
-	try {
-		await cache.set(CACHE_NAME, JSON.stringify(feed));
-		await cache.expire(CACHE_NAME, STALE_TIMER);
-	} catch (error) {
-		console.log('error pushing feed to cache');
-		console.error(error);
 	}
 }
 
