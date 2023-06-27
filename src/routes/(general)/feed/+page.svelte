@@ -29,19 +29,15 @@
 		<AsciiRipple />
 	{/if}
 
-	<div class="lg:mt-32">
-		<Feed feed={data} />
-	</div>
-
 	<!-- info -->
-	<div class="my-8 p-4 lg:mt-16">
-		<p class="text-center">
+	<div class="mt-8 p-4 lg:mt-32">
+		<p class="text-right">
 			<a href="https://news.ycombinator.com/">news.ycombinator.com</a> •
 			<a href="https://krebsonsecurity.com/">krebsonsecurity.com</a> •
 			<a href="https://cointelegraph.com/">cointelegraph.com</a> •
 			<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 		</p>
-		<p class="text-darker text-center" title={data.generated.toISOString()}>
+		<p class="text-darker text-right" title={data.generated.toISOString()}>
 			generated {fromNow(data.generated)}
 			• cached <span title={data.ISR.toISOString()}>{fromNow(data.ISR)}</span>
 			•
@@ -49,5 +45,9 @@
 				toggle FX
 			</button>
 		</p>
+	</div>
+
+	<div class="mt-4 md:mt-16">
+		<Feed feed={data} />
 	</div>
 </Container>

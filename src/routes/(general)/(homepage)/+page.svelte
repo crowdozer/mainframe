@@ -8,9 +8,9 @@
 	<title>Let's build something</title>
 </svelte:head>
 
-<div class="my-8 md:my-32">
+<div class="mx-2 my-16 sm:mx-4 md:my-32">
 	<div class="mx-auto max-w-xl">
-		<div class="flex flex-col gap-16 md:gap-48">
+		<div class="flex flex-col gap-32 md:gap-48">
 			<div>
 				<h1>👋 hi there</h1>
 				<h4 class="mt-8">I'm a developer based out of St. Louis</h4>

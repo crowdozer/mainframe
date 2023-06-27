@@ -20,7 +20,7 @@
 		</div>
 	</a>
 {:else}
-	<div class="rounded border border-stone-700 bg-stone-950 p-4">
+	<div class="border border-stone-800 bg-transparent p-4">
 		<div class="flex flex-col gap-4">
 			<h3 class="text-light font-bold">{title}</h3>
 			<p class="text-dark font-sans">{description}</p>
