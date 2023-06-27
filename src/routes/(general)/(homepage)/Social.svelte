@@ -9,7 +9,7 @@
 	href={url}
 	target="_blank"
 	rel="noopener noreferrer"
-	class="btn flex cursor-pointer flex-row gap-8 border border-surface-500"
+	class="btn flex cursor-pointer flex-row gap-8 border border-stone-800 bg-transparent hover:border-stone-700 hover:bg-transparent"
 >
 	<i class="fa-fw text-4xl text-primary-500 {icon}" />
 	<div class="flex grow flex-col text-left">

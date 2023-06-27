@@ -14,7 +14,7 @@
 	</h3>
 
 	<!-- author/meta line -->
-	<p class="mb-6 text-sm italic text-surface-500-400-token lg:pl-12">
+	<p class="text-darker mb-6 text-sm italic lg:pl-12">
 		<slot name="meta" />
 	</p>
 

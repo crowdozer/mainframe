@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Bloggo</title>
+	<title>blog</title>
 </svelte:head>
 
 <Container>
@@ -22,22 +22,19 @@
 
 <style lang="postcss">
 	.appcontainer {
-		@apply p-8;
+		@apply p-8 text-stone-100;
 	}
 	.appcontainer :global(h1) {
-		@apply mb-5 mt-8 text-2xl font-bold;
-		text-decoration: dotted;
-		text-decoration-line: underline;
-		text-underline-offset: 8px;
+		@apply mb-5 mt-8 text-2xl;
 	}
 	.appcontainer :global(h2) {
-		@apply mb-4 mt-8 text-xl font-bold;
+		@apply mb-4 mt-8 text-xl;
 	}
 	.appcontainer :global(h3) {
-		@apply mb-4 mt-8 text-lg font-bold;
+		@apply mb-4 mt-8 text-lg;
 	}
 	.appcontainer :global(hr) {
-		@apply mb-4 mt-4 border-zinc-300;
+		@apply mb-4 mt-4 border-stone-300;
 		border-width: 2px;
 		border-style: dashed;
 	}
@@ -49,10 +46,10 @@
 		list-style-type: none;
 	}
 	.appcontainer :global(li) {
-		@apply ml-4;
+		@apply ml-4 mt-2;
 	}
 	.appcontainer :global(li):before {
-		@apply mr-3 text-zinc-400;
+		@apply mr-3 text-stone-400;
 		content: '\f054'; /* unicode for chevron symbol */
 		font-family: FontAwesome; /* font that contains the chevron symbol */
 		font-size: 0.65rem;

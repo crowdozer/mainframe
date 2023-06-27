@@ -12,7 +12,7 @@
 	<div class="mx-auto max-w-xl">
 		<div class="flex flex-col gap-16 md:gap-48">
 			<div>
-				<h1>hi there</h1>
+				<h1>👋 hi there</h1>
 				<h4 class="mt-8">I'm a developer based out of St. Louis</h4>
 				<div class="mt-8 flex flex-col gap-2">
 					<Social
@@ -44,7 +44,7 @@
 
 			<div>
 				<h2>
-					🧪 tech <span class="mt-8 text-sm opacity-50">by usage, not proficiency</span>
+					🧪 tech <span class="text-darker mt-8 text-sm">by usage, not proficiency</span>
 				</h2>
 				<hr />
 
@@ -68,7 +68,7 @@
 						description="luxury condo rental website for Luxorts"
 					/>
 					<Item
-						link="https://www.crwdzr.io"
+						link="https://github.com/crowdozer/mainframe"
 						title="crwdzr.io"
 						description="free and public source on github"
 					/>

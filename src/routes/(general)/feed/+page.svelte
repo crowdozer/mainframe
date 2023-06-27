@@ -41,7 +41,7 @@
 			<a href="https://cointelegraph.com/">cointelegraph.com</a> •
 			<a href="https://www.infosecurity-magazine.com">infosecurity-magazine.com</a>
 		</p>
-		<p class="text-center text-zinc-500" title={data.generated.toISOString()}>
+		<p class="text-darker text-center" title={data.generated.toISOString()}>
 			generated {fromNow(data.generated)}
 			• cached <span title={data.ISR.toISOString()}>{fromNow(data.ISR)}</span>
 			•
