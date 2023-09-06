@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Container from '@/components/astro/Container.astro';
 import { Button } from '@/components/shadcn/ui/button';
-import Icon from 'astro-icon'
+import Icon from 'astro-icon';
 ---
 
 <Layout title="yo 👋">
@@ -21,10 +21,9 @@ import Icon from 'astro-icon'
 		<div id="sell" class="bg-neutral-800">
 			<!-- container -->
 			<div class="max-w-6xl mx-auto p-6 py-24">
-				
 				<!-- grid items -->
 				<h1 class="mb-16 text-4xl text-zinc-50">what I do</h1>
-				<div id="home-grid" class="grid grid-cols-3 gap-8">
+				<div id="home-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
 					<div class="bg-neutral-900 p-4 md:col-span-2"></div>
 					<div class="bg-neutral-900 p-4"></div>
 					<div class="bg-neutral-900 p-4 md:row-span-2"></div>
@@ -35,12 +34,12 @@ import Icon from 'astro-icon'
 				<div class="mt-24 text-right">
 					<a href="/hire-me">
 						<Button variant="secondary" size="xl">
-							view my resume 
+							view my resume
 							<Icon
-							name="carbon:arrow-right"
-							width="1.15rem"
-							class="ml-4 pt-1"
-							/> 
+								name="carbon:arrow-right"
+								width="1.15rem"
+								class="ml-4 pt-1"
+							/>
 						</Button>
 					</a>
 				</div>
