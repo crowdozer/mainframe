@@ -52,11 +52,11 @@
 html,
 body {
 	background: theme(colors.neutral.900);
-	color: theme(colors.white);
+	color: theme(colors.zinc.100);
 }
 
 *::selection {
-	color: theme(colors.white);
+	color: theme(colors.zinc.100);
 	background: theme(colors.green.600);
 }
 
@@ -70,7 +70,7 @@ h6 {
 }
 
 hr {
-	border-color: theme(colors.neutral.700);
+	border-color: theme(colors.zinc.700);
 }
 
 a {
@@ -98,7 +98,7 @@ a:hover {
 	background-image: radial-gradient(
 		circle at center,
 		transparent,
-		theme(colors.neutral.950)
+		theme(colors.zinc.950)
 	);
 	opacity: 0.75;
 	pointer-events: none; /* This allows clicks to go through this overlay */

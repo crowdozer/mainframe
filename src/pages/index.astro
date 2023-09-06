@@ -1,13 +1,69 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Container from '@/components/astro/Container.astro';
+import { Button } from '@/components/shadcn/ui/button';
+import Icon from 'astro-icon'
 ---
 
 <Layout title="yo 👋">
-	<div class="lg:mt-32 p-4">
-		<Container>
-			<p class="text-center">remaking my website rn</p>
-			<p class="text-center mt-2">have a look around</p>
-		</Container>
+	<!-- hero section -->
+	<div class="h-[720px] flex flex-col">
+		<div class="grow"></div>
+		<div>
+			<h1 class="text-6xl text-center mb-6">hey 👋</h1>
+			<h2 class="text-xl text-center font-normal">WIP... have a look around</h2>
+		</div>
+		<div class="grow"></div>
+	</div>
+
+	<!-- bg color transition -->
+	<div class="relative mt-[64px]">
+		<div id="sell" class="bg-neutral-800">
+			<!-- container -->
+			<div class="max-w-6xl mx-auto p-6 py-24">
+				
+				<!-- grid items -->
+				<h1 class="mb-16 text-4xl text-zinc-50">what I do</h1>
+				<div id="home-grid" class="grid grid-cols-3 gap-8">
+					<div class="bg-neutral-900 p-4 md:col-span-2"></div>
+					<div class="bg-neutral-900 p-4"></div>
+					<div class="bg-neutral-900 p-4 md:row-span-2"></div>
+					<div class="bg-neutral-900 p-4 md:col-span-2"></div>
+					<div class="bg-neutral-900 p-4 md:col-span-2"></div>
+				</div>
+
+				<div class="mt-24 text-right">
+					<a href="/hire-me">
+						<Button variant="secondary" size="xl">
+							view my resume 
+							<Icon
+							name="carbon:arrow-right"
+							width="1.15rem"
+							class="ml-4 pt-1"
+							/> 
+						</Button>
+					</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </Layout>
+
+<style>
+	/* add the triangular bg transition to the sell */
+	#sell::before {
+		content: '';
+		position: absolute;
+		top: -64px;
+		left: 0;
+		width: 0;
+		height: 0;
+		border-right: 100vw solid transparent;
+		border-bottom: 64px solid theme(colors.neutral.800);
+	}
+
+	#home-grid > div {
+		min-height: 360px;
+		display: relative;
+	}
+</style>
