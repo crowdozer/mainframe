@@ -4,7 +4,6 @@
  */
 
 import '@/styles/globals.css';
-import Container from '@/components/astro/Container.astro';
 import Layout from './Layout.astro';
 
 interface Props {
@@ -17,8 +16,8 @@ const { title } = Astro.props;
 <script src="/ruffle/ruffle.js" is:inline></script>
 
 <Layout title={title}>
-	<Container>
-		<a href="/games" class="mt-8 mb-4">go back</a>
+	<div class="max-w-4xl mx-auto mb-32">
+		<a href="/games" class="mt-24 mb-4">go back</a>
 		<slot />
-	</Container>
+	</div>
 </Layout>
