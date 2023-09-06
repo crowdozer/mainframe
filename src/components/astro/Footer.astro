@@ -1,19 +1,38 @@
 ---
 import Container from '@/components/astro/Container.astro';
+import Socials from '@/components/astro/Socials.astro';
 ---
 
-<div class="p-6 border-t border-neutral-700">
+<div class="p-6 border-t border-neutral-700 h-[300px]">
 	<Container>
-		<div class="flex flex-row gap-2 justify-center">
-			<p>(c) nobody</p>
-			<p>•</p>
-			<p>
-				view on <a
-					href="https://www.github.com/crowdozer/mainframe"
-					target="_blank"
-					rel="noopener noreferrer">github</a
-				>
-			</p>
+		<div class="flex flex-col lg:flex-row gap-16">
+			<!-- Left Column -->
+			<div class="overflow-hidden flex-shrink-0 md:w-[360px] w-full">
+				<div class="flex flex-col top-0">
+					<h2 class="text-xl mb-4">Info</h2>
+					<p>this site is designed and maintained by me,</p>
+					<p>
+						public sourced on <a
+							href="https://www.github.com/crowdozer/mainframe"
+							target="_blank"
+							rel="noopener noreferrer">github</a
+						>
+					</p>
+
+					<hr class="mt-2" />
+					<p class="mt-4">copyright (c) nobody</p>
+				</div>
+			</div>
+
+			<!-- Right Column -->
+			<div class="grow overflow-hidden">
+				<h2 class="text-xl mb-4">Business Offers</h2>
+				<p>If you want to work together, shoot an email to:</p>
+				<p class="text-blue-500 font-bold">business@crwdzr.io</p>
+
+				<h2 class="text-xl mb-4 mt-16">Socials</h2>
+				<Socials />
+			</div>
 		</div>
 	</Container>
 </div>

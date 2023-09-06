@@ -51,13 +51,13 @@
 
 html,
 body {
-	background: theme(colors.neutral.950);
+	background: theme(colors.neutral.900);
 	color: theme(colors.white);
 }
 
 *::selection {
 	color: theme(colors.white);
-	background: theme(colors.blue.500);
+	background: theme(colors.green.600);
 }
 
 h1,
@@ -69,10 +69,14 @@ h6 {
 	@apply font-bold;
 }
 
+hr {
+	border-color: theme(colors.neutral.700);
+}
+
 a {
 	font-weight: bold;
 	display: inline-block;
-	color: theme(colors.blue.500);
+	color: theme(colors.green.500);
 }
 
 a:hover {
