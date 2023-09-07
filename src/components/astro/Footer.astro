@@ -2,12 +2,12 @@
 import Socials from '@/components/astro/Socials.astro';
 ---
 
-<div class="p-6 border-t border-neutral-700 md:h-[300px]">
+<div class="border-t border-neutral-700 p-6 md:h-[300px]">
 	<div class="mx-auto max-w-4xl">
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+		<div class="grid grid-cols-1 gap-16 md:grid-cols-2">
 			<!-- Left Column -->
-			<div class="flex flex-col top-0">
-				<h2 class="text-xl mb-4">Info</h2>
+			<div class="top-0 flex flex-col">
+				<h2 class="mb-4 text-xl">Info</h2>
 				<p>this site is designed and maintained by me,</p>
 				<p>
 					public sourced on <a
@@ -17,23 +17,23 @@ import Socials from '@/components/astro/Socials.astro';
 					>
 				</p>
 
-				<hr class="md:visible hidden mt-2" />
+				<hr class="mt-2 hidden md:visible" />
 				<p class="mt-4">copyright (c) nobody</p>
 			</div>
 
 			<!-- Right Column -->
 			<div>
-				<h2 class="text-xl mb-4">Business Offers</h2>
+				<h2 class="mb-4 text-xl">Business Offers</h2>
 				<p>If you want to work together, shoot an email to:</p>
-				<div class="bg-neutral-800 p-2 px-4 mt-2">
+				<div class="mt-2 bg-neutral-800 p-2 px-4">
 					<p class="font-bold">business@crwdzr.io</p>
 				</div>
 
-				<h2 class="text-xl mb-4 mt-16 md:mt-8">Socials</h2>
+				<h2 class="mb-4 mt-16 text-xl md:mt-8">Socials</h2>
 				<Socials />
 
 				<!-- spacer for mobile -->
-				<div class="md:hidden mt-4"></div>
+				<div class="mt-4 md:hidden"></div>
 			</div>
 		</div>
 	</div>

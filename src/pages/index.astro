@@ -6,11 +6,11 @@ import Icon from 'astro-icon';
 
 <Layout title="yo 👋">
 	<!-- hero section -->
-	<div class="h-[720px] flex flex-col">
+	<div class="flex h-[720px] flex-col">
 		<div class="grow"></div>
 		<div>
-			<h1 class="text-6xl text-center mb-6">hey 👋</h1>
-			<h2 class="text-xl text-center font-normal">have a look around</h2>
+			<h1 class="mb-6 text-center text-6xl">hey 👋</h1>
+			<h2 class="text-center text-xl font-normal">have a look around</h2>
 		</div>
 		<div class="grow"></div>
 	</div>
@@ -19,26 +19,26 @@ import Icon from 'astro-icon';
 	<div class="relative mt-[64px]">
 		<div id="sell" class="bg-neutral-800">
 			<!-- container -->
-			<div class="max-w-6xl mx-auto p-6 py-24">
+			<div class="mx-auto max-w-6xl p-6 py-24">
 				<!-- grid items -->
 				<h1 class="mb-16 text-4xl text-zinc-50">what I do</h1>
-				<div id="home-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<div id="home-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3">
 					<!-- Interactivity -->
 					<div class="bg-neutral-900 md:col-span-2">
 						<div class="p-8 px-4 md:p-16 md:pt-8">
 							<p
-								class="text-2xl md:text-6xl text-center md:text-left font-bold text-red-500"
+								class="text-center text-2xl font-bold text-red-500 md:text-left md:text-6xl"
 							>
 								Interactivity
 							</p>
-							<p class="mt-6 md:mt-12 text-center md:text-left text-xl">
+							<p class="mt-6 text-center text-xl md:mt-12 md:text-left">
 								I help enhance web apps with...
 							</p>
-							<ul class="mt-6 md:mt-4 text-xl ml-4">
+							<ul class="ml-4 mt-6 text-xl md:mt-4">
 								<li>👉 API connections</li>
 								<li>
 									👉 Database I/O
-									<span class="text-zinc-300 text-sm">(mysql, nosql)</span>
+									<span class="text-sm text-zinc-300">(mysql, nosql)</span>
 								</li>
 								<li>👉 UI/UX interactions</li>
 								<li>👉 CRM/CMS integrations</li>
@@ -47,15 +47,15 @@ import Icon from 'astro-icon';
 					</div>
 
 					<!-- images, hidden on mobile -->
-					<div class="md:contents hidden">
+					<div class="hidden md:contents">
 						<div
-							class="bg-neutral-900 p-4 vignette bg-cover border-2 border-neutral-700 shadow-md"
+							class="vignette border-2 border-neutral-700 bg-neutral-900 bg-cover p-4 shadow-md"
 							style="background-image: url(/images/code.webp);"
 							title="image from www.unsplash.com"
 						>
 						</div>
 						<div
-							class="bg-neutral-900 p-4 md:row-span-2 vignette bg-cover border-2 border-neutral-700 shadow-md"
+							class="vignette border-2 border-neutral-700 bg-neutral-900 bg-cover p-4 shadow-md md:row-span-2"
 							style="background-image: url(/images/earth.webp);"
 							title="image from www.unsplash.com"
 						>
@@ -66,14 +66,14 @@ import Icon from 'astro-icon';
 					<div class="bg-neutral-900 md:col-span-2">
 						<div class="p-8 px-4 md:p-16 md:pt-8">
 							<p
-								class="text-2xl md:text-6xl text-center md:text-left font-bold text-green-500"
+								class="text-center text-2xl font-bold text-green-500 md:text-left md:text-6xl"
 							>
 								Responsiveness
 							</p>
-							<p class="mt-6 md:mt-12 text-center md:text-left text-xl">
+							<p class="mt-6 text-center text-xl md:mt-12 md:text-left">
 								I help apps look and run great anywhere
 							</p>
-							<ul class="mt-6 md:mt-4 text-xl ml-4">
+							<ul class="ml-4 mt-6 text-xl md:mt-4">
 								<li>👉 mobile first designs</li>
 								<li>👉 add responsiveness to legacy apps</li>
 								<li>👉 or even just tweak things</li>
@@ -85,28 +85,28 @@ import Icon from 'astro-icon';
 					<div class="bg-neutral-900 md:col-span-2">
 						<div class="p-8 px-4 md:p-16 md:pt-8">
 							<p
-								class="text-2xl md:text-6xl text-center md:text-left font-bold text-fuchsia-500"
+								class="text-center text-2xl font-bold text-fuchsia-500 md:text-left md:text-6xl"
 							>
 								API Development
 							</p>
-							<p class="mt-6 md:mt-12 text-xl text-center md:text-left">
+							<p class="mt-6 text-center text-xl md:mt-12 md:text-left">
 								I help build robust back ends for...
 							</p>
-							<ul class="mt-6 md:mt-4 text-xl ml-4">
+							<ul class="ml-4 mt-6 text-xl md:mt-4">
 								<li>👉 NodeJS/Typescript, PHP</li>
 								<li>
-									👉 Payments <span class="text-zinc-300 text-sm">
+									👉 Payments <span class="text-sm text-zinc-300">
 										(stripe)
 									</span>
 								</li>
 								<li>
 									👉 User authentication
-									<span class="text-zinc-300 text-sm">
+									<span class="text-sm text-zinc-300">
 										(user/pass, socials, jwt, oauth)
 									</span>
 								</li>
 								<li>
-									👉 UX enhancements <span class="text-zinc-300 text-sm">
+									👉 UX enhancements <span class="text-sm text-zinc-300">
 										(infinite scroll, autocomplete, filtering)
 									</span>
 								</li>

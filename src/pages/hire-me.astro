@@ -12,12 +12,12 @@ const yoe = current - start;
 ---
 
 <Layout title="hire me 👋">
-	<div class="max-w-4xl mx-auto p-4 lg:mt-32">
-		<div class="flex flex-col lg:flex-row gap-16">
+	<div class="mx-auto max-w-4xl p-4 lg:mt-32">
+		<div class="flex flex-col gap-16 lg:flex-row">
 			<!-- Left Column -->
-			<div class="overflow-hidden flex-shrink-0 md:w-[360px] w-full">
-				<div class="flex flex-col top-0">
-					<h1 class="text-5xl z-[1]">Full stack development</h1>
+			<div class="w-full flex-shrink-0 overflow-hidden md:w-[360px]">
+				<div class="top-0 flex flex-col">
+					<h1 class="z-[1] text-5xl">Full stack development</h1>
 					<hr class="z-0 border-2" />
 				</div>
 
@@ -35,7 +35,7 @@ const yoe = current - start;
 			<!-- Right Column -->
 			<div class="grow overflow-hidden">
 				<!-- About Me -->
-				<h1 class="text-xl mb-4">About Me</h1>
+				<h1 class="mb-4 text-xl">About Me</h1>
 				<p>
 					I began programming in the early 2010s, using Lua to make <a
 						href="https://www.computercraft.info/"
@@ -46,12 +46,12 @@ const yoe = current - start;
 					of web development. I've been growing and building ever since.
 				</p>
 
-				<p class="text-3xl mt-4">👩‍💻🎮🎶</p>
+				<p class="mt-4 text-3xl">👩‍💻🎮🎶</p>
 
-				<h1 class="text-xl mt-16 mb-4">Projects</h1>
+				<h1 class="mb-4 mt-16 text-xl">Projects</h1>
 				<Projects />
 
-				<h1 class="text-xl mt-16 mb-4">Employment</h1>
+				<h1 class="mb-4 mt-16 text-xl">Employment</h1>
 				<Employers client:load />
 
 				<br />
