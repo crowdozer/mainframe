@@ -2,6 +2,7 @@
 import '@/styles/globals.css';
 import Header from '@/components/astro/Header.astro';
 import Footer from '@/components/astro/Footer.astro';
+import Analytics from '@/components/astro/Analytics.astro';
 
 interface Props {
 	title: string;
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const { title, footer = true } = Astro.props;
-const url = Astro.request.url;
+const isProd = import.meta.env.MODE === 'production';
 ---
 
 <!doctype html>
@@ -21,21 +22,7 @@ const url = Astro.request.url;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} - crwdzr.io</title>
-
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SDQPP9QJ3H"
-		></script>
-		<script define:vars={{ title, url }}>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() {
-				dataLayer.push(arguments);
-			}
-			gtag('js', new Date());
-			gtag('config', 'G-SDQPP9QJ3H', {
-				page_title: title,
-				page_path: url,
-			});
-		</script>
+		{isProd && <Analytics {title} />}
 	</head>
 
 	<body class="flex min-h-screen flex-col overflow-y-auto overflow-x-hidden">
