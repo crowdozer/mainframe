@@ -1,38 +1,87 @@
 ---
-import { Badge } from '@/components/shadcn/ui/badge.tsx';
+import { TechSVG } from '@/components/react/TechSVG.tsx';
 ---
 
 <h2 class="mt-8">Languages</h2>
 <div class="mb-4 mt-2">
-	<div class="flex flex-row flex-wrap gap-2">
-		<Badge chipcolor="blue">Shell/Bash</Badge>
-		<Badge chipcolor="blue">PHP</Badge>
-		<Badge chipcolor="blue">Javascript</Badge>
-		<Badge chipcolor="blue">Typescript</Badge>
-		<Badge chipcolor="blue">NodeJS</Badge>
-		<Badge chipcolor="blue">Lua</Badge>
+	<div class="flex flex-row flex-wrap">
+		<TechSVG
+			client:idle
+			title="Shell/Bash"
+			path="/icons/bash-icon-svgrepo-com.svg"
+			invert={false}
+		/>
+		<TechSVG client:idle title="PHP" path="/icons/php02-svgrepo-com.svg" />
+		<TechSVG
+			client:idle
+			title="Javascript"
+			path="/icons/javascript-155-svgrepo-com.svg"
+		/>
+		<TechSVG
+			client:idle
+			title="Typescript"
+			path="/icons/typescript-svgrepo-com.svg"
+		/>
+		<TechSVG client:idle title="NodeJS" path="/icons/nodejs-svgrepo-com.svg" />
+		<TechSVG client:idle title="Lua" path="/icons/lua-16-svgrepo-com.svg" />
 	</div>
 </div>
 
 <h2 class="mt-8">Frameworks & Libraries</h2>
 <div class="mb-4 mt-2">
-	<div class="flex flex-row flex-wrap gap-2">
-		<Badge chipcolor="blue">Express</Badge>
-		<Badge chipcolor="blue">React</Badge>
-		<Badge chipcolor="blue">Astro</Badge>
-		<Badge chipcolor="blue">Svelte</Badge>
-		<Badge chipcolor="blue">Tailwind</Badge>
+	<div class="flex flex-row flex-wrap">
+		<TechSVG
+			client:idle
+			title="Express"
+			path="/icons/express-svgrepo-com.svg"
+		/>
+		<TechSVG client:idle title="React" path="/icons/react-svgrepo-com.svg" />
+		<TechSVG
+			client:idle
+			title="Astro"
+			path="/icons/astro-svgrepo-com.svg"
+			revert
+			colorize
+		/>
+		<TechSVG
+			client:idle
+			title="Svelte"
+			path="/icons/svelte-16-svgrepo-com.svg"
+		/>
+		<TechSVG
+			client:idle
+			title="Tailwind"
+			path="/icons/tailwind-css-svgrepo-com.svg"
+		/>
 	</div>
 </div>
 
 <h2 class="mt-8">DB & Hosting</h2>
 <div class="mb-4 mt-2">
-	<div class="flex flex-row flex-wrap gap-2">
-		<Badge chipcolor="blue">MySQL</Badge>
-		<Badge chipcolor="blue">Firebase</Badge>
-		<Badge chipcolor="blue">GCP</Badge>
-		<Badge chipcolor="blue">AWS</Badge>
-		<Badge chipcolor="blue">Vercel</Badge>
-		<Badge chipcolor="blue">DigitalOcean</Badge>
+	<div class="flex flex-row flex-wrap">
+		<TechSVG client:idle title="MySQL" path="/icons/mysql-svgrepo-com.svg" />
+		<TechSVG
+			client:idle
+			title="Firebase"
+			path="/icons/firebase-svgrepo-com.svg"
+		/>
+		<TechSVG
+			client:idle
+			title="GCP"
+			path="/icons/gcp-svgrepo-com.svg"
+			revert
+			colorize
+		/>
+		<TechSVG client:idle title="AWS" path="/icons/aws-svgrepo-com.svg" />
+		<TechSVG
+			client:idle
+			title="Vercel"
+			path="/icons/vercel-fill-svgrepo-com.svg"
+		/>
+		<TechSVG
+			client:idle
+			title="DigitalOcean"
+			path="/icons/digitalocean-svgrepo-com.svg"
+		/>
 	</div>
 </div>
