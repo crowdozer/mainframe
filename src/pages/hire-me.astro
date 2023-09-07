@@ -16,26 +16,9 @@ const yoe = current - start;
 		<div class="flex flex-col gap-16 lg:flex-row">
 			<!-- Left Column -->
 			<div class="w-full flex-shrink-0 overflow-hidden md:w-[360px]">
-				<div class="top-0 flex flex-col">
-					<h1 class="z-[1] text-5xl">Full stack development</h1>
-					<hr class="z-0 border-2" />
-				</div>
+				<h1 class="mb-4 text-5xl">About me</h1>
 
-				<div class="mt-8">
-					<Tech />
-				</div>
-
-				<div class="mt-12">
-					<a href="/contact" class="contents">
-						<Button size="lg" variant="dark" fullwidth>Contact Me</Button>
-					</a>
-				</div>
-			</div>
-
-			<!-- Right Column -->
-			<div class="grow overflow-hidden">
 				<!-- About Me -->
-				<h1 class="mb-4 text-xl">About Me</h1>
 				<p>
 					I began programming in the early 2010s, using Lua to make <a
 						href="https://www.computercraft.info/"
@@ -46,9 +29,22 @@ const yoe = current - start;
 					of web development. I've been growing and building ever since.
 				</p>
 
-				<p class="mt-4 text-3xl">👩‍💻🎮🎶</p>
+				<p class="mt-8 text-3xl">👩‍💻🎮🎶</p>
 
-				<h1 class="mb-4 mt-16 text-xl">Projects</h1>
+				<div class="mt-8">
+					<Tech />
+				</div>
+
+				<div class="mt-16">
+					<a href="/contact" class="contents">
+						<Button size="lg" variant="dark" fullwidth>Contact Me</Button>
+					</a>
+				</div>
+			</div>
+
+			<!-- Right Column -->
+			<div class="grow overflow-hidden">
+				<h1 class="mb-4 text-xl">Projects</h1>
 				<Projects />
 
 				<h1 class="mb-4 mt-16 text-xl">Employment</h1>
