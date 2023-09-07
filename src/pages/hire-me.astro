@@ -7,12 +7,13 @@ import { Button } from '@/components/shadcn/ui/button.tsx';
 ---
 
 <Layout title="hire me 👋">
-	<div class="mx-auto max-w-4xl p-4 lg:mt-32">
+	<div class="mx-auto mb-16 max-w-4xl p-4 lg:mt-32">
 		<div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
 			<!-- Left Column -->
 			<div class="relative mt-8 md:mt-0">
-				<div class="relative md:sticky md:left-0 md:top-4" id="sticky">
-					<h1 class="mb-4 text-5xl">About me</h1>
+				<div class="relative md:sticky md:left-0 md:top-4 md:pr-12" id="sticky">
+					<h1 class="mb-2 text-5xl">About me</h1>
+					<hr class="mb-4" />
 
 					<!-- About Me -->
 					<p>
@@ -51,10 +52,23 @@ import { Button } from '@/components/shadcn/ui/button.tsx';
 				<h1 class="mb-2 mt-16 text-2xl">🤝 Employment</h1>
 				<hr class="mb-4" />
 				<Employers client:load />
-
-				<br />
-				<br />
 			</div>
 		</div>
 	</div>
 </Layout>
+
+<style is:global>
+	.card {
+		@apply rounded border p-4;
+
+		border-color: transparent;
+		border-left-color: theme(colors.neutral.700);
+
+		background: linear-gradient(
+			165deg,
+			theme(colors.neutral.800) 0%,
+			theme(colors.neutral.900) 50%,
+			theme(colors.neutral.900) 100%
+		);
+	}
+</style>

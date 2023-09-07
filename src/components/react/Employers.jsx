@@ -6,7 +6,7 @@ export default function Employers() {
 
 	return (
 		<div className="flex flex-col gap-4">
-			<div className="border-l border-neutral-600 p-4">
+			<div className="card">
 				<div className="flex flex-row gap-4">
 					<h2 className="text-lg">Luxorts</h2>
 					<div className="grow"></div>
