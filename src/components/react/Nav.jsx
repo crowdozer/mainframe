@@ -8,31 +8,36 @@ export default function Nav() {
 	function handleOpen() {
 		setOpen(true);
 	}
+
 	function handleClose() {
 		setOpen(false);
 	}
 
 	return (
 		<div className="relative">
-			<div
-				className={clsx({
-					'cursor-pointer select-none rounded bg-neutral-800 p-2 px-4 hover:bg-neutral-700': true,
-					'bg-neutral-700': open,
-				})}
+			<button
+				className={clsx(
+					'cursor-pointer select-none rounded bg-neutral-800 p-2 px-4 hover:bg-neutral-700',
+					{
+						'!bg-neutral-700': open,
+					},
+				)}
 				onMouseEnter={handleOpen}
 				onClick={handleOpen}
 			>
 				sitemap
-			</div>
+			</button>
 			<div
-				className={clsx({
-					'fixed bottom-0 left-0 right-0 top-0 z-50 block md:absolute md:bottom-auto md:left-auto md:right-0 md:top-full md:h-auto':
-						open,
-					hidden: !open,
-				})}
+				className={clsx(
+					'animate-in fade-in-0 zoom-in-95 fixed bottom-0 left-0 right-0 top-0 z-50 block ',
+					'md:absolute md:bottom-auto md:left-auto md:right-0 md:top-full md:h-auto',
+					{
+						hidden: !open,
+					},
+				)}
 				onMouseLeave={handleClose}
 			>
-				<div className="h-full border-neutral-700 bg-neutral-900 p-6 md:mt-4 md:w-[500px] md:rounded md:border">
+				<div className="h-full border-neutral-700 bg-neutral-900 p-6 md:mt-2 md:w-[500px] md:rounded md:border">
 					<div className="pb-4 text-right md:hidden">
 						<Button variant="dark" onClick={handleClose}>
 							Go Back
