@@ -1,0 +1,131 @@
+---
+/**
+ * Extends the default layout to include the flash stuff
+ */
+
+import '@/styles/globals.css';
+import Layout from './Layout.astro';
+import { formatDate } from '@/lib/date.ts';
+
+interface Props {
+	frontmatter: {
+		title: string;
+		author: string;
+		description: string;
+		date: string;
+	};
+	title: string;
+}
+
+const { title, frontmatter } = Astro.props;
+
+const date = new Date(frontmatter.date);
+const prettyDate = formatDate(date);
+---
+
+<Layout {title}>
+	<div class="mx-auto mb-32 mt-24 max-w-2xl">
+		<h1 class="mb-2 text-4xl">
+			{frontmatter.title}
+		</h1>
+		<p>by <b>{frontmatter.author}</b> on {prettyDate}</p>
+
+		<div class="my-8 rounded bg-neutral-800 p-4 px-8">
+			<p class="text-neutral-400">overview</p>
+			<p class="mt-2 text-lg">{frontmatter.description}</p>
+		</div>
+
+		<article class="mt-8">
+			<slot />
+		</article>
+	</div>
+</Layout>
+
+<style is:global>
+	article p {
+		@apply mb-4;
+	}
+
+	article h1,
+	article h2,
+	article h3,
+	article h4,
+	article h5 {
+		@apply mb-4 mt-8;
+	}
+
+	article h5 {
+		@apply text-xl;
+	}
+
+	article h4 {
+		@apply text-2xl;
+	}
+
+	article h3 {
+		@apply text-3xl;
+	}
+
+	article h2 {
+		@apply text-4xl;
+	}
+
+	article h1 {
+		@apply text-5xl;
+	}
+
+	article pre {
+		@apply my-4 overflow-x-hidden p-8 font-mono;
+	}
+
+	article pre {
+		/* Initialize the counter */
+		counter-reset: line-numbers;
+	}
+
+	article span.line {
+		@apply whitespace-pre-wrap;
+	}
+
+	article span.line::before {
+		/* Increment the counter */
+		counter-increment: line-numbers;
+		content: counter(line-numbers);
+		display: inline-block;
+		width: 36px;
+		height: 100%;
+		margin-right: 1em;
+		text-align: right;
+		user-select: none;
+		opacity: 0.5;
+	}
+
+	article p > code,
+	article li > code {
+		/** h-0 inline-block fixes paragraph line heights */
+		@apply inline-block h-0 font-mono text-green-500;
+	}
+
+	article ol,
+	article ul {
+		@apply mb-8 list-disc;
+	}
+
+	article ol > li {
+		/** ml-12 pr-12 condenses the list without leaving behind the bullets */
+		@apply -mb-2 ml-12 pr-12;
+	}
+
+	article ul > li {
+		/** ml-12 pr-12 condenses the list without leaving behind the bullets */
+		@apply ml-12 pr-12;
+	}
+
+	article sup {
+		@apply mb-2;
+	}
+
+	article hr {
+		@apply my-4;
+	}
+</style>
