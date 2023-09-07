@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Card from '@/components/astro/Card.astro';
+import LuxortsDetails from '@/components/react/LuxortsDetails.jsx';
 import Tech from '@/components/astro/Tech.astro';
-import Projects from '@/components/astro/Projects.astro';
-import Employers from '@/components/react/Employers.jsx';
+import { Badge } from '@/components/shadcn/ui/badge.tsx';
 import { Button } from '@/components/shadcn/ui/button.tsx';
 ---
 
@@ -45,54 +46,170 @@ import { Button } from '@/components/shadcn/ui/button.tsx';
 
 			<!-- Right Column -->
 			<div class="mt-8 md:mt-0">
+				<!-- Projects -->
 				<h1 class="mb-2 text-2xl">✨ Projects</h1>
 				<hr class="mb-4" />
-				<Projects />
+				<div class="flex flex-col gap-4">
+					<!-- Portfolio -->
+					<Card fancy>
+						<div class="flex flex-row gap-4">
+							<h2 class="text-lg">
+								crwdzr.io <span class="text-xs">(2023)</span>
+							</h2>
+							<div class="grow"></div>
+						</div>
+						<div class="pl-4 pt-2">
+							<p>My website! 👋</p>
+						</div>
+						<div class="mt-4">
+							<h2 class="text-sm">
+								code:
+								<a
+									target="_blank"
+									rel="noopener noreferrer"
+									href="https://www.github.com/crowdozer/mainframe"
+									class="ml-2">🔗 public on github</a
+								>
+							</h2>
+						</div>
+						<div class="mt-4 flex flex-row flex-wrap gap-2">
+							<Badge chipcolor="default">Tailwind</Badge>
+							<Badge chipcolor="default">React</Badge>
+							<Badge chipcolor="default">Astro</Badge>
+							<Badge chipcolor="default">Vercel</Badge>
+						</div>
+					</Card>
 
+					<!-- Luxorts -->
+					<Card>
+						<div class="flex flex-row gap-4">
+							<h2 class="text-lg">
+								Luxorts <span class="text-xs">(2022)</span>
+							</h2>
+							<div class="grow"></div>
+						</div>
+
+						<div class="pl-4 pt-2">
+							<p>
+								Luxury condo vacation rental platform. Enables users to book
+								affordable vacations at top resorts operated by companies such
+								as Wyndham.
+							</p>
+							<br />
+							<p>
+								I helped design and ship the Luxorts web app, connect it to
+								existing CMS systems, payment providers, and analytics
+								platforms.
+							</p>
+						</div>
+
+						<div class="mt-4">
+							<h2 class="text-sm">
+								code: <span class="ml-2 text-neutral-400">🔐 private</span>
+							</h2>
+							<h2 class="mt-2 text-sm">
+								visit: <a
+									href="https://www.luxorts.com/"
+									target="_blank"
+									rel="noopener noreferrer"
+									class="ml-2">🔗 www.luxorts.com</a
+								>
+							</h2>
+						</div>
+
+						<div class="mt-4 flex flex-row flex-wrap gap-2">
+							<Badge chipcolor="default">NextJS</Badge>
+							<Badge chipcolor="default">Material UI</Badge>
+							<Badge chipcolor="default">Vercel</Badge>
+						</div>
+					</Card>
+
+					<!-- VMG Portal/Luxorts Portal -->
+					<Card>
+						<div class="flex flex-row gap-4">
+							<h2 class="text-lg">
+								Luxorts CMS <span class="text-xs">(2017)</span>
+							</h2>
+							<div class="grow"></div>
+						</div>
+						<div class="pl-4 pt-2">
+							<p>
+								The CMS that powers Luxorts. Contained business specific
+								analytics and administrative tools, as well as resort,
+								reservation, and member management tools.
+							</p>
+						</div>
+						<div class="mt-4">
+							<h2 class="text-sm">
+								code: <span class="ml-2 text-neutral-400">🔐 private</span>
+							</h2>
+							<h2 class="mt-2 text-sm">
+								visit: <span class="ml-2 text-neutral-400">🔐 private</span>
+							</h2>
+						</div>
+						<div class="mt-4 flex flex-row flex-wrap gap-2">
+							<Badge chipcolor="default">PHP</Badge>
+							<Badge chipcolor="default">MySQL</Badge>
+							<Badge chipcolor="default">React</Badge>
+							<Badge chipcolor="default">Material UI</Badge>
+							<Badge chipcolor="default">Vercel</Badge>
+							<Badge chipcolor="default">GCP</Badge>
+						</div>
+					</Card>
+
+					<!-- Call Center Stuff -->
+					<Card>
+						<div class="flex flex-row gap-4">
+							<h2 class="text-lg">
+								TST Gateway API <span class="text-xs">(2022)</span>
+							</h2>
+							<div class="grow"></div>
+						</div>
+						<div class="pl-4 pt-2">
+							<p>
+								Supercharged their internal CMS with a highly optomized
+								round-robin for leads distribution, as well as various
+								analytical or managerial functions exposed via API.
+							</p>
+						</div>
+						<div class="mt-4">
+							<h2 class="text-sm">
+								code: <span class="ml-2 text-neutral-400">🔐 private</span>
+							</h2>
+							<h2 class="mt-2 text-sm">
+								visit: <span class="ml-2 text-neutral-400">🔐 private</span>
+							</h2>
+						</div>
+						<div class="mt-4 flex flex-row flex-wrap gap-2">
+							<Badge chipcolor="default">NodeJS</Badge>
+							<Badge chipcolor="default">Express</Badge>
+							<Badge chipcolor="default">Firebase</Badge>
+							<Badge chipcolor="default">GCP</Badge>
+						</div>
+					</Card>
+				</div>
+
+				<!-- Employment -->
 				<h1 class="mb-2 mt-16 text-2xl">🤝 Employment</h1>
 				<hr class="mb-4" />
-				<Employers client:idle />
+				<div class="flex flex-col gap-4">
+					<!-- Luxorts -->
+					<Card>
+						<div class="flex flex-row gap-4">
+							<h2 class="text-lg">Luxorts</h2>
+							<div class="grow"></div>
+						</div>
+
+						<h2 class="text-sm">
+							Full Stack Developer <span class="text-xs">(2016 2022)</span>
+						</h2>
+
+						<div class="pl-4 pt-2">
+							<LuxortsDetails client:idle />
+						</div>
+					</Card>
+				</div>
 			</div>
 		</div>
 	</div>
 </Layout>
-
-<style is:global>
-	/**
-	 * applies styling to all card elements on the page,
-	 * incl. the react versions
-	 */
-	.card {
-		@apply rounded border p-4 transition-colors duration-200 ease-in-out;
-
-		border-color: transparent;
-		border-left-color: theme(colors.neutral.700);
-
-		background: linear-gradient(
-			165deg,
-			theme(colors.neutral.800) 0%,
-			theme(colors.neutral.900) 50%,
-			theme(colors.neutral.900) 100%
-		);
-	}
-
-	/** make the first card stand out a bit */
-	.card-first {
-		background: linear-gradient(
-			165deg,
-			theme(colors.neutral.700) 0%,
-			theme(colors.neutral.800) 25%,
-			theme(colors.neutral.900) 80%
-		);
-	}
-
-	/** make the rest stand out on hover */
-	.card:hover {
-		background: linear-gradient(
-			165deg,
-			theme(colors.neutral.700) 0%,
-			theme(colors.neutral.800) 50%,
-			theme(colors.neutral.900) 100%
-		);
-	}
-</style>
