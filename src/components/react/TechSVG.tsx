@@ -31,7 +31,7 @@ export function TechSVG(props: TechSVGProps) {
 	return (
 		<TooltipProvider delayDuration={300}>
 			<Tooltip>
-				<TooltipTrigger>
+				<TooltipTrigger name={title + ' icon'}>
 					<div className="p-2 transition-colors duration-200 ease-in-out hover:bg-neutral-800">
 						<img
 							src={path}
