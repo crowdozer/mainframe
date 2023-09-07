@@ -11,8 +11,9 @@ const buttonVariants = cva(
 			variant: {
 				default:
 					'bg-zinc-100 text-zinc-900 hover:bg-zinc-200 active:bg-zinc-300',
-				outline:
-					'bg-neutral-900 text-zinc-50 border border-zinc-50 hover:bg-zinc-200 hover:text-zinc-900 active:bg-zinc-300',
+
+				dark: 'text-zinc-50 border bg-neutral-900 border-zinc-700 hover:border-zinc-300',
+
 				primary:
 					'border border-green-600 text-green-500 font-bold hover:bg-green-950 active:border-green-700 active:text-green-600',
 			},
