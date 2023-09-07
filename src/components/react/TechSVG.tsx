@@ -31,7 +31,7 @@ export function TechSVG(props: TechSVGProps) {
 	return (
 		<TooltipProvider delayDuration={300}>
 			<Tooltip>
-				<TooltipTrigger name={title + ' icon'}>
+				<TooltipTrigger name={'show popover'}>
 					<div className="p-2 transition-colors duration-200 ease-in-out hover:bg-neutral-800">
 						<img
 							src={path}
@@ -42,6 +42,7 @@ export function TechSVG(props: TechSVGProps) {
 								'hover:grayscale-0': colorize,
 								'hover:invert-0': revert,
 							})}
+							alt={title + ' icon'}
 						/>
 					</div>
 				</TooltipTrigger>
