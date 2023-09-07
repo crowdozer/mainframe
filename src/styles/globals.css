@@ -82,6 +82,20 @@ a {
 	color: theme(colors.green.500);
 }
 
+ul > li {
+	@apply ml-8 list-disc pr-4;
+}
+nav ul > li {
+	@apply ml-0 list-none pr-0;
+}
+nav a {
+	color: inherit;
+	font-weight: inherit;
+}
+nav a:hover {
+	color: inherit;
+}
+
 a:hover {
 	@apply text-blue-600;
 }

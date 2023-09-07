@@ -13,20 +13,20 @@ export default function Employers() {
 				</div>
 
 				<h2 className="text-sm">
-					Full Stack Developer <span className="text-xs">(2016 - 2022)</span>
+					Full Stack Developer <span className="text-xs">(2016 2022)</span>
 				</h2>
 
 				<div className="pl-4 pt-2">
 					<ul>
 						<li>
-							- Designed and built web applications for sales and business
+							Designed and built web applications for sales and business
 							operations
 						</li>
-						<li>- Enhanced UI/UX for customers</li>
-						<li>- Improved UI/UX for internal tools</li>
+						<li>Enhanced UI/UX for customers</li>
+						<li>Improved UI/UX for internal tools</li>
 						{!more ? (
 							<>
-								<li>- ...</li>
+								<li>...</li>
 								<br />
 								<Button onClick={() => setShowMore(true)} variant="outline">
 									{' '}
@@ -35,13 +35,13 @@ export default function Employers() {
 							</>
 						) : (
 							<>
-								<li>- Facilitated customer payments via Stripe Payments API</li>
+								<li>Facilitated customer payments via Stripe Payments API</li>
 								<li>
-									- Reduced server loads by optimizing or rewriting legacy code
+									Reduced server loads by optimizing or rewriting legacy code
 								</li>
-								<li>- Created and maintained Docker images</li>
+								<li>Created and maintained Docker images</li>
 								<li>
-									- Configured and automated unit tests, end to end tests,
+									Configured and automated unit tests, end to end tests,
 									integration tests
 								</li>
 								<br />

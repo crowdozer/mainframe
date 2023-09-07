@@ -1,13 +1,15 @@
-<div class="border-b border-neutral-700 p-6">
+---
+import Nav from '@/components/react/Nav.jsx';
+---
+
+<nav class="relative border-b border-neutral-700 p-6">
 	<div class="mx-auto max-w-6xl">
 		<div class="flex flex-row gap-2">
 			<h1 class="self-center">
 				<a href="/" style="text-decoration:none">crowdozer</a>
 			</h1>
 			<div class="grow"></div>
-			<a href="/games" class="ml-2 self-center text-sm">[ arcade ]</a>
-			<a href="/hire-me" class="ml-2 self-center text-sm">[ hire me ]</a>
-			<a href="/contact" class="ml-2 self-center text-sm">[ contact ]</a>
+			<Nav client:load />
 		</div>
 	</div>
-</div>
+</nav>
