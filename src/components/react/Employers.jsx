@@ -27,7 +27,11 @@ export default function Employers() {
 						{!more ? (
 							<>
 								<li>- ...</li>
-								<Button onClick={() => setShowMore(true)}>show 4 more</Button>
+								<br />
+								<Button onClick={() => setShowMore(true)} variant="outline">
+									{' '}
+									show 4 more
+								</Button>
 							</>
 						) : (
 							<>
@@ -40,7 +44,10 @@ export default function Employers() {
 									- Configured and automated unit tests, end to end tests,
 									integration tests
 								</li>
-								<Button onClick={() => setShowMore(false)}>show less</Button>
+								<br />
+								<Button onClick={() => setShowMore(false)} variant="outline">
+									show less
+								</Button>
 							</>
 						)}
 					</ul>

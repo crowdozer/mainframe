@@ -10,7 +10,7 @@ import Icon from 'astro-icon';
 		<div class="grow"></div>
 		<div>
 			<h1 class="text-6xl text-center mb-6">hey 👋</h1>
-			<h2 class="text-xl text-center font-normal">WIP... have a look around</h2>
+			<h2 class="text-xl text-center font-normal">have a look around</h2>
 		</div>
 		<div class="grow"></div>
 	</div>
@@ -23,17 +23,93 @@ import Icon from 'astro-icon';
 				<!-- grid items -->
 				<h1 class="mb-16 text-4xl text-zinc-50">what I do</h1>
 				<div id="home-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<div class="bg-neutral-900 p-4 md:col-span-2"></div>
-					<div class="bg-neutral-900 p-4"></div>
-					<div class="bg-neutral-900 p-4 md:row-span-2"></div>
-					<div class="bg-neutral-900 p-4 md:col-span-2"></div>
-					<div class="bg-neutral-900 p-4 md:col-span-2"></div>
+					<!-- Interactivity -->
+					<div class="bg-neutral-900 md:col-span-2">
+						<div class="p-8 px-4 md:p-16 md:pt-8">
+							<p
+								class="text-2xl md:text-6xl text-center md:text-left font-bold text-red-500"
+							>
+								Interactivity
+							</p>
+							<p class="mt-4 text-center md:text-left text-xl">
+								I can help you enhance your web app with...
+							</p>
+							<ul class="mt-6 text-xl ml-4">
+								<li>👉 API connections</li>
+								<li>
+									👉 Database I/O
+									<span class="text-zinc-300 text-sm">(mysql, nosql)</span>
+								</li>
+								<li>👉 UI/UX interactions</li>
+								<li>👉 CRM/CMS integrations</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- images, hidden on mobile -->
+					<div class="md:contents hidden">
+						<div
+							class="bg-neutral-900 p-4 vignette bg-cover border-2 border-neutral-700 shadow-md"
+							style="background-image: url(/images/code.webp);"
+						>
+						</div>
+						<div
+							class="bg-neutral-900 p-4 md:row-span-2 vignette bg-cover border-2 border-neutral-700 shadow-md"
+							style="background-image: url(/images/earth.webp);"
+						>
+						</div>
+					</div>
+
+					<!-- Responsiveness -->
+					<div class="bg-neutral-900 md:col-span-2">
+						<div class="p-8 px-4 md:p-16 md:pt-8">
+							<p
+								class="text-2xl md:text-6xl text-center md:text-left font-bold text-green-500"
+							>
+								Responsiveness
+							</p>
+							<p class="mt-4 text-center md:text-left text-xl">
+								Make your app look and run great anywhere
+							</p>
+							<ul class="mt-6 text-xl ml-4">
+								<li>👉 mobile first designs</li>
+								<li>👉 add responsiveness to legacy apps</li>
+								<li>👉 or even just tweak things</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- API Dev -->
+					<div class="bg-neutral-900 md:col-span-2">
+						<div class="p-8 px-4 md:p-16 md:pt-8">
+							<p
+								class="text-2xl md:text-6xl text-center md:text-left font-bold text-fuchsia-500"
+							>
+								API Development
+							</p>
+							<p class="mt-4 text-xl text-center md:text-left">
+								Build robust back ends
+							</p>
+							<ul class="mt-6 text-xl ml-4">
+								<li>👉 NodeJS/Typescript, PHP</li>
+								<li>
+									👉 User auth
+									<span class="text-zinc-300 text-sm">
+										(user/pass, socials, 2fa)
+									</span>
+								</li>
+								<li>👉 User authentication</li>
+								<li>👉 Enhance UX with infinite scroll, filtering, etc</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 
-				<div class="mt-24 text-right">
-					<a href="/hire-me">
-						<Button variant="secondary" size="xl">
-							view my resume
+				<!-- "My Portfolio" btn -->
+				<div class="mt-24 text-center md:text-right">
+					<a href="/hire-me" class="contents">
+						<Button variant="default" size="xl" fullwidth>
+							my portfolio
 							<Icon
 								name="carbon:arrow-right"
 								width="1.15rem"

@@ -100,6 +100,6 @@ a:hover {
 		transparent,
 		theme(colors.zinc.950)
 	);
-	opacity: 0.75;
+	opacity: 1;
 	pointer-events: none; /* This allows clicks to go through this overlay */
 }
