@@ -4,50 +4,52 @@ import Tech from '@/components/astro/Tech.astro';
 import Projects from '@/components/astro/Projects.astro';
 import Employers from '@/components/react/Employers.jsx';
 import { Button } from '@/components/shadcn/ui/button.tsx';
-import { Icon } from 'astro-icon';
-
-const start = 2016;
-const current = new Date().getFullYear();
-const yoe = current - start;
 ---
 
 <Layout title="hire me 👋">
 	<div class="mx-auto max-w-4xl p-4 lg:mt-32">
-		<div class="flex flex-col gap-16 lg:flex-row">
+		<div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
 			<!-- Left Column -->
-			<div class="w-full flex-shrink-0 overflow-hidden md:w-[360px]">
-				<h1 class="mb-4 text-5xl">About me</h1>
+			<div class="relative mt-8 md:mt-0">
+				<div class="relative md:sticky md:left-0 md:top-4" id="sticky">
+					<h1 class="mb-4 text-5xl">About me</h1>
 
-				<!-- About Me -->
-				<p>
-					I began programming in the early 2010s, using Lua to make <a
-						href="https://www.computercraft.info/"
-						target="_blank"
-						rel="noopener noreferrer">ComputerCraft</a
-					>
-					 scripts. Eventually, I attended college and learned the fundamentals
-					of web development. I've been growing and building ever since.
-				</p>
+					<!-- About Me -->
+					<p>
+						I began programming in the early 2010s, using Lua to make <a
+							href="https://www.computercraft.info/"
+							target="_blank"
+							rel="noopener noreferrer">ComputerCraft</a
+						>
+						 scripts. Eventually, I attended college and learned the
+						fundamentals of web development. I've been growing and building ever
+						since.
+					</p>
 
-				<p class="mt-8 text-3xl">👩‍💻🎮🎶</p>
+					<div id="hide-me">
+						<p class="mt-8 text-3xl">👩‍💻🎮🎶</p>
 
-				<div class="mt-8">
-					<Tech />
-				</div>
+						<div class="mt-8">
+							<Tech />
+						</div>
+					</div>
 
-				<div class="mt-16">
-					<a href="/contact" class="contents">
-						<Button size="lg" variant="dark" fullwidth>Contact Me</Button>
-					</a>
+					<div class="mt-16">
+						<a href="/contact" class="contents">
+							<Button size="lg" variant="dark" fullwidth>Contact Me</Button>
+						</a>
+					</div>
 				</div>
 			</div>
 
 			<!-- Right Column -->
-			<div class="grow overflow-hidden">
-				<h1 class="mb-4 text-xl">Projects</h1>
+			<div class="mt-8 md:mt-0">
+				<h1 class="mb-2 text-2xl">✨ Projects</h1>
+				<hr class="mb-4" />
 				<Projects />
 
-				<h1 class="mb-4 mt-16 text-xl">Employment</h1>
+				<h1 class="mb-2 mt-16 text-2xl">🤝 Employment</h1>
+				<hr class="mb-4" />
 				<Employers client:load />
 
 				<br />
