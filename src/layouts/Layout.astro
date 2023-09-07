@@ -25,7 +25,7 @@ const url = Astro.request.url;
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-SDQPP9QJ3H"
 		></script>
-		<script>
+		<script define:vars={{ title, url }}>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
 				dataLayer.push(arguments);
