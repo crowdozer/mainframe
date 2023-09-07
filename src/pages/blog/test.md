@@ -2,7 +2,7 @@
 layout: '@/layouts/Blog.astro'
 title: Reducing component complexity with React Hooks
 author: crowdozer
-description: Using hooks for abstraction
+description: We'll talk about using React hooks to reduce component complexity, with a few brief examples
 date: '2020-11-10'
 ---
 
