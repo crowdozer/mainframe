@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { title, footer = true } = Astro.props;
+const url = Astro.request.url;
 ---
 
 <!doctype html>
@@ -30,9 +31,9 @@ const { title, footer = true } = Astro.props;
 				dataLayer.push(arguments);
 			}
 			gtag('js', new Date());
-			gtag('config', 'G-SDQPP9QJ3H');
-			gtag('event', {
-				type: 'test',
+			gtag('config', 'G-SDQPP9QJ3H', {
+				page_title: title,
+				page_path: url,
 			});
 		</script>
 	</head>
