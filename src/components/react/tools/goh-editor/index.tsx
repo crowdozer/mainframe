@@ -38,19 +38,17 @@ export default function GohEditor() {
 
 			{/* Uploader */}
 			{!loaded && (
-				<div className="{data ? 'hidden' : 'block'}">
-					<div className="mt-8">
-						<p>To begin, locate your savefile.</p>
-						<p>Save files are commonly located at:</p>
-						<div className=" my-4 bg-neutral-950/25 p-4 font-mono">
-							<p className=" text-green-500 ">
-								Documents\my games\gates of hell\profiles\(steam
-								id)\campaign\(file).sav
-							</p>
-						</div>
-						<div>
-							<input type="file" name="files" onChange={handleParseSave} />
-						</div>
+				<div className="mt-8">
+					<p>To begin, locate your savefile.</p>
+					<p>Save files are commonly located at:</p>
+					<div className=" my-4 bg-neutral-950/25 p-4 font-mono">
+						<p className=" text-green-500 ">
+							Documents\my games\gates of hell\profiles\(steam
+							id)\campaign\(file).sav
+						</p>
+					</div>
+					<div>
+						<input type="file" name="files" onChange={handleParseSave} />
 					</div>
 				</div>
 			)}
