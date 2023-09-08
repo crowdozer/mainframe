@@ -70,9 +70,10 @@
 </script>
 
 <h1 class="text-4xl">Gates of Hell Editor</h1>
+<h2 class="mt-2 text-neutral-400">web gui for Gates of Hell: Ostfront savefiles</h2>
 
 <!-- Disclaimer Messages -->
-<div class="mt-4">
+<div class="mt-8">
 	<div class="px-4 border border-neutral-500">
 		<div class="p-4">
 			<p class="mb-2 font-bold text-yellow-500">NOTICE</p>
