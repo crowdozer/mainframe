@@ -19,11 +19,10 @@ export async function parseSave(file: File): Promise<Campaign | null> {
 			campaign: parseSaveFilePart(result.campaign),
 		};
 	} catch (err) {
-		console.error('error deserializing data')
+		console.error('error deserializing data');
 
-		return null
+		return null;
 	}
-
 }
 
 /**
@@ -50,19 +49,18 @@ export async function loadFromDisk(
 	try {
 		const status = zip.file('status');
 		const campaign = zip.file('campaign.scn');
-		
+
 		if (!status || !campaign) {
 			throw new Error('invalid, unknown, or possibly corrupt save data');
 		}
-	
+
 		return {
 			status: await status.async('string'),
 			campaign: await campaign.async('string'),
 		};
-
 	} catch (err) {
-		console.error('error parsing savefile')
+		console.error('error parsing savefile');
 
-		return null
+		return null;
 	}
 }

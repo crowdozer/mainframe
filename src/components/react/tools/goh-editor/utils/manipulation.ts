@@ -59,7 +59,9 @@ export function set(data: any, keyPath: string, value: any): any {
 	// Split the keyPath string into an array of keys and indices, using "." and "[]" as delimiters
 	// ESlint is lying. It's a useful escape character.
 	// eslint-disable-next-line no-useless-escape
-	const keyParts: (number | string)[] = keyPath.split(/[.\[\]]/).filter((part) => part.length > 0);
+	const keyParts: (number | string)[] = keyPath
+		.split(/[.\[\]]/)
+		.filter((part) => part.length > 0);
 	let currentNode = data;
 
 	// The first layer (like saveinfo) doesn't require specification
@@ -92,12 +94,16 @@ export function set(data: any, keyPath: string, value: any): any {
 					currentNode.push([key, value]);
 				} else {
 					// If the node exists, update its value
-					currentNode[nodeIndex] = Array.isArray(value) ? [key, ...value] : [key, value];
+					currentNode[nodeIndex] = Array.isArray(value)
+						? [key, ...value]
+						: [key, value];
 				}
 			}
 		} else {
 			// If the current key is not the last part, move the currentNode to the next level
-			let nodeIndex = currentNode.findIndex((item: any) => Array.isArray(item) && item[0] === key);
+			let nodeIndex = currentNode.findIndex(
+				(item: any) => Array.isArray(item) && item[0] === key,
+			);
 			// If the next node doesn't exist, create it
 			if (nodeIndex === -1) {
 				nodeIndex = currentNode.length;

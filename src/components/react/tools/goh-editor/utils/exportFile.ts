@@ -5,7 +5,10 @@ import { serializeData } from './serialization';
 /**
  * Accepts an unserialized savegame, serializes it, writes it to zip
  */
-export async function exportFile(filename: string, savegame: { status: any; campaign: any }) {
+export async function exportFile(
+	filename: string,
+	savegame: { status: any; campaign: any },
+) {
 	// serialize the files
 	const status = serializeData(savegame.status);
 	const campaign = serializeData(savegame.campaign);
@@ -17,7 +20,10 @@ export async function exportFile(filename: string, savegame: { status: any; camp
 	newZip.file('campaign.scn', campaign);
 
 	// Generate the new zip file for download
-	const newZipBlob = await newZip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
+	const newZipBlob = await newZip.generateAsync({
+		type: 'blob',
+		compression: 'DEFLATE',
+	});
 
 	saveAs(newZipBlob, filename);
 }
