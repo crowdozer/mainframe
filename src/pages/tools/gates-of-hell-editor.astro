@@ -1,0 +1,13 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Editor from '@/components/svelte/goh-editor/Editor.svelte';
+---
+
+<Layout title="hire me 👋">
+	<div class="mx-auto mb-16 max-w-4xl p-4 lg:mt-16">
+		<a href="/tools">go back</a>
+		<div class="mt-8">
+			<Editor client:load />
+		</div>
+	</div>
+</Layout>
