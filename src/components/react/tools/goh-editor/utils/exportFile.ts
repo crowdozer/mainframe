@@ -1,5 +1,5 @@
 import JSZip from 'jszip';
-import { saveAs } from 'file-saver';
+import saveAs from 'file-saver';
 import { serializeData } from './serialization';
 
 /**
