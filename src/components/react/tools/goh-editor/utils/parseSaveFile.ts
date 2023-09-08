@@ -1,11 +1,12 @@
 import JSZip from 'jszip';
 import { deserializeData } from './serialization';
+import type { Campaign } from '../useEditor';
 
 /**
  * Accepts a file pointer, laods it to disk,
  * and attempts to parse save data
  */
-export async function parseSave(file: File): Promise<any | null> {
+export async function parseSave(file: File): Promise<Campaign | null> {
 	const result = await loadFromDisk(file);
 
 	if (!result) {

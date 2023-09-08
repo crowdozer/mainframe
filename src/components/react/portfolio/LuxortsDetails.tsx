@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../shadcn/ui/button';
+import { Button } from '@/components/shadcn/ui/button';
 
 export default function LuxortsDetails() {
 	const [more, setShowMore] = useState(false);
@@ -17,7 +17,7 @@ export default function LuxortsDetails() {
 					<li>...</li>
 				</ul>
 				<br />
-				<Button onClick={() => setShowMore(true)} variant="outline">
+				<Button onClick={() => setShowMore(true)} variant="ghost">
 					show more
 				</Button>
 			</>
@@ -42,7 +42,7 @@ export default function LuxortsDetails() {
 				</li>
 			</ul>
 			<br />
-			<Button onClick={() => setShowMore(false)} variant="outline">
+			<Button onClick={() => setShowMore(false)} variant="ghost">
 				show less
 			</Button>
 		</>
