@@ -75,7 +75,10 @@ h2,
 h3,
 h4,
 h5,
-p {
+p,
+span,
+li,
+ol {
 	@apply cursor-default;
 }
 
@@ -106,6 +109,9 @@ hr {
 /* Links */
 a {
 	@apply inline-block font-bold text-fuchsia-500 transition-colors duration-100 ease-in-out hover:text-fuchsia-200;
+}
+a * {
+	cursor: pointer;
 }
 
 /* Lists */
