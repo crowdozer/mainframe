@@ -1,16 +1,17 @@
 ---
-import '@/styles/globals.css';
-import Header from '@/components/astro/Header.astro';
-import Footer from '@/components/astro/Footer.astro';
-import Analytics from '@/components/astro/Analytics.astro';
+import '@/styles/globals.css'
+import Header from '@/components/astro/Header.astro'
+import Footer from '@/components/astro/Footer.astro'
+import Analytics from '@/components/astro/Analytics.astro'
 
 interface Props {
-	title: string;
-	footer?: boolean;
+	title: string
+	header?: boolean
+	footer?: boolean
 }
 
-const { title, footer = true } = Astro.props;
-const isProd = import.meta.env.MODE === 'production';
+const { title, header = true, footer = true } = Astro.props
+const isProd = import.meta.env.MODE === 'production'
 ---
 
 <!doctype html>
@@ -26,7 +27,7 @@ const isProd = import.meta.env.MODE === 'production';
 	</head>
 
 	<body class="flex min-h-screen flex-col overflow-y-auto overflow-x-hidden">
-		<Header />
+		{header ? <Header /> : null}
 
 		<div class="grow">
 			<slot />

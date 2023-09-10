@@ -1,157 +1,325 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import { Button } from '@/components/shadcn/ui/button';
-import Icon from 'astro-icon';
+import Layout from '@/layouts/Layout.astro'
+import Icon from 'astro-icon'
+import { Button } from '@/components/shadcn/ui/button'
+import FancyChars from '@/components/astro/FancyChars.astro'
 ---
 
-<Layout title="yo 👋">
-	<!-- hero section -->
-	<div class="flex h-[720px] flex-col">
-		<div class="grow"></div>
-		<div>
-			<h1 class="mb-6 text-center text-6xl">hey 👋</h1>
-			<h2 class="text-center text-xl font-normal">have a look around</h2>
+<Layout title="hey 👋" header={false}>
+	<div
+		id="splash"
+		class="min-h-[100vh] w-screen bg-neutral-950 text-neutral-50"
+	>
+		<!-- splash navbar -->
+		<div class="mx-auto max-w-5xl p-4">
+			<div class="flex flex-row gap-4">
+				<h1 class="!text-lg">
+					<a href="/">crowdozer</a>
+				</h1>
+				<div class="grow"></div>
+				<a href="/hire-me">portfolio</a>
+				<a href="/contact">contact</a>
+			</div>
 		</div>
-		<div class="grow"></div>
-	</div>
 
-	<!-- bg color transition -->
-	<div class="relative mt-[64px]">
-		<div id="sell" class="bg-neutral-800">
-			<!-- container -->
-			<div class="mx-auto max-w-6xl p-6 py-24">
-				<!-- grid items -->
-				<h1 class="mb-16 text-4xl text-zinc-50">what I do</h1>
-				<div id="home-grid" class="grid grid-cols-1 gap-8 md:grid-cols-3">
-					<!-- Interactivity -->
-					<div class="bg-neutral-900 md:col-span-2">
-						<div class="p-8 px-4 md:p-16 md:pt-8">
-							<p
-								class="text-center text-2xl font-bold text-red-500 md:text-left md:text-6xl"
-							>
-								Interactivity
-							</p>
-							<p class="mt-6 text-center text-xl md:mt-12 md:text-left">
-								I help enhance web apps with...
-							</p>
-							<ul class="mt-6 text-xl md:mt-4">
-								<li>👉 API connections</li>
-								<li>
-									👉 Database I/O
-									<span class="text-sm text-zinc-300">(mysql, nosql)</span>
-								</li>
-								<li>👉 UI/UX interactions</li>
-								<li>👉 CRM/CMS integrations</li>
-							</ul>
-						</div>
+		<!-- hero section -->
+		<div class="relative mx-auto my-[40%] max-w-md text-center lg:my-64">
+			<h1 class="!text-4xl font-extrabold tracking-tighter md:!text-6xl">
+				<FancyChars text="what" />
+				<FancyChars text="'" isStatic />
+				<FancyChars text="s up?" />
+			</h1>
+			<div class="mt-8 text-base md:text-xl">
+				<p>I design and build full-stack web applications.</p>
+				<p>Need help bringing your designs to production?</p>
+			</div>
+			<div class="mt-16">
+				<a href="/hire-me" class="button button-dark p-4 px-8">
+					<div class="flex flex-row gap-2">
+						view my portfolio
+						<Icon name="carbon:arrow-right" width="1.15rem" />
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="relative">
+			<hr />
+
+			<!-- scroll indicator/button -->
+			<div class="absolute left-0 right-0 top-full z-10 -mt-[20px] text-center">
+				<a
+					id="btn-scroll"
+					href="/#scroll-target"
+					class="button button-dark border border-transparent p-3 hover:border-neutral-700"
+					title="read more"
+				>
+					<Icon name="mdi:triangle" width="1.15rem" class="rotate-180" />
+				</a>
+			</div>
+		</div>
+
+		<!-- services -->
+		<div class="bg-neutral-950 pt-32 lg:pb-32 lg:pt-48" id="scroll-target">
+			<div class="mx-auto max-w-5xl lg:block lg:space-y-32 lg:py-0">
+				<!-- design -->
+				<div class="relative lg:min-h-[720px]">
+					<!-- "DESIGN DESIGN DESIGN" text, hidden on mobile -->
+					<div
+						class="hidden select-none text-center text-6xl font-extrabold tracking-tighter text-neutral-800 lg:block"
+					>
+						DESIGN DESIGN DESIGN DESIGN DESIGN DESIGN DESIGN DESIGN DESIGN
+						DESIGN
+						<span class="text-neutral-100"> DESIGN</span>
+						 DESIGN DESIGN DESIGN DESIGN DESIGN
 					</div>
 
-					<!-- images, hidden on mobile -->
-					<div class="hidden md:contents">
-						<div
-							class="vignette border-2 border-neutral-700 bg-neutral-900 bg-cover p-4 shadow-md"
-							style="background-image: url(/images/code.webp);"
-							title="image from www.unsplash.com"
-						>
-						</div>
-						<div
-							class="vignette border-2 border-neutral-700 bg-neutral-900 bg-cover p-4 shadow-md md:row-span-2"
-							style="background-image: url(/images/earth.webp);"
-							title="image from www.unsplash.com"
-						>
-						</div>
-					</div>
+					<div class="lg:absolute lg:left-0 lg:right-0 lg:top-0">
+						<div class="grid grid-cols-1 lg:mx-32 lg:grid-cols-2 lg:gap-16">
+							<!-- picture -->
+							<div class="mx-auto w-full lg:mx-0 lg:mb-0 lg:mt-24 lg:max-w-xs">
+								<div
+									class="h-[300px] space-y-4 bg-neutral-900 bg-cover bg-center transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-neutral-100/40 md:h-[360px] lg:h-[480px] lg:rounded-xl lg:bg-left lg:shadow-lg lg:shadow-neutral-100/30"
+									style="background-image: url(/images/computer.webp)"
+								>
+								</div>
+							</div>
 
-					<!-- Responsiveness -->
-					<div class="bg-neutral-900 md:col-span-2">
-						<div class="p-8 px-4 md:p-16 md:pt-8">
-							<p
-								class="text-center text-2xl font-bold text-green-500 md:text-left md:text-6xl"
-							>
-								Responsiveness
-							</p>
-							<p class="mt-6 text-center text-xl md:mt-12 md:text-left">
-								I help apps look and run great anywhere
-							</p>
-							<ul class="mt-6 text-xl md:mt-4">
-								<li>👉 mobile first designs</li>
-								<li>👉 add responsiveness to legacy apps</li>
-								<li>👉 or even just tweak things</li>
-							</ul>
-						</div>
-					</div>
-
-					<!-- API Dev -->
-					<div class="bg-neutral-900 md:col-span-2">
-						<div class="p-8 px-4 md:p-16 md:pt-8">
-							<p
-								class="text-center text-2xl font-bold text-fuchsia-500 md:text-left md:text-6xl"
-							>
-								API Development
-							</p>
-							<p class="mt-6 text-center text-xl md:mt-12 md:text-left">
-								I help build robust back ends for...
-							</p>
-							<ul class="mt-6 text-xl md:mt-4">
-								<li>👉 NodeJS/Typescript, PHP</li>
-								<li>
-									👉 Payments <span class="text-sm text-zinc-300">
-										(stripe)
-									</span>
-								</li>
-								<li>
-									👉 User authentication
-									<span class="text-sm text-zinc-300">
-										(user/pass, socials, jwt, oauth)
-									</span>
-								</li>
-								<li>
-									👉 UX enhancements <span class="text-sm text-zinc-300">
-										(infinite scroll, autocomplete, filtering)
-									</span>
-								</li>
-							</ul>
+							<!-- text -->
+							<div class="mt-4 space-y-4 lg:mt-[260px] lg:space-y-8">
+								<div class="mt-8 block px-8 lg:hidden">
+									<h1>Design</h1>
+									<hr />
+								</div>
+								<div class="px-8 text-lg lg:px-0 lg:text-center">
+									<p>I can help design a brand new UI,</p>
+									<p>or modernize your existing UI</p>
+								</div>
+								<div class="pt-8 lg:pt-0">
+									<ul class="space-y-2 text-lg">
+										<li
+											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+										>
+											👉 Enhance user interactions
+										</li>
+										<li
+											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+										>
+											👉 Add responsiveness
+										</li>
+										<li
+											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+										>
+											👉 Mobile first designs
+										</li>
+										<li
+											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+										>
+											👉 or, just tweak stuff
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<!-- "My Portfolio" btn -->
-				<div class="mt-24 text-center md:text-right">
-					<a href="/hire-me" class="contents">
-						<Button variant="dark" size="xl" fullwidth>
-							my portfolio
-							<Icon
-								name="carbon:arrow-right"
-								width="1.15rem"
-								class="ml-4 pt-1"
-							/>
-						</Button>
-					</a>
+				<!-- develop -->
+				<div class="mx-auto max-w-5xl pt-16 lg:pt-0">
+					<div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
+						<!-- text -->
+						<div>
+							<div class="p-8 lg:p-0">
+								<h1
+									class="text-4xl text-neutral-200 lg:whitespace-nowrap lg:!text-8xl"
+								>
+									<FancyChars text="DEVELOP" />
+								</h1>
+								<h2
+									class="mt-2 text-xl font-bold tracking-normal text-neutral-300"
+								>
+									Readable. Documented. Scalable.
+								</h2>
+								<hr class="mt-2" />
+							</div>
+
+							<div class="space-y-2 text-xl lg:mt-8">
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<span class="text-xl tracking-wider text-red-500">
+										Javascript/Typescript, PHP
+									</span>
+									<span class="block text-base text-neutral-300">
+										NodeJS, Express, Laravel, CodeIgniter
+									</span>
+								</div>
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<span class="text-xl tracking-wider text-red-500">
+										Payments</span
+									>
+									<span class="block text-base text-neutral-300">
+										via stripe</span
+									>
+								</div>
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<span class="text-xl tracking-wider text-red-500">
+										User authentication</span
+									>
+									<span class="block text-base text-neutral-300">
+										user/pass, socials, jwt, oauth
+									</span>
+								</div>
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<span class="text-xl tracking-wider text-red-500">
+										UX enhancements</span
+									>
+									<span class="block text-base text-neutral-300">
+										infiniscroll, autocomplete, filtering, etc
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- image -->
+						<div
+							class="vignette hidden border border-neutral-800 bg-cover shadow-2xl shadow-neutral-500/10 transition-all duration-300 ease-in-out hover:shadow-neutral-500/20 lg:block"
+							style="background-image: url(/images/code.webp)"
+						>
+						</div>
+					</div>
+				</div>
+
+				<!-- interactivity -->
+				<div class="mx-auto max-w-5xl pt-16 text-center lg:pt-0">
+					<div class="space-y-2 lg:space-y-8">
+						<div class="space-y-4">
+							<hr />
+							<h1 class="!text-5xl lg:!text-6xl">
+								<FancyChars text="Supercharge" />
+							</h1>
+							<h2>
+								your apps with <span class="text-yellow-400">interactivity</span
+								>
+							</h2>
+							<hr />
+						</div>
+						<div class="mx-auto max-w-2xl text-left">
+							<div class="grid grid-cols-1 gap-2 lg:grid-cols-2 lg:gap-8">
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<p class="text-xl font-bold tracking-wider">
+										👉 API Connections
+									</p>
+									<p class="text-neutral-300">fetch, axios, trpc, graphql</p>
+								</div>
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<p class="text-xl font-bold tracking-wider">
+										👉 Database I/O
+									</p>
+									<p class="text-neutral-300">mysql, nosql, firebase</p>
+								</div>
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<p class="text-xl font-bold tracking-wider">
+										👉 UI/UX interactions
+									</p>
+									<p class="text-neutral-300">
+										animations, feedback, indicators
+									</p>
+								</div>
+								<div
+									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+								>
+									<p class="text-xl font-bold tracking-wider">
+										👉 CMS integration
+									</p>
+									<p class="text-neutral-300">forms, validation, insights</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- portfolio link -->
+				<div class="mx-auto max-w-lg pt-16 text-center lg:pt-0">
+					<div class="space-y-8">
+						<a href="/hire-me" class="button button-dark p-4 px-8">
+							<div class="flex flex-row gap-2 p-2 px-4 text-xl">
+								view my portfolio
+								<Icon name="carbon:arrow-right" width="1.15rem" />
+							</div>
+						</a>
+
+						<div>
+							<a href="/" id="btn-scroll-top" class="p-4 px-8">
+								<div class="flex flex-row gap-2">back to top</div>
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<style>
+		* {
+			font-family: Helvetica, sans-serif;
+		}
+
+		a:not(#btn-scroll) {
+			@apply text-neutral-50 transition-colors duration-200 ease-in-out hover:!text-fuchsia-500 hover:!no-underline;
+		}
+
+		h1 {
+			@apply text-6xl;
+		}
+
+		.button {
+			@apply rounded-full bg-neutral-50 font-bold !text-neutral-950  transition-colors duration-200 ease-in-out hover:bg-neutral-800 hover:!text-fuchsia-500 hover:shadow-xl;
+		}
+
+		.button.button-dark {
+			@apply hover:!bg-neutral-900;
+		}
+	</style>
+
+	<script>
+		/**
+		 * smoothscroll button script
+		 */
+
+		const scrollButton = document.getElementById('btn-scroll')
+		const scrollTopButton = document.getElementById('btn-scroll-top')
+		const target = document.getElementById('scroll-target')
+
+		if (scrollButton && target) {
+			scrollButton.addEventListener('click', (event) => {
+				event.preventDefault()
+				target.scrollIntoView({
+					behavior: 'smooth',
+				})
+			})
+		}
+
+		if (scrollTopButton) {
+			scrollTopButton.addEventListener('click', (event) => {
+				event.preventDefault()
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth',
+				})
+			})
+		}
+	</script>
 </Layout>
-
-<style>
-	li {
-		list-style: none;
-	}
-
-	/* add the triangular bg transition to the sell */
-	#sell::before {
-		content: '';
-		position: absolute;
-		top: -64px;
-		left: 0;
-		width: 0;
-		height: 0;
-		border-right: 100vw solid transparent;
-		border-bottom: 64px solid theme(colors.neutral.800);
-	}
-
-	#home-grid > div {
-		min-height: 360px;
-		display: relative;
-	}
-</style>

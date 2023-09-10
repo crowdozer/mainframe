@@ -1,10 +1,11 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-import Card from '@/components/astro/Card.astro';
-import LuxortsDetails from '@/components/react/portfolio/LuxortsDetails.tsx';
-import Tech from '@/components/astro/Tech.astro';
-import { Badge } from '@/components/shadcn/ui/badge.tsx';
-import { Button } from '@/components/shadcn/ui/button.tsx';
+import Layout from '@/layouts/Layout.astro'
+import Card from '@/components/astro/Card.astro'
+import LuxortsDetails from '@/components/react/portfolio/LuxortsDetails.tsx'
+import Tech from '@/components/astro/Tech.astro'
+import { Badge } from '@/components/shadcn/ui/badge.tsx'
+import { Button } from '@/components/shadcn/ui/button.tsx'
+import FancyChars from '@/components/astro/FancyChars.astro'
 ---
 
 <Layout title="hire me 👋">
@@ -13,7 +14,9 @@ import { Button } from '@/components/shadcn/ui/button.tsx';
 			<!-- Left Column -->
 			<div class="relative mt-8 md:mt-0">
 				<div class="relative md:left-0 md:top-4 md:pr-12" id="sticky">
-					<h1 class="mb-2 text-5xl">About me</h1>
+					<h1 class="mb-2 text-5xl">
+						<FancyChars text="About me" />
+					</h1>
 					<hr class="mb-4" />
 
 					<!-- About Me -->
@@ -215,3 +218,4 @@ import { Button } from '@/components/shadcn/ui/button.tsx';
 	</div>
 </Layout>
  @/components/react/portfolio/LuxortsDetails.jsx
+

@@ -52,17 +52,34 @@
 	}
 }
 
-html,
-body {
-	background: theme(colors.neutral.900);
-	color: theme(colors.zinc.100);
+:root {
+	color-scheme: dark;
 }
+
+/**
+ * Basic markup styling
+ */
 
 *::selection {
-	color: theme(colors.zinc.100);
-	background: theme(colors.green.600);
+	@apply bg-fuchsia-500/30 text-neutral-100;
 }
 
+html,
+body {
+	@apply bg-neutral-900 text-neutral-100;
+}
+
+/* Font cursor override */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+	@apply cursor-default;
+}
+
+/* Heading styling */
 h1,
 h2,
 h3,
@@ -70,35 +87,35 @@ h4,
 h5,
 h6 {
 	@apply font-bold;
+	font-family: Helvetica, sans-serif;
 }
 
+h1 {
+	@apply font-extrabold tracking-tighter;
+}
+
+h2 {
+	@apply font-extrabold tracking-tight;
+}
+
+/* Dividers */
 hr {
-	border-color: theme(colors.zinc.700);
+	@apply border-zinc-700;
 }
 
+/* Links */
 a {
-	font-weight: bold;
-	display: inline-block;
-	color: theme(colors.green.500);
+	@apply inline-block font-bold text-fuchsia-500 transition-colors duration-100 ease-in-out hover:text-fuchsia-200;
 }
 
+/* Lists */
 ul > li {
 	@apply ml-8 list-disc pr-4;
 }
-nav ul > li {
-	@apply ml-0 list-none pr-0;
-}
-nav a {
-	color: inherit;
-	font-weight: inherit;
-}
-nav a:hover {
-	color: inherit;
-}
 
-a:hover {
-	@apply text-blue-600;
-}
+/**
+ * Additional styling/utility classes
+ */
 
 .vignette {
 	position: relative;

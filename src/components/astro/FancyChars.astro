@@ -1,0 +1,30 @@
+---
+export interface Props {
+	text: string
+	isStatic?: boolean
+}
+
+const { text, isStatic = false } = Astro.props
+
+const characters = text.split('')
+---
+
+{
+	isStatic ? (
+		<>
+			{characters.map((char) => (
+				<span class="inline-block -translate-y-1 select-none whitespace-pre text-fuchsia-500">
+					{char}
+				</span>
+			))}
+		</>
+	) : (
+		<>
+			{characters.map((char) => (
+				<span class="inline-block select-none whitespace-pre duration-100 ease-in-out hover:-translate-y-1 hover:text-fuchsia-500">
+					{char}
+				</span>
+			))}
+		</>
+	)
+}
