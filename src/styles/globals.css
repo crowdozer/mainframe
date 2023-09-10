@@ -113,6 +113,20 @@ ul > li {
 	@apply ml-8 list-disc pr-4;
 }
 
+/* Nav menu */
+#sitemap ul > li {
+	@apply ml-0 list-none pr-0;
+}
+
+#sitemap a {
+	color: inherit;
+	font-weight: inherit;
+}
+
+#sitemap a:hover {
+	color: inherit;
+}
+
 /**
  * Additional styling/utility classes
  */

@@ -1,26 +1,33 @@
-import clsx from 'clsx';
-import { useState } from 'react';
-import { Button } from '../shadcn/ui/button';
+import clsx from 'clsx'
+import { useState } from 'react'
+import { Button } from '../shadcn/ui/button'
 
-export default function Nav() {
-	const [open, setOpen] = useState(false);
+export interface NavProps {
+	classes?: string
+}
+
+export default function Nav(props: NavProps) {
+	const { classes = '' } = props
+
+	const [open, setOpen] = useState(false)
 
 	function handleOpen() {
-		setOpen(true);
+		setOpen(true)
 	}
 
 	function handleClose() {
-		setOpen(false);
+		setOpen(false)
 	}
 
 	return (
-		<div className="relative">
+		<div id="sitemap" className="relative">
 			<button
 				className={clsx(
 					'cursor-pointer select-none rounded bg-neutral-800 p-2 px-4 hover:bg-neutral-700',
 					{
 						'!bg-neutral-700': open,
 					},
+					classes,
 				)}
 				onMouseEnter={handleOpen}
 				onClick={handleOpen}
@@ -29,7 +36,7 @@ export default function Nav() {
 			</button>
 			<div
 				className={clsx(
-					'animate-in fade-in-0 zoom-in-95 fixed bottom-0 left-0 right-0 top-0 z-50 block ',
+					'fixed bottom-0 left-0 right-0 top-0 z-50 block animate-in fade-in-0 zoom-in-95 ',
 					'md:absolute md:bottom-auto md:left-auto md:right-0 md:top-full md:h-auto',
 					{
 						hidden: !open,
@@ -38,7 +45,7 @@ export default function Nav() {
 				onMouseLeave={handleClose}
 			>
 				<div className="h-full border-neutral-700 bg-neutral-900 p-6 md:mt-2 md:w-[500px] md:rounded md:border">
-					<div className="pb-4 text-right md:hidden">
+					<div className="pb-4 text-left md:hidden">
 						<Button variant="dark" onClick={handleClose}>
 							Go Back
 						</Button>
@@ -76,5 +83,5 @@ export default function Nav() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }

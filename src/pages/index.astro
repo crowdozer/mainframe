@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Icon from 'astro-icon'
-import { Button } from '@/components/shadcn/ui/button'
+import Nav from '@/components/react/Nav.tsx'
 import FancyChars from '@/components/astro/FancyChars.astro'
 ---
 
@@ -13,12 +13,17 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 		<!-- splash navbar -->
 		<div class="mx-auto max-w-5xl p-4">
 			<div class="flex flex-row gap-4">
-				<h1 class="!text-lg">
+				<h1 class="self-center !text-lg">
 					<a href="/">crowdozer</a>
 				</h1>
 				<div class="grow"></div>
-				<a href="/hire-me">portfolio</a>
-				<a href="/contact">contact</a>
+				<div class="hidden flex-row gap-8 lg:flex">
+					<a class="self-center" href="/contact">contact</a>
+				</div>
+				<Nav
+					client:load
+					classes="bg-neutral-950 hover:bg-neutral-900 font-bold"
+				/>
 			</div>
 		</div>
 
@@ -30,8 +35,16 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 				<FancyChars text="s up?" />
 			</h1>
 			<div class="mt-8 text-base md:text-xl">
-				<p>I design and build full-stack web applications.</p>
-				<p>Need help bringing your designs to production?</p>
+				<p>
+					I build <span class="border-b-2 border-dotted border-fuchsia-500"
+						>web apps</span
+					>, full stack
+				</p>
+				<p>
+					Let's bring your designs to <span class="bg-fuchsia-950 px-1"
+						>production</span
+					>
+				</p>
 			</div>
 			<div class="mt-16">
 				<a href="/hire-me" class="button button-dark p-4 px-8">
@@ -61,7 +74,7 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 
 		<!-- services -->
 		<div class="bg-neutral-950 pt-32 lg:pb-32 lg:pt-48" id="scroll-target">
-			<div class="mx-auto max-w-5xl lg:block lg:space-y-32 lg:py-0">
+			<div class="mx-auto max-w-5xl lg:block lg:space-y-48 lg:py-0">
 				<!-- design -->
 				<div class="relative lg:min-h-[720px]">
 					<!-- "DESIGN DESIGN DESIGN" text, hidden on mobile -->
@@ -88,34 +101,38 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 							<!-- text -->
 							<div class="mt-4 space-y-4 lg:mt-[260px] lg:space-y-8">
 								<div class="mt-8 block px-8 lg:hidden">
-									<h1>Design</h1>
+									<h1>DESIGN</h1>
 									<hr />
 								</div>
 								<div class="px-8 text-lg lg:px-0 lg:text-center">
-									<p>I can help design a brand new UI,</p>
-									<p>or modernize your existing UI</p>
+									<p>I can design your next UI</p>
+									<p>or modernize your existing one</p>
 								</div>
 								<div class="pt-8 lg:pt-0">
 									<ul class="space-y-2 text-lg">
 										<li
-											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+											class="relative ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
 										>
 											👉 Enhance user interactions
+											<div class="stripe"></div>
 										</li>
 										<li
-											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+											class="relative ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
 										>
 											👉 Add responsiveness
+											<div class="stripe"></div>
 										</li>
 										<li
-											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+											class="relative ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
 										>
 											👉 Mobile first designs
+											<div class="stripe"></div>
 										</li>
 										<li
-											class="ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+											class="relative ml-0 list-none bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
 										>
-											👉 or, just tweak stuff
+											<em class="text-base">or, just tweak stuff</em>
+											<div class="stripe"></div>
 										</li>
 									</ul>
 								</div>
@@ -130,24 +147,24 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 						<!-- text -->
 						<div>
 							<div class="p-8 lg:p-0">
-								<h1
-									class="text-4xl text-neutral-200 lg:whitespace-nowrap lg:!text-8xl"
-								>
+								<h1 class="!text-6xl lg:whitespace-nowrap lg:!text-8xl">
 									<FancyChars text="DEVELOP" />
 								</h1>
 								<h2
 									class="mt-2 text-xl font-bold tracking-normal text-neutral-300"
 								>
-									Readable. Documented. Scalable.
+									Documented. Scalable. <span class="text-yellow-400"
+										>Reliable.</span
+									>
 								</h2>
 								<hr class="mt-2" />
 							</div>
 
 							<div class="space-y-2 text-xl lg:mt-8">
 								<div
-									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+									class="space-y-2 border-b border-l-4 border-neutral-500 border-b-neutral-700 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded lg:rounded-l-none"
 								>
-									<span class="text-xl tracking-wider text-red-500">
+									<span class="text-xl font-bold tracking-wider">
 										Javascript/Typescript, PHP
 									</span>
 									<span class="block text-base text-neutral-300">
@@ -155,9 +172,9 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 									</span>
 								</div>
 								<div
-									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+									class="space-y-2 border-b border-l-4 border-neutral-500 border-b-neutral-700 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded lg:rounded-l-none"
 								>
-									<span class="text-xl tracking-wider text-red-500">
+									<span class="text-xl font-bold tracking-wider">
 										Payments</span
 									>
 									<span class="block text-base text-neutral-300">
@@ -165,9 +182,9 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 									>
 								</div>
 								<div
-									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+									class="space-y-2 border-b border-l-4 border-neutral-500 border-b-neutral-700 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded lg:rounded-l-none"
 								>
-									<span class="text-xl tracking-wider text-red-500">
+									<span class="text-xl font-bold tracking-wider">
 										User authentication</span
 									>
 									<span class="block text-base text-neutral-300">
@@ -175,9 +192,9 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 									</span>
 								</div>
 								<div
-									class="space-y-2 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded"
+									class="space-y-2 border-b border-l-4 border-neutral-500 border-b-neutral-700 bg-neutral-900 p-6 px-8 hover:bg-neutral-800/60 lg:rounded lg:rounded-l-none"
 								>
-									<span class="text-xl tracking-wider text-red-500">
+									<span class="text-xl font-bold tracking-wider">
 										UX enhancements</span
 									>
 									<span class="block text-base text-neutral-300">
@@ -271,55 +288,59 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 			</div>
 		</div>
 	</div>
-
-	<style>
-		* {
-			font-family: Helvetica, sans-serif;
-		}
-
-		a:not(#btn-scroll) {
-			@apply text-neutral-50 transition-colors duration-200 ease-in-out hover:!text-fuchsia-500 hover:!no-underline;
-		}
-
-		h1 {
-			@apply text-6xl;
-		}
-
-		.button {
-			@apply rounded-full bg-neutral-50 font-bold !text-neutral-950  transition-colors duration-200 ease-in-out hover:bg-neutral-800 hover:!text-fuchsia-500 hover:shadow-xl;
-		}
-
-		.button.button-dark {
-			@apply hover:!bg-neutral-900;
-		}
-	</style>
-
-	<script>
-		/**
-		 * smoothscroll button script
-		 */
-
-		const scrollButton = document.getElementById('btn-scroll')
-		const scrollTopButton = document.getElementById('btn-scroll-top')
-		const target = document.getElementById('scroll-target')
-
-		if (scrollButton && target) {
-			scrollButton.addEventListener('click', (event) => {
-				event.preventDefault()
-				target.scrollIntoView({
-					behavior: 'smooth',
-				})
-			})
-		}
-
-		if (scrollTopButton) {
-			scrollTopButton.addEventListener('click', (event) => {
-				event.preventDefault()
-				window.scrollTo({
-					top: 0,
-					behavior: 'smooth',
-				})
-			})
-		}
-	</script>
 </Layout>
+
+<style>
+	* {
+		font-family: Helvetica, sans-serif;
+	}
+
+	a:not(#btn-scroll) {
+		@apply text-neutral-50 transition-colors duration-200 ease-in-out hover:!text-fuchsia-500 hover:!no-underline;
+	}
+
+	h1 {
+		@apply text-6xl;
+	}
+
+	.button {
+		@apply rounded-full bg-neutral-50 font-bold !text-neutral-950  transition-colors duration-200 ease-in-out hover:bg-neutral-800 hover:!text-fuchsia-500 hover:shadow-xl;
+	}
+
+	.button.button-dark {
+		@apply hover:!bg-neutral-900;
+	}
+
+	.stripe {
+		@apply absolute bottom-0 right-4 top-0 w-8 bg-neutral-800;
+	}
+</style>
+
+<script>
+	/**
+	 * smoothscroll button script
+	 */
+
+	const scrollButton = document.getElementById('btn-scroll')
+	const scrollTopButton = document.getElementById('btn-scroll-top')
+	const target = document.getElementById('scroll-target')
+
+	if (scrollButton && target) {
+		scrollButton.addEventListener('click', (event) => {
+			event.preventDefault()
+			target.scrollIntoView({
+				behavior: 'smooth',
+			})
+		})
+	}
+
+	if (scrollTopButton) {
+		scrollTopButton.addEventListener('click', (event) => {
+			event.preventDefault()
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth',
+			})
+		})
+	}
+</script>
