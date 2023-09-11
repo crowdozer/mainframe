@@ -108,7 +108,7 @@ hr {
 
 /* Links */
 a {
-	@apply inline-block font-bold text-fuchsia-500 transition-colors duration-100 ease-in-out hover:text-fuchsia-200;
+	@apply inline-block font-bold text-green-500 transition-colors duration-100 ease-in-out hover:text-green-300;
 }
 a * {
 	cursor: pointer;

@@ -30,21 +30,19 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 			<div class="mx-auto mt-16 max-w-md text-center md:mt-32 xl:mt-64">
 				<h1 class="!text-4xl font-extrabold tracking-tighter md:!text-6xl">
 					<FancyChars text="what" />
-					<span class="text-fuchsia-500">'</span>
+					<span class="text-green-500">'</span>
 					<FancyChars text="s up" />
-					<span class="text-fuchsia-500">?</span>
+					<span class="text-green-500">?</span>
 				</h1>
+
 				<div class="mt-8 text-base md:text-xl">
 					<p>
-						I build <span class="border-b-2 border-dotted border-fuchsia-500"
+						I build <span
+							class="whitespace-break-spaces border-b-2 border-dotted border-green-500"
 							>web apps</span
 						>, full stack
 					</p>
-					<p>
-						Let's bring your designs to <span class="bg-fuchsia-950 px-1"
-							>production</span
-						>
-					</p>
+					<p>Let's bring your designs to production</p>
 				</div>
 
 				<!-- it doesnt make much sense to distract people away from the splash flow -->
@@ -276,7 +274,7 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 				</div>
 
 				<!-- portfolio link -->
-				<div class="mx-auto max-w-lg pt-16 text-center lg:pt-0">
+				<div class="pt-16 lg:pt-0">
 					<div
 						class="flex flex-col justify-center gap-8 text-center lg:flex-row-reverse"
 					>
@@ -290,7 +288,10 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 						</div>
 
 						<div>
-							<a href="/contact" class="button button-dark p-4 px-8">
+							<a
+								href="/contact"
+								class="button button-dark bg-neutral-950 p-4 px-8"
+							>
 								<div class="flex flex-row gap-2">
 									<Icon name="carbon:email" width="1.15rem" />
 									 contact me
@@ -300,7 +301,7 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 					</div>
 				</div>
 
-				<div class="text-center">
+				<div class="pt-16 text-center lg:pt-0">
 					<hr />
 					<a href="/" id="btn-scroll-top" class="p-4 px-8">
 						<div class="flex flex-row gap-2">back to top</div>
@@ -317,7 +318,7 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 	}
 
 	a:not(#btn-scroll) {
-		@apply text-neutral-50 transition-colors duration-200 ease-in-out hover:!text-fuchsia-500 hover:!no-underline;
+		@apply text-neutral-50 transition-colors duration-200 ease-in-out hover:!text-yellow-500 hover:!no-underline;
 	}
 
 	h1 {
@@ -325,7 +326,7 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 	}
 
 	.button {
-		@apply rounded-full bg-neutral-50 font-bold !text-neutral-950  transition-colors duration-200 ease-in-out hover:bg-neutral-800 hover:!text-fuchsia-500 hover:shadow-xl;
+		@apply rounded-full bg-neutral-50 font-bold !text-neutral-950  transition-colors duration-200 ease-in-out hover:bg-neutral-800 hover:!text-yellow-500 hover:shadow-xl;
 	}
 
 	.button.button-dark {
