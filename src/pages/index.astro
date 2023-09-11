@@ -6,73 +6,76 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 ---
 
 <Layout title="hey 👋" header={false}>
-	<div
-		id="splash"
-		class="min-h-[100vh] w-screen bg-neutral-950 text-neutral-50"
-	>
-		<!-- splash navbar -->
-		<div class="mx-auto max-w-5xl p-4">
-			<div class="flex flex-row gap-4">
-				<h1 class="self-center !text-lg">
-					<a href="/">
-						<span class="font-extrabold text-neutral-700">@</span>
-						 crowdozer</a
-					>
-				</h1>
-				<div class="grow"></div>
-				<div class="hidden flex-row gap-8 lg:flex">
-					<a class="self-center" href="/contact">contact</a>
-				</div>
-				<Nav
-					client:load
-					classes="bg-neutral-950 hover:bg-neutral-900 font-bold"
-				/>
-			</div>
-		</div>
-
-		<!-- hero section -->
-		<div class="relative mx-auto my-[40%] max-w-md text-center lg:my-64">
-			<h1 class="!text-4xl font-extrabold tracking-tighter md:!text-6xl">
-				<FancyChars text="what" />
-				<span class="text-fuchsia-500">'</span>
-				<FancyChars text="s up" />
-				<span class="text-fuchsia-500">?</span>
-			</h1>
-			<div class="mt-8 text-base md:text-xl">
-				<p>
-					I build <span class="border-b-2 border-dotted border-fuchsia-500"
-						>web apps</span
-					>, full stack
-				</p>
-				<p>
-					Let's bring your designs to <span class="bg-fuchsia-950 px-1"
-						>production</span
-					>
-				</p>
-			</div>
-			<div class="mt-16">
-				<a href="/hire-me" class="button button-dark p-4 px-8">
-					<div class="flex flex-row gap-2">
-						view my portfolio
-						<Icon name="carbon:arrow-right" width="1.15rem" />
+	<div id="splash" class="min-h-screen w-screen bg-neutral-950 text-neutral-50">
+		<!-- container for splash screen, 100%x100% -->
+		<div class="relative min-h-screen">
+			<!-- splash navbar -->
+			<div class="mx-auto max-w-5xl p-4">
+				<div class="flex flex-row gap-4">
+					<h1 class="self-center !text-lg">
+						<a href="/"> crwdzr.io</a>
+					</h1>
+					<div class="grow"></div>
+					<div class="hidden flex-row gap-8 lg:flex">
+						<a class="self-center" href="/contact">contact</a>
 					</div>
-				</a>
+					<Nav
+						client:load
+						classes="bg-neutral-950 hover:bg-neutral-900 font-bold"
+					/>
+				</div>
 			</div>
-		</div>
 
-		<div class="relative">
-			<hr />
+			<!-- hero section -->
+			<div class="mx-auto mt-16 max-w-md text-center md:mt-32 xl:mt-64">
+				<h1 class="!text-4xl font-extrabold tracking-tighter md:!text-6xl">
+					<FancyChars text="what" />
+					<span class="text-fuchsia-500">'</span>
+					<FancyChars text="s up" />
+					<span class="text-fuchsia-500">?</span>
+				</h1>
+				<div class="mt-8 text-base md:text-xl">
+					<p>
+						I build <span class="border-b-2 border-dotted border-fuchsia-500"
+							>web apps</span
+						>, full stack
+					</p>
+					<p>
+						Let's bring your designs to <span class="bg-fuchsia-950 px-1"
+							>production</span
+						>
+					</p>
+				</div>
 
-			<!-- scroll indicator/button -->
-			<div class="absolute left-0 right-0 top-full z-10 -mt-[20px] text-center">
-				<a
-					id="btn-scroll"
-					href="/#scroll-target"
-					class="button button-dark border border-transparent p-3 hover:border-neutral-700"
-					title="read more"
+				<!-- it doesnt make much sense to distract people away from the splash flow -->
+				<!-- maybe i change my mind so i'll leave this -->
+				<div class="mt-16">
+					<a href="/contact" class="button button-dark p-4 px-8">
+						<div class="flex flex-row gap-2">
+							<Icon name="carbon:email" width="1.15rem" />
+							 contact me
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<!-- scroll indicator and divider -->
+			<div class="absolute bottom-16 left-0 right-0 xl:bottom-32">
+				<hr />
+
+				<!-- scroll indicator/button -->
+				<div
+					class="absolute left-0 right-0 top-full z-10 -mt-[20px] text-center"
 				>
-					<Icon name="mdi:triangle" width="1.15rem" class="rotate-180" />
-				</a>
+					<a
+						id="btn-scroll"
+						href="/#scroll-target"
+						class="button button-dark border border-transparent p-3 hover:border-neutral-700"
+						title="read more"
+					>
+						<Icon name="mdi:triangle" width="1.15rem" class="rotate-180" />
+					</a>
+				</div>
 			</div>
 		</div>
 
@@ -274,20 +277,34 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 
 				<!-- portfolio link -->
 				<div class="mx-auto max-w-lg pt-16 text-center lg:pt-0">
-					<div class="space-y-8">
-						<a href="/hire-me" class="button button-dark p-4 px-8">
-							<div class="flex flex-row gap-2 p-2 px-4 text-xl">
-								view my portfolio
-								<Icon name="carbon:arrow-right" width="1.15rem" />
-							</div>
-						</a>
+					<div
+						class="flex flex-col justify-center gap-8 text-center lg:flex-row-reverse"
+					>
+						<div>
+							<a href="/hire-me" class="button button-dark p-4 px-8">
+								<div class="flex flex-row gap-2">
+									view my portfolio
+									<Icon name="carbon:arrow-right" width="1.15rem" />
+								</div>
+							</a>
+						</div>
 
 						<div>
-							<a href="/" id="btn-scroll-top" class="p-4 px-8">
-								<div class="flex flex-row gap-2">back to top</div>
+							<a href="/contact" class="button button-dark p-4 px-8">
+								<div class="flex flex-row gap-2">
+									<Icon name="carbon:email" width="1.15rem" />
+									 contact me
+								</div>
 							</a>
 						</div>
 					</div>
+				</div>
+
+				<div class="text-center">
+					<hr />
+					<a href="/" id="btn-scroll-top" class="p-4 px-8">
+						<div class="flex flex-row gap-2">back to top</div>
+					</a>
 				</div>
 			</div>
 		</div>
