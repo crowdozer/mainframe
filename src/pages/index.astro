@@ -5,6 +5,16 @@ import Nav from '@/components/react/Nav.tsx'
 import FancyChars from '@/components/astro/FancyChars.astro'
 ---
 
+<script>
+	// Ugly hack to fix vh on mobile
+
+	// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+	let vh = window.innerHeight * 0.01
+
+	// Then we set the value in the --vh custom property to the root of the document
+	document.documentElement.style.setProperty('--vh', `${vh}px`)
+</script>
+
 <Layout title="hey 👋" header={false}>
 	<div id="splash" class="min-h-screen w-screen bg-neutral-950 text-neutral-50">
 		<!-- container for splash screen, 100%x100% -->
@@ -27,7 +37,7 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 			</div>
 
 			<!-- hero section -->
-			<div class="mx-auto mt-16 max-w-md text-center md:mt-32 xl:mt-64">
+			<div class="mx-auto mb-48 mt-24 max-w-md space-y-8 text-center">
 				<h1 class="!text-4xl font-extrabold tracking-tighter md:!text-6xl">
 					<FancyChars text="what" />
 					<span class="text-green-500">'</span>
@@ -35,7 +45,7 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 					<span class="text-green-500">?</span>
 				</h1>
 
-				<div class="mt-8 text-base md:text-xl">
+				<div class="text-base md:text-xl">
 					<p>
 						I build <span
 							class="whitespace-break-spaces border-b-2 border-dotted border-green-500"
@@ -45,23 +55,21 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 					<p>Let's bring your designs to production</p>
 				</div>
 
-				<div class="mt-16">
-					<a href="/contact" class="button button-dark p-4 px-8">
-						<div class="flex flex-row gap-2">
-							<Icon name="carbon:email" width="1.15rem" />
-							 contact me
-						</div>
-					</a>
-				</div>
+				<a href="/contact" class="button button-dark p-4 px-8">
+					<div class="flex flex-row gap-2">
+						<Icon name="carbon:email" width="1.15rem" />
+						 contact me
+					</div>
+				</a>
 			</div>
 
 			<!-- scroll indicator and divider -->
-			<div class="absolute bottom-16 left-0 right-0 xl:bottom-32">
+			<div class="relative">
 				<hr />
 
 				<!-- scroll indicator/button -->
 				<div
-					class="absolute left-0 right-0 top-full z-10 -mt-[20px] text-center"
+					class="absolute left-0 right-0 top-full z-10 -mt-[24px] text-center"
 				>
 					<a
 						id="btn-scroll"

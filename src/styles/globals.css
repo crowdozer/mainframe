@@ -104,6 +104,7 @@ h2 {
 /* Dividers */
 hr {
 	@apply border-zinc-700;
+	/* @apply border-red-500; */
 }
 
 /* Links */
