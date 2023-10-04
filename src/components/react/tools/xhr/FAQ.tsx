@@ -19,7 +19,7 @@ export default function FAQ() {
 					<div className="space-y-2">
 						<div className="border border-neutral-800 bg-neutral-950/25 px-4 py-2">
 							<p className="font-bold">What is it?</p>
-							<p>it's like the bollywood version of postman</p>
+							<p>it's like the wakaliwood version of postman</p>
 						</div>
 						<div className="border border-neutral-800 bg-neutral-950/25 px-4 py-2">
 							<p className="font-bold">Is this complete?</p>
