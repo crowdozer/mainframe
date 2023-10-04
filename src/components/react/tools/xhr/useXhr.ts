@@ -7,11 +7,12 @@ import type { HttpMethod, Header, BodyType } from './types'
 export default function useXhr() {
 	// Method & URL
 	const [method, setMethod] = useState<HttpMethod>('GET')
-	const [url, setUrl] = useState<string>('http://localhost:4321')
+	const [url, setUrl] = useState<string>('http://localhost:4321/tools/xhr-api')
 
 	// Array of headers
 	const [headers, setHeaders] = useState<Header[]>([
 		['Content-Type', 'application/json'],
+		['User-Agent', 'bostman'],
 		['', ''],
 	])
 	// Filter out blank/empty headers
@@ -65,7 +66,7 @@ export default function useXhr() {
 		}
 
 		fetch(url, options)
-			.then((response) => {
+			.then(async (response) => {
 				setResponseRaw(response)
 
 				if (!response.ok) {
@@ -75,7 +76,8 @@ export default function useXhr() {
 				const contentType = response.headers.get('Content-Type')
 				if (contentType && contentType.includes('application/json')) {
 					// json response
-					return response.json()
+					const json = await response.json()
+					return JSON.stringify(json, null, 4)
 				} else {
 					// other types (text, html)
 					return response.text()
