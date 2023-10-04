@@ -16,7 +16,7 @@ export default function Headers(props: HeadersProps) {
 	return (
 		<div className="flex flex-col gap-1">
 			<div
-				className="flex cursor-pointer flex-row px-2 py-1 hover:bg-neutral-800"
+				className="flex cursor-pointer flex-row bg-neutral-800 p-2 py-1 hover:bg-neutral-700"
 				onClick={() => setOpen(!open)}
 			>
 				<p className="font-bold">headers ({numHeaders})</p>
@@ -25,7 +25,7 @@ export default function Headers(props: HeadersProps) {
 			</div>
 
 			{open && (
-				<div className="flex flex-col gap-1 px-2">
+				<div className="flex flex-col gap-1">
 					{headers.map((header, index) => (
 						<div
 							className="flex flex-row gap-1 border border-transparent"

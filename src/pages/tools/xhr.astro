@@ -4,44 +4,11 @@ import Xhr from '@/components/react/tools/xhr'
 ---
 
 <Layout title="hire me 👋" footer={false}>
-    <div class="max-w-lg mx-auto py-8 space-y-8">
-        <div>
-            <h1 class="text-4xl">Bostman</h1>
-            <hr />
-        </div>
-        <Xhr client:load client:only />
-        <hr />
-        <div class="space-y-2">
-            <div class="px-4 py-2 bg-neutral-950/25 border border-neutral-800">
-                <p class="font-bold">What is it?</p>
-                <p>it's like the bollywood version of postman</p>
-            </div>
-            <div class="px-4 py-2 bg-neutral-950/25 border border-neutral-800">
-                <p class="font-bold">Is this complete?</p>
-                <p>no but you can still try to use it</p>
-            </div>
-            <div class="px-4 py-2 bg-neutral-950/25 border border-neutral-800">
-                <p class="font-bold">Roadmap?</p>
-                <ul>
-                    <li>make the options work</li>
-                    <li>presets</li>
-                    <li>show output</li>
-                    <li>better validation</li>
-                    <li>refactor everything when done</li>
-                </ul>
-            </div>
-            <div class="px-4 py-2 bg-neutral-950/25 border border-neutral-800">
-                <p class="font-bold">Timeframe?</p>
-                <p>no</p>
-            </div>
-            <div class="px-4 py-2 bg-neutral-950/25 border border-neutral-800">
-                <p class="font-bold">A11Y?</p>
-                <p>not in the budget</p>
-            </div>
-            <div class="px-4 py-2 bg-neutral-950/25 border border-neutral-800">
-                <p class="font-bold">It did something weird</p>
-                <p>email me or open a github issue</p>
-            </div>
-        </div>
-    </div>
+    <Xhr client:load client:only />
 </Layout>
+
+<style is:global>
+    * {
+        @apply font-thin;
+    }
+</style>
