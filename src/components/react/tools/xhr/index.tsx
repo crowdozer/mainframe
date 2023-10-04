@@ -28,19 +28,19 @@ export default function Bostman() {
 	} = useXhr()
 
 	return (
-		<div className="mx-auto max-w-4xl space-y-8 py-8">
+		<div className="mx-auto max-w-4xl space-y-8 px-2 py-8 lg:px-0">
 			<div>
 				<h1 className="text-4xl">Bostman</h1>
 				<hr />
 			</div>
 			<div>
-				<div className="grid grid-cols-2 gap-4">
+				<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
 					{/* Config area */}
 					<div className="flex flex-col gap-4">
 						<p className="px-2 py-1 font-bold">request</p>
 
 						{/* url */}
-						<div className="-mt-3 flex flex-col gap-1">
+						<div className="-mt-3 overflow-x-auto lg:overflow-x-hidden">
 							<div className="flex flex-row gap-1">
 								<select
 									className="border border-neutral-700 bg-transparent px-2 py-1"
@@ -75,12 +75,14 @@ export default function Bostman() {
 						</div>
 
 						{/* headers */}
-						<Headers
-							handleAddHeader={handleAddHeader}
-							numActiveHeaders={numActiveHeaders}
-							headers={headers}
-							setHeaders={setHeaders}
-						/>
+						<div className="w-full overflow-x-auto lg:overflow-x-hidden">
+							<Headers
+								handleAddHeader={handleAddHeader}
+								numActiveHeaders={numActiveHeaders}
+								headers={headers}
+								setHeaders={setHeaders}
+							/>
+						</div>
 
 						{/* body */}
 						<div className="flex flex-col gap-1">
