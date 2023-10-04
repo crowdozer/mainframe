@@ -1,13 +1,17 @@
 import { useCallback, useMemo, useState } from 'react'
 import type { HttpMethod, Header, BodyType } from './types'
 
+const isProd = import.meta.env.PROD
+const defaultURL = isProd
+	? 'https://www.crwdzr.io/tools/xhr-api'
+	: 'http://localhost:4321/tools/xhr-api'
 /**
  * Returns the editor page API
  */
 export default function useXhr() {
 	// Method & URL
 	const [method, setMethod] = useState<HttpMethod>('GET')
-	const [url, setUrl] = useState<string>('http://localhost:4321/tools/xhr-api')
+	const [url, setUrl] = useState<string>(defaultURL)
 
 	// Array of headers
 	const [headers, setHeaders] = useState<Header[]>([
