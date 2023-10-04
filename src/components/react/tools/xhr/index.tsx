@@ -9,21 +9,22 @@ import type { HttpMethod } from './types'
 
 export default function Bostman() {
 	const {
-		url,
-		setUrl,
-		method,
-		setMethod,
-		headers,
-		setHeaders,
 		body,
-		setBody,
 		bodyType,
-		setBodyType,
 		handleAddHeader,
 		handleClick,
+		headers,
+		method,
+		numActiveHeaders,
 		onBodyChange,
 		response,
 		responseRaw,
+		setBody,
+		setBodyType,
+		setHeaders,
+		setMethod,
+		setUrl,
+		url,
 	} = useXhr()
 
 	return (
@@ -76,6 +77,7 @@ export default function Bostman() {
 						{/* headers */}
 						<Headers
 							handleAddHeader={handleAddHeader}
+							numActiveHeaders={numActiveHeaders}
 							headers={headers}
 							setHeaders={setHeaders}
 						/>

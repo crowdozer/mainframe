@@ -4,14 +4,14 @@ import Header from './Header'
 
 interface HeadersProps {
 	headers: IHeader[]
+	numActiveHeaders: number
 	setHeaders: (value: IHeader[] | ((old: IHeader[]) => IHeader[])) => void
 	handleAddHeader: () => void
 }
 
 export default function Headers(props: HeadersProps) {
-	const { headers, setHeaders, handleAddHeader } = props
+	const { headers, setHeaders, handleAddHeader, numActiveHeaders } = props
 	const [open, setOpen] = useState(true)
-	const numHeaders = headers.filter((h) => h[0] !== '' && h[1] !== '').length
 
 	return (
 		<div className="flex flex-col gap-1">
@@ -19,7 +19,7 @@ export default function Headers(props: HeadersProps) {
 				className="flex cursor-pointer flex-row bg-neutral-800 p-2 py-1 hover:bg-neutral-700"
 				onClick={() => setOpen(!open)}
 			>
-				<p className="font-bold">headers ({numHeaders})</p>
+				<p className="font-bold">headers ({numActiveHeaders})</p>
 				<div className="grow"></div>
 				<p>{open ? 'v' : '>'}</p>
 			</div>

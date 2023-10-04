@@ -86,20 +86,21 @@ export default function useXhr() {
 	}
 
 	return {
-		url,
-		setUrl,
-		method,
-		setMethod,
-		headers,
-		setHeaders,
 		body,
-		setBody,
 		bodyType,
-		setBodyType,
 		handleAddHeader,
 		handleClick: handleSendRequest,
+		headers,
+		method,
+		numActiveHeaders: filteredHeaders.length,
 		onBodyChange,
 		response,
 		responseRaw,
+		setBody,
+		setBodyType,
+		setHeaders,
+		setMethod,
+		setUrl,
+		url,
 	}
 }
