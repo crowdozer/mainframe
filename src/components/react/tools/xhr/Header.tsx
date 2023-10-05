@@ -1,28 +1,31 @@
 import clsx from 'clsx'
 import { type Header as IHeader } from './types'
+import { Input } from '../../ui/Input'
+import { Button } from '../../ui/Button'
 
 interface HeaderProps {
 	setHeaders: (value: IHeader[] | ((old: IHeader[]) => IHeader[])) => void
 	header: IHeader
 	headers: IHeader[]
+	loading: boolean
 	index: number
 }
 
 export default function Header(props: HeaderProps) {
-	const { setHeaders, header, headers, index } = props
+	const { setHeaders, header, headers, loading, index } = props
 
-	function handleUpdateHeaderType(e: any) {
+	function handleUpdateHeaderType(value: string) {
 		setHeaders((oldHeaders) => {
 			const newHeaders = [...oldHeaders]
-			newHeaders[index][0] = e.target.value.trim()
+			newHeaders[index][0] = value.trim()
 			return newHeaders
 		})
 	}
 
-	function handleUpdateHeaderContent(e: any) {
+	function handleUpdateHeaderContent(value: string) {
 		setHeaders((oldHeaders) => {
 			const newHeaders = [...oldHeaders]
-			newHeaders[index][1] = e.target.value
+			newHeaders[index][1] = value
 			return newHeaders
 		})
 	}
@@ -57,81 +60,86 @@ export default function Header(props: HeaderProps) {
 
 	const error = checkForError()
 
-	// generate a random id for the html elements
-	const id = 'header-' + Math.random().toString(36)
-
 	return (
 		<>
-			<input
-				className={clsx('border border-neutral-700 bg-transparent px-2 py-1', {
-					'border-l-2 border-l-red-500': error,
-					'border-l-2 border-l-yellow-500': !error && checkForWarning(),
-				})}
+			<Input
+				classes={{
+					input: clsx('border border-neutral-700 bg-transparent px-2 py-1', {
+						'border-l-2 border-l-red-500': error,
+						'border-l-2 border-l-yellow-500': !error && checkForWarning(),
+					}),
+				}}
+				name="url"
 				value={header[0]}
-				onChange={handleUpdateHeaderType}
 				placeholder="name"
-				list={`header-${id}-name`}
-			/>
-			<datalist id={`header-${id}-name`}>
-				<option>Accept-Encoding</option>
-				<option>Accept</option>
-				<option>Authorization</option>
-				<option>Cache-Control</option>
-				<option>Content-Type</option>
-				<option>Cookie</option>
-				<option>Host</option>
-				<option>Referrer</option>
-				<option>Location</option>
-				<option>Connection</option>
-			</datalist>
-
-			<input
-				className="grow border border-neutral-700 bg-transparent px-2 py-1"
-				value={header[1]}
-				onChange={handleUpdateHeaderContent}
-				placeholder="value"
-				list={`header-${id}-value`}
-			/>
-			<datalist id={`header-${id}-value`}>
-				{['Accept', 'Content-Type'].includes(header[0]) && (
+				onChange={(value) => handleUpdateHeaderType(value)}
+				disabled={loading}
+				list={
 					<>
-						{contentTypeOptions.map(([name, options], index) => (
-							<optgroup label={name} key={index}>
-								{options.map((option, i) => (
+						<option>Accept-Encoding</option>
+						<option>Accept</option>
+						<option>Authorization</option>
+						<option>Cache-Control</option>
+						<option>Content-Type</option>
+						<option>Cookie</option>
+						<option>Host</option>
+						<option>Referrer</option>
+						<option>Location</option>
+						<option>Connection</option>
+					</>
+				}
+			/>
+
+			<Input
+				classes={{
+					input: 'grow border border-neutral-700 bg-transparent px-2 py-1',
+				}}
+				name="value"
+				value={header[1]}
+				placeholder="value"
+				onChange={(value) => handleUpdateHeaderContent(value)}
+				disabled={loading}
+				list={
+					<>
+						{['Accept', 'Content-Type'].includes(header[0]) && (
+							<>
+								{contentTypeOptions.map(([name, options], index) => (
+									<optgroup label={name} key={index}>
+										{options.map((option, i) => (
+											<option key={i}>{option}</option>
+										))}
+									</optgroup>
+								))}
+							</>
+						)}
+						{header[0] === 'Accept-Encoding' && (
+							<>
+								{encodingOptions.map((option, i) => (
 									<option key={i}>{option}</option>
 								))}
-							</optgroup>
-						))}
+							</>
+						)}
+						{header[0] === 'Cache-Control' && (
+							<>
+								{cacheOptions.map((option, i) => (
+									<option key={i}>{option}</option>
+								))}
+							</>
+						)}
+						{header[0] === 'Connection' && (
+							<>
+								{connectionOptions.map((option, i) => (
+									<option key={i}>{option}</option>
+								))}
+							</>
+						)}
 					</>
-				)}
-				{header[0] === 'Accept-Encoding' && (
-					<>
-						{encodingOptions.map((option, i) => (
-							<option key={i}>{option}</option>
-						))}
-					</>
-				)}
-				{header[0] === 'Cache-Control' && (
-					<>
-						{cacheOptions.map((option, i) => (
-							<option key={i}>{option}</option>
-						))}
-					</>
-				)}
-				{header[0] === 'Connection' && (
-					<>
-						{connectionOptions.map((option, i) => (
-							<option key={i}>{option}</option>
-						))}
-					</>
-				)}
-			</datalist>
-			<button
-				className="border border-neutral-700 px-3 py-1 hover:bg-neutral-800"
-				onClick={handleRemoveHeader}
-			>
+				}
+			/>
+
+			<Button onClick={handleRemoveHeader} disabled={loading}>
 				x
-			</button>
+			</Button>
 		</>
 	)
 }

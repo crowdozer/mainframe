@@ -12,6 +12,7 @@ export default function useXhr() {
 	// Method & URL
 	const [method, setMethod] = useState<HttpMethod>('GET')
 	const [url, setUrl] = useState<string>(defaultURL)
+	const [loading, setLoading] = useState(false)
 
 	// Array of headers
 	const [headers, setHeaders] = useState<Header[]>([
@@ -69,6 +70,8 @@ export default function useXhr() {
 			}
 		}
 
+		setLoading(true)
+
 		fetch(url, options)
 			.then(async (response) => {
 				setResponseRaw(response)
@@ -89,6 +92,7 @@ export default function useXhr() {
 			})
 			.then((data) => setResponse(data))
 			.catch(console.error)
+			.finally(() => setLoading(false))
 	}
 
 	return {
@@ -97,6 +101,7 @@ export default function useXhr() {
 		handleAddHeader,
 		handleClick: handleSendRequest,
 		headers,
+		loading,
 		method,
 		numActiveHeaders: filteredHeaders.length,
 		onBodyChange,

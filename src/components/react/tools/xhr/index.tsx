@@ -2,8 +2,17 @@ import clsx from 'clsx'
 import { json } from '@codemirror/lang-json'
 import { monokai } from '@uiw/codemirror-theme-monokai'
 import CodeMirror from '@uiw/react-codemirror'
+import {
+	Accordion,
+	Button,
+	Chip,
+	Code,
+	Input,
+	Message,
+	Select,
+} from '@/components/react/ui'
 import FAQ from './FAQ'
-import Headers from './Headers'
+import Header from './Header'
 import useXhr from './useXhr'
 import type { HttpMethod } from './types'
 
@@ -14,6 +23,7 @@ export default function Bostman() {
 		handleAddHeader,
 		handleClick,
 		headers,
+		loading,
 		method,
 		numActiveHeaders,
 		onBodyChange,
@@ -42,10 +52,11 @@ export default function Bostman() {
 						{/* url */}
 						<div className="-mt-3 overflow-x-auto lg:overflow-x-hidden">
 							<div className="flex flex-row gap-1">
-								<select
-									className="border border-neutral-700 bg-transparent px-2 py-1"
+								<Select
+									name="Method"
 									value={method}
-									onChange={(e) => setMethod(e.target.value as HttpMethod)}
+									onChange={(value) => setMethod(value as HttpMethod)}
+									disabled={loading}
 								>
 									<option className="text-neutral-950" value="GET">
 										GET
@@ -65,58 +76,74 @@ export default function Bostman() {
 									<option className="text-neutral-950" value="OPTIONS">
 										OPTIONS
 									</option>
-								</select>
-								<input
-									className="grow border border-neutral-700 bg-transparent px-2 py-1"
+								</Select>
+								<Input
+									classes={{
+										input: 'grow',
+									}}
+									name="url"
 									value={url}
-									onChange={(e) => setUrl(e.target.value)}
+									onChange={(value) => setUrl(value)}
+									disabled={loading}
 								/>
 							</div>
 						</div>
 
 						{/* headers */}
 						<div className="w-full overflow-x-auto lg:overflow-x-hidden">
-							<Headers
-								handleAddHeader={handleAddHeader}
-								numActiveHeaders={numActiveHeaders}
-								headers={headers}
-								setHeaders={setHeaders}
-							/>
+							<Accordion defaultOpen label={`headers (${numActiveHeaders})`}>
+								{headers.map((header, index) => (
+									<div
+										className="flex flex-row gap-1 border border-transparent"
+										key={index}
+									>
+										<Header
+											loading={loading}
+											headers={headers}
+											header={header}
+											index={index}
+											setHeaders={setHeaders}
+										/>
+									</div>
+								))}
+
+								<Button disabled={loading} onClick={handleAddHeader}>
+									+ new
+								</Button>
+							</Accordion>
 						</div>
 
 						{/* body */}
 						<div className="flex flex-col gap-1">
 							{method === 'GET' && (
-								<p className="border border-transparent border-l-yellow-500 bg-neutral-800 px-2 py-1 text-sm font-thin">
-									body unavailable with GET requests
-								</p>
+								<Message kind="warning">
+									body unavailable for GET requests
+								</Message>
 							)}
 							{method !== 'GET' && (
 								<>
 									<div className="flex flex-col gap-1">
 										<div className="flex flex-row gap-1">
-											<button
-												className={clsx(
-													'border border-neutral-700 px-2 py-1 hover:bg-neutral-800',
-													{
-														'bg-neutral-800': bodyType === 'json',
-													},
-												)}
+											<Button
 												onClick={() => setBodyType('json')}
+												classes={{
+													button: clsx({
+														'bg-neutral-800': bodyType === 'json',
+													}),
+												}}
 											>
 												json body
-											</button>
-											<button
-												className={clsx(
-													'border border-neutral-700 px-2 py-1 hover:bg-neutral-800',
-													{
-														'bg-neutral-800': bodyType === 'other',
-													},
-												)}
+											</Button>
+											<Button
 												onClick={() => setBodyType('other')}
+												classes={{
+													button: clsx({
+														'bg-neutral-800': bodyType === 'other',
+													}),
+												}}
 											>
 												plaintext body
-											</button>
+											</Button>
 										</div>
 									</div>
 
@@ -133,8 +160,9 @@ export default function Bostman() {
 									)}
 									{bodyType === 'other' && (
 										<textarea
-											className="min-h-full w-full whitespace-pre border border-neutral-700 bg-transparent px-2 py-1 font-mono"
+											className="w-full grow whitespace-pre border border-neutral-700 bg-transparent px-2 py-1 font-mono"
 											value={body}
+											cols={4}
 											onChange={(e) => setBody(e.target.value)}
 										/>
 									)}
@@ -144,12 +172,13 @@ export default function Bostman() {
 
 						{/* send button */}
 						<div className="text-right">
-							<button
-								className="border border-neutral-700 px-2 py-1 hover:bg-neutral-800"
+							<Button
 								onClick={handleClick}
+								loading={loading}
+								disabled={loading}
 							>
 								send 🚀
-							</button>
+							</Button>
 						</div>
 					</div>
 
@@ -159,19 +188,12 @@ export default function Bostman() {
 							<p className="font-bold">response</p>
 							<div className="grow"></div>
 							{responseRaw && (
-								<p
-									className={clsx(
-										'rounded-full px-3',
-										getResponseColor(responseRaw.status),
-									)}
-								>
+								<Chip kind={getResponseKind(responseRaw.status)}>
 									{responseRaw.status} {responseRaw.statusText}
-								</p>
+								</Chip>
 							)}
 						</div>
-						<pre className="h-[400px] resize-y overflow-auto border border-neutral-700 p-2">
-							{response}
-						</pre>
+						<Code content={response} />
 					</div>
 				</div>
 			</div>
@@ -187,12 +209,12 @@ export default function Bostman() {
 	)
 }
 
-function getResponseColor(status: number) {
+function getResponseKind(status: number) {
 	if (status >= 200 && status < 300) {
-		return 'bg-green-500/30'
+		return 'success'
 	}
 	if (status >= 300 && status < 400) {
-		return 'bg-yellow-500/30'
+		return 'warning'
 	}
-	return 'bg-red-500/30'
+	return 'error'
 }
