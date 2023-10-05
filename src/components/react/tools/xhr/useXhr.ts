@@ -17,7 +17,7 @@ export default function useXhr() {
 	// Array of headers
 	const [headers, setHeaders] = useState<Header[]>([
 		['Content-Type', 'application/json'],
-		['User-Agent', 'bostman'],
+		['User-Agent', 'crwdzr.io/tools/xhr'],
 		['', ''],
 	])
 	// Filter out blank/empty headers
