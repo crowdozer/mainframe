@@ -22,6 +22,9 @@ export default function Bostman() {
 		bodyType,
 		handleAddHeader,
 		handleClick,
+		handleRemoveHeader,
+		handleUpdateHeaderContent,
+		handleUpdateHeaderType,
 		headers,
 		loading,
 		method,
@@ -31,7 +34,6 @@ export default function Bostman() {
 		responseRaw,
 		setBody,
 		setBodyType,
-		setHeaders,
 		setMethod,
 		setUrl,
 		url,
@@ -88,14 +90,19 @@ export default function Bostman() {
 							{headers.map((header, index) => (
 								<div
 									className="flex flex-row gap-1 border border-transparent"
-									key={index}
+									key={header.id}
 								>
 									<Header
 										loading={loading}
-										headers={headers}
 										header={header}
 										index={index}
-										setHeaders={setHeaders}
+										handleRemove={() => handleRemoveHeader(index)}
+										handleSetType={(value) =>
+											handleUpdateHeaderType(index, value)
+										}
+										handleSetContent={(value) =>
+											handleUpdateHeaderContent(index, value)
+										}
 									/>
 								</div>
 							))}
@@ -165,7 +172,7 @@ export default function Bostman() {
 
 					{/* send button */}
 					<div className="text-right">
-						<Button onClick={handleClick} loading={loading} disabled={loading}>
+						<Button onClick={handleClick} disabled={loading}>
 							send 🚀
 						</Button>
 					</div>

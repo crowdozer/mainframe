@@ -5,6 +5,7 @@ const isProd = import.meta.env.PROD
 const defaultURL = isProd
 	? 'https://www.crwdzr.io/tools/xhr-api'
 	: 'http://localhost:4321/tools/xhr-api'
+
 /**
  * Returns the editor page API
  */
@@ -16,20 +17,41 @@ export default function useXhr() {
 
 	// Array of headers
 	const [headers, setHeaders] = useState<Header[]>([
-		['Content-Type', 'application/json'],
-		['User-Agent', 'crwdzr.io/tools/xhr'],
-		['', ''],
+		{
+			id: Math.random().toString(36),
+			hasError: false,
+			hasWarning: false,
+			name: 'Content-Type',
+			value: 'application/json',
+		},
+		{
+			id: Math.random().toString(36),
+			hasError: false,
+			hasWarning: false,
+			name: 'User-Agent',
+			value: 'crwdzr.io/tools/xhr',
+		},
 	])
+
+	// Adds certain flags (i.e hasError) to headers
+	const parsedHeaders = useMemo(() => {
+		return headers.map((header, index) => {
+			return {
+				id: header.id,
+				name: header.name.trim(),
+				value: header.value.trim(),
+				hasError: checkForError(header, index),
+				hasWarning: checkForWarning(header),
+			} as Header
+		})
+	}, [headers])
+
 	// Filter out blank/empty headers
 	const filteredHeaders = useMemo(() => {
-		return headers
-			.map((header) => {
-				return [header[0].trim(), header[1].trim()] as Header
-			})
-			.filter((header) => {
-				return header[0] !== '' && header[1] !== ''
-			})
-	}, [headers])
+		return parsedHeaders.filter((header) => {
+			return header.name !== '' && header.value !== ''
+		})
+	}, [parsedHeaders])
 
 	// Body type (json, etc)
 	const [body, setBody] = useState<string>('')
@@ -47,11 +69,77 @@ export default function useXhr() {
 	}, [])
 
 	/**
+	 * returns whether or not the given header has an error
+	 */
+	function checkForError(header: Header, index: number): boolean {
+		// both empty is allowed
+		if (header.name === '' && header.value === '') return false
+
+		// data with no type is not allowed
+		if (header.name === '' && header.value !== '') return true
+
+		// duplicate types not allowed
+		const typeCollision = headers.some(
+			(h, i) => h.name === header.name && index !== i,
+		)
+
+		if (typeCollision) return true
+
+		return false
+	}
+
+	/**
+	 * returns whether or not the givne header has a warning
+	 */
+	function checkForWarning(header: Header): boolean {
+		if (header.name !== '' && header.value === '') return true
+
+		return false
+	}
+
+	/**
 	 * Add a new blank entry for headers
 	 */
 	function handleAddHeader() {
 		setHeaders((oldHeaders) => {
-			return [...oldHeaders, ['', '']]
+			return oldHeaders.concat({
+				id: Math.random().toString(36),
+				hasWarning: false,
+				hasError: false,
+				name: '',
+				value: '',
+			})
+		})
+	}
+
+	/**
+	 * Remove the header at the given index
+	 */
+	function handleRemoveHeader(index: number) {
+		setHeaders((oldHeaders) => {
+			return oldHeaders.filter((_, i) => i !== index)
+		})
+	}
+
+	/**
+	 * Update header name at the given index
+	 */
+	function handleUpdateHeaderType(index: number, value: string) {
+		setHeaders((oldHeaders) => {
+			const newHeaders = [...oldHeaders]
+			newHeaders[index].name = value.trim()
+			return newHeaders
+		})
+	}
+
+	/**
+	 * Update header content at the given index
+	 */
+	function handleUpdateHeaderContent(index: number, value: string) {
+		setHeaders((oldHeaders) => {
+			const newHeaders = [...oldHeaders]
+			newHeaders[index].value = value
+			return newHeaders
 		})
 	}
 
@@ -61,7 +149,7 @@ export default function useXhr() {
 	function handleSendRequest() {
 		const options: RequestInit = {
 			method,
-			headers: filteredHeaders,
+			headers: filteredHeaders.map((header) => [header.name, header.value]),
 		}
 
 		if (method !== 'GET') {
@@ -102,7 +190,10 @@ export default function useXhr() {
 		bodyType,
 		handleAddHeader,
 		handleClick: handleSendRequest,
-		headers,
+		handleRemoveHeader,
+		handleUpdateHeaderContent,
+		handleUpdateHeaderType,
+		headers: parsedHeaders,
 		loading,
 		method,
 		numActiveHeaders: filteredHeaders.length,
@@ -111,7 +202,6 @@ export default function useXhr() {
 		responseRaw,
 		setBody,
 		setBodyType,
-		setHeaders,
 		setMethod,
 		setUrl,
 		url,
