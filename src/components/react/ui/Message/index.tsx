@@ -12,7 +12,7 @@ export function Message(props: MessageProps) {
 	return (
 		<div
 			className={clsx(
-				'border border-transparent  bg-neutral-800 px-2 py-1 text-sm font-thin',
+				'border border-transparent  bg-neutral-800 p-4 text-sm font-thin',
 				{
 					'border-l-yellow-500': kind === 'warning',
 					'border-l-green-500': kind === 'success',

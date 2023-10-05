@@ -71,6 +71,8 @@ export default function useXhr() {
 		}
 
 		setLoading(true)
+		setResponseRaw(null)
+		setResponse('')
 
 		fetch(url, options)
 			.then(async (response) => {

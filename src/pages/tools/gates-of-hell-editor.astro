@@ -4,10 +4,17 @@ import Editor from '@/components/react/tools/goh-editor';
 ---
 
 <Layout title="Gates of Hell" footer={false}>
-	<div class="mx-auto mb-16 max-w-4xl p-4 lg:mt-16">
-		<a href="/tools">go back</a>
-		<div class="mt-8">
-			<Editor client:load />
-		</div>
-	</div>
+    <div class="mx-auto max-w-4xl px-2 py-8 lg:px-0">
+        <div class="mb-8">
+            <h1 class="text-4xl">Gates of Hell Editor</h1>
+            <hr />
+        </div>
+		<Editor client:load />
+    </div>
 </Layout>
+
+<style is:global>
+    * {
+        @apply font-thin;
+    }
+</style>

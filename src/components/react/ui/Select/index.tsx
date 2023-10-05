@@ -42,13 +42,28 @@ export interface SelectProps {
 	disabled?: boolean
 
 	/**
+	 * Class specifying width (i.e w-full, max-w-6xl, etc)
+	 */
+	width?: string
+
+	/**
 	 * Various classes to be applied
 	 */
 	classes?: {
 		/**
+		 * Applied to the wrapper
+		 */
+		wrapper?: string
+
+		/**
 		 * Applied to the select element
 		 */
 		select?: string
+
+		/**
+		 * Applied to the input label
+		 */
+		label?: string
 	}
 	/**
 	 * The select options, like so:
@@ -71,8 +86,12 @@ export function Select(props: SelectProps) {
 		onChange,
 		placeholder = undefined,
 		value: initialValue = '',
+		width = 'max-w-full',
 	} = props
+
 	const selectClasses = props.classes?.select || ''
+	const wrapperClasses = props.classes?.wrapper || ''
+	const labelClasses = props.classes?.label || ''
 
 	const [value, setValue] = useState<HTMLSelectElement['value']>(initialValue)
 
@@ -88,24 +107,33 @@ export function Select(props: SelectProps) {
 	}
 
 	return (
-		<>
-			{label && <label htmlFor={id}>{label}</label>}
-			<select
-				value={value}
-				name={name}
-				placeholder={placeholder}
-				className={clsx(
-					'border border-neutral-700 bg-transparent px-2 py-1',
-					{
-						'cursor-not-allowed opacity-50': disabled,
-					},
-					selectClasses,
+		<div className={width}>
+			<div className={clsx('flex flex-col gap-1', wrapperClasses)}>
+				{label && (
+					<label
+						htmlFor={id}
+						className={clsx('ml-1 text-sm font-bold', labelClasses)}
+					>
+						{label}
+					</label>
 				)}
-				onChange={handleChange}
-				disabled={disabled}
-			>
-				{children}
-			</select>
-		</>
+				<select
+					value={value}
+					name={name}
+					placeholder={placeholder}
+					className={clsx(
+						'border border-neutral-700 bg-transparent px-2 py-1',
+						{
+							'cursor-not-allowed opacity-50': disabled,
+						},
+						selectClasses,
+					)}
+					onChange={handleChange}
+					disabled={disabled}
+				>
+					{children}
+				</select>
+			</div>
+		</div>
 	)
 }

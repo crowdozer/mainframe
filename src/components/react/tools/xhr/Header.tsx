@@ -63,15 +63,16 @@ export default function Header(props: HeaderProps) {
 	return (
 		<>
 			<Input
+				width="grow"
 				classes={{
 					input: clsx('border border-neutral-700 bg-transparent px-2 py-1', {
 						'border-l-2 border-l-red-500': error,
 						'border-l-2 border-l-yellow-500': !error && checkForWarning(),
 					}),
 				}}
-				name="url"
 				value={header[0]}
-				placeholder="name"
+				name="header name"
+				placeholder="header name"
 				onChange={(value) => handleUpdateHeaderType(value)}
 				disabled={loading}
 				list={
@@ -91,12 +92,13 @@ export default function Header(props: HeaderProps) {
 			/>
 
 			<Input
+				width="grow"
 				classes={{
-					input: 'grow border border-neutral-700 bg-transparent px-2 py-1',
+					input: 'border border-neutral-700 bg-transparent px-2 py-1',
 				}}
-				name="value"
 				value={header[1]}
-				placeholder="value"
+				name="header value"
+				placeholder="header value"
 				onChange={(value) => handleUpdateHeaderContent(value)}
 				disabled={loading}
 				list={
