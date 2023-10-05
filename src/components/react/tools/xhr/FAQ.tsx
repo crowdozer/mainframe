@@ -6,7 +6,7 @@ export default function FAQ() {
 			<div className="space-y-2">
 				<div className="border border-neutral-800 bg-neutral-950/25 px-4 py-2">
 					<p className="font-bold">What is it?</p>
-					<p>It's a basic network request tool</p>
+					<p>It's a lightweight network request gui built ontop of fetch</p>
 				</div>
 				<div className="border border-neutral-800 bg-neutral-950/25 px-4 py-2">
 					<p className="font-bold">Is this complete?</p>
@@ -18,7 +18,6 @@ export default function FAQ() {
 						<li>error handling</li>
 						<li>presets</li>
 						<li>better validation</li>
-						<li>responsiveness</li>
 						<li>syntax highlighting in response</li>
 						<li>more payload types (x-www)</li>
 						<li>refactor everything when done</li>

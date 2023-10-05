@@ -40,11 +40,11 @@ export default function Bostman() {
 	return (
 		<div className="mx-auto max-w-4xl space-y-8 px-2 py-8 lg:px-0">
 			<div>
-				<h1 className="text-4xl">Bostman</h1>
+				<h1 className="text-4xl">network requests</h1>
 				<hr />
 			</div>
 			<div>
-				<div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+				<div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-4">
 					{/* Config area */}
 					<div className="flex flex-col gap-4">
 						<p className="px-2 py-1 font-bold">request</p>
