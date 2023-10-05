@@ -3,8 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import Card from '@/components/astro/Card.astro'
 import LuxortsDetails from '@/components/react/portfolio/LuxortsDetails.tsx'
 import Tech from '@/components/astro/Tech.astro'
-import { Badge } from '@/components/shadcn/ui/badge.tsx'
-import { Button } from '@/components/shadcn/ui/button.tsx'
+import { Chip, Button } from '@/components/react/ui'
 import FancyChars from '@/components/astro/FancyChars.astro'
 ---
 
@@ -40,8 +39,10 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 					</div>
 
 					<div class="mt-16">
-						<a href="/contact" class="contents">
-							<Button size="lg" variant="dark" fullwidth>Contact Me</Button>
+						<a href="/contact" class="contents text-inherit">
+							<Button client:load classes={{ button: 'px-4 py-4 w-full'}}>
+								Contact Me
+							</Button>
 						</a>
 					</div>
 				</div>
@@ -77,10 +78,10 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 							</h2>
 						</div>
 						<div class="mt-4 flex flex-row flex-wrap gap-2">
-							<Badge chipcolor="default">Tailwind</Badge>
-							<Badge chipcolor="default">React</Badge>
-							<Badge chipcolor="default">Astro</Badge>
-							<Badge chipcolor="default">Vercel</Badge>
+							<Chip kind="neutral">Tailwind</Chip>
+							<Chip kind="neutral">React</Chip>
+							<Chip kind="neutral">Astro</Chip>
+							<Chip kind="neutral">Vercel</Chip>
 						</div>
 					</Card>
 
@@ -122,9 +123,9 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 						</div>
 
 						<div class="mt-4 flex flex-row flex-wrap gap-2">
-							<Badge chipcolor="default">NextJS</Badge>
-							<Badge chipcolor="default">Material UI</Badge>
-							<Badge chipcolor="default">Vercel</Badge>
+							<Chip kind="neutral">NextJS</Chip>
+							<Chip kind="neutral">Material UI</Chip>
+							<Chip kind="neutral">Vercel</Chip>
 						</div>
 					</Card>
 
@@ -152,12 +153,12 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 							</h2>
 						</div>
 						<div class="mt-4 flex flex-row flex-wrap gap-2">
-							<Badge chipcolor="default">PHP</Badge>
-							<Badge chipcolor="default">MySQL</Badge>
-							<Badge chipcolor="default">React</Badge>
-							<Badge chipcolor="default">Material UI</Badge>
-							<Badge chipcolor="default">Vercel</Badge>
-							<Badge chipcolor="default">GCP</Badge>
+							<Chip kind="neutral">PHP</Chip>
+							<Chip kind="neutral">MySQL</Chip>
+							<Chip kind="neutral">React</Chip>
+							<Chip kind="neutral">Material UI</Chip>
+							<Chip kind="neutral">Vercel</Chip>
+							<Chip kind="neutral">GCP</Chip>
 						</div>
 					</Card>
 
@@ -185,10 +186,10 @@ import FancyChars from '@/components/astro/FancyChars.astro'
 							</h2>
 						</div>
 						<div class="mt-4 flex flex-row flex-wrap gap-2">
-							<Badge chipcolor="default">NodeJS</Badge>
-							<Badge chipcolor="default">Express</Badge>
-							<Badge chipcolor="default">Firebase</Badge>
-							<Badge chipcolor="default">GCP</Badge>
+							<Chip kind="neutral">NodeJS</Chip>
+							<Chip kind="neutral">Express</Chip>
+							<Chip kind="neutral">Firebase</Chip>
+							<Chip kind="neutral">GCP</Chip>
 						</div>
 					</Card>
 				</div>

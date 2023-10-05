@@ -11,9 +11,8 @@ export interface ButtonProps {
 	 *
 	 * @param event Click event
 	 */
-	onClick: (event: any) => void
+	onClick?: (event: any) => void
 
-	loading?: boolean
 	disabled?: boolean
 
 	/**
@@ -28,12 +27,7 @@ export interface ButtonProps {
 }
 
 export function Button(props: ButtonProps) {
-	const {
-		onClick = undefined,
-		loading = false,
-		disabled = false,
-		children,
-	} = props
+	const { onClick = undefined, disabled = false, children } = props
 	const buttonClasses = props.classes?.button || ''
 
 	return (

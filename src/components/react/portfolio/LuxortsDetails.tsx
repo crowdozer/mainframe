@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Button } from '@/components/shadcn/ui/button';
+import { useState } from 'react'
+import { Button } from '@/components/react/ui'
 
 export default function LuxortsDetails() {
-	const [more, setShowMore] = useState(false);
+	const [more, setShowMore] = useState(false)
 
 	if (!more) {
 		return (
@@ -17,11 +17,9 @@ export default function LuxortsDetails() {
 					<li>...</li>
 				</ul>
 				<br />
-				<Button onClick={() => setShowMore(true)} variant="ghost">
-					show more
-				</Button>
+				<Button onClick={() => setShowMore(true)}>show more</Button>
 			</>
-		);
+		)
 	}
 
 	return (
@@ -42,9 +40,7 @@ export default function LuxortsDetails() {
 				</li>
 			</ul>
 			<br />
-			<Button onClick={() => setShowMore(false)} variant="ghost">
-				show less
-			</Button>
+			<Button onClick={() => setShowMore(false)}>show less</Button>
 		</>
-	);
+	)
 }
