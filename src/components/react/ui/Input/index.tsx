@@ -1,5 +1,5 @@
-import clsx from 'clsx'
-import { useState, type ReactNode } from 'react'
+import { useState, type ReactNode, type HTMLInputTypeAttribute } from 'react'
+import { cn } from '../utils'
 
 export interface InputProps {
 	/**
@@ -34,14 +34,6 @@ export interface InputProps {
 	 * @param event The event
 	 */
 	onChange: (value: any, event: any) => void
-	/**
-	 * Executed before any state updates. Useful if you need to preprocess the value
-	 *
-	 * @param value Value from the event
-	 * @param event The event
-	 * @returns the new value
-	 */
-	beforeOnChange?: (value: any, event: any) => any
 
 	disabled?: boolean
 
@@ -71,6 +63,30 @@ export interface InputProps {
 	}
 
 	/**
+	 * Input HTML props to include, excluding ones already handled by standard props
+	 */
+	inputProps?: Omit<
+		React.InputHTMLAttributes<HTMLInputElement>,
+		| 'id'
+		| 'value'
+		| 'name'
+		| 'type'
+		| 'placeholder'
+		| 'className'
+		| 'disabled'
+		| 'onChange'
+		| 'list'
+	>
+
+	/**
+	 * Label HTML props to include, excluding ones already handled by standard props
+	 */
+	labelProps?: Omit<
+		React.HTMLAttributes<HTMLLabelElement>,
+		'className' | 'htmlFor'
+	>
+
+	/**
 	 * An optional datalist, like so:
 	 * <>
 	 * 	  <option>option 1</option>
@@ -83,7 +99,6 @@ export interface InputProps {
 
 export function Input(props: InputProps) {
 	const {
-		beforeOnChange,
 		disabled = false,
 		id = `input-${Math.random().toString(36)}`,
 		label = undefined,
@@ -94,6 +109,8 @@ export function Input(props: InputProps) {
 		type = undefined,
 		value: initialValue = '',
 		width = 'max-w-full',
+		inputProps = {},
+		labelProps = {},
 	} = props
 	const inputClasses = props.classes?.input || ''
 	const wrapperClasses = props.classes?.wrapper || ''
@@ -103,22 +120,18 @@ export function Input(props: InputProps) {
 
 	function handleChange(event: any) {
 		let value = event.target.value
-
-		if (beforeOnChange) {
-			value = beforeOnChange(value, event)
-		}
-
 		setValue(value)
 		onChange(value, event)
 	}
 
 	return (
 		<div className={width}>
-			<div className={clsx('flex flex-col gap-1', wrapperClasses)}>
+			<div className={cn('flex flex-col gap-1', wrapperClasses)}>
 				{label && (
 					<label
 						htmlFor={id}
-						className={clsx('ml-1 text-sm font-bold', labelClasses)}
+						className={cn('ml-1 text-sm font-bold', labelClasses)}
+						{...labelProps}
 					>
 						{label}
 					</label>
@@ -129,16 +142,22 @@ export function Input(props: InputProps) {
 					name={name}
 					type={type}
 					placeholder={placeholder}
-					className={clsx(
+					className={cn(
+						// base styles
 						'border border-neutral-700 bg-transparent px-2 py-1',
+						// a11y
+						'focus:border-blue-500 focus:outline-none',
+						// conditional styles
 						{
 							'cursor-not-allowed opacity-50': disabled,
 						},
+						// user styles
 						inputClasses,
 					)}
 					disabled={disabled}
 					onChange={handleChange}
 					list={list ? `${id}-datalist` : undefined}
+					{...inputProps}
 				/>
 				{list && <datalist id={`${id}-datalist`}>{list}</datalist>}
 			</div>

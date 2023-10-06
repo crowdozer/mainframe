@@ -2,7 +2,7 @@ import { useEditor } from './useEditor'
 import Mods from './components/Mods'
 import Maps from './components/Maps'
 import { get } from './utils/manipulation'
-import { Button, Input, Message } from '@/components/react/ui'
+import { Button, Code, Input, Message } from '@/components/react/ui'
 
 export default function GohEditor() {
 	const {
@@ -29,10 +29,8 @@ export default function GohEditor() {
 					<p>To begin, locate your savefile.</p>
 					<p>Save files are commonly located at:</p>
 					<div className="my-4 border border-neutral-700 bg-neutral-950/25 p-4 font-mono">
-						<p>
-							Documents\my games\gates of hell\profiles\(steam
-							id)\campaign\(file).sav
-						</p>
+						Documents\my games\gates of hell\profiles\(steam
+						id)\campaign\(file).sav
 					</div>
 					<div>
 						<input type="file" name="files" onChange={handleParseSave} />

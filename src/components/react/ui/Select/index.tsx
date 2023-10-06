@@ -1,5 +1,5 @@
-import clsx from 'clsx'
 import { useState, type ReactNode } from 'react'
+import { cn } from '../utils'
 
 export interface SelectProps {
 	/**
@@ -30,14 +30,6 @@ export interface SelectProps {
 	 * @param event The event
 	 */
 	onChange: (value: any, event: any) => void
-	/**
-	 * Executed before any state updates. Useful if you need to preprocess the value
-	 *
-	 * @param value Value from the event
-	 * @param event The event
-	 * @returns the new value
-	 */
-	beforeOnChange?: (value: any, event: any) => any
 
 	disabled?: boolean
 
@@ -65,6 +57,29 @@ export interface SelectProps {
 		 */
 		label?: string
 	}
+
+	/**
+	 * Select HTML props to include, excluding ones already handled by standard props
+	 */
+	selectProps?: Omit<
+		React.SelectHTMLAttributes<HTMLSelectElement>,
+		| 'id'
+		| 'name'
+		| 'onChange'
+		| 'value'
+		| 'disabled'
+		| 'placeholder'
+		| 'className'
+	>
+
+	/**
+	 * Label HTML props to include, excluding ones already handled by standard props
+	 */
+	labelProps?: Omit<
+		React.HTMLAttributes<HTMLLabelElement>,
+		'className' | 'htmlFor'
+	>
+
 	/**
 	 * The select options, like so:
 	 * <>
@@ -75,9 +90,9 @@ export interface SelectProps {
 	 */
 	children: ReactNode
 }
+
 export function Select(props: SelectProps) {
 	const {
-		beforeOnChange,
 		children,
 		disabled = false,
 		id = `select-${Math.random().toString(36)}`,
@@ -87,6 +102,8 @@ export function Select(props: SelectProps) {
 		placeholder = undefined,
 		value: initialValue = '',
 		width = 'max-w-full',
+		selectProps = {},
+		labelProps = {},
 	} = props
 
 	const selectClasses = props.classes?.select || ''
@@ -97,39 +114,42 @@ export function Select(props: SelectProps) {
 
 	function handleChange(event: any) {
 		let value = event.target.value
-
-		if (beforeOnChange) {
-			value = beforeOnChange(value, event)
-		}
-
 		setValue(value)
 		onChange(value, event)
 	}
 
 	return (
 		<div className={width}>
-			<div className={clsx('flex flex-col gap-1', wrapperClasses)}>
+			<div className={cn('flex flex-col gap-1', wrapperClasses)}>
 				{label && (
 					<label
 						htmlFor={id}
-						className={clsx('ml-1 text-sm font-bold', labelClasses)}
+						className={cn('ml-1 text-sm font-bold', labelClasses)}
+						{...labelProps}
 					>
 						{label}
 					</label>
 				)}
 				<select
+					id={id}
 					value={value}
 					name={name}
 					placeholder={placeholder}
-					className={clsx(
+					className={cn(
+						// base styles
 						'border border-neutral-700 bg-transparent px-2 py-1',
+						// a11y
+						'focus:border-blue-500 focus:outline-none',
+						// conditional styles
 						{
 							'cursor-not-allowed opacity-50': disabled,
 						},
+						// user styles
 						selectClasses,
 					)}
 					onChange={handleChange}
 					disabled={disabled}
+					{...selectProps}
 				>
 					{children}
 				</select>

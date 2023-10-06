@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import { cn } from '../utils'
 
 export interface CodeProps {
 	content?: string
@@ -21,9 +21,10 @@ export function Code(props: CodeProps) {
 	const lines = content.split('\n')
 
 	return (
-		<pre
-			className={clsx(
-				'resize-y overflow-auto border border-neutral-700',
+		<code
+			role="log"
+			className={cn(
+				'resize-y overflow-auto whitespace-pre border border-neutral-700',
 				wrapperClasses,
 			)}
 		>
@@ -32,19 +33,24 @@ export function Code(props: CodeProps) {
 					key={index}
 					className="grid grid-cols-[minmax(32px,_max-content)_1fr] gap-2"
 				>
+					{/* Line numbers */}
 					<span
-						className={clsx(
+						className={cn(
 							'border-r border-r-neutral-800 bg-neutral-800/50 px-2 text-right',
 							{
 								'pt-4': index === 0,
 								'pb-4': index === lines.length - 1,
 							},
 						)}
+						// Do not expose the line numbers
+						aria-hidden="true"
 					>
 						{index + 1}
 					</span>
+
+					{/* Line content */}
 					<span
-						className={clsx({
+						className={cn({
 							'pt-4': index === 0,
 							'pb-4': index === lines.length - 1,
 						})}
@@ -53,6 +59,6 @@ export function Code(props: CodeProps) {
 					</span>
 				</div>
 			))}
-		</pre>
+		</code>
 	)
 }

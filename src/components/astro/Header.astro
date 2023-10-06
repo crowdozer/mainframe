@@ -1,12 +1,19 @@
 ---
 import Nav from '@/components/react/Nav.tsx'
+import { Button } from '@/components/react/ui'
 ---
 
 <nav class="relative border-b border-neutral-700 p-6">
 	<div class="mx-auto max-w-6xl">
 		<div class="flex flex-row gap-2">
 			<h1 class="self-center">
-				<a href="/" style="text-decoration:none">crwdzr.io</a>
+				<a href="/" tabindex="-1">
+					<Button classes={{
+						button: 'font-bold border-transparent select-none rounded p-2 px-4',
+					}}>
+						crwdzr.io
+					</Button>
+				</a>
 			</h1>
 			<div class="grow"></div>
 			<Nav client:load />

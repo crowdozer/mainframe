@@ -1,9 +1,10 @@
-import clsx from 'clsx'
+import { type ClassValue } from 'clsx'
 import { useState } from 'react'
 import { Button } from '@/components/react/ui'
+import { cn } from '@/components/react/ui'
 
 export interface NavProps {
-	classes?: string
+	classes?: ClassValue[]
 }
 
 export default function Nav(props: NavProps) {
@@ -24,8 +25,10 @@ export default function Nav(props: NavProps) {
 			<div className="contents" onMouseEnter={handleOpen}>
 				<Button
 					classes={{
-						button: clsx(
-							'border-none cursor-pointer select-none rounded p-2 px-4 hover:!bg-neutral-700',
+						button: cn(
+							// restyle the button for the header
+							'font-bold border-transparent select-none rounded p-2 px-4 hover:!bg-neutral-700',
+							// conditional styles
 							{
 								'bg-neutral-800': open,
 							},
@@ -39,8 +42,10 @@ export default function Nav(props: NavProps) {
 			</div>
 
 			<div
-				className={clsx(
+				className={cn(
+					// animation + position
 					'fixed bottom-0 left-0 right-0 top-0 z-50 block animate-in fade-in-0 zoom-in-95 ',
+					// responsiveness (fullscreen)
 					'md:absolute md:bottom-auto md:left-auto md:right-0 md:top-full md:h-auto',
 					{
 						hidden: !open,

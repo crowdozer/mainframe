@@ -39,11 +39,17 @@ export default function Bostman() {
 		url,
 	} = useXhr()
 
+	function handleSubmit(event: any) {
+		event.preventDefault()
+		console.log('handleSubmit')
+		handleClick()
+	}
+
 	return (
 		<div className="space-y-16">
 			<div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-4">
 				{/* Config area */}
-				<div className="flex flex-col gap-4">
+				<form className="flex flex-col gap-4" onSubmit={handleSubmit}>
 					<p className="px-2 py-1 font-bold">request</p>
 
 					{/* url */}
@@ -54,6 +60,9 @@ export default function Bostman() {
 								value={method}
 								onChange={(value) => setMethod(value as HttpMethod)}
 								disabled={loading}
+								selectProps={{
+									autoFocus: true,
+								}}
 							>
 								<option className="text-neutral-950" value="GET">
 									GET
@@ -172,11 +181,11 @@ export default function Bostman() {
 
 					{/* send button */}
 					<div className="text-right">
-						<Button onClick={handleClick} disabled={loading}>
+						<Button onClick={handleClick} disabled={loading} type="submit">
 							send 🚀
 						</Button>
 					</div>
-				</div>
+				</form>
 
 				{/* Response area */}
 				<div className="flex flex-col gap-1">
