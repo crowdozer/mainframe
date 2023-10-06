@@ -1,0 +1,14 @@
+{
+    "name": "crwdzr.io",
+    "short_name": "crwdzr.io",
+    "icons": [
+        {
+            "src": "/android-chrome-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#131313",
+    "background_color": "#131313",
+    "display": "standalone"
+}
