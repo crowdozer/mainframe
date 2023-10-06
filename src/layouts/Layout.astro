@@ -20,11 +20,7 @@ const isProd = import.meta.env.MODE === 'production'
 		<meta charset="UTF-8" />
 		<meta name="description" content="coolest corner of the internet 😎" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} - crwdzr.io</title>
-		{isProd && <Analytics {title} />}
-
 		<!-- favicons -->
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -33,6 +29,9 @@ const isProd = import.meta.env.MODE === 'production'
 		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 		<meta name="msapplication-TileColor" content="#603cba">
 		<meta name="theme-color" content="#131313">
+
+		<title>{title} - crwdzr.io</title>
+		{isProd && <Analytics {title} />}
 	</head>
 
 	<body class="flex min-h-screen flex-col overflow-y-auto overflow-x-hidden">
