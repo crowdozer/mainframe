@@ -59,7 +59,7 @@ export default function Nav(props: NavProps) {
 					</div>
 					<div className="grid grid-cols-1 gap-4 md:grid-cols-[.75fr_1fr]">
 						<a
-							href="/hire-me"
+							href="/"
 							className="flex flex-col gap-2 rounded bg-neutral-800 px-4 py-3 hover:bg-neutral-700 md:row-span-3"
 						>
 							<div className="grow"></div>
