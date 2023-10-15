@@ -1,7 +1,3 @@
-# Useful links
-
-[Icons](https://icon-sets.iconify.design/carbon/)
-[Svelte Iteration](https://github.com/crowdozer/mainframe/tree/79946319e761fde580b1975e9198452dacb4b58b)
 
 # Astro Starter Kit: Basics
 
@@ -57,3 +53,8 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Useful links
+
+- [Icons](https://icon-sets.iconify.design/carbon/)
+- [Svelte Iteration](https://github.com/crowdozer/mainframe/tree/79946319e761fde580b1975e9198452dacb4b58b)
