@@ -5,7 +5,6 @@ import {
 	generateBoard,
 	getInitialRemainingMoves,
 	getSelectionMode,
-	hasRemainingMoves,
 } from './utils'
 
 export function useCodebreaker(): CodebreakerAPI {
