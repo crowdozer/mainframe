@@ -18,6 +18,8 @@ export default function Codebreaker() {
 		restart,
 	} = api
 
+	// console.log(api)
+
 	return (
 		<>
 			<div className="block lg:hidden">

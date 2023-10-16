@@ -5,6 +5,7 @@ import {
 	generateBoard,
 	getInitialRemainingMoves,
 	getSelectionMode,
+	hasRemainingMoves,
 } from './utils'
 
 export function useCodebreaker(): CodebreakerAPI {
@@ -119,13 +120,14 @@ export function useCodebreaker(): CodebreakerAPI {
 				const seqLength = sequence.values.length
 				const relevantMoves = getLastNClickedValues(seqLength)
 
+				const matches = countMatchingElements(relevantMoves, sequence.values)
+				sequence.progress = matches
+
 				// console.log({
 				// 	sequence: sequence.values.join('.'),
 				// 	moves: relevantMoves.join('.'),
+				// 	matches,
 				// })
-
-				const matches = countMatchingElements(relevantMoves, sequence.values)
-				sequence.progress = matches
 
 				if (matches === seqLength) {
 					sequence.solved = true
@@ -189,7 +191,9 @@ export function useCodebreaker(): CodebreakerAPI {
 	}, [])
 
 	/**
-	 * Update the tiles when the 'moves' array changes
+	 * Updates the tiles when the 'moves' array changes,
+	 * and ensures the defeat condition is tripped if there are
+	 * no valid moves left.
 	 */
 	useEffect(() => {
 		if (initialRemainingMoves && remainingMoves === 0) {

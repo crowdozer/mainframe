@@ -14,7 +14,7 @@ export function getInitialRemainingMoves(sequences: Sequence[]): number {
 	})
 
 	// Afford them a 25% grace
-	return count * 1.25
+	return Math.round(count * 1.25)
 }
 
 /**
@@ -235,8 +235,10 @@ export function countMatchingElements(
 		// We need to compare to both the current & first value
 		const firstHex = goalSequence[0]
 
-		if (userSelection[i] === wantedHex || userSelection[i] === firstHex) {
+		if (userSelection[i] === wantedHex) {
 			score++
+		} else if (userSelection[i] === firstHex) {
+			score = 1
 		} else {
 			score = 0
 		}
