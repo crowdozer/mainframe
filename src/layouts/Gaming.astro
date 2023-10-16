@@ -3,21 +3,22 @@
  * Extends the default layout to include the flash stuff
  */
 
-import '@/styles/globals.css';
-import Layout from './Layout.astro';
+import '@/styles/globals.css'
+import Layout from './Layout.astro'
 
 interface Props {
-	title: string;
+	title: string
+	flash?: boolean
 }
 
-const { title } = Astro.props;
+const { title, flash = true } = Astro.props
 ---
 
-<script src="/ruffle/ruffle.js" is:inline></script>
+{flash && <script src="/ruffle/ruffle.js" is:inline />}
 
 <Layout {title} footer={false}>
-	<div class="mx-auto mb-32 max-w-4xl">
-		<a href="/games" class="mb-4 mt-24">go back</a>
+	<div class="mx-auto mb-32 max-w-4xl p-2">
+		<a href="/games" class="mb-4 mt-8 lg:mt-16">go back</a>
 		<slot />
 	</div>
 </Layout>

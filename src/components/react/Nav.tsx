@@ -74,10 +74,8 @@ export default function Nav(props: NavProps) {
 							<p className="text-xs">random stuff</p>
 						</a>
 						<a href="/games" className="rounded px-4 py-3 hover:bg-neutral-700">
-							<p className="font-bold">flash games</p>
-							<p className="text-xs">
-								waste some time with classic flash games
-							</p>
+							<p className="font-bold">arcade</p>
+							<p className="text-xs">waste time responsibly</p>
 						</a>
 						<a
 							href="/contact"

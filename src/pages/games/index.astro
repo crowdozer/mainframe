@@ -1,45 +1,57 @@
 ---
-import Layout from '@/layouts/Layout.astro';
+import Layout from '@/layouts/Layout.astro'
 ---
 
 <Layout title="we gaming">
-	<div class="mx-auto mb-16 max-w-4xl p-4 lg:mt-16">
-		<h1 class="text-4xl">games</h1>
+	<div class="mx-auto mb-16 max-w-4xl space-y-16 p-4 lg:mt-16">
+		<div>
+			<h2 class="text-2xl">minigames</h2>
+			<hr />
+			<p class="mt-4">games I've created</p>
+			<ul class="mt-4">
+				<li>
+					<a href="/games/codebreaker">codebreaker</a> - cyberpunk 2077 inspired
+					puzzle game
+				</li>
+			</ul>
+		</div>
 
-		<ul class="mt-8">
-			<li>
-				<a href="/games/age-of-war">age of war</a>
-			</li>
-			<li>
-				<a href="/games/bloxorz">bloxorz</a>
-			</li>
-			<li>
-				<a href="/games/castle">defend your castle</a>
-			</li>
-			<li>
-				<a href="/games/interactivebuddy">interactive buddy</a>
-			</li>
-			<li>
-				<a href="/games/portal">portal</a>
-			</li>
-			<li>
-				<a href="/games/stickrpg">stick rpg</a>
-			</li>
-			<li>
-				<a href="/games/fancypantsadventure">the fancy pants adventure</a>
-			</li>
-			<li>
-				<a href="/games/worlds-hardest">the world's hardest game</a>
-			</li>
-		</ul>
-
-		<p class="mt-8">
-			the .swf files are sourced from <a
-				href="https://github.com/CBGamesdev/chilibowlflash">chilibowlflash</a
-			>, and emulated via <a href="https://github.com/ruffle-rs/ruffle"
-				>ruffle</a
-			>
-		</p>
-		<p class="mt-2">enjoy</p>
+		<div>
+			<h2 class="text-2xl">flash games</h2>
+			<hr />
+			<p class="mt-4">
+				classic flash games - the .swf files are sourced from <a
+					href="https://github.com/CBGamesdev/chilibowlflash">chilibowlflash</a
+				>, and emulated via <a href="https://github.com/ruffle-rs/ruffle"
+					>ruffle</a
+				>
+			</p>
+			<ul class="mt-4">
+				<li>
+					<a href="/games/age-of-war">age of war</a>
+				</li>
+				<li>
+					<a href="/games/bloxorz">bloxorz</a>
+				</li>
+				<li>
+					<a href="/games/castle">defend your castle</a>
+				</li>
+				<li>
+					<a href="/games/interactivebuddy">interactive buddy</a>
+				</li>
+				<li>
+					<a href="/games/portal">portal</a>
+				</li>
+				<li>
+					<a href="/games/stickrpg">stick rpg</a>
+				</li>
+				<li>
+					<a href="/games/fancypantsadventure">the fancy pants adventure</a>
+				</li>
+				<li>
+					<a href="/games/worlds-hardest">the world's hardest game</a>
+				</li>
+			</ul>
+		</div>
 	</div>
 </Layout>
