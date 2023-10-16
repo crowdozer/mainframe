@@ -163,7 +163,8 @@ export default function Codebreaker() {
 							<p>
 								The game alternates between moving laterally and moving
 								vertically. Your first move can be anywhere, the second one must
-								be in the same row, then the same column, and so forth.
+								be in the same column, then the same row, then column, then row,
+								and so forth.
 							</p>
 							<p>
 								When you complete a vector, it is locked into a success state.
