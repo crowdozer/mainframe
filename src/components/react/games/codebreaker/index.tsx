@@ -21,7 +21,10 @@ export default function Codebreaker() {
 	return (
 		<>
 			<div className="block lg:hidden">
-				<p>This page requires a desktop view. It is not responsive yet.</p>
+				<p>
+					This page requires a larger desktop view. Please make your browser
+					larger - this is not small-screen friendly yet.
+				</p>
 			</div>
 			<div className="mt-8 hidden lg:block">
 				<div>
