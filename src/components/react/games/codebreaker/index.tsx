@@ -65,12 +65,13 @@ export default function Codebreaker() {
 												<div
 													className={cn('border  p-2 px-4', {
 														'border-red-800/50 bg-red-800/25': !seq.solved,
+														// Defeat squares
+														'border-red-500/50 bg-red-500/25': defeat,
+														// Solved sequences override defeat squares
 														'border-green-800/50 bg-green-800/25':
 															seq.solved || seq.progress > hexIndex,
-														// Victory
+														// Victory squares
 														'border-green-500/50 bg-green-500/25': victory,
-														// Defeat
-														'border-red-500/50 bg-red-500/25': defeat,
 													})}
 												>
 													{hex}
