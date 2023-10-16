@@ -119,10 +119,10 @@ export function useCodebreaker(): CodebreakerAPI {
 				const seqLength = sequence.values.length
 				const relevantMoves = getLastNClickedValues(seqLength)
 
-				console.log({
-					sequence: sequence.values.join('.'),
-					moves: relevantMoves.join('.'),
-				})
+				// console.log({
+				// 	sequence: sequence.values.join('.'),
+				// 	moves: relevantMoves.join('.'),
+				// })
 
 				const matches = countMatchingElements(relevantMoves, sequence.values)
 				sequence.progress = matches
@@ -208,7 +208,6 @@ export function useCodebreaker(): CodebreakerAPI {
 		if (!sequences.length) return
 
 		const unsolved = sequences.some((seq) => !seq.solved)
-		console.log(unsolved)
 
 		if (!unsolved) {
 			setVictory(true)
