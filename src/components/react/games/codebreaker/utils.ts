@@ -72,7 +72,7 @@ export function generateBoard(
 		return row.map((colHex, colIndex) => {
 			return {
 				value: colHex,
-				clickable: true,
+				clickable: false,
 				clicked: false,
 				xCoord: colIndex,
 				yCoord: rowIndex,
@@ -141,9 +141,9 @@ export function injectSolution(
 		return colIndex
 	}
 
-	// Start somewhere random
+	// Start somewhere random on the first row
 	let colIndex = getRandomColIndex()
-	let rowIndex = getRandomRowIndex()
+	let rowIndex = 0
 
 	// Allows the solution to switch between moving laterally and vertically
 	let useRow = false
@@ -203,7 +203,7 @@ export function generateNUniqueHexStrings(n: number): string[] {
  * Initially it is null, then it flipflops between col/row, starting with col
  */
 export function getSelectionMode(moves: string[]): SelectionMode {
-	if (!moves.length) return null
+	if (!moves.length) return 'row'
 
 	if (moves.length % 2 === 1) {
 		return 'col'

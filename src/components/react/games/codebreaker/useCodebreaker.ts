@@ -155,10 +155,9 @@ export function useCodebreaker(): CodebreakerAPI {
 	 */
 	function isTileClickable(tile: Tile): boolean {
 		if (tile.clicked) return false
+		if (moves.includes(`${tile.yCoord}-${tile.xCoord}`)) return false 
 
 		switch (selectionMode) {
-			case null:
-				return true
 			case 'col':
 				return tile.xCoord === lastColIndex
 			case 'row':

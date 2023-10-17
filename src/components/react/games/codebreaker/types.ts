@@ -15,7 +15,7 @@ export interface Tile {
 	clickable: boolean
 }
 
-export type SelectionMode = 'row' | 'col' | null
+export type SelectionMode = 'row' | 'col'
 
 export type CodebreakerBoard = Tile[][]
 
