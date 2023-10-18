@@ -1,5 +1,31 @@
 import { getRandomInt } from '@/lib/random-int'
-import type { CodebreakerBoard, SelectionMode, Sequence, Tile } from './types'
+import type {
+	CodebreakerBoard,
+	CodebreakerState,
+	SelectionMode,
+	Sequence,
+	Tile,
+} from './types'
+
+/**
+ * Generates the initial board state
+ */
+export function getInitialState(): CodebreakerState {
+	const [sequences, initialBoard, solution] = generateBoard()
+	const remainingMoves = getInitialRemainingMoves(sequences)
+
+	return {
+		moves: [],
+		board: initialBoard,
+		sequences,
+		solution,
+		initialRemainingMoves: remainingMoves,
+		remainingMoves: remainingMoves,
+		selectionMode: 'row',
+		victory: false,
+		defeat: false,
+	} satisfies CodebreakerState
+}
 
 /**
  * Determines the number of moves the user should be allocated
@@ -15,6 +41,56 @@ export function getInitialRemainingMoves(sequences: Sequence[]): number {
 
 	// Afford them a 25% grace
 	return Math.round(count * 1.25)
+}
+
+/**
+ * Determines whether the given tile is clickable or not.
+ *
+ * @param tile the tile to be scanned
+ * @param moves all moves made thus far
+ * @param selectionMode the current selection constraint
+ */
+export function isTileClickable(
+	tile: Tile,
+	moves: string[],
+	selectionMode: SelectionMode,
+): boolean {
+	if (tile.clicked) return false
+	if (moves.includes(`${tile.yCoord}-${tile.xCoord}`)) return false
+
+	/**
+	 * Derive the last row index and last col index
+	 * from the array of moves the user has made
+	 */
+	const [lastRowIndex, lastColIndex] = moves.length
+		? moves[moves.length - 1].split('-').map(Number)
+		: [0, 0]
+
+	switch (selectionMode) {
+		case 'col':
+			return tile.xCoord === lastColIndex
+		case 'row':
+			return tile.yCoord === lastRowIndex
+	}
+}
+
+/**
+ * Returns the last n hex values that were clicked
+ *
+ * @param board the current board state
+ * @param moves all moves made thus far
+ * @param n number of values to return
+ */
+export function getLastNClickedValues(
+	board: CodebreakerBoard,
+	moves: string[],
+	n: number,
+): string[] {
+	return moves.slice(n * -1).map((moveStr) => {
+		const [yCoord, xCoord] = moveStr.split('-').map(Number)
+
+		return board[yCoord][xCoord].value
+	})
 }
 
 /**
@@ -36,7 +112,7 @@ export function generateBoard(
 	numSeq: number = 3,
 	minSeqLen: number = 2,
 	maxSeqLen: number = 4,
-	numHexValues: number = 7,
+	numHexValues: number = 9,
 ): [Sequence[], CodebreakerBoard, [number, number][]] {
 	// Construct the empty board
 	const emptyBoard = [...new Array(size)].map((row) => [...new Array(size)])
@@ -245,6 +321,30 @@ export function countMatchingElements(
 	}
 
 	return score
+}
+
+/**
+ * returns whether or not the user is victorious
+ * @param sequences all of the victory sequences
+ */
+export function isVictorious(sequences: Sequence[]): boolean {
+	const unsolved = sequences.some((seq) => !seq.solved)
+
+	return !unsolved
+}
+
+/**
+ * returns whether or not the user is defeated
+ * @param remainingMoves how many moves the user has left
+ * @param numMovesAllowed how many moves were allowed during the game
+ * @returns
+ */
+export function isDefeated(
+	remainingMoves: number,
+	numMovesAllowed: number,
+): boolean {
+	// if numMovesAllowed = 0, the game has not started
+	return numMovesAllowed && remainingMoves === 0 ? true : false
 }
 
 const victoryMessages = [
