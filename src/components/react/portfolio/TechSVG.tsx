@@ -1,38 +1,32 @@
-import clsx from 'clsx';
+import clsx from 'clsx'
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
-} from '@/components/shadcn/ui/tooltip';
+} from '@/components/shadcn/ui/tooltip'
 
 export interface TechSVGProps {
 	// path to svg
-	path: string;
+	path: string
 	// title displayed on hover
-	title: string;
+	title: string
 	// whether or not to invert svg color
-	invert?: boolean;
+	invert?: boolean
 	// whether or not to de-invert on hover
-	revert?: boolean;
+	revert?: boolean
 	// whether or not to re-color on hover
-	colorize?: boolean;
+	colorize?: boolean
 }
 
 export function TechSVG(props: TechSVGProps) {
-	const {
-		path,
-		title,
-		invert = true,
-		revert = false,
-		colorize = false,
-	} = props;
+	const { path, title, invert = true, revert = false, colorize = false } = props
 
 	return (
 		<TooltipProvider delayDuration={300}>
 			<Tooltip>
 				<TooltipTrigger name={'show popover'}>
-					<div className="p-2 transition-colors duration-200 ease-in-out hover:bg-neutral-800">
+					<div className="border border-neutral-700 bg-neutral-800/50 p-2 transition-colors duration-200 ease-in-out hover:bg-neutral-700">
 						<img
 							src={path}
 							width="42px"
@@ -51,5 +45,5 @@ export function TechSVG(props: TechSVGProps) {
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>
-	);
+	)
 }
