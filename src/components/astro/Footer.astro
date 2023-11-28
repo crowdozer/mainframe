@@ -1,5 +1,6 @@
 ---
-import Socials from '@/components/astro/Socials.astro';
+import Socials from '@/components/astro/Socials.astro'
+import { TechSVG } from '@/components/react/portfolio/TechSVG'
 ---
 
 <div class="border-t border-neutral-700 p-6 md:h-[300px]">
@@ -19,6 +20,38 @@ import Socials from '@/components/astro/Socials.astro';
 
 				<hr class="mt-2 hidden md:visible" />
 				<p class="mt-4">copyright (c) nobody</p>
+
+				<div class="grid grid-cols-1 lg:gap-4">
+					<div class="my-8">
+						<div class="flex flex-row flex-wrap gap-1">
+							<TechSVG
+								client:idle
+								title="Typescript"
+								path="/icons/typescript-svgrepo-com.svg"
+							/>
+							<TechSVG
+								client:idle
+								title="React"
+								path="/icons/react-svgrepo-com.svg"
+							/>
+							<TechSVG
+								client:idle
+								title="Astro"
+								path="/icons/astro-svgrepo-com.svg"
+							/>
+							<TechSVG
+								client:idle
+								title="Tailwind"
+								path="/icons/tailwind-css-svgrepo-com.svg"
+							/>
+							<TechSVG
+								client:idle
+								title="Vercel"
+								path="/icons/vercel-fill-svgrepo-com.svg"
+							/>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<!-- Right Column -->
