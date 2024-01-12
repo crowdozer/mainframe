@@ -1,0 +1,15 @@
+---
+interface Props {
+	pausable?: boolean
+}
+
+const { pausable = false } = Astro.props
+---
+
+<marquee
+	onmouseover={pausable ? 'this.stop();' : ''}
+	onmouseout={pausable ? 'this.start();' : ''}
+	class="line-clamp-1 whitespace-nowrap"
+>
+	<slot />
+</marquee>

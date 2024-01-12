@@ -1,0 +1,40 @@
+---
+import Marquee from './Marquee.astro'
+
+import QuoteOfTheDay from './QuoteOfTheDay.astro'
+
+const buttonId = Math.random().toString(36)
+---
+
+<header>
+	<div class="space-y-0 bg-neutral-950">
+		<nav>
+			<div class="flex flex-row">
+				<a href="/">home</a>
+				<a href="/blog">blog</a>
+				<a href="/contact">contact</a>
+				<a href="/sitemap">sitemap</a>
+				<button id={buttonId}>wtf</button>
+			</div>
+		</nav>
+		<div class="border border-t-0 border-dotted border-neutral-400">
+			<QuoteOfTheDay />
+		</div>
+	</div>
+</header>
+
+<script define:vars={{ buttonId }}>
+	const button = document.getElementById(buttonId)
+	button.addEventListener('click', function () {
+		window.alert('clicked')
+	})
+</script>
+
+<style>
+	nav button,
+	nav a {
+		@apply grow cursor-pointer border border-r-0  border-neutral-400 bg-neutral-300 px-4 py-2 text-center text-2xl font-extrabold uppercase text-black no-underline last:border-r hover:border-solid hover:bg-neutral-400 hover:text-white  active:bg-neutral-500;
+
+		/* @apply grow cursor-pointer border border-r-0 border-dotted border-neutral-400 bg-transparent px-4 py-2 text-center text-2xl font-extrabold uppercase text-amber-500 no-underline last:border-r  hover:border-solid hover:border-amber-500 hover:bg-amber-500 hover:text-black active:bg-amber-600; */
+	}
+</style>

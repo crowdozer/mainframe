@@ -1,0 +1,63 @@
+---
+import Basic from './Basic.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import Sidebar from '@/components/Sidebar.astro'
+
+interface Props {
+	title?: string
+	header?: boolean
+	footer?: boolean
+}
+
+const { title = '', header = true, footer = true } = Astro.props
+---
+
+<Basic {title}>
+	<!-- mobile warning -->
+	<div class="contents lg:hidden" id="mobile-gate-message">
+		<div class="flex h-screen w-screen flex-col justify-center">
+			<div class="mx-auto max-w-xs space-y-8">
+				<p>best seen on desktop</p>
+				<button
+					id="let-me-in"
+					class="border px-4 py-2 hover:bg-neutral-300 hover:text-black active:bg-neutral-400"
+					>let me in anyway</button
+				>
+			</div>
+		</div>
+	</div>
+
+	<!-- content -->
+	<div class="hidden lg:contents" id="mobile-gate-content">
+		<div class="mx-auto mb-32 mt-64 h-full w-[900px]">
+			<div class="flex h-full flex-col gap-4">
+				{header && <Header />}
+
+				<div class="grow">
+					<div class="grid h-full w-full grid-cols-[3fr_1fr] gap-4">
+						<main class="contents">
+							<slot />
+						</main>
+						<Sidebar />
+					</div>
+				</div>
+
+				{footer && <Footer />}
+			</div>
+		</div>
+	</div>
+</Basic>
+
+<script>
+	;(() => {
+		const btn = document.getElementById('let-me-in')
+		const con = document.getElementById('mobile-gate-content')
+		const msg = document.getElementById('mobile-gate-message')
+
+		btn?.addEventListener('click', function () {
+			msg?.classList.replace('contents', 'hidden')
+			con?.classList.replace('hidden', 'contents')
+		})
+	})()
+</script>

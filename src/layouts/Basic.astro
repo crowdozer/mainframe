@@ -1,0 +1,53 @@
+---
+import '@/styles/globals.css'
+// import Analytics from '@/components/Analytics.astro'
+
+interface Props {
+	title?: string
+	header?: boolean
+	footer?: boolean
+}
+
+const { title = '' } = Astro.props
+const isProd = import.meta.env.MODE === 'production'
+
+const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="coolest corner of the internet 😎" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<!-- favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#603cba" />
+		<meta name="theme-color" content="#131313" />
+
+		<title>{finalTitle}</title>
+		<!-- {isProd && <Analytics {title} />} -->
+	</head>
+
+	<body class="h-screen w-screen">
+		<div class="relative z-[2] h-full overflow-auto">
+			<slot />
+		</div>
+
+		<!-- bg image -->
+		<div
+			class="absolute bottom-0 left-0 right-0 top-0 z-[1] bg-[url(/images/gargantua.webp)] bg-cover bg-center opacity-40"
+		>
+		</div>
+
+		<div
+			class="bg-tile absolute bottom-0 left-0 right-0 top-0 z-[0] bg-[url(/images/dark-bg.jpg)]"
+		>
+		</div>
+	</body>
+</html>

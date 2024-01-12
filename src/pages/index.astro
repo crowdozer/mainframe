@@ -1,215 +1,80 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import Feed from '@/components/astro/Feed.astro'
-import { Chip, Button } from '@/components/react/ui'
+import Card from '@/components/Card.astro'
+import Structured from '@/layouts/Structured.astro'
 ---
 
-<Layout title="hire me 👋">
-	<!-- HERO -->
-	<div class="bg-neutral-900">
-		<Feed>
-			<div class="mx-auto max-w-2xl p-4">
-				<div class="my-8 lg:my-32">
-					<h1>👋 About Me</h1>
-					<div class="mt-8 space-y-8">
-						<p>
-							I love strategy, FPS and roleplaying games. I've dedicated a huge
-							portion of my life to honing my skills, whether it be getting
-							better at my favorite games like Overwatch, or refining my
-							technical skills.
-						</p>
-						<p>
-							I have been building full-stack web apps for 7 years, using
-							Javascript, Typescript, React, and other supporting technologies.
-							I don't know everything, but I try to 😉
-						</p>
-						<p>
-							I excel in taking designs or ideas and transforming them into user
-							facing tools or platforms, but I can also do minor design work.
-						</p>
-						<p class="text-3xl">👩‍💻🎮🎶</p>
-					</div>
-				</div>
+<Structured>
+	<div class="space-y-4">
+		<Card padding="p-4 px-12">
+			<div class="space-y-4">
+				<h1>about me</h1>
+				<p>I have been building full-stack web apps since 2012 🚀</p>
+				<p>
+					I love strategy, FPS and roleplaying games. I've dedicated a huge
+					portion of my life to honing my skills, whether it be getting better
+					at my favorite games like Overwatch, or refining my technical skills.
+				</p>
 			</div>
-		</Feed>
-	</div>
-
-	<!-- PROJECTS -->
-	<div class="bg-neutral-900 pt-16">
-		<div class="mx-auto max-w-2xl p-4 lg:py-16">
-			<h1>🌟 Projects</h1>
-			<div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-1">
-				<!-- Luxorts -->
-				<div class="card">
-					<div class="flex flex-row gap-4">
-						<h2 class="text-lg">
-							Luxorts <span class="text-xs">(2022)</span>
-						</h2>
-						<div class="grow"></div>
-					</div>
-
-					<div class="pl-4 pt-2">
-						<p>
-							Luxury condo marketplace. Allows travellers around the globe to
-							book stays at resorts from top companies such as Wyndham.
-						</p>
-					</div>
-
-					<div class="mt-4">
-						<h2 class="text-sm">
-							code: <span class="ml-2 text-neutral-400">🔐 private</span>
-						</h2>
-						<h2 class="mt-2 text-sm">
-							visit: <a
-								href="https://www.luxorts.com/"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="ml-2">🔗 www.luxorts.com</a
-							>
-						</h2>
-					</div>
-
-					<div class="mt-4 flex flex-row flex-wrap gap-2">
-						<Chip role="none" kind="neutral">NextJS</Chip>
-						<Chip role="none" kind="neutral">Material UI</Chip>
-						<Chip role="none" kind="neutral">Google Cloud</Chip>
-					</div>
-				</div>
-
-				<div class="card">
-					<div class="flex flex-row gap-4">
-						<h2 class="text-lg">
-							Codebeaker <span class="text-xs">(2022)</span>
-						</h2>
-						<div class="grow"></div>
-					</div>
-
-					<div class="pl-4 pt-2">
-						<p>
-							A hacking puzzle game inspired by the Cyberpunk 2077 hacking
-							sequence.
-						</p>
-					</div>
-
-					<div class="mt-4">
-						<h2 class="text-sm">
-							code:
-							<a
-								target="_blank"
-								rel="noopener noreferrer"
-								href="https://github.com/crowdozer/codebreaker"
-								class="ml-2">🔗 public on github</a
-							>
-						</h2>
-
-						<h2 class="mt-2 text-sm">
-							visit: <a
-								href="https://codebreaker-app.vercel.app/"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="ml-2">🔗 codebreaker-app.vercel.app</a
-							>
-						</h2>
-					</div>
-
-					<div class="mt-4 flex flex-row flex-wrap gap-2">
-						<Chip role="none" kind="neutral">Astro</Chip>
-						<Chip role="none" kind="neutral">React</Chip>
-						<Chip role="none" kind="neutral">TailwindCSS</Chip>
-					</div>
-				</div>
-
-				<!-- VMG Portal/Luxorts Portal -->
-				<div class="card">
-					<div class="flex flex-row gap-4">
-						<h2 class="text-lg">
-							Luxorts CMS <span class="text-xs">(2017)</span>
-						</h2>
-						<div class="grow"></div>
-					</div>
-					<div class="pl-4 pt-2">
-						<p>
-							The CMS that powers Luxorts. Contained business specific analytics
-							and administrative tools, as well as resort, reservation, and
-							member management tools.
-						</p>
-					</div>
-					<div class="mt-4">
-						<h2 class="text-sm">
-							code: <span class="ml-2 text-neutral-400">🔐 private</span>
-						</h2>
-						<h2 class="mt-2 text-sm">
-							visit: <span class="ml-2 text-neutral-400">🔐 private</span>
-						</h2>
-					</div>
-					<div class="mt-4 flex flex-row flex-wrap gap-2">
-						<Chip role="none" kind="neutral">PHP</Chip>
-						<Chip role="none" kind="neutral">MySQL</Chip>
-						<Chip role="none" kind="neutral">React</Chip>
-					</div>
-				</div>
-
-				<!-- Call Center Stuff -->
-				<div class="card">
-					<div class="flex flex-row gap-4">
-						<h2 class="text-lg">
-							TST Gateway API <span class="text-xs">(2022)</span>
-						</h2>
-						<div class="grow"></div>
-					</div>
-					<div class="pl-4 pt-2">
-						<p>
-							Supercharged their internal CMS with a highly optomized
-							round-robin for leads distribution, as well as various analytical
-							or managerial functions exposed via API.
-						</p>
-					</div>
-					<div class="mt-4">
-						<h2 class="text-sm">
-							code: <span class="ml-2 text-neutral-400">🔐 private</span>
-						</h2>
-						<h2 class="mt-2 text-sm">
-							visit: <span class="ml-2 text-neutral-400">🔐 private</span>
-						</h2>
-					</div>
-					<div class="mt-4 flex flex-row flex-wrap gap-2">
-						<Chip role="none" kind="neutral">NodeJS</Chip>
-						<Chip role="none" kind="neutral">Express</Chip>
-						<Chip role="none" kind="neutral">Firebase</Chip>
-					</div>
-				</div>
+		</Card>
+		<Card padding="p-4 px-12">
+			<div class="space-y-4">
+				<p>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi
+					recusandae earum excepturi accusamus eligendi et dicta error culpa
+					eius vitae quibusdam, sed atque quaerat quisquam ut corporis quis
+					praesentium commodi.
+				</p>
 			</div>
-		</div>
-	</div>
-
-	<!-- CONTACT -->
-	<div class="py-48">
-		<div class="mx-auto max-w-2xl px-4 lg:px-0">
-			<div class="space-y-16 text-center">
-				<h1>Let's work together</h1>
-				<a href="/contact">
-					<Button
-						classes={{
-							button:
-								'!px-8 !py-4 rounded-lg text-2xl hover:bg-green-500 hover:text-white hover:border-green-600',
-						}}
-					>
-						Schedule a meeting
-					</Button>
-				</a>
+		</Card>
+		<Card padding="p-4 px-12">
+			<div class="space-y-4">
+				<p>
+					Debitis voluptatibus, aliquam dignissimos repellendus maiores tempora
+					beatae nisi eligendi libero reprehenderit similique reiciendis odit
+					maxime eum quas explicabo? Minima dolorem magni quam a quaerat vel
+					iste odio. Nam, laboriosam.
+				</p>
 			</div>
-		</div>
+		</Card>
+		<Card padding="p-4 px-12">
+			<div class="space-y-4">
+				<p>
+					Reiciendis, rerum voluptate? Odit temporibus saepe reprehenderit
+					itaque molestias dolore velit quaerat id. Enim pariatur dicta omnis
+					praesentium nostrum minus, debitis error beatae expedita ducimus id
+					quis, facilis temporibus recusandae!
+				</p>
+			</div>
+		</Card>
+		<Card padding="p-4 px-12">
+			<div class="space-y-4">
+				<p>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi
+					recusandae earum excepturi accusamus eligendi et dicta error culpa
+					eius vitae quibusdam, sed atque quaerat quisquam ut corporis quis
+					praesentium commodi.
+				</p>
+			</div>
+		</Card>
+		<Card padding="p-4 px-12">
+			<div class="space-y-4">
+				<p>
+					Debitis voluptatibus, aliquam dignissimos repellendus maiores tempora
+					beatae nisi eligendi libero reprehenderit similique reiciendis odit
+					maxime eum quas explicabo? Minima dolorem magni quam a quaerat vel
+					iste odio. Nam, laboriosam.
+				</p>
+			</div>
+		</Card>
+		<Card padding="p-4 px-12">
+			<div class="space-y-4">
+				<p>
+					Reiciendis, rerum voluptate? Odit temporibus saepe reprehenderit
+					itaque molestias dolore velit quaerat id. Enim pariatur dicta omnis
+					praesentium nostrum minus, debitis error beatae expedita ducimus id
+					quis, facilis temporibus recusandae!
+				</p>
+			</div>
+		</Card>
 	</div>
-</Layout>
-
-<style>
-	h1 {
-		@apply text-4xl xl:text-6xl;
-	}
-	.card {
-		@apply flex-shrink-0 rounded-xl border border-neutral-800 bg-neutral-800/50 p-4;
-	}
-	.card-green {
-		@apply border-green-800 bg-green-700 text-white;
-	}
-</style>
+</Structured>

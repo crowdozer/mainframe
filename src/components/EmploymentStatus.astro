@@ -1,0 +1,46 @@
+---
+const lfw = false
+---
+
+<div class="space-y-1">
+	{
+		lfw ? (
+			<>
+				<div class=" bg-green-500/10">
+					<span id="lfw-indicator">🟢</span> looking for work
+				</div>
+				<div>⚫ employed</div>
+			</>
+		) : (
+			<>
+				<div>⚫ looking for work</div>
+				<div class=" bg-blue-500/10">
+					<span id="lfw-indicator">🔵</span> employed
+				</div>
+			</>
+		)
+	}
+</div>
+<div class="flex flex-row gap-2">
+	<a href="/contact">contact anyway</a>
+</div>
+
+<script>
+	;(() => {
+		const blinker = document.getElementById('lfw-indicator')
+		if (!blinker) return
+
+		const original = blinker.innerText
+		let state = false
+
+		setInterval(() => {
+			if (state) {
+				blinker.innerText = '⚫'
+			} else {
+				blinker.innerText = original
+			}
+
+			state = !state
+		}, 1000)
+	})()
+</script>
