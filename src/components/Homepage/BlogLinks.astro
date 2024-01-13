@@ -1,5 +1,6 @@
 ---
 import EmojiList from '../EmojiList.astro'
+import ViewMore from '../ViewMore.astro'
 
 const links: [string, string, Date][] = [
 	['Lorem ipsum dolor sit', '/blog/lorem', new Date()],
@@ -34,12 +35,5 @@ const links: [string, string, Date][] = [
 		}
 	</EmojiList>
 
-	<div class="flex flex-row justify-between">
-		<a href="/blog">view more</a>
-		<span>
-			<a href="/rss" class="text-green-500">rss</a>
-			{' • '}
-			<a href="/json" class="text-yellow-500">json</a>
-		</span>
-	</div>
+	<ViewMore urlbase="/blog" rss json text="view 14 more" />
 </div>

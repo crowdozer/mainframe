@@ -17,7 +17,7 @@ body {
 
 /* Links */
 a {
-	@apply inline-block underline transition-colors duration-100 ease-in-out;
+	@apply inline-block underline underline-offset-2 transition-colors duration-100 ease-in-out;
 	@apply visited:text-blue-300;
 	@apply hover:text-blue-500;
 }
