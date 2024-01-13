@@ -1,0 +1,32 @@
+---
+const links: [string, string, Date][] = [
+	['Lorem ipsum dolor sit', '/blog/lorem', new Date()],
+	['Incidunt, iure. Dolor obcaecati', '/blog/lorem', new Date()],
+	['Asperiores cum voluptatem, doloremque', '/blog/lorem', new Date()],
+	['Consequatur neque aliquam esse et amet', '/blog/lorem', new Date()],
+	['Voluptatum dicta esse nesciunt', '/blog/lorem', new Date()],
+	['Omnis nihil minus nam in sunt', '/blog/lorem', new Date()],
+	['Officiis fugiat iure illo', '/blog/lorem', new Date()],
+	['Facilis in ratione blanditiis', '/blog/lorem', new Date()],
+]
+---
+
+<div class="space-y-4">
+	<ul>
+		{
+			links.map(([text, link, date]) => (
+				<li>
+					- <a href={link}>{text}</a> - posted {date.toLocaleString()}
+				</li>
+			))
+		}
+	</ul>
+
+	<p>
+		<a href="/blog">view more</a>
+		{' • '}
+		<a href="/rss">subscribe via rss</a>
+		{' • '}
+		<a href="/json">subscribe via json</a>
+	</p>
+</div>

@@ -1,0 +1,43 @@
+---
+import getQuote from '@/lib/quote'
+import Marquee from '../Marquee.astro'
+
+const quote = getQuote()
+---
+
+<Marquee>
+	<b>✨ Quote of the Day ✨</b>
+	{' '}
+	<i>{quote}</i>
+	<div aria-hidden="true" class="contents">
+		{' '}
+		<b>✨ Quote of the Day ✨</b>
+		{' '}
+		<i>{quote}</i>
+		{' '}
+		<b>✨ Quote of the Day ✨</b>
+		{' '}
+		<i>{quote}</i>
+		{' '}
+		<b>✨ Quote of the Day ✨</b>
+		{' '}
+		<i>{quote}</i>
+		{' '}
+		<b>✨ Quote of the Day ✨</b>
+		{' '}
+		<i>{quote}</i>
+		{' '}
+		<b>✨ Quote of the Day ✨</b>
+		{' '}
+		<i>{quote}</i>
+		{' '}
+		<b>✨ Quote of the Day ✨</b>
+		{' '}
+		<i>{quote}</i>
+		{' '}
+		<b>✨ Quote of the Day ✨</b>
+		{' '}
+		<i>{quote}</i>
+		{' '}
+	</div>
+</Marquee>
