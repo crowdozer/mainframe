@@ -1,30 +1,33 @@
 ---
-import Icon from 'astro-icon'
 import Card from '../Card.astro'
 import EmploymentStatus from '@/components/Homepage/EmploymentStatus.astro'
+import SidebarNews from '@/components/LayoutHelpers/SidebarNews.astro'
+import SidebarChangelog from '@/components/LayoutHelpers/SidebarChangelog.astro'
+import { STATUS_EMOJI, STATUS_TEXT } from '@/content'
 ---
 
 <Card>
 	<div class="space-y-2">
-		<h5>💵 hire me</h5>
+		<h5>{STATUS_EMOJI} status</h5>
+		<p>{STATUS_TEXT}</p>
+	</div>
+</Card>
+<Card>
+	<div class="space-y-2">
+		<h5>🔖 conscript me</h5>
 		<EmploymentStatus />
 	</div>
 </Card>
 <Card>
 	<div class="space-y-2">
 		<h5>📰 news</h5>
-		<ul>
-			<li>asdfasd fasdf</li>
-			<li>asdfasd fasdf</li>
-			<li>asdfasd fasdf</li>
-			<li>asdfasd fasdf</li>
-		</ul>
+		<SidebarNews />
 	</div>
 </Card>
 <Card>
 	<div class="space-y-2">
-		<h5><Icon name="mdi:bell" width="2rem" class="inline-block" /> status</h5>
-		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+		<h5>📈 changelog</h5>
+		<SidebarChangelog />
 	</div>
 </Card>
 <Card>
@@ -32,4 +35,12 @@ import EmploymentStatus from '@/components/Homepage/EmploymentStatus.astro'
 		<h5>🎶 now playing</h5>
 		<p>Dicta, deserunt facilis</p>
 	</div>
+</Card>
+<Card>
+	<img
+		src="/images/son-goku-wave.gif"
+		alt="son goku waving goodbye"
+		loading="lazy"
+		class="max-h-[120px] w-full object-cover"
+	/>
 </Card>

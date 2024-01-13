@@ -15,3 +15,4 @@ My personal site. You can take whatever you want from it.
 
 - Multiplayer Typing Test
 - Multiplayer Cursors
+- Use retro chat SFX or retro SFX in general.
