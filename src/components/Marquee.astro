@@ -4,12 +4,26 @@ interface Props {
 }
 
 const { pausable = false } = Astro.props
+
+const id = Math.random().toString(36)
 ---
 
-<marquee
-	onmouseover={pausable ? 'this.stop();' : ''}
-	onmouseout={pausable ? 'this.start();' : ''}
-	class="line-clamp-1 whitespace-nowrap"
->
+<marquee {id} class="line-clamp-1 whitespace-nowrap">
 	<slot />
 </marquee>
+
+<script define:vars={{ pausable, id }}>
+	;(() => {
+		const marquee = document.getElementById(id)
+
+		if (pausable) {
+			marquee.addEventListener('mouseenter', function () {
+				marquee.stop()
+			})
+
+			marquee.addEventListener('mouseleave', function () {
+				marquee.start()
+			})
+		}
+	})()
+</script>

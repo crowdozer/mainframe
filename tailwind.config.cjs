@@ -8,7 +8,7 @@ module.exports = {
 		'./app/**/*.{ts,tsx}',
 		'./src/**/*.{ts,tsx}',
 	],
-	safelist: ['contents', 'hidden'],
+	safelist: ['contents', 'hidden', 'overflow-y-hidden'],
 	theme: {},
 	plugins: [require('tailwindcss-animate')],
 }

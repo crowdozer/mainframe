@@ -13,9 +13,6 @@
     "@astrojs/react": "^3.0.0",
     "@astrojs/tailwind": "^5.0.0",
     "@codemirror/lang-json": "^6.0.1",
-    "@radix-ui/react-popover": "^1.0.6",
-    "@radix-ui/react-slot": "^1.0.2",
-    "@radix-ui/react-tooltip": "^1.0.6",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@uiw/codemirror-theme-monokai": "^4.21.18",
@@ -29,7 +26,6 @@
     "lucide-react": "^0.274.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "svelte": "^4.2.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.7"

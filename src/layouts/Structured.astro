@@ -1,8 +1,8 @@
 ---
 import Basic from './Basic.astro'
-import Header from '@/components/Header.astro'
-import Footer from '@/components/Footer.astro'
-import Sidebar from '@/components/Sidebar.astro'
+import Header from '@/components/LayoutHelpers/Header.astro'
+import Footer from '@/components/LayoutHelpers/Footer.astro'
+import Sidebar from '@/components/LayoutHelpers/Sidebar.astro'
 
 interface Props {
 	title?: string
@@ -30,12 +30,14 @@ const { title = '', header = true, footer = true } = Astro.props
 
 	<!-- content -->
 	<div class="hidden lg:contents" id="mobile-gate-content">
-		<div class="mx-auto mb-32 mt-64 h-full w-[900px]">
+		<div class="mx-auto h-full max-w-[900px] lg:mb-32 lg:mt-64">
 			<div class="flex h-full flex-col gap-4">
 				{header && <Header />}
 
 				<div class="grow">
-					<div class="grid h-full w-full grid-cols-[3fr_1fr] gap-4">
+					<div
+						class="grid h-full w-full gap-4 px-2 lg:grid-cols-[3fr_1fr] lg:px-0"
+					>
 						<main class="contents">
 							<slot />
 						</main>
@@ -61,3 +63,10 @@ const { title = '', header = true, footer = true } = Astro.props
 		})
 	})()
 </script>
+
+<style>
+	/** sidebar hack to get rid of scrolling on mobile */
+	body:has(#sidebar[data-open='1']) {
+		@apply h-full overflow-y-hidden lg:h-screen lg:overflow-y-auto;
+	}
+</style>
