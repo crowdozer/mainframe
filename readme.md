@@ -2,7 +2,6 @@ My personal site. You can take whatever you want from it.
 
 # Needed infrastructure
 
-- Analytics
 - Firebase integ
 - Error reporting
 
