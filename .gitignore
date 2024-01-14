@@ -23,5 +23,8 @@ pnpm-debug.log*
 # might have an old src for reference
 src-old/
 
+/public/downloads/*
+!/public/downloads/.gitkeep
+
 # lighthouse 
 .lighthouseci/ 
