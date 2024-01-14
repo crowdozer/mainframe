@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # might have an old src for reference
 src-old/
+
+# lighthouse 
+.lighthouseci/ 
