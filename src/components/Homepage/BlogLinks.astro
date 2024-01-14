@@ -1,9 +1,16 @@
 ---
+import EmojiList from '../EmojiList.astro'
+import ViewMore from '../ViewMore.astro'
+
 const links: [string, string, Date][] = [
 	['Lorem ipsum dolor sit', '/blog/lorem', new Date()],
 	['Incidunt, iure. Dolor obcaecati', '/blog/lorem', new Date()],
 	['Asperiores cum voluptatem, doloremque', '/blog/lorem', new Date()],
-	['Consequatur neque aliquam esse et amet', '/blog/lorem', new Date()],
+	[
+		'Consequatur neque aliquam esse et amet. This one is super duper extra long! asdfpasdjfna aspdfjna spdaf asdf ajsondfp',
+		'/blog/lorem',
+		new Date(),
+	],
 	['Voluptatum dicta esse nesciunt', '/blog/lorem', new Date()],
 	['Omnis nihil minus nam in sunt', '/blog/lorem', new Date()],
 	['Officiis fugiat iure illo', '/blog/lorem', new Date()],
@@ -12,21 +19,21 @@ const links: [string, string, Date][] = [
 ---
 
 <div class="space-y-4">
-	<ul>
+	<EmojiList emoji="✏️">
 		{
 			links.map(([text, link, date]) => (
 				<li>
-					- <a href={link}>{text}</a> - posted {date.toLocaleString()}
+					<a class="inline" href={link}>
+						{text}
+					</a>
+					<span class="inline text-neutral-400">
+						{' @ '}
+						{date.toLocaleString()}
+					</span>
 				</li>
 			))
 		}
-	</ul>
+	</EmojiList>
 
-	<p>
-		<a href="/blog">view more</a>
-		{' • '}
-		<a href="/rss">subscribe via rss</a>
-		{' • '}
-		<a href="/json">subscribe via json</a>
-	</p>
+	<ViewMore urlbase="/blog" rss json text="view 14 more" />
 </div>

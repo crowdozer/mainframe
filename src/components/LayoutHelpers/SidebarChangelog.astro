@@ -1,0 +1,12 @@
+---
+import EmojiList from '../EmojiList.astro'
+import ViewMore from '../ViewMore.astro'
+---
+
+<EmojiList emoji="🔧">
+	<li><a href="/git/1" class="inline text-ellipsis">2024 01 01</a></li>
+	<li><a href="/git/2" class="inline text-ellipsis">2023 12 31</a></li>
+	<li><a href="/git/3" class="inline text-ellipsis">2023 12 30</a></li>
+</EmojiList>
+
+<ViewMore urlbase="/git" rss json text="view 12 more" />

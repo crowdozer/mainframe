@@ -6,7 +6,7 @@
 html,
 body {
 	@apply bg-black font-mono text-white;
-	font-size: 14px;
+	font-size: 12px;
 }
 :root {
 	color-scheme: dark;
@@ -17,7 +17,9 @@ body {
 
 /* Links */
 a {
-	@apply inline-block underline transition-colors duration-100 ease-in-out hover:text-orange-500;
+	@apply inline-block underline underline-offset-2 transition-colors duration-100 ease-in-out;
+	@apply visited:text-blue-300;
+	@apply hover:text-blue-500;
 }
 a * {
 	cursor: pointer;

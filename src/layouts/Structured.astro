@@ -30,18 +30,16 @@ const { title = '', header = true, footer = true } = Astro.props
 
 	<!-- content -->
 	<div class="hidden lg:contents" id="mobile-gate-content">
-		<div class="mx-auto h-full max-w-[900px] lg:mb-32 lg:mt-64">
-			<div class="flex h-full flex-col gap-4">
+		<div class="mx-auto max-w-[900px] bg-neutral-950 lg:mb-32 lg:mt-64">
+			<div class="flex h-full flex-col">
 				{header && <Header />}
 
-				<div class="grow">
-					<div
-						class="grid h-full w-full gap-4 px-2 lg:grid-cols-[3fr_1fr] lg:px-0"
-					>
+				<div class="grow border border-t-0 border-dotted border-neutral-400">
+					<div class="grid h-full w-full gap-4 p-2 lg:grid-cols-[1fr_3fr]">
+						<Sidebar />
 						<main class="contents">
 							<slot />
 						</main>
-						<Sidebar />
 					</div>
 				</div>
 

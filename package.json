@@ -19,6 +19,7 @@
     "@uiw/codemirror-theme-monokai": "^4.21.18",
     "@uiw/react-codemirror": "^4.21.18",
     "astro": "^3.0.7",
+    "astro-compressor": "^0.4.1",
     "astro-icon": "^0.8.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

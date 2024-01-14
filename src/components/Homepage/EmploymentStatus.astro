@@ -1,13 +1,13 @@
 ---
-const lfw = false
+const lfw = 0
 ---
 
 <div class="space-y-1">
 	{
 		lfw ? (
 			<>
-				<div class=" bg-green-500/10">
-					<span id="lfw-indicator">🟢</span> looking for work
+				<div class=" bg-yellow-500/10">
+					<span id="lfw-indicator">🟡</span> looking for work
 				</div>
 				<div>⚫ employed</div>
 			</>
@@ -21,9 +21,8 @@ const lfw = false
 		)
 	}
 </div>
-<div class="flex flex-row gap-2">
-	<a href="/contact">contact anyway</a>
-</div>
+
+<a href="/contact">contact anyway</a>
 
 <script>
 	;(() => {

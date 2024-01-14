@@ -1,0 +1,37 @@
+---
+import clsx from 'clsx'
+
+interface Props {
+	emoji: string
+	ulClasses?: string
+}
+
+const { emoji, ulClasses = '' } = Astro.props
+
+// generate a random ID so we can do some scoped css
+const id = `emoji-list-${crypto.randomUUID()}`
+---
+
+<ul {id} class={clsx(id, ulClasses)}>
+	<slot />
+</ul>
+
+<script define:vars={{ emoji, id }}>
+	;(() => {
+		// we can't target these easily with the tools astro provides
+		// so hack in some custom css scoped to this component
+		const items = document.querySelectorAll(`ul#${id} li`)
+
+		items.forEach((item) => {
+			item.classList.add(`emoji-list-${id}-li`)
+		})
+
+		var styleElem = document.head.appendChild(document.createElement('style'))
+		styleElem.innerHTML = `
+            ul#${id} li::before {
+                content: "${emoji}";
+                margin-right: 0.5rem;
+            }
+        `
+	})()
+</script>

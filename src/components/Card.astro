@@ -3,15 +3,14 @@ import clsx from 'clsx'
 
 interface Props {
 	padding?: string
+	classes?: string
 }
 
-const { padding = 'p-2 px-3' } = Astro.props
+const { padding = 'p-2 px-3', classes = '' } = Astro.props
 ---
 
-<div class="relative border border-dotted border-neutral-400">
-	<div class="absolute bottom-0 left-0 right-0 top-0 z-[0] bg-neutral-950/75">
-	</div>
-	<div class={clsx('relative z-[1]', padding)}>
+<div class={clsx('relative border border-dotted border-neutral-400', classes)}>
+	<div class={clsx('relative', padding)}>
 		<slot />
 	</div>
 </div>
