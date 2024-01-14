@@ -20,7 +20,7 @@ import { Icon } from 'astro-icon'
 <!-- the sidebar itself -->
 <aside
 	id="sidebar"
-	class="fixed bottom-0 left-0 right-0 top-0 z-[999] bg-neutral-950 p-2 lg:contents lg:p-0"
+	class="fixed bottom-0 left-0 right-0 top-0 z-[999] bg-neutral-900 p-2 lg:contents lg:bg-neutral-950 lg:p-0"
 	data-open="0"
 >
 	<!-- give the button a dedicated slot at the bottom -->
@@ -65,20 +65,24 @@ import { Icon } from 'astro-icon'
 
 		if (state === '0') {
 			sidebar?.setAttribute('data-open', '1')
-			document.body.classList.add('overflow-y-hidden')
 		} else {
 			sidebar?.setAttribute('data-open', '0')
-			document.body.classList.remove('overflow-y-hidden')
 		}
 	})
 </script>
 
 <style>
+	#sidebar {
+		transition: transform 0.3s ease-in-out;
+	}
+
 	#sidebar[data-open='0'] {
-		@apply hidden lg:contents;
+		/* Start with the sidebar off-screen */
+		transform: translateX(100%);
 	}
 	#sidebar[data-open='1'] {
-		@apply block lg:contents;
+		/* Slide in when open */
+		transform: translateX(0%);
 	}
 	#btn-open-sidebar {
 		transform-origin: 100% 0;
