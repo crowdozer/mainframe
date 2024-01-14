@@ -39,8 +39,6 @@ const id = `emoji-list-${crypto.randomUUID()}`
 			// so hack in some custom css scoped to this component
 			const items = document.querySelectorAll(`#${id} ul li`)
 
-			console.log(items)
-
 			items.forEach((item) => {
 				item.classList.add(`emoji-list-${id}-li`)
 			})
