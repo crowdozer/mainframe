@@ -3,7 +3,14 @@ import ytdl from 'ytdl-core'
 
 export const prerender = false
 
+/**
+ * youtube video downloading api
+ * expects url to be set in formdata
+ */
 export const POST: APIRoute = async ({ request }) => {
+	/**
+	 * get and validate the url
+	 */
 	const data = await request.formData()
 	const url = (data.get('url') || '') as string
 	if (!url || !ytdl.validateURL(url)) {
@@ -12,6 +19,9 @@ export const POST: APIRoute = async ({ request }) => {
 		})
 	}
 
+	/**
+	 * now begin to stream the video to the client
+	 */
 	try {
 		// it needs to be in this stream format
 		const stream = new ReadableStream({
@@ -27,9 +37,6 @@ export const POST: APIRoute = async ({ request }) => {
 				videoStream.on('error', (error) => {
 					controller.error(error)
 				})
-			},
-			cancel() {
-				console.log('cancelled')
 			},
 		})
 
