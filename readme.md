@@ -1,11 +1,22 @@
 My personal site. You can take whatever you want from it.
 
+# Needed infrastructure
+
+- Analytics
+- Firebase integ
+- Error reporting
+
 # Needed Components
 
 - A marquee that properly cycles infinitely
 - Chat
 - Blog
 - Spotify
+
+# Needed Utils
+
+- Rate limit
+  - ytdl api
 
 # Needed QOL / Bugfixes
 
