@@ -1,9 +1,10 @@
 ---
-import Card from '../Card.astro'
-import EmploymentStatus from '@/components/Homepage/EmploymentStatus.astro'
-import SidebarNews from '@/components/LayoutHelpers/SidebarNews.astro'
-import SidebarChangelog from '@/components/LayoutHelpers/SidebarChangelog.astro'
 import { STATUS_EMOJI, STATUS_TEXT } from '@/content'
+import Card from '@c/Card.astro'
+import EmploymentStatus from '@c/Homepage/EmploymentStatus.astro'
+import SidebarNews from './SidebarNews.astro'
+import SidebarChangelog from './SidebarChangelog.astro'
+import YTDownloader from './YTDownloader.astro'
 ---
 
 <Card>
@@ -34,6 +35,12 @@ import { STATUS_EMOJI, STATUS_TEXT } from '@/content'
 	<div class="space-y-2">
 		<h5>🎶 now playing</h5>
 		<p>Dicta, deserunt facilis</p>
+	</div>
+</Card>
+<Card>
+	<div class="space-y-2">
+		<h5>⏬ yt downloader</h5>
+		<YTDownloader />
 	</div>
 </Card>
 <Card>

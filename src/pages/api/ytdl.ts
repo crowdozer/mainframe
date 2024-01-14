@@ -1,8 +1,11 @@
 import type { APIRoute } from 'astro'
 import ytdl from 'ytdl-core'
 
-export const GET: APIRoute = async ({ request }) => {
-	const url = new URL(request.url).searchParams.get('url')
+export const prerender = false
+
+export const POST: APIRoute = async ({ request }) => {
+	const data = await request.formData()
+	const url = (data.get('url') || '') as string
 	if (!url || !ytdl.validateURL(url)) {
 		return new Response(JSON.stringify({ error: 'Invalid URL' }), {
 			status: 400,

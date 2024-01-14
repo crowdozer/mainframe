@@ -1,0 +1,48 @@
+---
+
+---
+
+<form id="yt-download-form" action="/ytdl" method="post">
+	<input
+		name="url"
+		placeholder="https://www.youtube.com/watch?v=a5ITNmnS680"
+		class="w-full border border-neutral-400 bg-transparent px-4 py-2"
+	/>
+</form>
+
+<script>
+	const form = document.getElementById('yt-download-form') as HTMLFormElement
+
+	form.addEventListener('submit', handleYTDownload)
+
+	async function handleYTDownload(event: any) {
+		// stop form submission from trying to nav
+		event.preventDefault()
+
+		try {
+			const response = await fetch('/api/ytdl', {
+				method: 'POST',
+				body: new FormData(form),
+			})
+
+			if (!response.ok) {
+				throw new Error('Network response was not ok')
+			}
+
+			// Assuming the response is a stream of the video file
+			const blob = await response.blob()
+			const downloadUrl = window.URL.createObjectURL(blob)
+
+			// Create a temporary anchor element to trigger download
+			const a = document.createElement('a')
+			a.href = downloadUrl
+			a.download = 'video.mp4'
+			document.body.appendChild(a)
+			a.click()
+			window.URL.revokeObjectURL(downloadUrl)
+			document.body.removeChild(a)
+		} catch (error) {
+			console.error('Fetch error: ', error)
+		}
+	}
+</script>
