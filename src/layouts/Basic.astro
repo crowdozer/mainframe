@@ -1,6 +1,6 @@
 ---
 import '@/styles/globals.css'
-// import Analytics from '@c/Analytics.astro'
+import Analytics from '@c/Analytics.astro'
 
 interface Props {
 	title?: string
@@ -31,7 +31,6 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 		<meta name="theme-color" content="#131313" />
 
 		<title>{finalTitle}</title>
-		<!-- {isProd && <Analytics {title} />} -->
 	</head>
 
 	<body class="h-screen w-screen">
@@ -49,5 +48,7 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 			class="bg-tile absolute bottom-0 left-0 right-0 top-0 z-[0] bg-[url(/images/dark-bg.jpg)]"
 		>
 		</div>
+
+		{isProd && <Analytics {title} />}
 	</body>
 </html>
