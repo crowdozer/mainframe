@@ -1,75 +1,12 @@
----
-
----
-
-<form id="yt-download-form" action="/ytdl" method="post">
+<form id="yt-download-form" target="_blank" action="/api/ytdl" method="post">
 	<input
 		name="url"
 		placeholder="https://www.youtube.com/watch?v=a5ITNmnS680"
 		class="w-full border border-neutral-400 bg-transparent px-4 py-2"
 	/>
+	<div class="flex flex-row justify-end">
+		<button type="submit" class="rounded px-2 hover:bg-neutral-800"
+			>download</button
+		>
+	</div>
 </form>
-
-<script>
-	const form = document.getElementById('yt-download-form') as HTMLFormElement
-	const input = form.querySelector('input') as HTMLInputElement
-
-	/**
-	 * keep the page lightweight by appending scripts
-	 * and polyfills only when the user shows interest
-	 */
-	let streamSaverLoaded = false
-	input.addEventListener('focus', function () {
-		if (streamSaverLoaded) return
-		prepareStreamPolyfill()
-		prepareStreamSaver()
-		streamSaverLoaded = true
-	})
-
-	function prepareStreamSaver() {
-		const script = document.createElement('script')
-		script.src = 'https://cdn.jsdelivr.net/npm/streamsaver@2.0.6/StreamSaver.min.js' // prettier-ignore
-		document.body.appendChild(script)
-	}
-
-	function prepareStreamPolyfill() {
-		const script = document.createElement('script')
-		script.src = 'https://cdn.jsdelivr.net/npm/web-streams-polyfill@2.0.2/dist/ponyfill.min.js' // prettier-ignore
-		document.body.appendChild(script)
-	}
-
-	/**
-	 * begin form submission intercept + download
-	 */
-	form.addEventListener('submit', async function (event) {
-		// stop form submission from trying to nav
-		event.preventDefault()
-
-		// @ts-ignore
-		const ss = window.streamSaver
-		if (!ss) {
-			return window.alert('streaming script not prepared')
-		}
-
-		try {
-			const response = await fetch('/api/ytdl', {
-				method: 'POST',
-				body: new FormData(form),
-			})
-
-			if (!response.ok || !response.body) {
-				throw new Error('Network response was not ok')
-			}
-
-			const fileStream = ss.createWriteStream('video.mp4')
-			return response.body.pipeTo(fileStream).catch((error) => {
-				console.error(error)
-				window.alert(
-					'download failed, view your developer console for more details',
-				)
-			})
-		} catch (error) {
-			console.error('Fetch error: ', error)
-		}
-	})
-</script>

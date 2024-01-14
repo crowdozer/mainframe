@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro'
 import ytdl from 'ytdl-core'
 
+const ENABLED = true
+
 export const prerender = false
 
 /**
@@ -8,48 +10,53 @@ export const prerender = false
  * expects url to be set in formdata
  */
 export const POST: APIRoute = async ({ request }) => {
-	return new Response(null, { status: 401 })
-	// /**
-	//  * get and validate the url
-	//  */
-	// const data = await request.formData()
-	// const url = (data.get('url') || '') as string
-	// if (!url || !ytdl.validateURL(url)) {
-	// 	return new Response(JSON.stringify({ error: 'Invalid URL' }), {
-	// 		status: 400,
-	// 	})
-	// }
+	if (!ENABLED) {
+		return new Response(null, { status: 401 })
+	}
 
-	// /**
-	//  * now begin to stream the video to the client
-	//  */
-	// try {
-	// 	// it needs to be in this stream format
-	// 	const stream = new ReadableStream({
-	// 		start(controller) {
-	// 			// Stream the video directly to the client
-	// 			const videoStream = ytdl(url)
-	// 			videoStream.on('data', (chunk) => {
-	// 				controller.enqueue(chunk)
-	// 			})
-	// 			videoStream.on('end', () => {
-	// 				controller.close()
-	// 			})
-	// 			videoStream.on('error', (error) => {
-	// 				controller.error(error)
-	// 			})
-	// 		},
-	// 	})
+	/**
+	 * get and validate the url
+	 */
+	const data = await request.formData()
+	const url = (data.get('url') || '') as string
+	if (!url || !ytdl.validateURL(url)) {
+		return new Response(JSON.stringify({ error: 'Invalid URL' }), {
+			status: 400,
+		})
+	}
 
-	// 	return new Response(stream, {
-	// 		headers: {
-	// 			'Content-Type': 'video/mp4',
-	// 			'Content-Disposition': 'attachment; filename="download.mp4"',
-	// 		},
-	// 	})
-	// } catch (error) {
-	// 	return new Response(JSON.stringify({ error: 'Error downloading video' }), {
-	// 		status: 500,
-	// 	})
-	// }
+	/**
+	 * now begin to stream the video to the client
+	 */
+	try {
+		// Stream the video directly to the client
+		const videoStream = ytdl(url)
+
+		// it needs to be in this stream format, bc serverless
+		// won't allow us to send a Readable directly
+		const stream = new ReadableStream({
+			start(controller) {
+				videoStream.on('data', (chunk) => {
+					controller.enqueue(chunk)
+				})
+				videoStream.on('end', () => {
+					controller.close()
+				})
+				videoStream.on('error', (error) => {
+					controller.error(error)
+				})
+			},
+		})
+
+		return new Response(stream, {
+			headers: {
+				'Content-Type': 'video/mp4',
+				'Content-Disposition': 'attachment; filename="download.mp4"',
+			},
+		})
+	} catch (error) {
+		return new Response(JSON.stringify({ error: 'Error downloading video' }), {
+			status: 500,
+		})
+	}
 }
