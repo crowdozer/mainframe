@@ -12,26 +12,26 @@ const { emoji, ulClasses = '' } = Astro.props
 const id = `emoji-list-${crypto.randomUUID()}`
 ---
 
-<ul {id} class={clsx(id, ulClasses)}>
-	<slot />
-</ul>
+<emoji-list data-emoji={emoji} data-id={id}>
+	<ul {id} class={clsx(id, ulClasses)}>
+		<slot />
+	</ul>
+</emoji-list>
 
-<script define:vars={{ emoji, id }}>
-	;(() => {
-		// we can't target these easily with the tools astro provides
-		// so hack in some custom css scoped to this component
-		const items = document.querySelectorAll(`ul#${id} li`)
+<script>
+	import connect from './EmojiList'
 
-		items.forEach((item) => {
-			item.classList.add(`emoji-list-${id}-li`)
-		})
+	class EmojiList extends HTMLElement {
+		constructor() {
+			super()
 
-		var styleElem = document.head.appendChild(document.createElement('style'))
-		styleElem.innerHTML = `
-            ul#${id} li::before {
-                content: "${emoji}";
-                margin-right: 0.5rem;
-            }
-        `
-	})()
+			const emoji = this.dataset.emoji
+			const id = this.dataset.id
+			if (id && emoji) {
+				connect(id, emoji)
+			}
+		}
+	}
+
+	customElements.define('emoji-list', EmojiList)
 </script>
