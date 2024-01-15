@@ -8,22 +8,44 @@ const { pausable = false } = Astro.props
 const id = Math.random().toString(36)
 ---
 
-<marquee {id} class="line-clamp-1 whitespace-nowrap">
-	<slot />
-</marquee>
+<custom-marquee data-id={id} data-pausable={pausable}>
+	<marquee class="line-clamp-1 whitespace-nowrap">
+		<slot />
+	</marquee>
+</custom-marquee>
 
-<script define:vars={{ pausable, id }}>
-	;(() => {
-		const marquee = document.getElementById(id)
+<script>
+	class CustomMarquee extends HTMLElement {
+		constructor() {
+			super()
 
-		if (pausable) {
-			marquee.addEventListener('mouseenter', function () {
-				marquee.stop()
-			})
+			const id = this.dataset.id
+			const pausable = this.dataset.pausable === 'true'
 
-			marquee.addEventListener('mouseleave', function () {
-				marquee.start()
-			})
+			if (!id) {
+				console.error('no id found')
+				return
+			}
+
+			const marquee = this.querySelector('marquee')
+			if (!marquee) {
+				console.error('no marquee element found')
+				return
+			}
+
+			if (pausable) {
+				marquee.addEventListener('mouseenter', function () {
+					// @ts-ignore
+					marquee.stop()
+				})
+
+				marquee.addEventListener('mouseleave', function () {
+					// @ts-ignore
+					marquee.start()
+				})
+			}
 		}
-	})()
+	}
+
+	customElements.define('custom-marquee', CustomMarquee)
 </script>

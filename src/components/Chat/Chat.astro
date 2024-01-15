@@ -1,0 +1,42 @@
+---
+import colors from 'tailwindcss/colors'
+import Message, { type Props as TMessage } from './Message.astro'
+
+const messages: TMessage[] = [
+	{
+		username: 'crowdozer',
+		date: new Date(),
+		color: colors.red['500'],
+		message:
+			'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt odit consequuntur modi architecto sequi rerum, eius quis, delectus obcaecati repellendus quo quae. Repellat, nemo perspiciatis. Pariatur quia vel sint ad.',
+	},
+	{
+		username: 'user65345634',
+		date: new Date(),
+		message:
+			'Enim porro quaerat cum magnam voluptatibus exercitationem mollitia',
+	},
+	{
+		username: 'user1513412',
+		date: new Date(),
+		message:
+			'Eaque amet autem facilis perspiciatis distinctio voluptate, dolore tenetur vel praesentium quas laborum expedita similique',
+	},
+	{
+		username: 'system@crwdzr.io',
+		date: new Date(),
+		color: colors.blue['500'],
+		message:
+			"If it's not obvious, the website is still under construction and probably doesn't work.",
+	},
+]
+---
+
+<div class="space-y-0">
+	{messages.map((msg) => <Message {...msg} />)}
+</div>
+
+<div class="flex flex-row gap-2">
+	<input placeholder="please refer to the ID10-T manual" class="input grow" />
+	<button type="submit" class="button"> send</button>
+</div>

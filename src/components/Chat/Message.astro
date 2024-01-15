@@ -1,0 +1,27 @@
+---
+import colors from 'tailwindcss/colors'
+
+export interface Props {
+	date: Date
+	username: string
+	color?: string
+	message: string
+}
+
+const { date, username, message, color = colors.green['500'] } = Astro.props
+---
+
+<div>
+	<span>
+		<span class="text-neutral-ui-highlight" title={date.toLocaleString()}>
+			{date.toLocaleTimeString()}
+		</span>
+	</span>
+
+	<span>
+		{'<'}<span class="font-bold" style={{ color }}>{username}</span>{'>'}
+	</span>
+	<span class="text-neutral-ui-highlight">
+		{message}
+	</span>
+</div>

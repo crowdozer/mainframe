@@ -5,10 +5,17 @@ const buttonId = Math.random().toString(36)
 ---
 
 <header
-	class="space-y-0 border-b border-dashed border-neutral-400 bg-neutral-950"
+	class="space-y-0 border-b border-dashed border-neutral-ui-highlight bg-neutral-dark"
 >
+	<img
+		src="/images/naruto-gif-de-navelya-visite-pandatoryu.gif"
+		class="h-[100px] w-full object-cover lg:h-[200px]"
+		alt="naruto turning and looking at the camera"
+		loading="lazy"
+	/>
+
 	<nav class="max-w-[100vw] overflow-x-auto">
-		<div class="flex w-[900px] flex-row">
+		<div class="flex w-[900px] flex-row lg:w-full">
 			<a href="/">home</a>
 			<a href="/blog">blog</a>
 			<a href="/contact">contact</a>
@@ -16,9 +23,7 @@ const buttonId = Math.random().toString(36)
 			<button id={buttonId}>wtf</button>
 		</div>
 	</nav>
-	<div class="border-l border-r border-dotted border-neutral-400">
-		<QuoteOfTheDay />
-	</div>
+	<QuoteOfTheDay />
 </header>
 
 <script define:vars={{ buttonId }}>
@@ -31,15 +36,18 @@ const buttonId = Math.random().toString(36)
 <style>
 	nav button,
 	nav a {
-		@apply grow cursor-pointer border border-r-0  border-neutral-400 bg-neutral-300 px-4 py-2 text-center text-2xl font-extrabold uppercase text-black no-underline;
-		@apply first:border-l-0 last:border-r-0;
-		@apply hover:border-solid hover:bg-neutral-400 hover:text-white;
+		/* base styles */
+		@apply grow cursor-pointer bg-neutral-300 px-4 py-2;
+		@apply text-center text-2xl font-extrabold uppercase text-black no-underline;
+		/* @apply inline-block underline underline-offset-2; */
+
+		/* hover state */
+		@apply hover:bg-neutral-400;
+
+		/* focus state */
+		@apply focus:border-none focus:bg-neutral-400  focus-visible:outline-none;
+
+		/* active state (user press) */
 		@apply active:bg-neutral-500;
-	}
-	nav {
-		scrollbar-width: none; /* Firefox */
-	}
-	nav::-webkit-scrollbar {
-		display: none; /* Safari and Chrome */
 	}
 </style>

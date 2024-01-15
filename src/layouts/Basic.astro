@@ -1,6 +1,5 @@
 ---
 import '@/styles/globals.css'
-import Analytics from '@c/Analytics.astro'
 
 interface Props {
 	title?: string
@@ -9,8 +8,6 @@ interface Props {
 }
 
 const { title = '' } = Astro.props
-const isProd = import.meta.env.MODE === 'production'
-
 const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 ---
 
@@ -40,7 +37,7 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 
 		<!-- bg image -->
 		<div
-			class="absolute bottom-0 left-0 right-0 top-0 z-[1] bg-[url(/images/gargantua.webp)] bg-cover bg-center opacity-25"
+			class="absolute bottom-0 left-0 right-0 top-0 z-[1] bg-[url(/images/gargantua.webp)] bg-cover bg-center opacity-25 invert"
 		>
 		</div>
 
@@ -49,6 +46,6 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 		>
 		</div>
 
-		{isProd && <Analytics {title} />}
+		<script src="/htmx.min.js" is:inline defer></script>
 	</body>
 </html>

@@ -6,10 +6,7 @@ import { Icon } from 'astro-icon'
 
 <!-- floating button to open sidebar -->
 <div class="fixed bottom-0 right-0 z-[990] lg:hidden">
-	<button
-		id="btn-open-sidebar"
-		class="-mb-8 mr-8 rotate-90 border border-neutral-400 bg-neutral-950 px-4 py-2 hover:bg-neutral-900 active:bg-neutral-800"
-	>
+	<button id="btn-open-sidebar" class="button rotate-90">
 		<p class="flex flex-row gap-4">
 			<span class="self-center">sidebar</span>
 			<Icon name="mdi:menu" width="2rem" />
@@ -20,7 +17,7 @@ import { Icon } from 'astro-icon'
 <!-- the sidebar itself -->
 <aside
 	id="sidebar"
-	class="fixed bottom-0 left-0 right-0 top-0 z-[999] bg-neutral-900 p-2 lg:contents lg:bg-neutral-950 lg:p-0"
+	class="lg:bg-neutral-dark bg-neutral-dark-highlight fixed bottom-0 left-0 right-0 top-0 z-[999] p-2 lg:contents lg:p-0"
 	data-open="0"
 >
 	<!-- give the button a dedicated slot at the bottom -->
@@ -34,10 +31,10 @@ import { Icon } from 'astro-icon'
 		</div>
 
 		<!-- close button -->
-		<div class="mt-2 block border-t border-neutral-400 pt-2 lg:hidden">
+		<div class="border-neutral-ui-highlight mt-2 block border-t pt-2 lg:hidden">
 			<button
 				id="btn-close-sidebar"
-				class="w-full bg-neutral-900 px-4 py-2 hover:bg-neutral-800 active:bg-neutral-700"
+				class="button bg-neutral-dark-highlight w-full"
 			>
 				{'< back to page'}
 			</button>
