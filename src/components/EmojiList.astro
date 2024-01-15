@@ -18,6 +18,12 @@ const id = `emoji-list-${crypto.randomUUID()}`
 	</ul>
 </emoji-list>
 
+<style is:global>
+	emoji-list li {
+		@apply relative pl-8;
+	}
+</style>
+
 <script>
 	class EmojiList extends HTMLElement {
 		constructor() {
@@ -37,8 +43,7 @@ const id = `emoji-list-${crypto.randomUUID()}`
 
 			// we can't target these easily with the tools astro provides
 			// so hack in some custom css scoped to this component
-			const items = document.querySelectorAll(`#${id} ul li`)
-
+			const items = document.querySelectorAll(`#${id} li`)
 			items.forEach((item) => {
 				item.classList.add(`emoji-list-${id}-li`)
 			})
@@ -47,7 +52,9 @@ const id = `emoji-list-${crypto.randomUUID()}`
 			styleElem.innerHTML = `
 				ul#${id} li::before {
 					content: "${emoji}";
-					margin-right: 0.5rem;
+					position: absolute;
+					top: 0;
+					left: 0;
 				}
 			`
 		}

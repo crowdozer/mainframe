@@ -6,7 +6,11 @@ const links: [string, string, Date][] = [
 	['Lorem ipsum dolor sit', '/blog/lorem', new Date()],
 	['Incidunt, iure. Dolor obcaecati', '/blog/lorem', new Date()],
 	['Asperiores cum voluptatem, doloremque', '/blog/lorem', new Date()],
-	['Consequatur neque aliquam esse et amet.', '/blog/lorem', new Date()],
+	[
+		'Consequatur neque aliquam esse et amet. Voluptatum dicta esse nesciunt!',
+		'/blog/lorem',
+		new Date(),
+	],
 	['Voluptatum dicta esse nesciunt', '/blog/lorem', new Date()],
 	['Omnis nihil minus nam in sunt', '/blog/lorem', new Date()],
 	['Officiis fugiat iure illo', '/blog/lorem', new Date()],
@@ -19,10 +23,10 @@ const links: [string, string, Date][] = [
 		{
 			links.map(([text, link, date]) => (
 				<li>
-					<a class="mr-1 inline" href={link}>
+					<a class="mr-1 line-clamp-1" href={link} title={text}>
 						{text.trim()}
 					</a>
-					<span class="inline font-mono text-sm text-neutral-ui-highlight">
+					<span class="block font-mono text-sm text-neutral-ui-highlight">
 						[{date.toLocaleString()}]
 					</span>
 				</li>

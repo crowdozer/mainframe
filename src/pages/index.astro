@@ -15,18 +15,20 @@ import Projects from '@/components/Homepage/Projects.astro'
 				<AboutMe />
 			</div>
 		</Card>
-		<Card padding="p-4 px-6">
-			<div class="space-y-4">
-				<h2><span class="text-green-500">{'~/blog '}</span>ls</h2>
-				<BlogLinks />
-			</div>
-		</Card>
-		<Card padding="p-4 px-6">
-			<div class="space-y-4">
-				<h2><span class="text-green-500">{'~/projects '}</span>ls</h2>
-				<Projects />
-			</div>
-		</Card>
+		<div class="flex w-full flex-col gap-2 md:flex-row">
+			<Card padding="p-4 px-6" classes="basis-1/2">
+				<div class="space-y-4">
+					<h2><span class="text-green-500">{'~/blog '}</span>ls</h2>
+					<BlogLinks />
+				</div>
+			</Card>
+			<Card padding="p-4 px-6" classes="basis-1/2">
+				<div class="space-y-4">
+					<h2><span class="text-green-500">{'~/projects '}</span>ls</h2>
+					<Projects />
+				</div>
+			</Card>
+		</div>
 		<Card padding="p-4 px-6">
 			<div class="space-y-4">
 				<Chat />

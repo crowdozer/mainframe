@@ -1,7 +1,5 @@
 ---
 import SidebarContent from '@c/Sidebar/SidebarContent.astro'
-
-import { Icon } from 'astro-icon'
 ---
 
 <!-- floating button to open sidebar -->
@@ -9,8 +7,12 @@ import { Icon } from 'astro-icon'
 	<button id="btn-open-sidebar" class="button rotate-90">
 		<p class="flex flex-row gap-4">
 			<span class="self-center">sidebar</span>
-			<img src="/images/shubaduck.gif" class="h-[2rem] w-[2rem]" />
-			<!-- <Icon name="mdi:menu" width="2rem" /> -->
+			<img
+				src="/images/shubaduck.gif"
+				class="h-[2rem] w-[2rem]"
+				loading="lazy"
+				alt="the shubaduck beckons you to explore. click him!"
+			/>
 		</p>
 	</button>
 </div>
@@ -26,7 +28,7 @@ import { Icon } from 'astro-icon'
 		<!-- sidebar content area -->
 		<div
 			id="sidebar-content-scroll"
-			class="flex grow flex-col gap-4 overflow-y-auto overflow-x-hidden"
+			class="grow overflow-y-auto overflow-x-hidden"
 		>
 			<SidebarContent />
 		</div>

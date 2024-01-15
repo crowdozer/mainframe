@@ -19,10 +19,10 @@ const links: [string, string, Date][] = [
 		{
 			links.map(([text, link, date]) => (
 				<li>
-					<a class="mr-1 inline" href={link}>
+					<a class="mr-1 line-clamp-1" href={link} title={text}>
 						{text.trim()}
 					</a>
-					<span class="inline font-mono text-sm text-neutral-ui-highlight">
+					<span class="block font-mono text-sm text-neutral-ui-highlight">
 						[{date.toLocaleString()}]
 					</span>
 				</li>
