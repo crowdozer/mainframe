@@ -9,7 +9,7 @@ interface Props {
 const { padding = 'p-2 px-3', classes = '' } = Astro.props
 ---
 
-<div class={clsx('relative border border-neutral-ui', classes)}>
+<div class={clsx('relative border border-neutral-ui bg-neutral-dark', classes)}>
 	<div class={clsx('relative', padding)}>
 		<slot />
 	</div>

@@ -32,6 +32,13 @@ const messages: TMessage[] = [
 ]
 ---
 
+<div class="flex flex-row">
+	<h2>💻 chat</h2>
+	<div class="grow">
+		<!-- <span class="text-green-500">5 online</span> -->
+	</div>
+</div>
+
 <div class="space-y-0">
 	{messages.map((msg) => <Message {...msg} />)}
 </div>

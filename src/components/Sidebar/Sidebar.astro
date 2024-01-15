@@ -9,7 +9,8 @@ import { Icon } from 'astro-icon'
 	<button id="btn-open-sidebar" class="button rotate-90">
 		<p class="flex flex-row gap-4">
 			<span class="self-center">sidebar</span>
-			<Icon name="mdi:menu" width="2rem" />
+			<img src="/images/shubaduck.gif" class="h-[2rem] w-[2rem]" />
+			<!-- <Icon name="mdi:menu" width="2rem" /> -->
 		</p>
 	</button>
 </div>
@@ -17,7 +18,7 @@ import { Icon } from 'astro-icon'
 <!-- the sidebar itself -->
 <aside
 	id="sidebar"
-	class="lg:bg-neutral-dark bg-neutral-dark-highlight fixed bottom-0 left-0 right-0 top-0 z-[999] p-2 lg:contents lg:p-0"
+	class="fixed bottom-0 left-0 right-0 top-0 z-[999] bg-neutral-dark-highlight p-2 lg:contents lg:bg-neutral-dark lg:p-0"
 	data-open="0"
 >
 	<!-- give the button a dedicated slot at the bottom -->
@@ -31,10 +32,10 @@ import { Icon } from 'astro-icon'
 		</div>
 
 		<!-- close button -->
-		<div class="border-neutral-ui-highlight mt-2 block border-t pt-2 lg:hidden">
+		<div class="mt-2 block border-t border-neutral-ui-highlight pt-2 lg:hidden">
 			<button
 				id="btn-close-sidebar"
-				class="button bg-neutral-dark-highlight w-full"
+				class="button w-full bg-neutral-dark-highlight"
 			>
 				{'< back to page'}
 			</button>
