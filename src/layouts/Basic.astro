@@ -36,9 +36,13 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 		</div>
 
 		<!-- bg image -->
-		<div
-			class="absolute bottom-0 left-0 right-0 top-0 z-[1] bg-[url(/images/gargantua.webp)] bg-cover bg-center opacity-25"
-		>
+		<div class="absolute bottom-0 left-0 right-0 top-0 z-[1] opacity-50">
+			<img
+				src="/images/star-wars-dark-space-0a-256x144.jpg"
+				data-defer="/images/star-wars-dark-space-0a-2560x1440.jpg"
+				class="h-full w-full object-cover object-center"
+				loading="eager"
+			/>
 		</div>
 
 		<div
@@ -47,5 +51,8 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 		</div>
 
 		<script src="/htmx.min.js" is:inline defer></script>
+		<script>
+			import '@/lib/client/lqip'
+		</script>
 	</body>
 </html>

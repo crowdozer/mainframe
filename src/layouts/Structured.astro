@@ -14,50 +14,22 @@ const { title = '', header = true, footer = true } = Astro.props
 ---
 
 <Basic {title}>
-	<!-- mobile warning -->
-	<div class="contents lg:hidden" id="mobile-gate-message">
-		<div class="flex h-screen w-screen flex-col justify-center">
-			<div class="mx-auto max-w-xs space-y-8">
-				<p>best seen on desktop</p>
-				<button
-					id="let-me-in"
-					class="border px-4 py-2 hover:bg-neutral-300 hover:text-black active:bg-neutral-ui-highlight"
-					>let me in anyway</button
-				>
-			</div>
-		</div>
-	</div>
+	<div class="mx-auto max-w-[900px] bg-neutral-950/50 lg:mb-32 lg:mt-16">
+		<div
+			class="flex h-full flex-col border-dotted border-neutral-ui-highlight lg:border"
+		>
+			{header && <Header />}
 
-	<!-- content -->
-	<div class="hidden lg:contents" id="mobile-gate-content">
-		<div class="mx-auto max-w-[900px] bg-neutral-950/50 lg:mb-32 lg:mt-16">
-			<div
-				class="flex h-full flex-col border-dotted border-neutral-ui-highlight lg:border"
-			>
-				{header && <Header />}
-
-				<div class="grow">
-					<div class="grid h-full w-full gap-4 p-2 lg:grid-cols-[1fr_3fr]">
-						<Sidebar />
-						<main class="contents">
-							<slot />
-						</main>
-					</div>
+			<div class="grow">
+				<div class="grid h-full w-full gap-4 p-2 lg:grid-cols-[1fr_3fr]">
+					<Sidebar />
+					<main class="contents">
+						<slot />
+					</main>
 				</div>
-
-				{footer && <Footer />}
 			</div>
+
+			{footer && <Footer />}
 		</div>
 	</div>
 </Basic>
-
-<script>
-	const btn = document.getElementById('let-me-in')
-	const con = document.getElementById('mobile-gate-content')
-	const msg = document.getElementById('mobile-gate-message')
-
-	btn?.addEventListener('click', function () {
-		msg?.classList.replace('contents', 'hidden')
-		con?.classList.replace('hidden', 'contents')
-	})
-</script>
