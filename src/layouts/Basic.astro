@@ -1,5 +1,6 @@
 ---
 import '@/styles/globals.css'
+import bgImage from '@img/star-wars-dark-space-0a-2560x1440.webp?lqip'
 
 interface Props {
 	title?: string
@@ -38,11 +39,13 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 		<!-- bg image -->
 		<div class="absolute bottom-0 left-0 right-0 top-0 z-[1] opacity-50">
 			<img
-				src="/images/star-wars-dark-space-0a-256x144.webp"
-				data-defer="/images/star-wars-dark-space-0a-2560x1440.webp"
-				class="h-full w-full object-cover object-center blur"
-				alt="ominous death star with star destroyers nearby"
-				loading="eager"
+				src={bgImage.src}
+				width={bgImage.width}
+				height={bgImage.height}
+				style={{
+					backgroundImage: `url("${bgImage.lqip}")`,
+					backgroundSize: 'cover',
+				}}
 			/>
 		</div>
 
@@ -52,8 +55,5 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 		</div>
 
 		<script src="/htmx.min.js" is:inline defer></script>
-		<script>
-			import '@/lib/client/lqip'
-		</script>
 	</body>
 </html>

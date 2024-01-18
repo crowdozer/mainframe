@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
-// import react from '@astrojs/react';
 import compressor from 'astro-compressor'
 import vercel from '@astrojs/vercel/serverless'
+import lqip from 'vite-plugin-lqip'
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +18,8 @@ export default defineConfig({
 			applyBaseStyles: false,
 		}),
 		compressor(),
-		// react(),
 	],
+	vite: {
+		plugins: [lqip()],
+	},
 })

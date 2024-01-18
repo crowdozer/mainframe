@@ -6,7 +6,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"],
-			"@c/*": ["src/components/*"]
+			"@c/*": ["src/components/*"],
+			"@pub/*": ["public/*"],
+			"@img/*": ["public/images/*"]
 		}
 	}
 }

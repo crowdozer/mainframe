@@ -1,5 +1,6 @@
 ---
 import QuoteOfTheDay from './QuoteOfTheDay.astro'
+import headerImg from '@img/naruto-gif-de-navelya-visite-pandatoryu.webp?lqip'
 
 const buttonId = Math.random().toString(36)
 ---
@@ -8,11 +9,13 @@ const buttonId = Math.random().toString(36)
 	class="space-y-0 border-b border-dashed border-neutral-ui-highlight bg-neutral-dark"
 >
 	<img
-		src="/images/naruto-gif-de-navelya-visite-pandatoryu-small.webp"
-		data-defer="/images/naruto-gif-de-navelya-visite-pandatoryu.webp"
-		class="h-[100px] w-full object-cover lg:h-[200px]"
-		alt="naruto turning and looking at the camera"
-		loading="eager"
+		src={headerImg.src}
+		width={headerImg.width}
+		height={headerImg.height}
+		style={{
+			backgroundImage: `url("${headerImg.lqip}")`,
+			backgroundSize: 'cover',
+		}}
 	/>
 
 	<nav class="max-w-[100vw] overflow-x-auto">

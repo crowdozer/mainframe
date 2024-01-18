@@ -5,6 +5,7 @@ import EmploymentStatus from '@c/Homepage/EmploymentStatus.astro'
 import SidebarNews from './SidebarNews.astro'
 import SidebarChangelog from './SidebarChangelog.astro'
 import YTDownloader from './YTDownloader.astro'
+import gokuImg from '@img/son-goku-wave.webp?lqip'
 ---
 
 <div class="flex flex-col-reverse gap-2 lg:flex-col">
@@ -49,11 +50,13 @@ import YTDownloader from './YTDownloader.astro'
 	<div class="sm:col-span-2">
 		<Card>
 			<img
-				src="/images/son-goku-wave-small.webp"
-				data-defer="/images/son-goku-wave.webp"
-				class="max-h-[120px] w-full object-cover sm:max-h-[240px]"
-				alt="son goku waving goodbye"
-				loading="eager"
+				src={gokuImg.src}
+				width={gokuImg.width}
+				height={gokuImg.height}
+				style={{
+					backgroundImage: `url("${gokuImg.lqip}")`,
+					backgroundSize: 'cover',
+				}}
 			/>
 		</Card>
 	</div>
