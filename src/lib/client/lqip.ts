@@ -6,6 +6,7 @@ function init() {
 		const src = image.getAttribute('data-defer')
 		if (!src) continue
 		image.setAttribute('src', src)
+		image.classList.remove('blur')
 	}
 }
 
