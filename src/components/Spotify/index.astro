@@ -6,11 +6,13 @@
 	intersect once prevents this from firing until it enters
 	the viewport. i.e when a mobile user opens sidebar
  -->
-<div
-	class="min-h-[68px]"
-	hx-get="/partials/spotify"
-	hx-trigger="intersect once"
-	hx-swap="innerHTML"
->
-	<div class="htmx-indicator glimmer h-[68px] w-full"></div>
+<div hx-ext="morph">
+	<div
+		class="min-h-[68px]"
+		hx-get="/partials/spotify"
+		hx-trigger="intersect once"
+		hx-swap="innerHTML"
+	>
+		<div class="htmx-indicator glimmer h-[68px] w-full"></div>
+	</div>
 </div>
