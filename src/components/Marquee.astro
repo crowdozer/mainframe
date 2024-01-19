@@ -1,51 +1,71 @@
 ---
 interface Props {
 	pausable?: boolean
+	duration?: string
+	dir?: 'rtl' | 'ltr'
+	multiples?: number
 }
 
-const { pausable = false } = Astro.props
+const {
+	duration = '15s',
+	dir = 'ltr',
+	multiples = 1,
+	pausable = true,
+} = Astro.props
 
-const id = Math.random().toString(36)
+const animation = `marquee-${dir} ${duration} linear infinite`
+
+console.log(animation)
 ---
 
-<custom-marquee data-id={id} data-pausable={pausable}>
-	<marquee class="line-clamp-1 whitespace-nowrap">
+<div class="marquee" data-pausable={pausable}>
+	<div class="marquee-content" style={{ animation }}>
 		<slot />
-	</marquee>
-</custom-marquee>
+	</div>
+	{
+		Array.from({ length: multiples }).map(() => (
+			<div class="marquee-content" aria-hidden="true" style={{ animation }}>
+				<slot />
+			</div>
+		))
+	}
+</div>
 
-<script>
-	class CustomMarquee extends HTMLElement {
-		constructor() {
-			super()
+<style>
+	.marquee {
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+	}
 
-			const id = this.dataset.id
-			const pausable = this.dataset.pausable === 'true'
+	.marquee-content {
+		white-space: nowrap;
+		flex-shrink: 0;
+		width: max-content;
+		display: flex;
+		align-items: center;
+		transform: translateX(0);
+	}
 
-			if (!id) {
-				console.error('no id found')
-				return
-			}
+	.marquee[data-pausable]:hover .marquee-content {
+		animation-play-state: paused !important;
+	}
 
-			const marquee = this.querySelector('marquee')
-			if (!marquee) {
-				console.error('no marquee element found')
-				return
-			}
-
-			if (pausable) {
-				marquee.addEventListener('mouseenter', function () {
-					// @ts-ignore
-					marquee.stop()
-				})
-
-				marquee.addEventListener('mouseleave', function () {
-					// @ts-ignore
-					marquee.start()
-				})
-			}
+	@keyframes marquee-ltr {
+		0% {
+			transform: translateX(-100%);
+		}
+		100% {
+			transform: translateX(0%);
 		}
 	}
 
-	customElements.define('custom-marquee', CustomMarquee)
-</script>
+	@keyframes marquee-rtl {
+		0% {
+			transform: translateX(0%);
+		}
+		100% {
+			transform: translateX(-100%);
+		}
+	}
+</style>

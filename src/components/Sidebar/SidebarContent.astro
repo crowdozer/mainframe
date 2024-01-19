@@ -7,6 +7,8 @@ import SidebarNews from './SidebarNews.astro'
 import SidebarChangelog from './SidebarChangelog.astro'
 import YTDownloader from './YTDownloader.astro'
 import gokuImg from '@img/son-goku-wave.webp?lqip'
+import Marquee from '../Marquee.astro'
+import ImgButton from '../ImgButton.astro'
 ---
 
 <div class="flex flex-col-reverse gap-2 lg:flex-col">
@@ -46,6 +48,13 @@ import gokuImg from '@img/son-goku-wave.webp?lqip'
 				<h5>⏬ yt downloader</h5>
 				<YTDownloader />
 			</div>
+		</Card>
+		<Card>
+			<Marquee dir="rtl" duration="5s">
+				<ImgButton name="htmx" url="https://htmx.org/" />
+				<ImgButton name="tailwind" url="https://tailwindcss.com/" />
+				<ImgButton name="astro" url="https://astro.build/" />
+			</Marquee>
 		</Card>
 	</div>
 	<div class="sm:col-span-2">

@@ -33,13 +33,10 @@ function getQuote(): string {
 const quote = getQuote()
 ---
 
-<Marquee pausable>
-	<b>✨ Quote of the Day ✨</b>
-	{' '}
-	<i>{quote}</i>
-	<div aria-hidden="true" class="contents">
+<Marquee pausable dir="ltr" duration="10s" multiples={3}>
+	<span>
 		<b>✨ Quote of the Day ✨</b>
 		{' '}
 		<i>{quote}</i>
-	</div>
+	</span>
 </Marquee>
