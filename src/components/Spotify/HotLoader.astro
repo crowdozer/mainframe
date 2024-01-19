@@ -16,7 +16,7 @@ const { interval } = Astro.props
 	begins working again.
 -->
 <div
-	hx-post="/partials/spotify"
+	hx-get="/partials/spotify"
 	hx-trigger={`intersect delay:${interval}`}
 	hx-swap="outerHTML"
 >
