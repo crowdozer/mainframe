@@ -1,0 +1,17 @@
+---
+import { getRandomInt } from '@/lib/number'
+import Renderer from '@c/Spotify/Renderer.astro'
+
+export const partial = true
+---
+
+<Renderer
+	duration={120000}
+	progress={getRandomInt(110000, 120000)}
+	albumText="The Story So Far"
+	songText="Empty Space"
+	artistText="The Story So Far"
+	url="/404"
+	image="/images/glitchdozer.gif"
+	paused={false}
+/>

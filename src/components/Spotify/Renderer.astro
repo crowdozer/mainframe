@@ -1,0 +1,109 @@
+---
+import HotLoader from './HotLoader.astro'
+
+/**
+ * do not directly include this in the page, the loaders
+ * TODO: fix rendering of low and high progress values
+ */
+
+interface Props {
+	// duration of the song (in ms)
+	duration: number
+	// progress of the player (in ms)
+	progress: number
+	// name of the album
+	albumText: string
+	// name of the song
+	songText: string
+	// name of the artist
+	artistText: string
+	// link to the song
+	url: string
+	// image url
+	image: string
+	// whether or not we are paused
+	paused: boolean
+}
+
+const {
+	duration,
+	progress,
+	albumText,
+	songText,
+	artistText,
+	url,
+	image,
+	paused,
+} = Astro.props
+
+function formatMilliseconds(milliseconds: number): string {
+	const seconds = Math.floor(milliseconds / 1000)
+	const hours = Math.floor(seconds / 3600)
+	const remainingSeconds = seconds % 3600
+	const minutes = Math.floor(remainingSeconds / 60)
+	//   const remainingMilliseconds = milliseconds % 1000;
+
+	const formattedHours = hours.toString().padStart(2, '0')
+	const formattedMinutes = minutes.toString().padStart(2, '0')
+	const formattedSeconds = (remainingSeconds % 60).toString().padStart(2, '0')
+
+	if (hours > 0) {
+		return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
+	} else {
+		return `${formattedMinutes}:${formattedSeconds}`
+	}
+}
+
+// make the interval longer if i'm not listening to anything
+// waste of resources to ping for no reason
+const interval = paused ? '15s' : '3s'
+
+// clean up some display text
+const progressPercent = Math.round((progress / duration) * 100)
+const progressText = formatMilliseconds(progress)
+const durationText = formatMilliseconds(duration)
+---
+
+<HotLoader {interval}>
+	<div class="space-y-2">
+		<!-- the pretty stuff -->
+		<div class="flex flex-row gap-2">
+			<div class="shrink-0">
+				<img
+					src={image}
+					alt={`${albumText} cover art`}
+					loading="lazy"
+					class="h-[48px] w-[48px] border border-neutral-ui"
+					title={albumText}
+				/>
+			</div>
+			<div class="grow">
+				<a href={url} class="line-clamp-2" title={songText}>
+					<span class="block font-bold">{songText}</span>
+				</a>
+				<p class="line-clamp-1 text-sm" title={artistText}>
+					{artistText}
+				</p>
+			</div>
+		</div>
+
+		<!-- progress bar -->
+		<div class="relative overflow-hidden border border-neutral-ui">
+			<div class="relative z-[2] flex flex-row px-1 py-0.5">
+				<span class="text-xs">
+					{progressText}
+				</span>
+				<div class="grow"></div>
+				<span class="text-xs">
+					{durationText}
+				</span>
+			</div>
+
+			<div
+				class="glimmer glimmer-bright absolute bottom-0 left-0 top-0 z-[1]"
+				style={{ width: `${progressPercent}%` }}
+			>
+			</div>
+		</div>
+	</div>
+</HotLoader>

@@ -20,6 +20,11 @@ body {
 	box-sizing: border-box;
 }
 
+/* 
+	Everything here belongs here because 
+	this allows for easier overrides 
+	than selectors
+ */
 @layer components {
 	.input {
 		/* base styles */
@@ -96,5 +101,46 @@ body {
 	/* Dividers */
 	hr {
 		@apply border-neutral-300;
+	}
+}
+
+/* Glimmering loading effect */
+/* https://codepen.io/andru255/pen/wvBdxbb */
+.glimmer {
+	animation-duration: 2.2s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-name: glimmer;
+	animation-timing-function: linear;
+	background: #ddd;
+	background: linear-gradient(
+		to right,
+		theme(colors.neutral-dark) 8%,
+		theme(colors.neutral-dark-highlight) 18%,
+		theme(colors.neutral-dark) 33%
+	);
+	background-size: 1200px 100%;
+}
+.glimmer.glimmer-bright {
+	animation-duration: 2.2s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-name: glimmer;
+	animation-timing-function: linear;
+	background: #ddd;
+	background: linear-gradient(
+		to right,
+		theme(colors.neutral-light-hover) 8%,
+		theme(colors.neutral-ui) 18%,
+		theme(colors.neutral-light-hover) 33%
+	);
+	background-size: 1200px 100%;
+}
+@keyframes glimmer {
+	0% {
+		background-position: -1200px 0;
+	}
+	100% {
+		background-position: 1200px 0;
 	}
 }
