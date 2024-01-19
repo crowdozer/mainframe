@@ -1,6 +1,8 @@
 ---
 import '@/styles/globals.css'
 import bgImage from '@img/star-wars-dark-space-0a-2560x1440.webp?lqip'
+import bgImageM from '@img/star-wars-dark-space-0a-1200x675.webp?lqip'
+import clsx from 'clsx'
 
 interface Props {
 	title?: string
@@ -36,8 +38,9 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 			<slot />
 		</div>
 
-		<!-- bg image -->
+		<!-- bg images -->
 		<div class="absolute bottom-0 left-0 right-0 top-0 z-[1] opacity-50">
+			<!-- desktop, big -->
 			<img
 				src={bgImage.src}
 				width={bgImage.width}
@@ -46,12 +49,33 @@ const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
 					backgroundImage: `url("${bgImage.lqip}")`,
 					backgroundSize: 'cover',
 				}}
-				class="pointer-events-none h-full w-full object-cover object-center"
+				class={clsx(
+					'pointer-events-none h-full w-full object-cover object-center',
+					'hidden lg:block',
+				)}
+				alt="ominous death star with star destroyers nearby"
+				loading="lazy"
+			/>
+
+			<!-- mobile users can barely see it, so it doesnt have to be big -->
+			<img
+				src={bgImageM.src}
+				width={bgImageM.width}
+				height={bgImageM.height}
+				style={{
+					backgroundImage: `url("${bgImageM.lqip}")`,
+					backgroundSize: 'cover',
+				}}
+				class={clsx(
+					'pointer-events-none h-full w-full object-cover object-center',
+					'block lg:hidden',
+				)}
 				alt="ominous death star with star destroyers nearby"
 				loading="lazy"
 			/>
 		</div>
 
+		<!-- texture overlayed ontop of the bg -->
 		<div
 			class="bg-tile pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-[0] bg-[url(/images/dark-bg.jpg)]"
 		>
