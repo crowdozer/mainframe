@@ -1,0 +1,30 @@
+---
+import BlogLinks from '@c/Homepage/BlogLinks.astro'
+import Card from '@c/Card.astro'
+import Structured from '@/layouts/Structured.astro'
+import AboutMe from '@c/Homepage/AboutMe.astro'
+import Projects from '@c/Homepage/Projects.astro'
+---
+
+<Structured>
+	<Card padding="p-4 px-6">
+		<div class="space-y-4">
+			<h2><span class="text-green-500">{'~/ '}</span>whois crowdozer</h2>
+			<AboutMe />
+		</div>
+	</Card>
+	<div class="grid w-full grid-cols-1 gap-2 md:grid-cols-2">
+		<Card padding="p-4 px-6 h-full">
+			<div class="flex h-full flex-col gap-4">
+				<h2><span class="text-green-500">{'~/blog '}</span>ls</h2>
+				<BlogLinks />
+			</div>
+		</Card>
+		<Card padding="p-4 px-6">
+			<div class="space-y-4">
+				<h2><span class="text-green-500">{'~/projects '}</span>ls</h2>
+				<Projects />
+			</div>
+		</Card>
+	</div>
+</Structured>

@@ -13,12 +13,15 @@ const id = `emoji-list-${crypto.randomUUID()}`
 ---
 
 <emoji-list data-emoji={emoji} data-id={id}>
-	<ul {id} class={clsx(id, ulClasses)}>
+	<ul {id} class={clsx('block', ulClasses)}>
 		<slot />
 	</ul>
 </emoji-list>
 
 <style is:global>
+	emoji-list {
+		display: block;
+	}
 	emoji-list li {
 		@apply relative pl-8;
 	}

@@ -1,0 +1,27 @@
+---
+import Card from '@c/Card.astro'
+import EmojiList from '@c/EmojiList.astro'
+import Structured from '@/layouts/Structured.astro'
+
+const allPosts = await Astro.glob('@/content/blog/*.md')
+const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())]
+---
+
+<Structured title="tags">
+	<Card padding="p-4 px-6">
+		<div class="space-y-4">
+			<h3>Tag index</h3>
+			<p>filter blog posts by category</p>
+			<EmojiList emoji="🔖">
+				{
+					tags.map((tag) => (
+						<li>
+							<a href={`/tags/${tag}`}>{tag}</a>
+						</li>
+					))
+				}
+			</EmojiList>
+			<a href="/blog">blog index</a>
+		</div>
+	</Card>
+</Structured>

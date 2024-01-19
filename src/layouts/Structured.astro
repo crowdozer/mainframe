@@ -3,6 +3,8 @@ import Basic from './Basic.astro'
 import Header from '@c/LayoutHelpers/Header.astro'
 import Footer from '@c/LayoutHelpers/Footer.astro'
 import Sidebar from '@c/Sidebar/Sidebar.astro'
+import Card from '@c/Card.astro'
+import Chat from '@c/Chat/Chat.astro'
 
 interface Props {
 	title?: string
@@ -24,7 +26,15 @@ const { title = '', header = true, footer = true } = Astro.props
 				<div class="grid h-full w-full gap-4 p-2 lg:grid-cols-[1fr_3fr]">
 					<Sidebar />
 					<main class="contents">
-						<slot />
+						<div class="mb-32 space-y-4 lg:mb-0">
+							<slot />
+
+							<Card padding="p-4 px-6">
+								<div class="space-y-4">
+									<Chat />
+								</div>
+							</Card>
+						</div>
 					</main>
 				</div>
 			</div>

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^3.0.9",
+    "@astrojs/rss": "^4.0.2",
     "@astrojs/tailwind": "^5.1.0",
     "@astrojs/vercel": "^6.1.4",
     "@codemirror/lang-json": "^6.0.1",

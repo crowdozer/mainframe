@@ -1,34 +1,42 @@
 ---
 import EmojiList from '../EmojiList.astro'
-import ViewMore from '../ViewMore.astro'
 
-const links: [string, string, Date][] = [
-	['Lorem ipsum dolor sit', '/blog/lorem', new Date()],
-	['Incidunt, iure. Dolor obcaecati', '/blog/lorem', new Date()],
-	['Asperiores cum voluptatem, doloremque', '/blog/lorem', new Date()],
-	['Consequatur neque aliquam esse et amet.', '/blog/lorem', new Date()],
-	['Voluptatum dicta esse nesciunt', '/blog/lorem', new Date()],
-	['Omnis nihil minus nam in sunt', '/blog/lorem', new Date()],
-	['Officiis fugiat iure illo', '/blog/lorem', new Date()],
-	['Facilis in ratione blanditiis', '/blog/lorem', new Date()],
+const projects = [
+	{
+		url: '/',
+		title: 'crwdzr.io',
+		description: 'My website, built with Astro and Tailwind',
+	},
+	{
+		url: 'https://codebeaker.crwdzr.io/',
+		title: 'Codebreaker',
+		description: 'My website, built with Astro and Tailwind',
+	},
+	{
+		url: 'https://www.luxorts.com/',
+		title: 'Luxorts',
+		description: 'The Luxorts web app',
+	},
 ]
 ---
 
 <div class="space-y-4">
 	<EmojiList emoji="✏️">
 		{
-			links.map(([text, link, date]) => (
+			projects.map((project) => (
 				<li>
-					<a class="mr-1 line-clamp-1" href={link} title={text}>
-						{text.trim()}
+					<a
+						class="mr-1 line-clamp-1"
+						href={`/blog/${project.url}`}
+						title={project.title}
+					>
+						{project.title}
 					</a>
 					<span class="block font-mono text-sm text-neutral-ui-highlight">
-						[{date.toLocaleString()}]
+						{project.description}
 					</span>
 				</li>
 			))
 		}
 	</EmojiList>
-
-	<ViewMore urlbase="/blog" rss json text="view 14 more" />
 </div>

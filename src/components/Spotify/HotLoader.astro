@@ -1,4 +1,13 @@
 ---
+/**
+	do not include this one on the page, use the deferred loader.
+	this one is meant to keep the front end hot once it loads
+
+	using itersect prevents this from refreshing when it's hidden, 
+	i.e on mobile in a sidebar. when the sidebar is opened, it automatically
+	begins working again.
+ */
+
 interface Props {
 	// how often to fire the request i.e "1s"
 	interval: string
@@ -7,14 +16,6 @@ interface Props {
 const { interval } = Astro.props
 ---
 
-<!-- 
-	do not include this one on the page, use the deferred loader.
-	this one is meant to keep the front end hot once it loads
-
-	using itersect prevents this from refreshing when it's hidden, 
-	i.e on mobile in a sidebar. when the sidebar is opened, it automatically
-	begins working again.
--->
 <div
 	hx-get="/partials/spotify"
 	hx-trigger={`intersect delay:${interval}`}

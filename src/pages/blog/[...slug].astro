@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content'
+import Card from '@/components/Card.astro'
+import Structured from '@/layouts/Structured.astro'
+
+export async function getStaticPaths() {
+	const blogEntries = await getCollection('blog')
+	return blogEntries.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}))
+}
+
+const { entry } = Astro.props
+const { Content } = await entry.render()
+---
+
+<Structured title={`✏ ${entry.data.title}`}>
+	<Card padding="p-4 px-6">
+		<div class="space-y-4">
+			<Content />
+			<a href="/blog">blog index</a>
+			{' • '}
+			<a href="/tags">tag index</a>
+		</div>
+	</Card>
+</Structured>

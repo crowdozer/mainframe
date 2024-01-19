@@ -13,7 +13,7 @@ const { urlbase, text, rss = false, json = false } = Astro.props
 	<span>
 		{
 			rss && (
-				<a href={`${urlbase}/rss`} class="text-green-500">
+				<a href={`${urlbase}/rss.xml`} class="text-green-500">
 					rss
 				</a>
 			)
@@ -22,7 +22,7 @@ const { urlbase, text, rss = false, json = false } = Astro.props
 			json && (
 				<>
 					{' • '}
-					<a href={`${urlbase}/json`} class="text-yellow-500">
+					<a href={`${urlbase}.json`} class="text-yellow-500">
 						json
 					</a>
 				</>

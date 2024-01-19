@@ -1,0 +1,54 @@
+---
+import Structured from '@/layouts/Structured.astro'
+import EmojiList from '@c/EmojiList.astro'
+import Card from '@c/Card.astro'
+
+export async function getStaticPaths(): Promise<any> {
+	const allPosts = await Astro.glob('@/content/blog/*.md')
+	const uniqueTags = [
+		...new Set(allPosts.map((post) => post.frontmatter.tags).flat()),
+	]
+
+	return uniqueTags.map((tag) => {
+		const filteredPosts = allPosts.filter((post) =>
+			post.frontmatter.tags.includes(tag),
+		)
+		return {
+			params: { tag },
+			props: { posts: filteredPosts },
+		}
+	})
+}
+
+const { tag } = Astro.params
+const { posts } = Astro.props
+---
+
+<Structured title={tag}>
+	<Card padding="p-4 px-6">
+		<div class="space-y-4">
+			<h3>
+				Posts tagged with <strong class="text-green-500">{tag}</strong>
+			</h3>
+			<EmojiList emoji="✏️">
+				{
+					posts.map((post, index) => (
+						<li>
+							<a
+								class="mr-1 line-clamp-1"
+								href={`/blog/${index + 1}`}
+								title={post.frontmatter.title}
+							>
+								{post.frontmatter.title}
+							</a>
+							<span class="block font-mono text-sm text-neutral-ui-highlight">
+								[{post.frontmatter.date.toLocaleString()}]
+							</span>
+						</li>
+					))
+				}
+			</EmojiList>
+			<a href="/tags">tag index</a>
+		</div>
+	</Card>
+</Structured>

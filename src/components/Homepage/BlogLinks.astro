@@ -1,38 +1,34 @@
 ---
+import { getCollection } from 'astro:content'
 import EmojiList from '../EmojiList.astro'
 import ViewMore from '../ViewMore.astro'
 
-const links: [string, string, Date][] = [
-	['Lorem ipsum dolor sit', '/blog/lorem', new Date()],
-	['Incidunt, iure. Dolor obcaecati', '/blog/lorem', new Date()],
-	['Asperiores cum voluptatem, doloremque', '/blog/lorem', new Date()],
-	[
-		'Consequatur neque aliquam esse et amet. Voluptatum dicta esse nesciunt!',
-		'/blog/lorem',
-		new Date(),
-	],
-	['Voluptatum dicta esse nesciunt', '/blog/lorem', new Date()],
-	['Omnis nihil minus nam in sunt', '/blog/lorem', new Date()],
-	['Officiis fugiat iure illo', '/blog/lorem', new Date()],
-	['Facilis in ratione blanditiis', '/blog/lorem', new Date()],
-]
+const allPosts = await getCollection('blog')
+const featuredPosts = allPosts.slice(0, 10)
+const remaining = allPosts.length - featuredPosts.length
+const viewMoreText = remaining > 0 ? `view ${remaining} more` : `view all`
 ---
 
-<div class="space-y-4">
-	<EmojiList emoji="✏️">
-		{
-			links.map(([text, link, date]) => (
-				<li>
-					<a class="mr-1 line-clamp-1" href={link} title={text}>
-						{text.trim()}
-					</a>
-					<span class="block font-mono text-sm text-neutral-ui-highlight">
-						[{date.toLocaleString()}]
-					</span>
-				</li>
-			))
-		}
-	</EmojiList>
-
-	<ViewMore urlbase="/blog" rss json text="view 14 more" />
+<div class="flex grow flex-col gap-4">
+	<div class="grow">
+		<EmojiList emoji="✏️">
+			{
+				featuredPosts.map((post) => (
+					<li>
+						<a
+							class="mr-1 line-clamp-1"
+							href={`/blog/${post.slug}`}
+							title={post.data.title}
+						>
+							{post.data.title}
+						</a>
+						<span class="block font-mono text-sm text-neutral-ui-highlight">
+							[{post.data.date.toLocaleString()}]
+						</span>
+					</li>
+				))
+			}
+		</EmojiList>
+	</div>
+	<ViewMore urlbase="/blog" rss text={viewMoreText} />
 </div>

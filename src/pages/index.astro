@@ -1,38 +1,7 @@
 ---
-import BlogLinks from '@c/Homepage/BlogLinks.astro'
-import Card from '@c/Card.astro'
-import Structured from '@/layouts/Structured.astro'
-import AboutMe from '@c/Homepage/AboutMe.astro'
-import Chat from '@c/Chat/Chat.astro'
-import Projects from '@/components/Homepage/Projects.astro'
+// homepage has a lot of sub components,
+// easier to work on it over there.
+import Homepage from '@c/Homepage/index.astro'
 ---
 
-<Structured>
-	<div class="mb-32 space-y-4 lg:mb-0">
-		<Card padding="p-4 px-6">
-			<div class="space-y-4">
-				<h2><span class="text-green-500">{'~/ '}</span>whois crowdozer</h2>
-				<AboutMe />
-			</div>
-		</Card>
-		<div class="flex w-full flex-col gap-2 md:flex-row">
-			<Card padding="p-4 px-6" classes="basis-1/2">
-				<div class="space-y-4">
-					<h2><span class="text-green-500">{'~/blog '}</span>ls</h2>
-					<BlogLinks />
-				</div>
-			</Card>
-			<Card padding="p-4 px-6" classes="basis-1/2">
-				<div class="space-y-4">
-					<h2><span class="text-green-500">{'~/projects '}</span>ls</h2>
-					<Projects />
-				</div>
-			</Card>
-		</div>
-		<Card padding="p-4 px-6">
-			<div class="space-y-4">
-				<Chat />
-			</div>
-		</Card>
-	</div>
-</Structured>
+<Homepage />

@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content'
+import EmojiList from '@c/EmojiList.astro'
+import Structured from '@/layouts/Structured.astro'
+import Card from '@/components/Card.astro'
+
+const allBlogPosts = await getCollection('blog')
+---
+
+<Structured title="blog posts">
+	<Card padding="p-4 px-6">
+		<div class="space-y-4">
+			<h3>Blog Posts</h3>
+			<p>all available blog posts</p>
+			<EmojiList emoji="✏️">
+				{
+					allBlogPosts.map((post) => (
+						<li>
+							<a
+								class="mr-1 line-clamp-1"
+								href={`/blog/${post.slug}`}
+								title={post.data.title}
+							>
+								{post.data.title}
+							</a>
+							<span class="block font-mono text-sm text-neutral-ui-highlight">
+								[{post.data.date.toLocaleString()}]
+							</span>
+						</li>
+					))
+				}
+			</EmojiList>
+			<a href="/tags">tag index</a>
+		</div>
+	</Card>
+</Structured>
