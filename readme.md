@@ -7,19 +7,12 @@ My personal site. You can take whatever you want from it.
 
 # Needed Components
 
-- A marquee that properly cycles infinitely
 - Chat
-- Blog
 - Spotify
 
 # Needed Utils
 
-- Rate limit
-  - ytdl api
-
-# Needed QOL / Bugfixes
-
-- Navbar drag outside of mobile
+- Rate limit ytdl api, spotify api
 
 # Fun Ideas
 
