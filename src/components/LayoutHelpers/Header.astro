@@ -1,6 +1,7 @@
 ---
 import QuoteOfTheDay from '@c/QuoteOfTheDay.astro'
 import headerImg from '@img/naruto-gif-de-navelya-visite-pandatoryu.webp?lqip'
+import Marquee from '@c/Marquee.astro'
 
 const buttonId = Math.random().toString(36)
 ---
@@ -30,7 +31,9 @@ const buttonId = Math.random().toString(36)
 			<button id={buttonId}>wtf</button>
 		</div>
 	</nav>
-	<QuoteOfTheDay />
+	<Marquee pausable dir="rtl" duration="10s" multiples={3}>
+		<QuoteOfTheDay />
+	</Marquee>
 </header>
 
 <script define:vars={{ buttonId }}>
