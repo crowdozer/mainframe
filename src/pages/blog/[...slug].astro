@@ -19,9 +19,10 @@ const { Content } = await entry.render()
 	<Card padding="p-4 px-6">
 		<div class="space-y-4">
 			<Content />
-			<a href="/blog">blog index</a>
-			{' • '}
-			<a href="/tags">tag index</a>
+			<div class="flex flex-row gap-2">
+				<a href="/blog">all posts</a>
+				<a href="/blog/tags">all tags</a>
+			</div>
 		</div>
 	</Card>
 </Structured>
