@@ -4,7 +4,10 @@ import EmojiList from '../EmojiList.astro'
 import ViewMore from '../ViewMore.astro'
 
 const allPosts = await getCollection('blog')
-const featuredPosts = allPosts.slice(0, 10)
+const sortedPosts = allPosts.sort((a, b) =>
+	a.data.date < b.data.date ? 1 : -1,
+)
+const featuredPosts = sortedPosts.slice(0, 10)
 const remaining = allPosts.length - featuredPosts.length
 const viewMoreText = remaining > 0 ? `view ${remaining} more` : `view all`
 ---

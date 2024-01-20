@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
-import Card from '@/components/Card.astro'
-import Structured from '@/layouts/Structured.astro'
+import Blog from '@/layouts/Blog.astro'
 
 export async function getStaticPaths() {
 	const blogEntries = await getCollection('blog')
@@ -15,14 +14,121 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
 
-<Structured title={`✏ ${entry.data.title}`}>
-	<Card padding="p-4 px-6">
-		<div class="space-y-4">
-			<Content />
-			<div class="flex flex-row gap-2">
-				<a href="/blog">all posts</a>
-				<a href="/blog/tags">all tags</a>
+<Blog title={`✏ ${entry.data.title}`}>
+	<article>
+		<h1>{entry.data.title}</h1>
+		<div class="flex flex-col gap-0 lg:flex-row lg:gap-4">
+			<p class="mb-0">
+				<span>on <b>{entry.data.date.toLocaleDateString()}</b></span>
+				<span>by <b>crowdozer</b></span>
+			</p>
+			<div class="flex flex-row flex-wrap gap-2">
+				{
+					entry.data.tags.map((tag) => (
+						<a href={`/blog/tags/${tag}`}>🔖{tag}</a>
+					))
+				}
 			</div>
 		</div>
-	</Card>
-</Structured>
+		<hr />
+		<Content />
+	</article>
+</Blog>
+
+<style is:global>
+	article p {
+		@apply mb-4;
+	}
+
+	article h1,
+	article h2,
+	article h3,
+	article h4,
+	article h5 {
+		@apply mb-4 mt-8 font-mono tracking-normal;
+		@apply text-green-700;
+	}
+
+	article h5 {
+		@apply text-xl;
+	}
+
+	article h4 {
+		@apply text-2xl;
+	}
+
+	article h3 {
+		@apply text-3xl;
+	}
+
+	article h2 {
+		@apply text-4xl;
+		@apply text-green-600;
+	}
+
+	article h1 {
+		@apply text-5xl;
+		@apply text-green-500;
+	}
+
+	article pre {
+		@apply my-4 overflow-x-hidden p-8 font-mono;
+	}
+
+	article pre {
+		/* Initialize the counter */
+		counter-reset: line-numbers;
+	}
+
+	article span.line {
+		@apply whitespace-pre-wrap;
+	}
+
+	article blockquote {
+		@apply bg-neutral-900 p-4;
+	}
+	article blockquote *:last-child {
+		/* fix for extra space at end */
+		@apply mb-0;
+	}
+
+	article span.line::before {
+		/* Increment the counter */
+		counter-increment: line-numbers;
+		content: counter(line-numbers);
+		display: inline-block;
+		width: 36px;
+		height: 100%;
+		margin-right: 1em;
+		text-align: right;
+		user-select: none;
+		opacity: 0.5;
+	}
+
+	article p > code,
+	article li > code {
+		/** h-0 inline-block fixes paragraph line heights */
+		@apply inline-block h-0 font-mono text-green-500;
+	}
+
+	article ol,
+	article ul {
+		@apply mb-8 list-disc;
+	}
+
+	article ol > li {
+		@apply ml-12 pr-12;
+	}
+
+	article ul > li {
+		@apply ml-12 pr-12;
+	}
+
+	article sup {
+		@apply mb-2;
+	}
+
+	article hr {
+		@apply my-4 border-neutral-ui;
+	}
+</style>

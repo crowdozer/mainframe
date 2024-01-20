@@ -1,39 +1,41 @@
 ---
 import { getCollection } from 'astro:content'
 import EmojiList from '@c/EmojiList.astro'
-import Structured from '@/layouts/Structured.astro'
-import Card from '@/components/Card.astro'
+import Blog from '@/layouts/Blog.astro'
 
-const allBlogPosts = await getCollection('blog')
+const allPosts = await getCollection('blog')
+const sortedPosts = allPosts.sort((a, b) =>
+	a.data.date < b.data.date ? 1 : -1,
+)
 ---
 
-<Structured title="blog posts">
-	<Card padding="p-4 px-6">
-		<div class="space-y-4">
-			<h3>Blog Posts</h3>
-			<p>all available blog posts</p>
-			<EmojiList emoji="✏️">
-				{
-					allBlogPosts.map((post) => (
-						<li>
-							<a
-								class="mr-1 line-clamp-1"
-								href={`/blog/${post.slug}`}
-								title={post.data.title}
-							>
-								{post.data.title}
-							</a>
-							<span class="block font-mono text-sm text-neutral-ui-highlight">
-								[{post.data.date.toLocaleString()}]
-							</span>
-						</li>
-					))
-				}
-			</EmojiList>
-			<div class="flex flex-row gap-2">
-				<a href="/blog">all posts</a>
-				<a href="/blog/tags">all tags</a>
-			</div>
-		</div>
-	</Card>
-</Structured>
+<Blog title="blog posts">
+	<div>
+		<h3 class="mb-8">📂 Blog Index</h3>
+		<EmojiList emoji="✏️">
+			{
+				sortedPosts.map((post) => (
+					<li>
+						<a
+							class="mr-1 line-clamp-1"
+							href={`/blog/${post.slug}`}
+							title={post.data.title}
+						>
+							{post.data.title}
+						</a>
+						<span class="block font-mono text-sm text-neutral-ui-highlight">
+							[{post.data.date.toLocaleString()}]
+						</span>
+					</li>
+				))
+			}
+			<p class="mt-4 text-neutral-ui-highlight">
+				Posts are automatically added to this index as they are published.
+			</p>
+			<p class="text-neutral-ui-highlight">
+				Click
+				<a href="/blog/rss.xml">here</a> for an RSS feed.
+			</p>
+		</EmojiList>
+	</div>
+</Blog>

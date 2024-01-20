@@ -1,8 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
-import Structured from '@/layouts/Structured.astro'
+import Blog from '@/layouts/Blog.astro'
 import EmojiList from '@c/EmojiList.astro'
-import Card from '@c/Card.astro'
 
 export async function getStaticPaths(): Promise<any> {
 	const allPosts = await getCollection('blog')
@@ -23,34 +22,28 @@ const { tag } = Astro.params
 const { posts } = Astro.props
 ---
 
-<Structured title={tag}>
-	<Card padding="p-4 px-6">
-		<div class="space-y-4">
-			<h3>
-				Posts tagged with <strong class="text-green-500">{tag}</strong>
-			</h3>
-			<EmojiList emoji="✏️">
-				{
-					posts.map((post) => (
-						<li>
-							<a
-								class="mr-1 line-clamp-1"
-								href={`/blog/${post.slug}`}
-								title={post.data.title}
-							>
-								{post.data.title}
-							</a>
-							<span class="block font-mono text-sm text-neutral-ui-highlight">
-								[{post.data.date.toLocaleString()}]
-							</span>
-						</li>
-					))
-				}
-			</EmojiList>
-			<div class="flex flex-row gap-2">
-				<a href="/blog">all posts</a>
-				<a href="/blog/tags">all tags</a>
-			</div>
-		</div>
-	</Card>
-</Structured>
+<Blog title={tag}>
+	<div class="space-y-8">
+		<h3>
+			Posts tagged with <strong class="text-green-500">{tag}</strong>
+		</h3>
+		<EmojiList emoji="✏️">
+			{
+				posts.map((post) => (
+					<li>
+						<a
+							class="mr-1 line-clamp-1"
+							href={`/blog/${post.slug}`}
+							title={post.data.title}
+						>
+							{post.data.title}
+						</a>
+						<span class="block font-mono text-sm text-neutral-ui-highlight">
+							[{post.data.date.toLocaleString()}]
+						</span>
+					</li>
+				))
+			}
+		</EmojiList>
+	</div>
+</Blog>

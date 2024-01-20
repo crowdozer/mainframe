@@ -1,12 +1,18 @@
 ---
+const date = new Date()
+const day = String(date.getDate()).padStart(2, '0')
+const month = String(date.getMonth() + 1).padStart(2, '0')
+const year = date.getFullYear()
 
+// generated at build time
+const modifiedText = `${month} / ${day} / ${year}`
 ---
 
-<footer>
-	<div class="mt-8 border-t border-neutral-ui bg-neutral-dark px-4 py-2">
+<footer class="text-neutral-ui-highlight">
+	<div class="border-t border-neutral-ui bg-neutral-dark px-4 py-2">
 		<div class="flex flex-col justify-between lg:flex-row">
 			<p>webmaster@crwdzr.io</p>
-			<p>last modified 07 / 06 / 1995</p>
+			<p>last modified {modifiedText}</p>
 			<p>
 				built with <a href="https://astro.build/">astro</a> & <a
 					href="https://tailwindcss.com/">tailwind</a
