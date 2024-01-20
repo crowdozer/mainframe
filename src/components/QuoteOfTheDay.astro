@@ -1,5 +1,6 @@
 ---
 import { getRandomInt } from '@/lib/number'
+import Marquee from '@c/Marquee.astro'
 
 export const quotes = [
 	'When there is no desire, all things are at peace. - Laozi',
@@ -32,8 +33,9 @@ function getQuote(): string {
 const quote = getQuote()
 ---
 
-<span>
-	<b>✨ Quote of the Day ✨</b>
-	{' '}
-	<i>{quote}</i>
-</span>
+<Marquee pausable dir="rtl" duration="10s" multiples={3}>
+	<span class="whitespace-pre">
+		<b>{'✨ Quote of the Day ✨'}</b>
+		<i>{quote}</i>
+	</span>
+</Marquee>

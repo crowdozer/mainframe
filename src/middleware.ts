@@ -12,6 +12,10 @@ const ratelimit = new Ratelimit({
 const urls = new Set(['/api/ytdl', '/partials/spotify'])
 
 export const onRequest: MiddlewareHandler = async ({ request, url }, next) => {
+	if (process.env.NODE_ENV === 'development') {
+		return next()
+	}
+
 	if (!urls.has(url.pathname)) {
 		return next()
 	}
@@ -24,7 +28,13 @@ export const onRequest: MiddlewareHandler = async ({ request, url }, next) => {
 
 	return success
 		? next()
-		: new Response('slow down!', {
-				status: 420,
-		  })
+		: new Response(
+				JSON.stringify({
+					message: 'slow down!',
+					next: reset,
+				}),
+				{
+					status: 420,
+				},
+		  )
 }
