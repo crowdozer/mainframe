@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "ci:audit": "lhci autorun"
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@astrojs/react": "^3.0.9",
@@ -20,6 +20,9 @@
     "@types/react-dom": "^18.2.7",
     "@uiw/codemirror-theme-monokai": "^4.21.18",
     "@uiw/react-codemirror": "^4.21.18",
+    "@upstash/ratelimit": "^1.0.0",
+    "@vercel/edge": "^1.1.1",
+    "@vercel/kv": "^1.0.1",
     "astro": "^4.1.2",
     "astro-compressor": "^0.4.1",
     "astro-icon": "^0.8.1",
