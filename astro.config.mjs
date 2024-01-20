@@ -6,6 +6,7 @@ import lqip from 'vite-plugin-lqip'
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://beta.crwdzr.io',
 	output: 'hybrid',
 	adapter: vercel({
 		webAnalytics: {
