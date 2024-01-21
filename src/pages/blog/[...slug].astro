@@ -31,7 +31,9 @@ const { Content } = await entry.render()
 			</div>
 		</div>
 		<hr />
-		<Content />
+		<div class="mx-auto max-w-2xl py-8">
+			<Content />
+		</div>
 	</article>
 </Blog>
 
@@ -46,7 +48,7 @@ const { Content } = await entry.render()
 	article h4,
 	article h5 {
 		@apply mb-4 mt-8 font-mono tracking-normal;
-		@apply text-green-700;
+		@apply text-green-500;
 	}
 
 	article h5 {
@@ -63,12 +65,10 @@ const { Content } = await entry.render()
 
 	article h2 {
 		@apply text-4xl;
-		@apply text-green-600;
 	}
 
 	article h1 {
 		@apply text-5xl;
-		@apply text-green-500;
 	}
 
 	article pre {
