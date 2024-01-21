@@ -18,8 +18,8 @@ const { interval } = Astro.props
 
 <div
 	hx-get="/partials/spotify"
-	hx-trigger={`intersect delay:${interval}`}
-	hx-swap="morph:outerHTML"
+	hx-trigger={`load delay:${interval}`}
+	hx-swap="outerHTML"
 >
 	<slot />
 </div>

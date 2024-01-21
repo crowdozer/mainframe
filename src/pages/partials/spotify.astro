@@ -1,18 +1,32 @@
 ---
-import { getRandomInt } from '@/lib/number'
 import Renderer from '@c/Spotify/Renderer.astro'
+import RendererInactive from '@c/Spotify/RendererInactive.astro'
+import getPlaybackState from '@/lib/spfy'
 
 export const partial = true
 export const prerender = false
+
+const { playing, date } = await getPlaybackState()
+
+// infer the actual track state, based on the datetime the
+// status was updatedon  vs the datetime we're currently at
+const now = new Date()
+const delta = now.getTime() - date.getTime()
 ---
 
-<Renderer
-	duration={120000}
-	progress={getRandomInt(110000, 120000)}
-	albumText="The Story So Far"
-	songText="Empty Space"
-	artistText="The Story So Far"
-	url="/404"
-	image="/images/glitchdozer.gif"
-	paused={false}
-/>
+{
+	playing.is_playing && playing && playing.item && playing.item.album ? (
+		<Renderer
+			duration={playing.item.duration_ms}
+			progress={playing.progress_ms + delta}
+			albumText={playing.item.album.name}
+			songText={playing.item.name}
+			artistText={playing.item.artists.map((a: any) => a.name).join(', ')}
+			url={playing.item.preview_url}
+			image={playing.item.album.images[0].url}
+			paused={false}
+		/>
+	) : (
+		<RendererInactive />
+	)
+}

@@ -1,0 +1,17 @@
+---
+import HotLoader from './HotLoader.astro'
+
+/**
+ * do not directly include this in the page, use the loaders
+ */
+
+// make the interval longer if i'm not listening to anything
+// waste of resources to ping for no reason
+---
+
+<HotLoader interval="15s">
+	<div class="mt-2">
+		<p>Nothing at the moment.</p>
+		<p>Check back later!</p>
+	</div>
+</HotLoader>
