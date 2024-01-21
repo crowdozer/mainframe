@@ -6,6 +6,9 @@
 	using itersect prevents this from refreshing when it's hidden, 
 	i.e on mobile in a sidebar. when the sidebar is opened, it automatically
 	begins working again.
+
+	the crypto.randomUUID() ensures morph replaces the htmx trigger
+	otherwise it will randomly stop pinging
  */
 
 interface Props {
@@ -18,8 +21,9 @@ const { interval } = Astro.props
 
 <div
 	hx-get="/partials/spotify"
-	hx-trigger={`load delay:${interval}`}
-	hx-swap="outerHTML"
+	hx-trigger={`intersect delay:${interval}`}
+	hx-swap="morph:outerHTML"
+	id={crypto.randomUUID()}
 >
 	<slot />
 </div>

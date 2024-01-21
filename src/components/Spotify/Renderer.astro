@@ -73,7 +73,13 @@ const durationText = formatMilliseconds(duration)
 				/>
 			</div>
 			<div class="grow">
-				<a href={url} class="line-clamp-2" title={songText}>
+				<a
+					href={url}
+					class="line-clamp-2"
+					title={songText}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
 					<span class="block font-bold">{songText}</span>
 				</a>
 				<p class="line-clamp-1 text-sm" title={artistText}>
