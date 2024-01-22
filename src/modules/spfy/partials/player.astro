@@ -1,10 +1,14 @@
 ---
+/**
+    wherever this component is included, the following must be exported:
+
+	export const partial = true
+	export const prerender = false
+ */
+
 import Renderer from '../components/Renderer.astro'
 import RendererInactive from '../components/RendererInactive.astro'
 import { getPlaybackState } from '../utils/client'
-
-export const partial = true
-export const prerender = false
 
 const { playing, date } = await getPlaybackState()
 
