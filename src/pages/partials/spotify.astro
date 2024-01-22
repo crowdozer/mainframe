@@ -1,32 +1,5 @@
 ---
-import Renderer from '@c/Spotify/Renderer.astro'
-import RendererInactive from '@c/Spotify/RendererInactive.astro'
-import getPlaybackState from '@/lib/spfy'
-
-export const partial = true
-export const prerender = false
-
-const { playing, date } = await getPlaybackState()
-
-// infer the actual track state, based on the datetime the
-// status was updatedon  vs the datetime we're currently at
-const now = new Date()
-const delta = now.getTime() - date.getTime()
+import Player from '@/modules/spfy/partials/player.astro'
 ---
 
-{
-	playing.is_playing && playing && playing.item && playing.item.album ? (
-		<Renderer
-			duration={playing.item.duration_ms}
-			progress={playing.progress_ms + delta}
-			albumText={playing.item.album.name}
-			songText={playing.item.name}
-			artistText={playing.item.artists.map((a: any) => a.name).join(', ')}
-			url={playing.item.preview_url}
-			image={playing.item.album.images[0].url}
-			paused={false}
-		/>
-	) : (
-		<RendererInactive />
-	)
-}
+<Player />

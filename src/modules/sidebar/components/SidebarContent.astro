@@ -1,14 +1,14 @@
 ---
-import { STATUS_EMOJI, STATUS_TEXT } from '@/content'
+import { STATUS_EMOJI, STATUS_TEXT } from '../config'
 import Card from '@c/Card.astro'
-import Spotify from '@c/Spotify/index.astro'
-import EmploymentStatus from './EmploymentStatus.astro'
-import SidebarNews from './SidebarNews.astro'
-import SidebarChangelog from './SidebarChangelog.astro'
-import YTDownloader from './YTDownloader.astro'
+import ImgButton from '@c/ImgButton.astro'
+import Marquee from '@c/Marquee.astro'
+import Spotify from '@/modules/spfy/Spotify.astro'
 import gokuImg from '@img/son-goku-wave.webp?lqip'
-import Marquee from '../Marquee.astro'
-import ImgButton from '../ImgButton.astro'
+import EmploymentStatus from './EmploymentStatus.astro'
+import SidebarNews from './News.astro'
+import SidebarChangelog from './Changelog.astro'
+import YTDownloader from './YTDownloader.astro'
 ---
 
 <div class="flex flex-col-reverse gap-2 lg:flex-col">

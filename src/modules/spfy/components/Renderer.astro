@@ -20,20 +20,10 @@ interface Props {
 	url: string
 	// image url
 	image: string
-	// whether or not we are paused
-	paused: boolean
 }
 
-const {
-	duration,
-	progress,
-	albumText,
-	songText,
-	artistText,
-	url,
-	image,
-	paused,
-} = Astro.props
+const { duration, progress, albumText, songText, artistText, url, image } =
+	Astro.props
 
 function formatMilliseconds(milliseconds: number): string {
 	const seconds = Math.floor(milliseconds / 1000)

@@ -1,17 +1,24 @@
+/**
+ * this file isn't for client-facing code,
+ * it's for client supporting code
+ */
+
 import axios from 'axios'
 import {
 	readCachedAuth,
 	refreshAuth,
-	type HTTPMethod,
 	readCachedStatus,
-	type NowPlaying,
 	writeStatusToCache,
-} from './utils'
+	type HTTPMethod,
+	type NowPlaying,
+	type Token,
+} from './server'
 
 /**
  * Requests current playback state
  */
-export default async function getPlaybackState(): Promise<NowPlaying> {
+export async function getPlaybackState(): Promise<NowPlaying> {
+	// check if the status was received recently
 	const cachedStatus = await readCachedStatus()
 	if (cachedStatus) {
 		return {
@@ -20,11 +27,19 @@ export default async function getPlaybackState(): Promise<NowPlaying> {
 		}
 	}
 
+	// if not, get auth and request status
+	const auth = await readCachedAuth()
+	if (!auth) {
+		throw new Error('No auth detected')
+	}
+
 	const playing = await wrapRequest(
 		'https://api.spotify.com/v1/me/player',
 		'GET',
+		auth,
 	)
 
+	// update cache
 	const status = { playing, date: new Date() }
 	await writeStatusToCache(status)
 	return status
@@ -36,13 +51,10 @@ export default async function getPlaybackState(): Promise<NowPlaying> {
 export async function wrapRequest(
 	url: string,
 	method: HTTPMethod,
-	data: any = undefined,
+	auth: Token,
+	// infinite loop protection
+	throwOnFail = false,
 ): Promise<any> {
-	const auth = await readCachedAuth()
-	if (!auth) {
-		throw new Error('No auth detected')
-	}
-
 	return axios({
 		url: url,
 		method: method,
@@ -50,26 +62,38 @@ export async function wrapRequest(
 			Authorization: 'Bearer ' + auth.access_token,
 			'Content-Type': 'application/json',
 		},
-		data: method === 'GET' ? undefined : JSON.stringify(data),
 	})
 		.then((res) => res.data)
 		.catch(async (err) => {
+			// check if we're about to loop undesirably
+			if (throwOnFail) throw err
+
+			// check for an error that doesn't come from spotify api
 			if (!err || !err?.response?.data) {
 				console.log(err)
 				throw new Error('unknown error')
 			}
 
+			// check our spotify error
 			const data = err.response.data
-
 			switch (true) {
+				/**
+				 * on expired token, just retry
+				 * pass throwOnFail=true so it doesnt loop
+				 */
 				case data?.error?.message === 'The access token expired':
-					// if our token is expired, refresh and try again
-					await refreshAuth(auth)
-					return wrapRequest(url, method, data)
+					const newAuth = await refreshAuth(auth)
+					return wrapRequest(url, method, newAuth, true)
+
+				/**
+				 * if no active device, thats ok
+				 */
 				case data?.error?.reason === 'NO_ACTIVE_DEVICE':
-					return console.log(
-						'No active playback - configure one with `spfy devices`',
-					)
+					return null
+
+				/**
+				 * otherwise log and throw
+				 */
 				default:
 					console.log(data)
 					throw new Error('Spotify API request failed')
