@@ -7,20 +7,9 @@
  * -> hx-trigger="intersect once"
  * prevents this from firing until it enters viewport
  * i.e when mobile opens sidebar
- *
- * see api/ for api handlers
- * see partials/ for partials that must be exposed
  */
 ---
 
-<!-- 
-    this is what needs to be included in the page layout. 
-    it defers loading of the spotify component to improve
-    performance (initial page load doesnt depend on widget)
-
-	intersect once prevents this from firing until it enters
-	the viewport. i.e when a mobile user opens sidebar
- -->
 <div hx-ext="morph">
 	<div
 		class="min-h-[68px]"
@@ -31,3 +20,8 @@
 		<div class="htmx-indicator glimmer h-[68px] w-full"></div>
 	</div>
 </div>
+
+<script>
+	// register the front-end sim
+	import './utils/hot'
+</script>

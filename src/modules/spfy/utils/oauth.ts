@@ -1,6 +1,5 @@
 /**
- * this file isn't for server-exclusive code,
- * it's for non-client facing functionality
+ * this file is exclusively for interfacing with the spotify api
  */
 
 import axios from 'axios'
@@ -14,6 +13,7 @@ import {
 	AUTH_CACHE_LOC,
 	CHALLENGE_CACHE_LOC,
 	NOW_CACHE_LOC,
+	SPOTIFY_API_CACHE_LIFETIME,
 } from '../config'
 
 // ...
@@ -191,5 +191,5 @@ export async function readCachedStatus(): Promise<NowPlaying | null> {
 
 export async function writeStatusToCache(data: NowPlaying) {
 	// cache the "now playing" status for 10 seconds
-	return write(data, NOW_CACHE_LOC, { ex: 10 })
+	return write(data, NOW_CACHE_LOC, { ex: SPOTIFY_API_CACHE_LIFETIME })
 }

@@ -1,15 +1,12 @@
 ---
-import HotLoader from './HotLoader.astro'
-
 /**
- * do not directly include this in the page, use the loaders
+	do not include this one on the page directly
+	this one is exclusively for rendering the partial
  */
-
-// make the interval longer if i'm not listening to anything
-// waste of resources to ping for no reason
+import HotLoader from './HotLoader.astro'
 ---
 
-<HotLoader interval="15s">
+<HotLoader interval="30s">
 	<div class="mt-2">
 		<p>Nothing at the moment.</p>
 		<p>Check back later!</p>

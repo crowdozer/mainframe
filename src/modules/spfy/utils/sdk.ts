@@ -1,6 +1,5 @@
 /**
- * this file isn't for client-facing code,
- * it's for client supporting code
+ * this file is for all of the client supporting astro js
  */
 
 import axios from 'axios'
@@ -12,18 +11,22 @@ import {
 	type HTTPMethod,
 	type NowPlaying,
 	type Token,
-} from './server'
+} from './oauth'
+import { CACHE_SPOTIFY_API_RESPONSE } from '../config'
 
 /**
  * Requests current playback state
+ * this is only used on initial server render when a cache entry doesn't exist
  */
 export async function getPlaybackState(): Promise<NowPlaying> {
-	// check if the status was received recently
-	const cachedStatus = await readCachedStatus()
-	if (cachedStatus) {
-		return {
-			...cachedStatus,
-			date: new Date(cachedStatus.date),
+	if (CACHE_SPOTIFY_API_RESPONSE) {
+		// check if the status was received recently
+		const cachedStatus = await readCachedStatus()
+		if (cachedStatus) {
+			return {
+				...cachedStatus,
+				date: new Date(cachedStatus.date),
+			}
 		}
 	}
 
@@ -41,12 +44,15 @@ export async function getPlaybackState(): Promise<NowPlaying> {
 
 	// update cache
 	const status = { playing, date: new Date() }
-	await writeStatusToCache(status)
+	if (CACHE_SPOTIFY_API_RESPONSE) {
+		await writeStatusToCache(status)
+	}
 	return status
 }
 
 /**
  * Wraps a request with auth
+ * this is only used to request updates from spotify
  */
 export async function wrapRequest(
 	url: string,

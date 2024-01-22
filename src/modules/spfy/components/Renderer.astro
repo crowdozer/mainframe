@@ -1,9 +1,10 @@
 ---
-import HotLoader from './HotLoader.astro'
-
 /**
- * do not directly include this in the page, use the loaders
+	do not include this one on the page directly
+	this one is exclusively for rendering the partial
  */
+import HotLoader from './HotLoader.astro'
+import { getProgressRenderData } from '../utils/shared'
 
 interface Props {
 	// duration of the song (in ms)
@@ -25,31 +26,19 @@ interface Props {
 const { duration, progress, albumText, songText, artistText, url, image } =
 	Astro.props
 
-function formatMilliseconds(milliseconds: number): string {
-	const seconds = Math.floor(milliseconds / 1000)
-	const hours = Math.floor(seconds / 3600)
-	const remainingSeconds = seconds % 3600
-	const minutes = Math.floor(remainingSeconds / 60)
-	//   const remainingMilliseconds = milliseconds % 1000;
+const { progressPercent, progressText, durationText } = getProgressRenderData(
+	progress,
+	duration,
+)
 
-	const formattedHours = hours.toString().padStart(2, '0')
-	const formattedMinutes = minutes.toString().padStart(2, '0')
-	const formattedSeconds = (remainingSeconds % 60).toString().padStart(2, '0')
-
-	if (hours > 0) {
-		return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`
-	} else {
-		return `${formattedMinutes}:${formattedSeconds}`
-	}
-}
-
-// clean up some display text
-const progressPercent = Math.round((progress / duration) * 100)
-const progressText = formatMilliseconds(progress)
-const durationText = formatMilliseconds(duration)
+// intelligently throttle this to target the end of a song
+// determine # of remaining seconds, add 1, refresh then.
+// OR in 30 seconds, whichever is sooner .
+const endOfSongIn = Math.round((duration - progress) / 1000) + 1
+const interval = endOfSongIn < 30 ? `${endOfSongIn}s` : '30s'
 ---
 
-<HotLoader interval="5s">
+<HotLoader {interval}>
 	<div class="space-y-2">
 		<!-- the pretty stuff -->
 		<div class="flex flex-row gap-2">
@@ -81,7 +70,7 @@ const durationText = formatMilliseconds(duration)
 		<!-- progress bar -->
 		<div class="relative overflow-hidden border border-neutral-ui">
 			<div class="relative z-[2] flex flex-row px-1 py-0.5">
-				<span class="text-xs">
+				<span class="text-xs" id="spfy-player-progress-text">
 					{progressText}
 				</span>
 				<div class="grow"></div>
@@ -93,6 +82,7 @@ const durationText = formatMilliseconds(duration)
 			<div
 				class="glimmer glimmer-bright absolute bottom-0 left-0 top-0 z-[1]"
 				style={{ width: `${progressPercent}%` }}
+				id="spfy-player-progress-bar"
 			>
 			</div>
 		</div>

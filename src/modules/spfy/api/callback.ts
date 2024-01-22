@@ -1,7 +1,11 @@
 import type { APIRoute } from 'astro'
-import { writeAuthToCache, getAuth } from '../utils/server'
-import { readCachedVerifier } from '../utils/server'
+import { writeAuthToCache, getAuth, readCachedVerifier } from '../utils/oauth'
 import { ADMIN_ROUTES_ENABLED } from '../config'
+
+/**
+ * the only purpose for this endpoint is to complete auth
+ * with the spotify API to get a long lasting token
+ */
 
 // prevent astro from prerendering this
 export const prerender = false

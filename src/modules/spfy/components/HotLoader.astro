@@ -1,13 +1,13 @@
 ---
 /**
-	do not include this one on the page, use the deferred loader.
-	this one is meant to keep the front end hot once it loads
+	do not include this one on the page directly
+	this one is meant to keep the front end hot automatically
 
-	using itersect prevents this from refreshing when it's hidden, 
+	using "intersect" prevents this from refreshing when it's hidden, 
 	i.e on mobile in a sidebar. when the sidebar is opened, it automatically
 	begins working again.
 
-	the crypto.randomUUID() ensures morph replaces the htmx trigger
+	nonce ensures morph replaces the htmx trigger, 
 	otherwise it will randomly stop pinging
  */
 
@@ -20,10 +20,11 @@ const { interval } = Astro.props
 ---
 
 <div
+	data-nonce={Math.random().toString(36)}
 	hx-get="/partials/spotify"
 	hx-trigger={`intersect delay:${interval}`}
 	hx-swap="morph:outerHTML"
-	id={crypto.randomUUID()}
+	hx-target="#spfy-player"
 >
 	<slot />
 </div>
