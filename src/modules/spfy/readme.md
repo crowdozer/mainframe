@@ -4,6 +4,8 @@ this is a set of components required to render spotify playback
 
 ## high level overview
 
+![Alt text](image.png)
+
 - HTMX is used to enable automatic polling
 - Redis is used to cache supporting data (tokens, mostly)
   - it can also cache api responses, but it's staying disabled until i get 429's

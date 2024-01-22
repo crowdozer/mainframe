@@ -7,9 +7,9 @@
 	export const prerender = false
  */
 
+ import { getPlaybackState } from '../utils/sdk'
 import Renderer from '../components/Renderer.astro'
 import RendererInactive from '../components/RendererInactive.astro'
-import { getPlaybackState } from '../utils/sdk'
 
 const { playing, date } = await getPlaybackState()
 
