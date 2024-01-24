@@ -1,11 +1,17 @@
-// disables admin api routes in ci/prod
-export const ADMIN_ROUTES_ENABLED = process.env.NODE_ENV !== 'production'
+import { isDev } from '@/lib/dev'
 
-// whether or not to cache calls to the api
-export const CACHE_SPOTIFY_API_RESPONSE = true
+// disables admin api routes in ci/prod
+export const ADMIN_ROUTES_ENABLED = isDev
 
 // how long to cache api calls
-export const SPOTIFY_API_CACHE_LIFETIME = 5
+// this can be fairly high, because it will taper off near
+// the end of songs to prevent the ui from being delayed
+export const SPOTIFY_API_CACHE_LIFETIME = 15
+
+// how long the front end should wait before checking updates
+// this can also be fairly high, because it also tapers off near
+// the end of songs
+export const CLIENT_HTMX_IDLE_DURATION = 30
 
 // spotify-cli app ID
 export const SPOTIFY_APP_ID = import.meta.env.SPOTIFY_APP_ID
@@ -26,3 +32,6 @@ export const SPOTIFY_AUTH_URL = 'https://accounts.spotify.com/authorize'
 export const AUTH_CACHE_LOC = 'spfy.auth'
 export const CHALLENGE_CACHE_LOC = 'spfy.challenge'
 export const NOW_CACHE_LOC = 'spfy.now'
+export const PREVIOUS_CACHE_LOC = 'spfy.prev'
+export const LIKES_CACHE_LOC = 'spfy.likes'
+export const PLAYS_CACHE_LOC = 'spfy.plays'

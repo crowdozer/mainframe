@@ -4,46 +4,18 @@
 
 import axios from 'axios'
 import { createHash } from 'crypto'
-import { read, write } from '@/lib/cache'
 import {
 	SPOTIFY_APP_ID,
 	CALLBACK_BASE_URL,
 	SCOPES,
 	SPOTIFY_AUTH_URL,
-	AUTH_CACHE_LOC,
-	CHALLENGE_CACHE_LOC,
-	NOW_CACHE_LOC,
-	SPOTIFY_API_CACHE_LIFETIME,
 } from '../config'
+import { writeAuthToCache, writeVerifierToCache } from './cache'
+import type { Token } from '../types'
 
 // ...
 // ...
-// ... TYPES
-// ...
-// ...
-
-export type Verifier = {
-	verifier: string
-	challenge: string
-}
-
-export type Token = {
-	access_token: string
-	token_type: 'Bearer'
-	expires_in: number
-	refresh_token: string
-}
-
-export type NowPlaying = {
-	playing: any
-	date: Date
-}
-
-export type HTTPMethod = 'GET' | 'POST' | 'PUT'
-
-// ...
-// ...
-// ... SETUP HELPER FUNCTIONS
+// ... OAUTH HELPER FUNCTIONS
 // ...
 // ...
 
@@ -161,35 +133,4 @@ export async function refreshAuth(token: Token): Promise<Token> {
 	// cache and return the new token
 	writeAuthToCache(newToken)
 	return newToken
-}
-
-// ...
-// ...
-// ... CACHE HELPER FUNCTIONS
-// ...
-// ...
-
-export async function readCachedAuth(): Promise<Token | null> {
-	return read<Token>(AUTH_CACHE_LOC)
-}
-
-export async function writeAuthToCache(data: Token) {
-	return write(data, AUTH_CACHE_LOC)
-}
-
-export async function readCachedVerifier(): Promise<Verifier | null> {
-	return read<Verifier>(CHALLENGE_CACHE_LOC)
-}
-
-export async function writeVerifierToCache(data: Verifier) {
-	return write(data, CHALLENGE_CACHE_LOC)
-}
-
-export async function readCachedStatus(): Promise<NowPlaying | null> {
-	return read<NowPlaying>(NOW_CACHE_LOC)
-}
-
-export async function writeStatusToCache(data: NowPlaying) {
-	// cache the "now playing" status for 10 seconds
-	return write(data, NOW_CACHE_LOC, { ex: SPOTIFY_API_CACHE_LIFETIME })
 }

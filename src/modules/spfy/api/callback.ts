@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro'
-import { writeAuthToCache, getAuth, readCachedVerifier } from '../utils/oauth'
+import { getAuth } from '../utils/oauth'
+import { writeAuthToCache, readCachedVerifier } from '../utils/cache'
 import { ADMIN_ROUTES_ENABLED } from '../config'
 
 /**

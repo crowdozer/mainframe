@@ -2,6 +2,7 @@ import { type MiddlewareHandler } from 'astro'
 import { ipAddress } from '@vercel/edge'
 import { Ratelimit } from '@upstash/ratelimit'
 import { kv } from '@vercel/kv'
+import { isDev } from './lib/dev'
 
 /**
  * define all urls which will be ratelimited
@@ -17,8 +18,6 @@ const RATELIMITED_URLS = new Set([
  * whether or not to apply ratelimiting in dev
  */
 const RATELIMIT_IN_DEV = false
-
-const isDev = process.env.NODE_ENV === 'development'
 
 /**
  * monkeypatch certain required process.env values
@@ -37,6 +36,7 @@ if (process.env.NODE_ENV === 'development') {
  */
 export const ratelimiter = new Ratelimit({
 	redis: kv,
+	prefix: 'ratelimiter:',
 	// 5 requests from the same IP in 10 seconds
 	limiter: Ratelimit.slidingWindow(5, '3 s'),
 })
@@ -65,7 +65,7 @@ export const onRequest: MiddlewareHandler = async ({ request, url }, next) => {
 			// pending,
 			// limit,
 			// remaining
-		} = await ratelimiter.limit(`ratelimit.${ip}`)
+		} = await ratelimiter.limit(ip)
 
 		// let the user through if it worked
 		if (success) {

@@ -1,51 +1,38 @@
 ---
 /**
-	this partial enables functoinality for the spotify player
+	this partial enables functionality for the spotify player
 
 	wherever this component is included, the following must be exported:
 	export const partial = true
 	export const prerender = false
  */
 
- import { getPlaybackState } from '../utils/sdk'
+import { getPlaybackState } from '../utils/getPlayback'
 import Renderer from '../components/Renderer.astro'
 import RendererInactive from '../components/RendererInactive.astro'
 
-const { playing, date } = await getPlaybackState()
+const { track, isPlaying, date, likes, plays } = await getPlaybackState()
 
 // server data is cached, so infer the actual track state
-const now = new Date()
-const delta = now.getTime() - date.getTime()
-
-const isPlaying =
-	playing.is_playing === true &&
-	typeof playing !== 'undefined' &&
-	typeof playing.item !== 'undefined' &&
-	typeof playing.item.album !== 'undefined'
-
-const duration = !isPlaying ? 0 : playing.item.duration_ms
-const progress = !isPlaying ? 0 : playing.progress_ms + delta
+if (isPlaying) {
+	const now = new Date()
+	const delta = now.getTime() - date.getTime()
+	track.progress = track.progress + delta
+}
 ---
 
 <div
 	class="contents"
 	id="spfy-player"
 	data-nonce={Math.random().toString(36)}
+	data-id={isPlaying ? track.id : ''}
 	data-playing={isPlaying ? 'true' : 'false'}
-	data-duration={duration}
-	data-progress={progress}
+	data-duration={isPlaying ? track.duration : 0}
+	data-progress={isPlaying ? track.progress : 0}
 >
 	{
 		isPlaying ? (
-			<Renderer
-				duration={duration}
-				progress={progress}
-				albumText={playing.item.album.name}
-				songText={playing.item.name}
-				artistText={playing.item.artists.map((a: any) => a.name).join(', ')}
-				url={playing.item.preview_url}
-				image={playing.item.album.images[0].url}
-			/>
+			<Renderer plays={plays} likes={likes} {...track} />
 		) : (
 			<RendererInactive />
 		)

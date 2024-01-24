@@ -4,9 +4,10 @@
 	this one is exclusively for rendering the partial
  */
 import HotLoader from './HotLoader.astro'
+import { CLIENT_HTMX_IDLE_DURATION } from '../config'
 ---
 
-<HotLoader interval="30s">
+<HotLoader interval={`${CLIENT_HTMX_IDLE_DURATION}s`}>
 	<div class="mt-2">
 		<p>Nothing at the moment.</p>
 		<p>Check back later!</p>
