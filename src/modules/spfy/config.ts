@@ -2,7 +2,8 @@
 export const ADMIN_ROUTES_ENABLED = process.env.NODE_ENV !== 'production'
 
 // whether or not to cache calls to the api
-export const CACHE_SPOTIFY_API_RESPONSE = false
+export const CACHE_SPOTIFY_API_RESPONSE = true
+
 // how long to cache api calls
 export const SPOTIFY_API_CACHE_LIFETIME = 5
 

@@ -7,8 +7,7 @@ this is a set of components required to render spotify playback
 ![Alt text](image.png)
 
 - HTMX is used to enable automatic polling
-- Redis is used to cache supporting data (tokens, mostly)
-  - it can also cache api responses, but it's staying disabled until i get 429's
+- Redis is used to cache supporting data (tokens, responses)
 - Files and Folders:
   - `/api` all required api endpoints (re-export into `/src/pages/api/spfy`)
   - `/components` all internal astro components (don't render these manually)
