@@ -1,0 +1,27 @@
+---
+/**
+ * this is what needs to be included in the page layout.
+ * it defers loading of the spotify component to improve
+ * performance (initial page load doesn't depend on widget)
+ *
+ * -> hx-trigger="intersect once"
+ * prevents this from firing until it enters viewport
+ * i.e when mobile opens sidebar
+ */
+---
+
+<div hx-ext="morph">
+	<div
+		class="min-h-[68px]"
+		hx-get="/partials/spotify"
+		hx-trigger="intersect once"
+		hx-swap="innerHTML"
+	>
+		<div class="htmx-indicator glimmer h-[68px] w-full"></div>
+	</div>
+</div>
+
+<script>
+	// register the front-end sim
+	import './utils/hot'
+</script>

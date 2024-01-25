@@ -1,0 +1,69 @@
+---
+interface Props {
+	pausable?: boolean
+	duration?: string
+	dir?: 'rtl' | 'ltr'
+	multiples?: number
+}
+
+const {
+	duration = '15s',
+	dir = 'ltr',
+	multiples = 1,
+	pausable = true,
+} = Astro.props
+
+const animation = `marquee-${dir} ${duration} linear infinite`
+---
+
+<div class="marquee" data-pausable={pausable}>
+	<div class="marquee-content" style={{ animation }}>
+		<slot />
+	</div>
+	{
+		Array.from({ length: multiples }).map(() => (
+			<div class="marquee-content" aria-hidden="true" style={{ animation }}>
+				<slot />
+			</div>
+		))
+	}
+</div>
+
+<style>
+	.marquee {
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+	}
+
+	.marquee-content {
+		white-space: nowrap;
+		flex-shrink: 0;
+		width: max-content;
+		display: flex;
+		align-items: center;
+		transform: translateX(0);
+	}
+
+	.marquee[data-pausable]:hover .marquee-content {
+		animation-play-state: paused !important;
+	}
+
+	@keyframes marquee-ltr {
+		0% {
+			transform: translateX(-100%);
+		}
+		100% {
+			transform: translateX(0%);
+		}
+	}
+
+	@keyframes marquee-rtl {
+		0% {
+			transform: translateX(0%);
+		}
+		100% {
+			transform: translateX(-100%);
+		}
+	}
+</style>

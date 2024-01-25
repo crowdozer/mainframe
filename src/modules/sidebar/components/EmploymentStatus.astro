@@ -1,0 +1,45 @@
+---
+import { LFW } from '../config'
+---
+
+<div class="space-y-1">
+	{
+		LFW ? (
+			<>
+				<div class=" bg-yellow-500/10">
+					<span id="lfw-indicator">🟡</span> looking for work
+				</div>
+				<div>⚫ employed</div>
+			</>
+		) : (
+			<>
+				<div>⚫ looking for work</div>
+				<div class=" bg-blue-500/10">
+					<span id="lfw-indicator">🔵</span> employed
+				</div>
+			</>
+		)
+	}
+</div>
+
+<a href="/contact">contact anyway</a>
+
+<script>
+	;(() => {
+		const blinker = document.getElementById('lfw-indicator')
+		if (!blinker) return
+
+		const original = blinker.innerText
+		let state = false
+
+		setInterval(() => {
+			if (state) {
+				blinker.innerText = '⚫'
+			} else {
+				blinker.innerText = original
+			}
+
+			state = !state
+		}, 1000)
+	})()
+</script>

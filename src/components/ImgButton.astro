@@ -1,0 +1,19 @@
+---
+interface Props {
+	name: string
+	url: string
+	ext?: string
+}
+
+const { name, ext = 'jpg', url } = Astro.props
+---
+
+<a href={url} target="_blank" rel="noopener noreferrer">
+	<img
+		src={`/images/buttons/${name}.${ext}`}
+		alt={name}
+		width="88"
+		height="32"
+		class="inline-block h-[32px] w-[88px]"
+	/>
+</a>

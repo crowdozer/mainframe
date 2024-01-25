@@ -1,0 +1,24 @@
+---
+interface Props {
+	urlbase: string
+	text: string
+	rss?: boolean
+}
+const { urlbase, text, rss = false } = Astro.props
+---
+
+<div class="flex flex-row justify-between">
+	<a href={`${urlbase}`} class="">{text}</a>
+	<span>
+		{
+			rss && (
+				<a
+					href={`${urlbase}/rss.xml`}
+					class="text-yellow-500 visited:text-yellow-700"
+				>
+					rss
+				</a>
+			)
+		}
+	</span>
+</div>

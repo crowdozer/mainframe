@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content'
+import GeneralLayout from '@/layouts/General/index.astro'
+import EmojiList from '@/components/EmojiList.astro'
+
+export async function getStaticPaths(): Promise<any> {
+	const allPosts = await getCollection('blog')
+	const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
+
+	return uniqueTags.map((tag) => {
+		const filteredPosts = allPosts.filter((post) =>
+			post.data.tags.includes(tag),
+		)
+		return {
+			params: { tag },
+			props: { posts: filteredPosts },
+		}
+	})
+}
+
+export interface Props {
+	posts: any[]
+}
+
+const { tag } = Astro.params
+const { posts } = Astro.props
+---
+
+<GeneralLayout title={`blog posts - ${tag}`}>
+	<div class="space-y-8">
+		<h3>
+			📁 Blog / <strong class="text-green-500">{tag}</strong>
+		</h3>
+		<EmojiList emoji="✏️">
+			{
+				posts.map((post) => (
+					<li>
+						<a
+							class="mr-1 line-clamp-1"
+							href={`/blog/${post.slug}`}
+							title={post.data.title}
+						>
+							{post.data.title}
+						</a>
+						<span class="block font-mono text-sm text-neutral-ui-highlight">
+							[{post.data.date.toLocaleString()}]
+						</span>
+					</li>
+				))
+			}
+		</EmojiList>
+		<a href="/blog">{'< back to index'}</a>
+	</div>
+</GeneralLayout>

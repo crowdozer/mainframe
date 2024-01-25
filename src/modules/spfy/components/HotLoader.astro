@@ -1,0 +1,30 @@
+---
+/**
+	do not include this on the page directly
+	this is meant to keep the front end hot after first load
+
+	using "intersect" prevents this from refreshing when it's hidden, 
+	i.e on mobile in a sidebar. when the sidebar is opened, it automatically
+	begins working again.
+
+	nonce ensures morph replaces the htmx trigger, 
+	otherwise it will randomly stop pinging
+ */
+
+interface Props {
+	// how often to fire the request i.e "1s"
+	interval: string
+}
+
+const { interval } = Astro.props
+---
+
+<div
+	data-nonce={Math.random().toString(36)}
+	hx-get="/partials/spotify"
+	hx-trigger={`intersect delay:${interval}`}
+	hx-swap="morph:outerHTML"
+	hx-target="#spfy-player"
+>
+	<slot />
+</div>

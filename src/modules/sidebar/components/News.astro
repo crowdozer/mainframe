@@ -1,0 +1,25 @@
+---
+import EmojiList from '@/components/EmojiList.astro'
+import ViewMore from '@/components/ViewMore.astro'
+
+const links: [string, string, Date][] = [
+	['Lorem ipsum dolor sit', '/news/1', new Date()],
+	['Incidunt, iure. Dolor obcaecati!', '/news/2', new Date()],
+	['Officiis fugiat iure illo', '/news/3', new Date()],
+	['Facilis in ratione blanditiis', '/news/4', new Date()],
+]
+---
+
+<EmojiList emoji="🗞️">
+	{
+		links.map(([text, link, date]) => (
+			<li>
+				<a class="mr-1 line-clamp-1" href={link} title={text}>
+					{text.trim()}
+				</a>
+			</li>
+		))
+	}
+</EmojiList>
+
+<ViewMore urlbase="/news" rss text="+4 more" />

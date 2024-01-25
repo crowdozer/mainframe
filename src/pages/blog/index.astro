@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content'
+import GeneralLayout from '@/layouts/General/index.astro'
+import EmojiList from '@/components/EmojiList.astro'
+import BlogTags from '@/components/BlogTags.astro'
+
+const allPosts = await getCollection('blog')
+const sortedPosts = allPosts.sort((a, b) =>
+	a.data.date < b.data.date ? 1 : -1,
+)
+---
+
+<GeneralLayout title="blog posts">
+	<div>
+		<h3 class="mb-4">📂 Blog</h3>
+		<BlogTags />
+		<EmojiList emoji="✏️">
+			{
+				sortedPosts.map((post) => (
+					<li>
+						<a
+							class="mr-1 line-clamp-1"
+							href={`/blog/${post.slug}`}
+							title={post.data.title}
+						>
+							{post.data.title}
+						</a>
+						<span class="block font-mono text-sm text-neutral-ui-highlight">
+							[{post.data.date.toLocaleString()}]
+						</span>
+					</li>
+				))
+			}
+			<p class="mt-4 text-neutral-ui-highlight">
+				Posts are automatically added to this index as they are published.
+			</p>
+			<p class="text-neutral-ui-highlight">
+				Click
+				<a href="/blog/rss.xml">here</a> for an RSS feed.
+			</p>
+		</EmojiList>
+	</div>
+</GeneralLayout>

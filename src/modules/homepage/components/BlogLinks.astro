@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content'
+import EmojiList from '@/components/EmojiList.astro'
+import ViewMore from '@/components/ViewMore.astro'
+
+const allPosts = await getCollection('blog')
+const sortedPosts = allPosts.sort((a, b) =>
+	a.data.date < b.data.date ? 1 : -1,
+)
+const featuredPosts = sortedPosts.slice(0, 10)
+const remaining = allPosts.length - featuredPosts.length
+const viewMoreText = remaining > 0 ? `view ${remaining} more` : `view all`
+---
+
+<div class="flex grow flex-col gap-4">
+	<div class="grow">
+		<EmojiList emoji="✏️">
+			{
+				featuredPosts.map((post) => (
+					<li>
+						<a
+							class="mr-1 line-clamp-1"
+							href={`/blog/${post.slug}`}
+							title={post.data.title}
+						>
+							{post.data.title}
+						</a>
+						<span class="block font-mono text-sm text-neutral-ui-highlight">
+							[{post.data.date.toLocaleString()}]
+						</span>
+					</li>
+				))
+			}
+		</EmojiList>
+	</div>
+	<ViewMore urlbase="/blog" rss text={viewMoreText} />
+</div>

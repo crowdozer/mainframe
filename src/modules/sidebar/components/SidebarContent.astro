@@ -1,0 +1,76 @@
+---
+import { STATUS_EMOJI, STATUS_TEXT } from '../config'
+import Card from '@/components/Card.astro'
+import ImgButton from '@/components/ImgButton.astro'
+import Marquee from '@/components/Marquee.astro'
+import Spotify from '@/modules/spfy/Spotify.astro'
+import gokuImg from '@img/son-goku-wave.webp?lqip'
+import EmploymentStatus from './EmploymentStatus.astro'
+import SidebarNews from './News.astro'
+import SidebarChangelog from './Changelog.astro'
+import YTDownloader from './YTDownloader.astro'
+---
+
+<div class="flex flex-col-reverse gap-2 lg:flex-col">
+	<div class="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
+		<Card>
+			<div class="space-y-2">
+				<h5>{STATUS_EMOJI} status</h5>
+				<p>{STATUS_TEXT}</p>
+			</div>
+		</Card>
+		<Card>
+			<div class="space-y-2">
+				<h5>🎶 listening</h5>
+				<Spotify />
+			</div>
+		</Card>
+		<Card>
+			<div class="space-y-2">
+				<h5>📰 news</h5>
+				<SidebarNews />
+			</div>
+		</Card>
+		<Card>
+			<div class="space-y-2">
+				<h5>📃 changelog</h5>
+				<SidebarChangelog />
+			</div>
+		</Card>
+		<Card>
+			<div class="space-y-2">
+				<h5>🔖 conscript me</h5>
+				<EmploymentStatus />
+			</div>
+		</Card>
+		<Card>
+			<div class="space-y-2">
+				<h5>⏬ yt downloader</h5>
+				<YTDownloader />
+			</div>
+		</Card>
+		<Card>
+			<Marquee multiples={2} dir="ltr" duration="5s">
+				<ImgButton name="htmx" url="https://htmx.org/" />
+				<ImgButton name="tailwind" url="https://tailwindcss.com/" />
+				<ImgButton name="astro" url="https://astro.build/" />
+			</Marquee>
+		</Card>
+	</div>
+	<div class="sm:col-span-2">
+		<Card>
+			<img
+				src={gokuImg.src}
+				width={gokuImg.width}
+				height={gokuImg.height}
+				style={{
+					backgroundImage: `url("${gokuImg.lqip}")`,
+					backgroundSize: 'cover',
+				}}
+				class="max-h-[120px] w-full object-cover sm:max-h-[240px]"
+				alt="son goku waving goodbye"
+				loading="lazy"
+			/>
+		</Card>
+	</div>
+</div>

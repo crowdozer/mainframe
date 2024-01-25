@@ -1,0 +1,60 @@
+---
+import QuoteOfTheDay from '@/components/QuoteOfTheDay.astro'
+import headerImg from '@img/naruto-gif-de-navelya-visite-pandatoryu.webp?lqip'
+
+const buttonId = Math.random().toString(36)
+---
+
+<header
+	class="space-y-0 border-b border-dashed border-neutral-ui-highlight bg-neutral-dark"
+>
+	<img
+		src={headerImg.src}
+		width={headerImg.width}
+		height={headerImg.height}
+		style={{
+			backgroundImage: `url("${headerImg.lqip}")`,
+			backgroundSize: 'cover',
+		}}
+		class="h-[100px] w-full object-cover lg:h-[200px]"
+		alt="naruto turning and looking at the camera"
+		loading="eager"
+	/>
+
+	<nav class="max-w-[100vw] overflow-x-auto">
+		<div class="flex w-[900px] flex-row lg:w-full">
+			<a href="/">home</a>
+			<a href="/blog">blog</a>
+			<a href="/contact">contact</a>
+			<a href="/sitemap">sitemap</a>
+			<button id={buttonId}>wtf</button>
+		</div>
+	</nav>
+	<QuoteOfTheDay />
+</header>
+
+<script define:vars={{ buttonId }}>
+	const button = document.getElementById(buttonId)
+	button.addEventListener('click', function () {
+		window.alert('what?')
+	})
+</script>
+
+<style>
+	nav button,
+	nav a {
+		/* base styles */
+		@apply grow cursor-pointer bg-neutral-300 px-4 py-2;
+		@apply text-center text-2xl font-extrabold uppercase text-black no-underline;
+		/* @apply inline-block underline underline-offset-2; */
+
+		/* hover state */
+		@apply hover:bg-neutral-400;
+
+		/* focus state */
+		@apply focus:border-none focus:bg-neutral-400  focus-visible:outline-none;
+
+		/* active state (user press) */
+		@apply active:bg-neutral-500;
+	}
+</style>

@@ -1,0 +1,25 @@
+---
+import EmojiList from '@/components/EmojiList.astro'
+import ViewMore from '@/components/ViewMore.astro'
+
+const links: [string, string, Date][] = [
+	['v0.0.4 (preview)', '/git/4', new Date()],
+	['v0.0.3 (build)', '/git/3', new Date()],
+	['v0.0.2 (build)', '/git/2', new Date()],
+	['v0.0.1 (build)', '/git/1', new Date()],
+]
+---
+
+<EmojiList emoji="🔧">
+	{
+		links.map(([text, link, date]) => (
+			<li>
+				<a class="mr-1 line-clamp-1" href={link} title={text}>
+					{text.trim()}
+				</a>
+			</li>
+		))
+	}
+</EmojiList>
+
+<ViewMore urlbase="/git" rss  text="+6 more" />

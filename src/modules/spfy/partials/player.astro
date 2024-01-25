@@ -1,0 +1,34 @@
+---
+/**
+	this partial enables functionality for the spotify player
+
+	wherever this component is included, the following must be exported:
+	export const partial = true
+	export const prerender = false
+ */
+
+import { getPlaybackState } from '../utils/getPlayback'
+import Renderer from '../components/Renderer.astro'
+import RendererInactive from '../components/RendererInactive.astro'
+
+const { track, isPlaying, date } = await getPlaybackState()
+
+// server data is cached, so infer the actual track state
+if (isPlaying) {
+	const now = new Date()
+	const delta = now.getTime() - date.getTime()
+	track.progress = track.progress + delta
+}
+---
+
+<div
+	class="contents"
+	id="spfy-player"
+	data-nonce={Math.random().toString(36)}
+	data-id={isPlaying ? track.id : ''}
+	data-playing={isPlaying ? 'true' : 'false'}
+	data-duration={isPlaying ? track.duration : 0}
+	data-progress={isPlaying ? track.progress : 0}
+>
+	{isPlaying ? <Renderer {...track} /> : <RendererInactive />}
+</div>

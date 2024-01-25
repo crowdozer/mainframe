@@ -1,0 +1,90 @@
+---
+import SidebarContent from './components/SidebarContent.astro'
+---
+
+<!-- floating button to open sidebar -->
+<div class="fixed bottom-0 right-0 z-[990] lg:hidden">
+	<button id="btn-open-sidebar" class="button rotate-90">
+		<p class="flex flex-row gap-4">
+			<span class="self-center">sidebar</span>
+			<img
+				src="/images/shubaduck.gif"
+				class="h-[2rem] w-[2rem]"
+				loading="lazy"
+				alt="the shubaduck beckons you to explore. click him!"
+			/>
+		</p>
+	</button>
+</div>
+
+<!-- the sidebar itself -->
+<aside
+	id="sidebar"
+	class="fixed bottom-0 left-0 right-0 top-0 z-[999] bg-neutral-dark-highlight p-2 lg:contents lg:bg-neutral-dark lg:p-0"
+	data-open="0"
+>
+	<!-- give the button a dedicated slot at the bottom -->
+	<div class="flex h-full flex-col">
+		<!-- sidebar content area -->
+		<div
+			id="sidebar-content-scroll"
+			class="grow overflow-y-auto overflow-x-hidden"
+		>
+			<SidebarContent />
+		</div>
+
+		<!-- close button -->
+		<div class="mt-2 block border-t border-neutral-ui-highlight pt-2 lg:hidden">
+			<button
+				id="btn-close-sidebar"
+				class="button w-full bg-neutral-dark-highlight"
+			>
+				{'< back to page'}
+			</button>
+		</div>
+	</div>
+</aside>
+
+<script>
+	const openBtn = document.getElementById('btn-open-sidebar')
+	const closeBtn = document.getElementById('btn-close-sidebar')
+	const sidebar = document.getElementById('sidebar')
+	const content = document.getElementById('sidebar-content-scroll')
+
+	openBtn?.addEventListener('click', function () {
+		sidebar?.setAttribute('data-open', '1')
+		content?.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'smooth',
+		})
+	})
+
+	closeBtn?.addEventListener('click', function () {
+		const state = sidebar?.getAttribute('data-open')
+
+		if (state === '0') {
+			sidebar?.setAttribute('data-open', '1')
+		} else {
+			sidebar?.setAttribute('data-open', '0')
+		}
+	})
+</script>
+
+<style>
+	#sidebar {
+		transition: transform 0.3s ease-in-out;
+	}
+
+	#sidebar[data-open='0'] {
+		/* Start with the sidebar off-screen */
+		transform: translateX(100%);
+	}
+	#sidebar[data-open='1'] {
+		/* Slide in when open */
+		transform: translateX(0%);
+	}
+	#btn-open-sidebar {
+		transform-origin: 100% 0;
+	}
+</style>

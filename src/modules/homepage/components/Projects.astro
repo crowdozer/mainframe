@@ -1,0 +1,39 @@
+---
+import EmojiList from '@/components/EmojiList.astro'
+
+const projects = [
+	{
+		url: '/',
+		title: 'crwdzr.io',
+		description: 'My website, built with Astro and Tailwind',
+	},
+	{
+		url: 'https://codebreaker.crwdzr.io/',
+		title: 'Codebreaker',
+		description: 'CP2077 inspired hacking minigame',
+	},
+]
+---
+
+<div class="space-y-4">
+	<EmojiList emoji="✏️">
+		{
+			projects.map((project) => (
+				<li>
+					<a
+						class="mr-1 line-clamp-1"
+						href={project.url}
+						title={project.title}
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{project.title}
+					</a>
+					<span class="block font-mono text-sm text-neutral-ui-highlight">
+						{project.description}
+					</span>
+				</li>
+			))
+		}
+	</EmojiList>
+</div>

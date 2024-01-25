@@ -1,0 +1,102 @@
+---
+/**
+ * this is the root for all layouts on the site
+
+ * by default, no extra css will be brought in, 
+ * so make sure to include the globals
+ *
+ * use <Fragment slot="background"> to override the background image
+ * or header={false} or footer={false} to hide the respective elements
+ */
+
+// import bgImage from '@img/gargantua.webp?lqip'
+import bgImage from '@img/star-wars-dark-space-0a-2560x1440.webp?lqip'
+import bgImageM from '@img/star-wars-dark-space-0a-1200x675.webp?lqip'
+import clsx from 'clsx'
+
+interface Props {
+	title?: string
+	header?: boolean
+	footer?: boolean
+}
+
+const { title = '' } = Astro.props
+const finalTitle = title !== '' ? `${title} - crwdzr.io` : 'crwdzr.io'
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="coolest corner of the internet 😎" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<!-- favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#603cba" />
+		<meta name="theme-color" content="#131313" />
+
+		<title>{finalTitle}</title>
+	</head>
+
+	<body class="h-screen w-screen">
+		<div class="relative z-[2] h-full overflow-auto">
+			<slot />
+		</div>
+
+		<!-- optional slot for bg images -->
+		<slot name="background">
+			<div class="absolute bottom-0 left-0 right-0 top-0 z-[1] opacity-50">
+				<!-- desktop, big -->
+				<img
+					src={bgImage.src}
+					width={bgImage.width}
+					height={bgImage.height}
+					style={{
+						backgroundImage: `url("${bgImage.lqip}")`,
+						backgroundSize: 'cover',
+					}}
+					class={clsx(
+						'pointer-events-none h-full w-full object-cover object-center',
+						'hidden lg:block',
+					)}
+					alt="ominous death star with star destroyers nearby"
+					loading="lazy"
+				/>
+
+				<!-- mobile users can barely see it, so it doesnt have to be big -->
+				<img
+					src={bgImageM.src}
+					width={bgImageM.width}
+					height={bgImageM.height}
+					style={{
+						backgroundImage: `url("${bgImageM.lqip}")`,
+						backgroundSize: 'cover',
+					}}
+					class={clsx(
+						'pointer-events-none h-full w-full object-cover object-center',
+						'block lg:hidden',
+					)}
+					alt="ominous death star with star destroyers nearby"
+					loading="lazy"
+				/>
+			</div>
+
+			<!-- texture overlayed ontop of the bg -->
+			<div
+				class="bg-tile pointer-events-none absolute bottom-0 left-0 right-0 top-0 z-[0] bg-[url(/images/dark-bg.jpg)]"
+			>
+			</div>
+		</slot>
+
+		<script src="/htmx.min.js" is:inline defer></script>
+		<script
+			src="https://unpkg.com/idiomorph/dist/idiomorph-ext.min.js"
+			is:inline
+			defer></script>
+	</body>
+</html>
