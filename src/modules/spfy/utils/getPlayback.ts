@@ -4,15 +4,7 @@
 
 import axios from 'axios'
 import { refreshAuth } from './oauth'
-import {
-	readCachedAuth,
-	readCachedPlays,
-	readCachedStatus,
-	writeStatusToCache,
-	incrementPlaysInCache,
-	readCachedPreviouslyPlaying,
-	writePreviouslyPlayingToCache,
-} from './cache'
+import { readCachedAuth, readCachedStatus, writeStatusToCache } from './cache'
 import type { HTTPMethod, NowPlaying, Token, TrackData } from '../types'
 
 /**
@@ -31,18 +23,12 @@ export async function getPlaybackState(): Promise<NowPlaying> {
 
 	// if not, get the current playback state from spotify
 	const playback = await sendRequest()
+
 	// upgrade it with some extra metadata + cache it
 	const state = await enrichPlaybackState(playback)
 
 	// write to caches
 	await writeStatusToCache(state)
-	if (state.isPlaying) {
-		await writePreviouslyPlayingToCache(
-			state.track.id,
-			state.track.duration,
-			state.track.progress,
-		)
-	}
 
 	// we're done ... phew
 	return state
@@ -61,8 +47,6 @@ async function enrichPlaybackState(playing: any): Promise<NowPlaying> {
 		return {
 			date,
 			track: null,
-			likes: 0,
-			plays: 0,
 			isPlaying: false,
 		}
 	}
@@ -79,39 +63,11 @@ async function enrichPlaybackState(playing: any): Promise<NowPlaying> {
 		image: playing.item.album.images[0].url,
 	} satisfies TrackData
 
-	// we gotta check if this is a unique track play for my plays counter
-	const isNewTrack = await checkIfNewTrack(track)
-	if (isNewTrack) {
-		await incrementPlaysInCache(track.id)
-	}
-
-	// inject the real up-to-date values
-	const plays = (await readCachedPlays(track.id)) || 0
-	const likes = 0
-
 	return {
 		track,
 		isPlaying,
-		plays,
-		likes,
 		date,
 	}
-}
-
-async function checkIfNewTrack(track: TrackData): Promise<boolean> {
-	const previous = await readCachedPreviouslyPlaying()
-	// there was nothing cached = it was a long time ago
-	if (!previous) return true
-	// it looks like a different song
-	if (previous.id !== track.id) {
-		return true
-	}
-	// it looks like progress was reset significantly
-	if (previous.progress > 60000 && track.progress < 30000) {
-		return true
-	}
-	// probably not a new song
-	return false
 }
 
 /**

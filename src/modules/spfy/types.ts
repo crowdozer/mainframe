@@ -35,20 +35,10 @@ export type NowPlaying =
 	| {
 			isPlaying: false
 			track: null
-			plays: number
-			likes: number
 			date: Date
 	  }
 	| {
 			isPlaying: true
 			track: TrackData
-			plays: number
-			likes: number
 			date: Date
 	  }
-
-export type PreviouslyPlaying = {
-	id: string
-	duration: number
-	progress: number
-}

@@ -11,7 +11,7 @@ import { getPlaybackState } from '../utils/getPlayback'
 import Renderer from '../components/Renderer.astro'
 import RendererInactive from '../components/RendererInactive.astro'
 
-const { track, isPlaying, date, likes, plays } = await getPlaybackState()
+const { track, isPlaying, date } = await getPlaybackState()
 
 // server data is cached, so infer the actual track state
 if (isPlaying) {
@@ -30,11 +30,5 @@ if (isPlaying) {
 	data-duration={isPlaying ? track.duration : 0}
 	data-progress={isPlaying ? track.progress : 0}
 >
-	{
-		isPlaying ? (
-			<Renderer plays={plays} likes={likes} {...track} />
-		) : (
-			<RendererInactive />
-		)
-	}
+	{isPlaying ? <Renderer {...track} /> : <RendererInactive />}
 </div>

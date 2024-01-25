@@ -22,23 +22,10 @@ interface Props {
 	url: string
 	// image url
 	image: string
-	// how many times its been played
-	plays: number
-	// how many times its been liked
-	likes: number
 }
 
-const {
-	duration,
-	progress,
-	albumText,
-	songText,
-	artistText,
-	url,
-	image,
-	plays,
-	// likes
-} = Astro.props
+const { duration, progress, albumText, songText, artistText, url, image } =
+	Astro.props
 
 /**
  * transform milliseconds to hh:mm:ss strings
@@ -68,19 +55,6 @@ function getSmartInterval() {
 	return endOfSongIn
 }
 const interval = getSmartInterval()
-
-/**
- * formats text for the 'plays' readout
- * there's no way i actually break 1k right?
- */
-function formatPlaysCount(num: number): string {
-	if (num < 1000) {
-		return num.toString()
-	} else {
-		return `${(num / 1000).toFixed(1)}k`.replace(/\.0$/, 'k')
-	}
-}
-const playsText = formatPlaysCount(plays)
 ---
 
 <HotLoader interval={`${interval}s`}>
@@ -99,7 +73,7 @@ const playsText = formatPlaysCount(plays)
 			<div class="grow">
 				<a
 					href={url}
-					class="line-clamp-1"
+					class="line-clamp-2"
 					title={songText}
 					target="_blank"
 					rel="noopener noreferrer"
@@ -108,9 +82,6 @@ const playsText = formatPlaysCount(plays)
 				</a>
 				<p class="line-clamp-1 text-sm" title={artistText}>
 					{artistText}
-				</p>
-				<p class="line-clamp-1 text-sm" title={`played ${playsText} time(s)`}>
-					🎧 {playsText}
 				</p>
 			</div>
 		</div>
