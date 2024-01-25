@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon'
+import GeneralLayout from '@/layouts/General/index.astro'
+---
+
+<GeneralLayout title="contact">
+	<div class="space-y-8">
+		<h3 class="mb-8">Contact</h3>
+
+		<div>
+			<h4 class="mb-2 text-xl">Business Offers</h4>
+			<p>If you want to work together, shoot an email to:</p>
+			<div class="mt-2 bg-neutral-800 p-2 px-4">
+				<p class="font-bold">business@crwdzr.io</p>
+			</div>
+		</div>
+
+		<div>
+			<h4 class="mb-2 text-xl">Socials</h4>
+			<div class="flex flex-row flex-wrap gap-2">
+				<a
+					href="https://www.x.com/crowdoze"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="self-center hover:text-cyan-500"
+					title="Twitter"
+				>
+					<Icon name="mdi:twitter" width="2rem" />
+				</a>
+				<a
+					href="https://www.twitch.tv/crowdozer"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="self-center hover:text-purple-500"
+					title="Twitch"
+				>
+					<Icon name="mdi:twitch" width="2rem" />
+				</a>
+				<a
+					href="https://discord.com/users/crowdozer"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="self-center hover:text-indigo-500"
+					title="Discord"
+				>
+					<Icon name="mdi:discord" width="2rem" />
+				</a>
+			</div>
+		</div>
+	</div>
+</GeneralLayout>

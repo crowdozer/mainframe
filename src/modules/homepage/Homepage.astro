@@ -1,12 +1,13 @@
 ---
-import Card from '@c/Card.astro'
-import Structured from '@/layouts/Structured.astro'
+import './styles.css'
+import Card from '@/components/Card.astro'
 import BlogLinks from './components/BlogLinks.astro'
 import AboutMe from './components/AboutMe.astro'
 import Projects from './components/Projects.astro'
+import Layout from './Layout.astro'
 ---
 
-<Structured>
+<Layout>
 	<Card padding="p-4 px-6">
 		<div class="space-y-4">
 			<h2><span class="text-green-500">{'~/ '}</span>whois crowdozer</h2>
@@ -27,4 +28,4 @@ import Projects from './components/Projects.astro'
 			</div>
 		</Card>
 	</div>
-</Structured>
+</Layout>

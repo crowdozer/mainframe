@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
-import EmojiList from '@c/EmojiList.astro'
-import ViewMore from '@c/ViewMore.astro'
+import EmojiList from '@/components/EmojiList.astro'
+import ViewMore from '@/components/ViewMore.astro'
 
 const allPosts = await getCollection('blog')
 const sortedPosts = allPosts.sort((a, b) =>

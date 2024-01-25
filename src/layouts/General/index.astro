@@ -1,0 +1,29 @@
+---
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import BasicLayout from '../Basic/index.astro'
+import './styles.css'
+
+interface Props {
+	title?: string
+}
+
+const { title = '' } = Astro.props
+---
+
+<BasicLayout {title}>
+	<Fragment>
+		<div class="mx-auto max-w-[900px] lg:mb-32 lg:mt-16">
+			<Header />
+
+			<main class="m-4 bg-neutral-900/50 p-4 lg:m-0">
+				<slot />
+			</main>
+
+			<div class="lg:mt-32">
+				<Footer />
+			</div>
+		</div>
+	</Fragment>
+	<Fragment slot="background"></Fragment>
+</BasicLayout>

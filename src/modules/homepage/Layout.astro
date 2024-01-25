@@ -1,27 +1,24 @@
 ---
-import Card from '@c/Card.astro'
+import BasicLayout from '@/layouts/Basic/index.astro'
+import Footer from '@/components/Footer.astro'
+import Card from '@/components/Card.astro'
 import Chat from '@/modules/chat/Chat.astro'
 import Sidebar from '@/modules/sidebar/Sidebar.astro'
-import Basic from './Basic.astro'
-import Header from './helpers/Header.astro'
-import Footer from './helpers/Footer.astro'
+import HomepageHeader from './components/HomepageHeader.astro'
 
 interface Props {
 	title?: string
-	header?: boolean
-	footer?: boolean
-	sidebar?: boolean
 }
 
-const { title = '', header = true, footer = true, sidebar = true } = Astro.props
+const { title = '' } = Astro.props
 ---
 
-<Basic {title}>
+<BasicLayout {title}>
 	<div class="mx-auto max-w-[900px] bg-neutral-950/50 lg:mb-32 lg:mt-16">
 		<div
 			class="flex h-full flex-col border-dotted border-neutral-ui-highlight lg:border"
 		>
-			{header && <Header />}
+			<HomepageHeader />
 
 			<div class="grow">
 				<div class="grid h-full w-full gap-4 p-2 lg:grid-cols-[1fr_3fr]">
@@ -42,8 +39,8 @@ const { title = '', header = true, footer = true, sidebar = true } = Astro.props
 			</div>
 
 			<div class="mt-16">
-				{footer && <Footer />}
+				<Footer />
 			</div>
 		</div>
 	</div>
-</Basic>
+</BasicLayout>

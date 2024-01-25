@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content'
-import EmojiList from '@c/EmojiList.astro'
-import Blog from '@/layouts/Blog.astro'
+import GeneralLayout from '@/layouts/General/index.astro'
+import EmojiList from '@/components/EmojiList.astro'
+import BlogTags from '@/components/BlogTags.astro'
 
 const allPosts = await getCollection('blog')
 const sortedPosts = allPosts.sort((a, b) =>
@@ -9,9 +10,10 @@ const sortedPosts = allPosts.sort((a, b) =>
 )
 ---
 
-<Blog title="blog posts">
+<GeneralLayout title="blog posts">
 	<div>
-		<h3 class="mb-8">📂 Blog Index</h3>
+		<h3 class="mb-4">📂 Blog</h3>
+		<BlogTags />
 		<EmojiList emoji="✏️">
 			{
 				sortedPosts.map((post) => (
@@ -38,4 +40,4 @@ const sortedPosts = allPosts.sort((a, b) =>
 			</p>
 		</EmojiList>
 	</div>
-</Blog>
+</GeneralLayout>

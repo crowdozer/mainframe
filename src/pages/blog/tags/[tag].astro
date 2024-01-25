@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
-import Blog from '@/layouts/Blog.astro'
-import EmojiList from '@c/EmojiList.astro'
+import GeneralLayout from '@/layouts/General/index.astro'
+import EmojiList from '@/components/EmojiList.astro'
 
 export async function getStaticPaths(): Promise<any> {
 	const allPosts = await getCollection('blog')
@@ -18,14 +18,18 @@ export async function getStaticPaths(): Promise<any> {
 	})
 }
 
+export interface Props {
+	posts: any[]
+}
+
 const { tag } = Astro.params
 const { posts } = Astro.props
 ---
 
-<Blog title={tag}>
+<GeneralLayout title={`blog posts - ${tag}`}>
 	<div class="space-y-8">
 		<h3>
-			Posts tagged with <strong class="text-green-500">{tag}</strong>
+			📁 Blog / <strong class="text-green-500">{tag}</strong>
 		</h3>
 		<EmojiList emoji="✏️">
 			{
@@ -45,5 +49,6 @@ const { posts } = Astro.props
 				))
 			}
 		</EmojiList>
+		<a href="/blog">{'< back to index'}</a>
 	</div>
-</Blog>
+</GeneralLayout>

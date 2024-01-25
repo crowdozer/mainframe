@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content'
+
+// load all posts
+const allPosts = await getCollection('blog')
+
+// get unique tag list
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())]
+
+// sort tag list
+const collator = new Intl.Collator(undefined, {
+	numeric: true,
+	sensitivity: 'base',
+})
+const sortedTags = tags.sort(collator.compare)
+---
+
+<ul class="mb-8 flex flex-row gap-2">
+	{
+		sortedTags.map((tag) => (
+			<li>
+				<a class="button-micro" href={`/blog/tags/${tag}`}>
+					{tag}
+				</a>
+			</li>
+		))
+	}
+</ul>

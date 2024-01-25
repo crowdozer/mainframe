@@ -1,8 +1,9 @@
 ---
-import Basic from '@/layouts/Basic.astro'
+import BasicLayout from '@/layouts/Basic/index.astro'
+import '@/layouts/General/styles.css'
 ---
 
-<Basic>
+<BasicLayout title="lost in space">
 	<div class="flex h-full flex-col justify-center">
 		<div class="mx-auto mb-[10vh] max-w-sm space-y-8">
 			<div class="border-l border-t border-neutral-300 p-4">
@@ -16,4 +17,4 @@ import Basic from '@/layouts/Basic.astro'
 			>
 		</div>
 	</div>
-</Basic>
+</BasicLayout>

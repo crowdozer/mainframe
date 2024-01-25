@@ -58,7 +58,7 @@ body {
 	/* Links */
 	a {
 		/* base styles */
-		@apply inline-block underline underline-offset-2;
+		@apply inline-block decoration-dotted underline-offset-2;
 		/* visited links */
 		@apply visited:text-link-visited;
 		/* various user intents */
