@@ -3,9 +3,8 @@ interface Props {
 	urlbase: string
 	text: string
 	rss?: boolean
-	json?: boolean
 }
-const { urlbase, text, rss = false, json = false } = Astro.props
+const { urlbase, text, rss = false } = Astro.props
 ---
 
 <div class="flex flex-row justify-between">
@@ -13,19 +12,12 @@ const { urlbase, text, rss = false, json = false } = Astro.props
 	<span>
 		{
 			rss && (
-				<a href={`${urlbase}/rss.xml`} class="text-green-500">
+				<a
+					href={`${urlbase}/rss.xml`}
+					class="text-yellow-500 visited:text-yellow-700"
+				>
 					rss
 				</a>
-			)
-		}
-		{
-			json && (
-				<>
-					{' • '}
-					<a href={`${urlbase}.json`} class="text-yellow-500">
-						json
-					</a>
-				</>
 			)
 		}
 	</span>
